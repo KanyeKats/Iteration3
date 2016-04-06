@@ -1,4 +1,4 @@
-//package Models.InfluenceEffect;
+//package Models.Entities.Skills.InfluenceEffect;
 //
 //import java.awt.*;
 //
