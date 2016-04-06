@@ -2,6 +2,7 @@ package Models.Entities;
 
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Skills.Skill;
+import Models.Items.Item;
 import Models.Map.Direction;
 import com.sun.org.glassfish.external.statistics.Stats;
 import javafx.geometry.Point3D;
@@ -45,11 +46,25 @@ public class Entity {
 
     }
 
+    //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
+
+    public void addItem(Item item){
+
+    }
+
     public void dropItem(int positionInInventory){
 
     }
 
     public void useSkill(Skill skill){
+
+    }
+
+    public void die(){
+
+    }
+
+    public void revive(){
 
     }
 
