@@ -53,6 +53,15 @@ public class MenuViewController extends ViewController{
             @Override
             public void finish() {}
         });
+        keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
+            @Override
+            public void execute() {
+                stateManager.goToPreviousState();
+            }
+
+            @Override
+            public void finish() {}
+        });
     }
 
     // These are not needed in this particular view.

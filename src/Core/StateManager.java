@@ -31,7 +31,9 @@ public class StateManager {
     public void goToPreviousState(){
         if(states.size() > 1){
             states.pop();
-            setActiveState(states.peek());
+            reActivate(states.peek());
+        }else{
+            System.exit(0);
         }
     }
 
@@ -41,5 +43,11 @@ public class StateManager {
             states.peek().update();
         }
         display.repaint();
+    }
+
+    // Simply activates the state without pushing it onto the stack.
+    private void reActivate(State state){
+        inputDispatcher.setActiveController(state.getViewController());
+        display.setActiveView(state.getView());
     }
 }

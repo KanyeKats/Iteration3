@@ -1,9 +1,11 @@
 package Models.Menu;
 
+import Controllers.MenuViewController;
 import Core.State;
 import Core.StateManager;
 import Utilities.Action;
 import Utilities.Constants;
+import Views.AvatarCreationMenuView;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
@@ -64,10 +66,11 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-//                        AvatarCreationViewController controller = new AvatarCreationViewController(stateManager);
-//                        AvatarCreationView view = new AvatarCreationView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT);
-//                        stateManager.setActiveState(new State(controller, view));
                         System.out.println("CREATE GAME");
+                        Menu avatarCreationMenu = Menu.createAvatarCreationMenu(stateManager);
+                        MenuViewController controller = new MenuViewController(stateManager, avatarCreationMenu);
+                        AvatarCreationMenuView view = new AvatarCreationMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatarCreationMenu);
+                        stateManager.setActiveState(new State(controller, view));
                     }
 
                     @Override
@@ -122,6 +125,90 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.exit(0);
+                    }
+
+                    @Override
+                    public void finish() {}
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        return new Menu(options);
+    }
+    public static Menu createAvatarCreationMenu(StateManager stateManager){
+        ArrayList<MenuOption> options = new ArrayList<>();
+
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Smasher";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Smasher");
+                    }
+
+                    @Override
+                    public void finish() {}
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Summoner";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Summoner");
+                        // TODO: Implement this.
+                    }
+
+                    @Override
+                    public void finish() {}
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Sneak";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Sneak");
                     }
 
                     @Override
