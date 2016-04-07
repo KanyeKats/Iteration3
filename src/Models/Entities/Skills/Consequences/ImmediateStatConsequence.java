@@ -12,4 +12,20 @@ public class ImmediateStatConsequence extends Consequence {
     public void execute(Entity entity) {
 
     }
+
+    public Consequence makeLevelUp(int levelUpDelay) {
+        return null;
+    }
+
+    public Consequence makeInstantDeath() {
+        return null;
+    }
+
+    public Consequence makeHealDamage(int healRate) {
+        return null;
+    }
+
+    public Consequence makeDamage(int damageRate) {
+        return null;
+    }
 }
