@@ -9,9 +9,7 @@ import Models.Entities.Stats.StatModification;
  */
 public class OneHandedWeaponMastery extends PassiveSkill {
 
-    private StatModification stateModification;
-
     public void addToStats(PassiveSkillVisitor passiveSkillVisitor){
-
+        passiveSkillVisitor.activate(this);
     }
 }

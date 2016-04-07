@@ -12,5 +12,4 @@ public class Bargain extends PassiveSkill {
     public void addToStats(PassiveSkillVisitor passiveSkillVisitor){
         passiveSkillVisitor.activate(this);
     }
-
 }
