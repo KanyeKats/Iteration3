@@ -7,4 +7,11 @@ import Models.Items.Item;
  */
 public class Equipment {
 
+
+
+    // TODO: Implement method.
+    // Stub inserted so that code can compile
+    public boolean containsItemByID(int ID){
+        return true;
+    }
 }

@@ -1,6 +1,7 @@
 package Models.Entities.Requirements;
 
 import Models.Entities.Entity;
+import Models.Entities.Equipment;
 import Models.Items.Item;
 
 /**
@@ -29,7 +30,7 @@ public class EquipmentRequirement implements Requirement {
     @Override
     public boolean isFullfilled(Entity entity ) {
         Equipment eq = entity.getEquipment();
-        if ( eq.containsID( requiredID ) ) return true;
+        if ( eq.containsItemByID( requiredID ) ) return true;
         else return false;
     }
 

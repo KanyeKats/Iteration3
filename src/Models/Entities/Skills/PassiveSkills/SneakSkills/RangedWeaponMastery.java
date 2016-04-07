@@ -13,4 +13,11 @@ public class RangedWeaponMastery extends PassiveSkill {
         passiveSkillVisitor.activate(this);
     }
 
+    // Blank overriden interface method added here so that the codebase compiles.
+    // TODO: implement function
+    @Override
+    public void acceptVisitor(PassiveSkillVisitor passiveSkillVisitor) {
+
+    }
+
 }
