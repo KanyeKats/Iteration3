@@ -1,5 +1,6 @@
 package Models.Entities;
 
+import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Skills.Skill;
 import Models.Items.Item;
@@ -24,6 +25,7 @@ public class Entity {
     private boolean isVisible;
     private Point3D point3D;
     private Direction orientation;
+
 
     public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D point3D, Direction orientation){
 
@@ -57,6 +59,10 @@ public class Entity {
     }
 
     public void useSkill(Skill skill){
+
+    }
+
+    public void mountVehicle(Mount mount){
 
     }
 
