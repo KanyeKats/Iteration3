@@ -2,9 +2,9 @@ package Models.Entities;
 
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Skills.Skill;
+import Models.Entities.Stats.Stats;
 import Models.Items.Item;
 import Models.Map.Direction;
-import com.sun.org.glassfish.external.statistics.Stats;
 import javafx.geometry.Point3D;
 
 import java.awt.image.BufferedImage;

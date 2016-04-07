@@ -1,6 +1,7 @@
 package Models.Entities.Requirements;
 
 import Models.Entities.Entity;
+import Models.Entities.Stats.Stat;
 import Models.Items.Item;
 
 /**

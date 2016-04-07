@@ -3,6 +3,7 @@ package Models.Entities.Skills.PassiveSkills;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillsVisitors.PassiveSkillVisitor;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.StatModification;
+import Models.Entities.Stats.Stats;
 
 /**
  * Created by josh on 4/6/16.
@@ -15,10 +16,10 @@ public abstract class PassiveSkill extends Skill{
     public abstract void acceptVisitor(PassiveSkillVisitor passiveSkillVisitor);
 
     public void addToStats(){
-        stats.applyStatMod(statModification);
+        statModification.apply(stats);
     }
 
     public void removeFromStats(){
-        stats.removeStatMod(statModification);
+        statModification.remove(stats);
     }
 }
