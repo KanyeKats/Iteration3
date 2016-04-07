@@ -25,4 +25,7 @@ public class Tile {
         this.decal = decal;
     }
 
+    public Entity getEntity() {
+        return entity;
+    }
 }

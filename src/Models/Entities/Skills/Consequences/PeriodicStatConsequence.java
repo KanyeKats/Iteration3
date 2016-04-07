@@ -19,4 +19,8 @@ public class PeriodicStatConsequence extends Consequence {
     public void execute(Entity entity) {
         statModifiers.applyModifications(entity.getStats());
     }
+
+    public Consequence makeTrap(int damage, int speedReduction) {
+        return null;
+    }
 }
