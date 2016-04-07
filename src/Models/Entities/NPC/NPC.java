@@ -4,8 +4,8 @@ import Models.Entities.Entity;
 import Models.Entities.Equipment;
 import Models.Entities.Inventory;
 import Models.Entities.Occupation.Occupation;
+import Models.Entities.Stats.Stats;
 import Models.Map.Direction;
-import com.sun.org.glassfish.external.statistics.Stats;
 import javafx.geometry.Point3D;
 
 import java.awt.image.BufferedImage;

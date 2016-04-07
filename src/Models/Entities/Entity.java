@@ -3,9 +3,11 @@ package Models.Entities;
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Skills.Skill;
+import Models.Entities.Stats.StatModificationList;
+import Models.Entities.Stats.Stats;
 import Models.Items.Item;
+import Models.Items.Takable.Equippable.EquippableItem;
 import Models.Map.Direction;
-import com.sun.org.glassfish.external.statistics.Stats;
 import javafx.geometry.Point3D;
 
 import java.awt.image.BufferedImage;
@@ -40,8 +42,17 @@ public class Entity {
 
     }
 
-    public void equip(){
+    public void equip(EquippableItem item){
+        // Boolean will be returned by the equipment equip function if the item was successfully equipped.
+        boolean successfulEquip = equipment.equip(item);
 
+        // Apply the stat mods if equipping was successful.. or do that in equipment? TDA violation?
+        // WE are currently doing it in equipment because it is easier... and clearer for all cases,
+        // like for unequipping.
+//        if (successfulEquip) {
+//            StatModificationList mods = item.getStatModificationList();
+//            mods.applyModifications(stats);
+//        }
     }
 
     public void unequip(){
