@@ -1,6 +1,7 @@
 package Models.Entities.Requirements;
 
 import Models.Entities.Entity;
+import Models.Entities.Inventory;
 import Models.Items.Item;
 
 /**
@@ -29,7 +30,7 @@ public class InventoryRequirement implements Requirement {
     @Override
     public boolean isFullfilled(Entity entity ) {
         Inventory inv = entity.getInventory();
-        if ( inv.containsID( requiredID ) ) return true;
+        if ( inv.containsItemByID( requiredID ) ) return true;
         else return false;
     }
 
