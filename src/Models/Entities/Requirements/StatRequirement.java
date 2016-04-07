@@ -1,7 +1,6 @@
 package Models.Entities.Requirements;
 
 import Models.Entities.Entity;
-import Models.Items.Item;
 
 /**
  * Created by Magic_Buddha on 4/6/2016.
