@@ -24,17 +24,17 @@ public class Entity {
     private Equipment equipment;
     private BufferedImage sprite;
     private boolean isVisible;
-    private Point3D point3D;
+    private Point3D location;
     private Direction orientation;
 
-    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D point3D, Direction orientation){
+    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation){
 
         this.occupation = occupation;
         this.stats = stats;
         this.inventory = inventory;
         this.equipment = equipment;
         this.sprite = sprite;
-        this.point3D = point3D;
+        this.location = location;
         this.orientation = orientation;
         isVisible = true;
 
@@ -136,12 +136,12 @@ public class Entity {
         isVisible = visible;
     }
 
-    public Point3D getPoint3D() {
-        return point3D;
+    public Point3D getLocation() {
+        return location;
     }
 
-    public void setPoint3D(Point3D point3D) {
-        this.point3D = point3D;
+    public void setLocation(Point3D location) {
+        this.location = location;
     }
 
     public Direction getOrientation() {

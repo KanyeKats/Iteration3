@@ -1,6 +1,7 @@
 package Models.Map;
 
 import Models.Entities.Entity;
+import Models.Entities.Skills.Effects.Effect;
 import Models.Items.Item;
 
 import java.util.ArrayList;
@@ -16,23 +17,25 @@ public class Tile {
     private Decal decal;
     private Entity entity;
     private ArrayList<Item> items;
+    private Effect effect;
     // TODO: User visitor pattern to construct tile image?
 
-    public Tile(Terrain terrain, AreaEffect areaEffect, Entity entity, ArrayList<Item> items, Decal decal){
+    public Tile(Terrain terrain, AreaEffect areaEffect, Entity entity, ArrayList<Item> items, Decal decal, Effect efffet){
         this.terrain = terrain;
         this.areaEffect = areaEffect;
         this.entity = entity;
         this.items = items;
         this.decal = decal;
+        this.effect = effect;
     }
 
     public boolean containsEntity(){
         return entity!=null;
     }
 
-//    public boolean containsVisibleEntity(){
-//        return entity!=null && entity.isVisible();
-//    }
+    public boolean containsVisibleEntity(){
+        return entity!=null && entity.isVisible();
+    }
 
     public void insertEntity(Entity entity){
         this.entity = entity;
@@ -42,15 +45,15 @@ public class Tile {
             Item item = iterator.next();
 
             // Activate the item and see if it should be removed from the map after its activation.
-//            boolean removeItem = item.onTouch(entity);
-//            if(removeItem){
-//                iterator.remove();
-//            }
+            boolean removeItem = item.onTouch(entity);
+            if(removeItem){
+                iterator.remove();
+            }
         }
 
         // Activate AreaEffects
         if(areaEffect!=null){
-//            areaEffect.onTouch(entity);
+            areaEffect.onTouch(entity);
         }
     }
 
@@ -62,10 +65,9 @@ public class Tile {
         items.add(item);
     }
 
-    // TODO: I Dont Think Well Need This
-//    public void removeItem(Item item){
-//        items.remove(item);
-//    }
+    public void removeItem(Item item){
+        items.remove(item);
+    }
 
     public void insertAreaEffect(AreaEffect areaEffect){
         this.areaEffect = areaEffect;
@@ -75,4 +77,7 @@ public class Tile {
         this.areaEffect = null;
     }
 
+    public void insertEffect(Effect effect){ this.effect = effect; }
+
+    public void removeEffect() { this.effect = null; }
 }
