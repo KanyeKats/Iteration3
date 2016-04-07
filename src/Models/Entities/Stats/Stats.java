@@ -1,6 +1,7 @@
 package Models.Entities.Stats;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.HashMap;
 
 /**
@@ -9,21 +10,21 @@ import java.util.HashMap;
 public class Stats {
 
     // The container that holds all of the current numerical values for stats.
-    HashMap<Stat, Integer> stats;
+    EnumMap<Stat, Integer> stats;
 
     // The container that holds all of the current derived stats.
     // Tbh, it doesn't hold the values. It just calls the function (via the SingleAction interface)
     // to derive and return them!
-    HashMap<Stat, DerivedStatGetter> derived;
+    EnumMap<Stat, DerivedStatGetter> derived;
 
     // Stats values will not be initialized in this constructor
     // They will be initialized in the appropriate Occupation sub class,
     // Which will apply a bunch of stat mods to init the stats
     public Stats() {
-        stats = new HashMap<Stat, Integer>();
+        stats = new EnumMap<Stat, Integer>(Stat.class);
 
         // Construct and Populate the derived stats map
-        derived = new HashMap<Stat, DerivedStatGetter>();
+        derived = new EnumMap<Stat, DerivedStatGetter>(Stat.class);
         derived.put(Stat.MAX_HEALTH, () -> getMaxHealth());
         derived.put(Stat.MAX_MANA, () -> getMaxMana());
         derived.put(Stat.OFFSENSIVE_RATING, () -> getOffensiveRating());
