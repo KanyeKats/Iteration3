@@ -9,10 +9,8 @@ import Models.Entities.Stats.StatModification;
  */
 public class BrawlingMastery extends PassiveSkill {
 
-    private StatModification stateModification;
-
     public void addToStats(PassiveSkillVisitor passiveSkillVisitor){
-
+        passiveSkillVisitor.activate(this);
     }
 
 }

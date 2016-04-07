@@ -13,31 +13,27 @@ import Models.Entities.Skills.PassiveSkills.SummonerSkills.StaffMastery;
  */
 public class OneHandedVisitor implements PassiveSkillVisitor {
 
-    public void activate(Bargain bargain){
+    public void activate(Bargain bargain){}
 
-    }
-
-    public void activate(Observation observation){
-
-    }
+    public void activate(Observation observation){}
 
     public void activate(OneHandedWeaponMastery oneHandedWeaponMastery){
-
+        oneHandedWeaponMastery.addToStats();
     }
 
     public void activate(TwoHandedWeaponMastery twoHandedWeaponMastery){
-
+        twoHandedWeaponMastery.removeFromStats();
     }
 
     public void activate(BrawlingMastery brawlingMastery){
-
+        brawlingMastery.removeFromStats();
     }
 
     public void activate(RangedWeaponMastery rangedWeaponMastery){
-
+        rangedWeaponMastery.removeFromStats();
     }
 
     public void activate(StaffMastery staffMastery){
-
+        staffMastery.removeFromStats();
     }
 }
