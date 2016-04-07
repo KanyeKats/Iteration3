@@ -14,4 +14,8 @@ public class PeriodicStatConsequence extends Consequence {
     public void execute(Entity entity) {
 
     }
+
+    public Consequence makeTrap(int damage, int speedReduction) {
+        return null;
+    }
 }
