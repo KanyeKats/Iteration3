@@ -15,4 +15,8 @@ public class BehaviorConsequence extends Consequence {
     public Consequence makeTeleport(Point3D endingPoint) {
         return null;
     }
+
+    public Consequence makeRiver(int waterVelocity) {
+        return null;
+    }
 }

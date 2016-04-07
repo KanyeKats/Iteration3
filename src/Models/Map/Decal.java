@@ -10,4 +10,5 @@ public class Decal {
     public static Decal death;
     public static Decal heal;
     public static Decal level;
+    public static Decal river;
 }
