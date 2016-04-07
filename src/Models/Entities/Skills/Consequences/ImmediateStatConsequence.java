@@ -9,8 +9,12 @@ import Models.Entities.Stats.StatModificationList;
 public class ImmediateStatConsequence extends Consequence {
     private StatModificationList statModifiers;
 
-    public void execute(Entity entity) {
+    public ImmediateStatConsequence(StatModificationList statModList){
+        statModifiers = statModList;
+    }
 
+    public void execute(Entity entity) {
+        statModifiers.applyModifications(entity.getStats());
     }
 
     public Consequence makeLevelUp(int levelUpDelay) {

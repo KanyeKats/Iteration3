@@ -37,7 +37,7 @@ public class Inventory {
     }
 
     //The contains(ID) class Rokas wanted
-    public boolean containsID(int ID){
+    public boolean containsItemByID(int ID){
         for(Item item: items){
             if(item.getID() == ID){
                 return true;
