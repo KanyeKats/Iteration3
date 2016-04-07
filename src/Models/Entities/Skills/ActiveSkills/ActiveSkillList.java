@@ -9,4 +9,12 @@ import java.util.ArrayList;
  */
 public class ActiveSkillList {
     private ArrayList<ActiveSkill> activeSkillList = new ArrayList<>();
+
+    public ArrayList<ActiveSkill> getActiveSkillList() {
+        return activeSkillList;
+    }
+
+    public void setActiveSkillList(ArrayList<ActiveSkill> activeSkillList) {
+        this.activeSkillList = activeSkillList;
+    }
 }
