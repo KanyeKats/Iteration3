@@ -28,7 +28,10 @@ public enum Stat {
     DEFENSIVE_RATING("Defensive Rating"),
     ARMOR_RATING("Armor Rating"),
     SKILL_POINTS("Skill Points"),
-    TOTAL_WEIGHT("Weight");
+    TOTAL_WEIGHT("Weight"),
+    BARGAIN("Bargain"),
+    OBSERVATION("Observation");
+
 
     // Properties and methods (constructor)
     private String descriptor;
