@@ -37,8 +37,6 @@ public class MapDrawingVisitor {
         int tileImageWidth = tileWidth;
         int tileImageHeight = tileHeight + tileDepth;
 
-        System.out.println(tileImageWidth + ", " + tileImageHeight);
-
         int horizDistanceBtwnAdjTiles = tileWidth * 3 / 4;
         int vertDistanceBtwnAdjTiles = tileHeight;
 
@@ -59,7 +57,6 @@ public class MapDrawingVisitor {
             // Get the image from this tile.
             Image tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor());
 
-//            System.out.println(center.toString());
             if(currentPoint.getZ() == center.getZ() && currentPoint.getX() == center.getX() && currentPoint.getY() == center.getY() -1){
                 System.out.println(currentPoint.toString());
             }
@@ -85,15 +82,7 @@ public class MapDrawingVisitor {
             pixelY -= tileImageHeight/2;
 
             g.drawImage(tileImage, pixelX, pixelY, null);
-
-
-
-
-
         }
-
         g.dispose();
-
-        // TODO DRAW THE MAP AND RETURN AN IMAGE
     }
 }

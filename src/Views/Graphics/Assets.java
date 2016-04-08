@@ -19,5 +19,9 @@ public class Assets {
 
         SpriteSheet terrainSheet = new SpriteSheet(imageLoader.loadImage("./res/map/terrain/earth.png"));
         EARTH = terrainSheet.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        // TODO Put all terrains on a single spritsheet
+        SpriteSheet water = new SpriteSheet(imageLoader.loadImage("./res/map/terrain/water.png"));
+        WATER = water.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
     }
 }

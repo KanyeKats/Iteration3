@@ -46,7 +46,7 @@ public class AreaViewport extends View {
 
     private void renderBackground(Graphics g){
 
-        g.setColor(Color.blue);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
     }
 }

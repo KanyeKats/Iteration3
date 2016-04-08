@@ -1,6 +1,7 @@
 package Views.Graphics;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,5 +23,12 @@ public class ImageLoader {
         }
         System.out.println("Failed");
         return null;
+    }
+
+    public void setOpacity(BufferedImage image, float opacity){
+
+        Graphics2D g = (Graphics2D) image.getGraphics();
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+        g.dispose();
     }
 }
