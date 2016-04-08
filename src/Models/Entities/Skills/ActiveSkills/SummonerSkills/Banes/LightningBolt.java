@@ -1,7 +1,7 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes;
 
 import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
-import Models.Entities.Skills.Effects.PrismEffect;
+import Models.Entities.Skills.InfluenceEffect.PrismEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;

@@ -1,6 +1,10 @@
 package Models.Entities;
 
+import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
+import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
+import Models.Entities.Skills.PassiveSkills.PassiveSkill;
+import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
@@ -19,7 +23,8 @@ public class Entity {
     //TODO: make occupation
     private Occupation occupation;
     private Stats stats;
-    private ArrayList<Skill> SkillList = new ArrayList<>();
+    private ActiveSkillList activeSkillList;
+    private PassiveSkillList passiveSkillList;
     private Inventory inventory;
     private Equipment equipment;
     private BufferedImage sprite;
@@ -37,6 +42,9 @@ public class Entity {
         this.point3D = point3D;
         this.orientation = orientation;
         isVisible = true;
+
+        occupation.initStats(this.stats);
+        occupation.initSkills(activeSkillList,passiveSkillList);
 
     }
 
@@ -71,6 +79,10 @@ public class Entity {
 
     }
 
+    public void mountVehicle(Mount mount){
+
+    }
+
     public void die(){
 
     }
@@ -96,12 +108,20 @@ public class Entity {
         this.stats = stats;
     }
 
-    public ArrayList<Skill> getSkillList() {
-        return SkillList;
+    public ActiveSkillList getActiveSkillList() {
+        return activeSkillList;
     }
 
-    public void setSkillList(ArrayList<Skill> skillList) {
-        SkillList = skillList;
+    public void setActiveSkillList(ActiveSkillList activeSkillList) {
+        this.activeSkillList = activeSkillList;
+    }
+
+    public PassiveSkillList getPassiveSkillList() {
+        return passiveSkillList;
+    }
+
+    public void setPassiveSkillList(PassiveSkillList passiveSkillList) {
+        this.passiveSkillList = passiveSkillList;
     }
 
     public Inventory getInventory() {

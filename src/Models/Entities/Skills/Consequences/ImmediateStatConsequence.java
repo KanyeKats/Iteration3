@@ -9,7 +9,27 @@ import Models.Entities.Stats.StatModificationList;
 public class ImmediateStatConsequence extends Consequence {
     private StatModificationList statModifiers;
 
-    public void execute(Entity entity) {
+    public ImmediateStatConsequence(StatModificationList statModList){
+        statModifiers = statModList;
+    }
 
+    public void execute(Entity entity) {
+        statModifiers.applyModifications(entity.getStats());
+    }
+
+    public Consequence makeLevelUp(int levelUpDelay) {
+        return null;
+    }
+
+    public Consequence makeInstantDeath() {
+        return null;
+    }
+
+    public Consequence makeHealDamage(int healRate) {
+        return null;
+    }
+
+    public Consequence makeDamage(int damageRate) {
+        return null;
     }
 }

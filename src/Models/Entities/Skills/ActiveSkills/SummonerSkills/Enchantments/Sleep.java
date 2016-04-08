@@ -1,7 +1,7 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments;
 
 import Models.Entities.Skills.Consequences.BehaviorConsequence;
-import Models.Entities.Skills.Effects.RadialEffect;
+import Models.Entities.Skills.InfluenceEffect.RadialEffect;
 
 /**
  * Created by josh on 4/6/16.

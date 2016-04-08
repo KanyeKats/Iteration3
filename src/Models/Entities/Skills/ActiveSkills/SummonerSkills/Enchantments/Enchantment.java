@@ -2,7 +2,7 @@ package Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments;
 
 import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
-import Models.Entities.Skills.Effects.Effect;
+import Models.Entities.Skills.InfluenceEffect.Effect;
 
 /**
  * Created by josh on 4/6/16.

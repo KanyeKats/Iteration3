@@ -1,7 +1,8 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes;
 
+import Models.Entities.Entity;
 import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
-import Models.Entities.Skills.Effects.LinearEffect;
+import Models.Entities.Skills.InfluenceEffect.LinearEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -19,6 +20,15 @@ public class Fireball extends Bane {
         super();
         effect = new LinearEffect();
         cooldownTime = BASE_COOLDOWN_TIME;
+    }
+
+    @Override
+    public void activate(Entity entity){
+        if(isCooledDown){
+            if(percentChanceByLevel()) {
+                effect.run();
+            }
+        }
     }
 
     @Override

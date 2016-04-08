@@ -11,7 +11,16 @@ public class PeriodicStatConsequence extends Consequence {
     private int numCycles;
     private StatModificationList statModifiers;
 
-    public void execute(Entity entity) {
+    public PeriodicStatConsequence(StatModificationList statModList){
+        statModifiers = statModList;
+    }
 
+    //TODO: Make this only happen once every period using a timer
+    public void execute(Entity entity) {
+        statModifiers.applyModifications(entity.getStats());
+    }
+
+    public Consequence makeTrap(int damage, int speedReduction) {
+        return null;
     }
 }
