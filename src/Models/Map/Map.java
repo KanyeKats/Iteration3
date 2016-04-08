@@ -18,11 +18,15 @@ public class Map {
     public Map(HashMap<Point, ArrayList<Tile>> tiles){
         this.tiles = tiles;
     }
-
+    
     public void insertEntity(Point3D point, Entity entity){
 
         Point point2d = new Point((int)point.getX(), (int)point.getY());
         Tile tile = tiles.get(point2d).get((int)point.getZ());
 //        tile.insertEntity(entity);
+    }
+
+    public HashMap<Point, ArrayList<Tile>> getTiles() {
+        return tiles;
     }
 }
