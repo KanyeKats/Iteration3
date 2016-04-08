@@ -2,6 +2,7 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Entities.Skills.Consequences.Consequence;
 import Models.Map.Map;
+import javafx.geometry.Point3D;
 
 import java.awt.*;
 
@@ -10,7 +11,7 @@ import java.awt.*;
  * TODO:
  */
 public class PrismEffect extends Effect{
-    public PrismEffect(int range, Point location, Consequence consequence, Map map) {
+    public PrismEffect(int range, Point3D location, Consequence consequence, Map map) {
         super(range, location, consequence, map);
         start();
     }
@@ -20,3 +21,4 @@ public class PrismEffect extends Effect{
 
     }
 }
+

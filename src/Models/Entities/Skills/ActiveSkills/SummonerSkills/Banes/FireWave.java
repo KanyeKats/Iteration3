@@ -1,5 +1,6 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes;
 
+import Models.Entities.Entity;
 import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
 import Models.Entities.Skills.InfluenceEffect.ConicalEffect;
 import Models.Entities.Stats.Stat;
@@ -14,11 +15,21 @@ public class FireWave extends Bane {
     private final int BASE_COOLDOWN_TIME = 20000;       //20 seconds
 
 
-    //TODO: add the consequence to the linear effect, once that functionality exists
     public FireWave(){
         super();
-        effect = new ConicalEffect();
         cooldownTime = BASE_COOLDOWN_TIME;
+    }
+
+    @Override
+    public void activate(Entity entity){
+        if(isCooledDown){
+            if(percentChanceByLevel()) {
+                effect = new ConicalEffect(BASE_RANGE, entity.getPoint3D(), consequence, entity.getMap());
+                effect.run();
+                isCooledDown = false;
+                doTheCoolDown();
+            }
+        }
     }
 
     @Override

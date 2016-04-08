@@ -27,6 +27,8 @@ public abstract class Bane extends ActiveSkill {
         if(isCooledDown){
             if(percentChanceByLevel()) {
                 effect.run();
+                isCooledDown = false;
+                doTheCoolDown();
             }
         }
     }

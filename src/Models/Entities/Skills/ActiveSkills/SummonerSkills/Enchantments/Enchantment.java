@@ -10,8 +10,8 @@ import Models.Entities.Skills.InfluenceEffect.Effect;
 public abstract class Enchantment extends ActiveSkill{
     protected int activeTime;
     protected Effect effect;
+    protected final int BASE_RANGE = 4;
 
-    //TODO: Handle the active time of this enchantment. Some sort of timer
     @Override
     public void activate(Entity entity){
         if(isCooledDown){
@@ -20,7 +20,7 @@ public abstract class Enchantment extends ActiveSkill{
         }
     }
 
-    //TODO: Implement this when the activeTime timer stops
+    //TODO: Implement this when the activeTime timer stops. Don't think this is done here...pretty sure it's done by the consequence...
     private void removeEnchantmentFromEntity(Entity entity){
 
     }

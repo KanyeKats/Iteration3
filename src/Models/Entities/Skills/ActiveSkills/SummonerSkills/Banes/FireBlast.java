@@ -1,5 +1,6 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes;
 
+import Models.Entities.Entity;
 import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
 import Models.Entities.Skills.InfluenceEffect.AngularEffect;
 import Models.Entities.Stats.Stat;
@@ -14,11 +15,22 @@ public class FireBlast extends Bane {
     private final int BASE_COOLDOWN_TIME = 20000;       //20 seconds
 
 
-    //TODO: add the consequence to the angular effect, once that functionality exists
     public FireBlast(){
         super();
-        effect = new AngularEffect();
         cooldownTime = BASE_COOLDOWN_TIME;
+    }
+
+    @Override
+    public void activate(Entity entity){
+        if(isCooledDown){
+            if(percentChanceByLevel()) {
+                //effect = new AngularEffect();
+                effect = new AngularEffect(BASE_RANGE, entity.getPoint3D(), consequence, entity.getMap());
+                effect.run();
+                isCooledDown = false;
+                doTheCoolDown();
+            }
+        }
     }
 
     @Override

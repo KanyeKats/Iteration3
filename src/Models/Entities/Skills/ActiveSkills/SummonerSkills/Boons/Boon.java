@@ -3,23 +3,33 @@ package Models.Entities.Skills.ActiveSkills.SummonerSkills.Boons;
 import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 
+import java.util.TimerTask;
+
 /**
  * Created by josh on 4/6/16.
  */
 public abstract class Boon extends ActiveSkill{
     protected int activeTime;
+    protected Entity entity;
 
-    //TODO: Handle the active time of this boon. Some sort of timer
     @Override
-    public void activate(Entity entity){
+    public void activate(Entity e){
         if(isCooledDown){
-            if(percentChanceByLevel())
-                consequence.execute(entity);
+            if(percentChanceByLevel()) {
+                this.entity = e;
+                consequence.execute(e);
+                isCooledDown = false;
+
+
+                effectTimer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        consequence.remove(entity);
+                        doTheCoolDown();
+                    }
+                }, activeTime);
+
+            }
         }
-    }
-
-    //TODO: Implement this when the activeTime timer stops
-    private void removeBoonFromEntity(Entity entity){
-
     }
 }

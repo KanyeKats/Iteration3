@@ -15,10 +15,8 @@ public class Fireball extends Bane {
     private final int BASE_COOLDOWN_TIME = 20000;       //20 seconds
 
 
-    //TODO: add the consequence to the linear effect, once that functionality exists
     public Fireball(){
         super();
-        effect = new LinearEffect();
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
@@ -26,7 +24,10 @@ public class Fireball extends Bane {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
+                effect = new LinearEffect(BASE_RANGE, entity.getPoint3D(), consequence, entity.getMap());
                 effect.run();
+                isCooledDown = false;
+                doTheCoolDown();
             }
         }
     }

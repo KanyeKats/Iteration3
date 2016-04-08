@@ -2,8 +2,10 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Entities.Skills.Consequences.Consequence;
 import Models.Map.Map;
+import javafx.geometry.Point3D;
 
 import java.awt.*;
+
 
 /**
  * Created by johnkaufmann on 4/2/16.
@@ -11,7 +13,8 @@ import java.awt.*;
  */
 public class RadialEffect extends Effect {
 
-    public RadialEffect(int range, Point location, Consequence consequence, Map map) {
+    public RadialEffect(int range, Point3D location, Consequence consequence, Map map) {
+
         super(range, location, consequence, map);
         start();
     }
