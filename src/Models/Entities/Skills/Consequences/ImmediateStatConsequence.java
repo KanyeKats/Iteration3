@@ -17,19 +17,7 @@ public class ImmediateStatConsequence extends Consequence {
         statModifiers.applyModifications(entity.getStats());
     }
 
-    public Consequence makeLevelUp(int levelUpDelay) {
-        return null;
-    }
-
-    public Consequence makeInstantDeath() {
-        return null;
-    }
-
-    public Consequence makeHealDamage(int healRate) {
-        return null;
-    }
-
-    public Consequence makeDamage(int damageRate) {
-        return null;
+    public void remove(Entity entity){
+        statModifiers.removeModifications(entity.getStats());
     }
 }

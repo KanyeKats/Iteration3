@@ -40,5 +40,4 @@ public class PassiveSkillList {
     public int size(){
         return passiveSkillList.size();
     }
-
 }

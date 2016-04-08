@@ -7,4 +7,6 @@ import Models.Entities.Entity;
  */
 public abstract class Consequence {
     public abstract void execute(Entity entity);
+
+    public abstract void remove(Entity entity);
 }
