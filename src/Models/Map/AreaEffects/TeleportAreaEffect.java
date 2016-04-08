@@ -1,5 +1,6 @@
 package Models.Map.AreaEffects;
 
+import Models.Entities.Entity;
 import Models.Entities.Skills.Consequences.BehaviorConsequence;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
@@ -10,7 +11,23 @@ import javafx.geometry.Point3D;
  * TODO:
  */
 public class TeleportAreaEffect extends AreaEffect {
-    public TeleportAreaEffect(Point3D endingPoint) {
-        super(new BehaviorConsequence().makeTeleport(endingPoint), Decal.teleport); // TODO: 4/6/16 figure out decal class and use immediate stat consequence
+    private Point3D targetLocation;
+
+    public TeleportAreaEffect(Point3D targetLocation) {
+        // Set target location
+        this.targetLocation = targetLocation;
+
+        // Set decal
+        this.decal = Decal.teleport;
+
+        // Set visibility and removability
+        this.isVisible = true;
+        this.isRemovable = false;
+    }
+
+    @Override
+    public void activate(Entity entity) {
+        // Move the entity to the target point.
+        entity.move(targetLocation);
     }
 }

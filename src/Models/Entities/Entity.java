@@ -13,6 +13,7 @@ import Models.Items.Takable.Equippable.EquippableItem;
 import Models.Map.Direction;
 import javafx.geometry.Point3D;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -61,8 +62,20 @@ public class Entity {
 //        }
     }
 
-    public void unequip(){
+    public void unequip(EquippableItem item){
+        equipment.unequip(item);
+    }
 
+    // TODO: Skeleton movement method
+    public final void move(Direction direction) {
+        // TODO: Needs to be implemented, needs to take into acc movement speed.
+    }
+
+    // Not a mistake, I think it will be good to have overloaded move methods
+    // The default will be moving a direction, but sometimes we want to move to a desired point instantly.
+    // For example, teleporting, falling off a cliff etc
+    public final void move(Point3D desiredPoint) {
+        // TODO: implement
     }
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
