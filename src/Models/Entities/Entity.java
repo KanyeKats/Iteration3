@@ -6,7 +6,6 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
-import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
 import Models.Items.Takable.Equippable.EquippableItem;
@@ -17,11 +16,12 @@ import javafx.geometry.Point3D;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Entity {
+public class Entity extends Observable {
     //TODO: make occupation
     private Occupation occupation;
     private Stats stats;
@@ -31,22 +31,35 @@ public class Entity {
     private Equipment equipment;
     private BufferedImage sprite;
     private boolean isVisible;
-    private Point3D point3D;
+    private Point3D location;
     private Direction orientation;
     private Map map;
 
-    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D point3D, Direction orientation, Map map){
+    // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
+    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map){
+
+        // TODO: Make sure that instantiating an entity with existing inventorys and equipment, make sure that the Equipemnt has a correct reference to the inventory.
         this.occupation = occupation;
         this.stats = stats;
         this.inventory = inventory;
         this.equipment = equipment;
         this.sprite = sprite;
-        this.point3D = point3D;
+        this.location = location;
         this.orientation = orientation;
         this.map = map;
         isVisible = true;
+    }
 
+    public Entity(Occupation occupation, Point3D location){
+        this.occupation = occupation;
+        this.location = location;
+        this.stats = new Stats();
+        this.inventory = new Inventory(10);
+        this.equipment = new Equipment(stats, inventory);
+        this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
+        this.orientation = Direction.DOWN;
+        isVisible = true;
         occupation.initStats(this.stats);
         occupation.initSkills(activeSkillList,passiveSkillList);
 
@@ -83,7 +96,7 @@ public class Entity {
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
 
-    public void addItem(Item item){
+    public void addItemToInventory(Item item){
 
     }
 
@@ -172,12 +185,12 @@ public class Entity {
         isVisible = visible;
     }
 
-    public Point3D getPoint3D() {
-        return point3D;
+    public Point3D getLocation() {
+        return location;
     }
 
-    public void setPoint3D(Point3D point3D) {
-        this.point3D = point3D;
+    public void setLocation(Point3D location) {
+        this.location = location;
     }
 
     public Direction getOrientation() {

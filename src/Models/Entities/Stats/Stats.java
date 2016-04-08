@@ -2,7 +2,6 @@ package Models.Entities.Stats;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.HashMap;
 
 /**
  * Created by sergiopuleri on 4/7/16.
@@ -22,6 +21,10 @@ public class Stats {
     // Which will apply a bunch of stat mods to init the stats
     public Stats() {
         stats = new EnumMap<Stat, Integer>(Stat.class);
+
+        for(Stat stat : Stat.values()){
+            stats.put(stat, 0);
+        }
 
         // Construct and Populate the derived stats map
         derived = new EnumMap<Stat, DerivedStatGetter>(Stat.class);

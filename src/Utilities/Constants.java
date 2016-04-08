@@ -7,5 +7,8 @@ public class Constants {
 
     public static final int SCREEN_WIDTH = 1200;
     public static final int SCREEN_HEIGHT = 800;
-    public static final int FRAME_RATE = 60;
+    public static final int FRAME_RATE = 1;
+    public static final int TILE_WIDTH = 49;
+    public static final int TILE_HEIGHT = 43;
+
 }
