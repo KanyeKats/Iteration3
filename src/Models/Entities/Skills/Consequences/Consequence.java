@@ -9,4 +9,6 @@ public abstract class Consequence {
     private int activeTime;
 
     public abstract void execute(Entity entity);
+
+    public abstract void remove(Entity entity);
 }

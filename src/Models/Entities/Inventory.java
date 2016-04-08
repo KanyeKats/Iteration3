@@ -46,4 +46,8 @@ public class Inventory {
         return false;
     }
 
+    public int size(){
+        return numOfItems;
+    }
+
 }

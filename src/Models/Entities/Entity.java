@@ -11,6 +11,7 @@ import Models.Entities.Stats.Stats;
 import Models.Items.Item;
 import Models.Items.Takable.Equippable.EquippableItem;
 import Models.Map.Direction;
+import Models.Map.Map;
 import javafx.geometry.Point3D;
 
 import java.awt.image.BufferedImage;
@@ -31,8 +32,9 @@ public class Entity {
     private boolean isVisible;
     private Point3D point3D;
     private Direction orientation;
+    private Map map;
 
-    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D point3D, Direction orientation){
+    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D point3D, Direction orientation, Map map){
 
         this.occupation = occupation;
         this.stats = stats;
@@ -41,6 +43,7 @@ public class Entity {
         this.sprite = sprite;
         this.point3D = point3D;
         this.orientation = orientation;
+        this.map = map;
         isVisible = true;
 
         occupation.initStats(this.stats);
@@ -170,5 +173,9 @@ public class Entity {
 
     public void setOrientation(Direction orientation) {
         this.orientation = orientation;
+    }
+
+    public Map getMap(){
+        return map;
     }
 }
