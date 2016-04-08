@@ -2,6 +2,7 @@ package Models.Entities.Skills.Effects;
 
 import Models.Entities.Skills.Consequences.Consequence;
 import Models.Map.Direction;
+import javafx.geometry.Point3D;
 
 import java.awt.*;
 
@@ -10,7 +11,7 @@ import java.awt.*;
  */
 public abstract class Effect {
     private int range;
-    private Point location;
+    private Point3D location;
     private Consequence consequence;
     private Direction direction;
 

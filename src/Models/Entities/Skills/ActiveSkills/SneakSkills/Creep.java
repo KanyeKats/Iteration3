@@ -8,7 +8,19 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkill;
  */
 public class Creep extends ActiveSkill {
 
-    public void activate(Entity entity) {
+    public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
 
+    public Creep(){
+        cooldownTime = BASE_COOLDOWN_TIME;
+    }
+
+
+    //TODO: Implement creeping
+    public void activate(Entity entity){
+        if(isCooledDown){
+            if(percentChanceByLevel()){
+                //Implement creeping
+            }
+        }
     }
 }

@@ -8,7 +8,18 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkill;
  */
 public class PickPocket extends ActiveSkill {
 
-    public void activate(Entity entity) {
+    public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
 
+    public PickPocket(){
+        cooldownTime = BASE_COOLDOWN_TIME;
+    }
+
+    //TODO: Implement the actual stealing of an item
+    public void activate(Entity entity){
+        if(isCooledDown){
+            if(percentChanceByLevel()){
+                //Implement stealing an item
+            }
+        }
     }
 }

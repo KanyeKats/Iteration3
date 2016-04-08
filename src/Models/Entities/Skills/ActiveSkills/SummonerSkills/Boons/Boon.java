@@ -7,7 +7,19 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkill;
  * Created by josh on 4/6/16.
  */
 public abstract class Boon extends ActiveSkill{
-    private int activeTime;
+    protected int activeTime;
 
-    public abstract void activate(Entity entity);
+    //TODO: Handle the active time of this boon. Some sort of timer
+    @Override
+    public void activate(Entity entity){
+        if(isCooledDown){
+            if(percentChanceByLevel())
+                consequence.execute(entity);
+        }
+    }
+
+    //TODO: Implement this when the activeTime timer stops
+    private void removeBoonFromEntity(Entity entity){
+
+    }
 }
