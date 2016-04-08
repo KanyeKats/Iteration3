@@ -5,6 +5,7 @@ import Models.Entities.Skills.Consequences.Consequence;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
+import javafx.geometry.Point3D;
 
 import java.awt.*;
 
@@ -14,11 +15,11 @@ import java.awt.*;
  */
 public abstract class Effect implements Runnable {
     private int range;
-    private Point location;
+    private Point3D location;
     private Consequence consequence;
     private Direction direction;
 
-    public Effect(int range, Point location, Consequence consequence, Map map) {
+    public Effect(int range, Point3D location, Consequence consequence, Map map) {
         this.range = range;
         this.location = location;
         this.consequence = consequence;

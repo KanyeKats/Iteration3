@@ -1,5 +1,7 @@
 package Views.Graphics;
 
+import Utilities.Constants;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -7,13 +9,20 @@ import java.awt.image.BufferedImage;
  */
 public class Assets {
 
-    public static BufferedImage TEST;
+    public static BufferedImage EARTH;
+    public static BufferedImage WATER;
+    public static BufferedImage SKY;
 
 
     public static void init(){
 
-        SpriteSheet TestSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/TEST.png"));
-        TEST = TestSheet.crop(0, 0, 32, 32);
+        ImageLoader imageLoader = new ImageLoader();
 
+        SpriteSheet terrainSheet = new SpriteSheet(imageLoader.loadImage("./res/map/terrain/earth.png"));
+        EARTH = terrainSheet.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        // TODO Put all terrains on a single spritsheet
+        SpriteSheet water = new SpriteSheet(imageLoader.loadImage("./res/map/terrain/water.png"));
+        WATER = water.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
     }
 }

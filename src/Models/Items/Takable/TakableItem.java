@@ -19,4 +19,15 @@ public abstract class TakableItem extends Item {
     public StatModificationList getStatModificationList() {
         return statModificationList;
     }
+
+    @Override
+    public boolean preventsMovement(Entity entity) {
+        return false;
+    }
+
+    @Override
+    public boolean onTouch(Entity entity) {
+        entity.addItemToInventory(this);
+        return true; // Indicate that this item should be removed from the map.
+    }
 }

@@ -1,6 +1,5 @@
 package Models.Entities.Occupation;
 
-import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.ActiveSkills.CommonSkills.BasicAttack;
 import Models.Entities.Skills.ActiveSkills.CommonSkills.BindWounds;
@@ -24,6 +23,9 @@ public abstract class Occupation {
     protected StatModificationList statModificationList;
 
     Occupation(){
+
+        this.activeSkillList = new ActiveSkillList();
+        this.passiveSkillList = new PassiveSkillList();
 
         this.activeSkillList.add(basicAttack);
         this.activeSkillList.add(bindWounds);

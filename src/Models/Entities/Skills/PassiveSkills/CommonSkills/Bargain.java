@@ -25,8 +25,6 @@ public class Bargain extends PassiveSkill {
         addToStats();
     }
 
-    // Blank overriden interface method added here so that the codebase compiles.
-    // TODO: implement function
     @Override
     public void acceptVisitor(PassiveSkillVisitor passiveSkillVisitor) {
         passiveSkillVisitor.activate(this);

@@ -8,7 +8,19 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkill;
  */
 public class DetectTrap extends ActiveSkill {
 
-    public void activate(Entity entity) {
+    public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
 
+    public DetectTrap(){
+        cooldownTime = BASE_COOLDOWN_TIME;
+    }
+
+    //TODO: Implement checking the map and making trap visible if there is one
+    public void activate(Entity entity){
+        //if there is a trap
+        if(isCooledDown){
+            if(percentChanceByLevel()){
+                //Implement making a trap visible
+            }
+        }
     }
 }

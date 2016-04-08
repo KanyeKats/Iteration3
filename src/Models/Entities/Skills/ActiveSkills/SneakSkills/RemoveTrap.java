@@ -8,7 +8,19 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkill;
  */
 public class RemoveTrap extends ActiveSkill {
 
-    public void activate(Entity entity) {
+    public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
 
+    public RemoveTrap(){
+        cooldownTime = BASE_COOLDOWN_TIME;
+    }
+
+    //TODO: Implement checking the map and removing trap if there is one
+    public void activate(Entity entity){
+        //if there is a trap
+        if(isCooledDown){
+            if(percentChanceByLevel()){
+                //Implement removing a trap
+            }
+        }
     }
 }

@@ -8,7 +8,7 @@ import java.util.Observer;
 /**
  * Created by Bradley on 4/4/2016.
  */
-public abstract class View implements Observer{
+public abstract class View extends Observable implements Observer{
 
     protected int width;
     protected int height;
