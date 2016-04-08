@@ -273,4 +273,5 @@ public class Equipment {
         else if (bothhands != null &&bothhands.getID() == ID) return true;
         else return false;
     }
+
 }
