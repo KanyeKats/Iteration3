@@ -9,6 +9,7 @@ public class Assets {
 
     public static BufferedImage TEST;
 
+
     public static void init(){
 
         SpriteSheet TestSheet = new SpriteSheet(new ImageLoader().loadImage("/Textures/TEST.png"));

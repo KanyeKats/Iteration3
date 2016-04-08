@@ -25,4 +25,6 @@ public class Map {
         Tile tile = tiles.get(point2d).get((int)point.getZ());
 //        tile.insertEntity(entity);
     }
+
+
 }
