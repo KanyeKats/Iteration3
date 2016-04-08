@@ -11,7 +11,6 @@
 //    private Point location;
 //    private Consequence consequence;
 //    private Direction direction;
-//    private NavigationMediator navigationMediator;
 //
 //    public Effect(int range, Point location, Consequence consequence, Map map) {
 //        this.range = range;

@@ -2,7 +2,6 @@ package Models.Entities;
 
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Skills.Skill;
-import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
 import Models.Items.Takable.Equippable.EquippableItem;
@@ -11,11 +10,12 @@ import javafx.geometry.Point3D;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Entity {
+public class Entity extends Observable {
     //TODO: make occupation
     private Occupation occupation;
     private Stats stats;
@@ -27,8 +27,11 @@ public class Entity {
     private Point3D location;
     private Direction orientation;
 
+    // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
+
     public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation){
 
+        // TODO: Make sure that instantiating an entity with existing inventorys and equipment, make sure that the Equipemnt has a correct reference to the inventory.
         this.occupation = occupation;
         this.stats = stats;
         this.inventory = inventory;
@@ -37,7 +40,17 @@ public class Entity {
         this.location = location;
         this.orientation = orientation;
         isVisible = true;
+    }
 
+    public Entity(Occupation occupation, Point3D location){
+        this.occupation = occupation;
+        this.location = location;
+        this.stats = new Stats();
+        this.inventory = new Inventory(10);
+        this.equipment = new Equipment(stats, inventory);
+        this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
+        this.orientation = Direction.DOWN;
+        isVisible = true;
     }
 
     public void equip(EquippableItem item){
@@ -59,7 +72,7 @@ public class Entity {
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
 
-    public void addItem(Item item){
+    public void addItemToInventory(Item item){
 
     }
 

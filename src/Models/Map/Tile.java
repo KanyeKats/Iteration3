@@ -3,7 +3,9 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.Effects.Effect;
 import Models.Items.Item;
+import Models.Map.MapUtilities.TileDrawingVisitor;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,7 +22,7 @@ public class Tile {
     private Effect effect;
     // TODO: User visitor pattern to construct tile image?
 
-    public Tile(Terrain terrain, AreaEffect areaEffect, Entity entity, ArrayList<Item> items, Decal decal, Effect efffet){
+    public Tile(Terrain terrain, AreaEffect areaEffect, Entity entity, ArrayList<Item> items, Decal decal, Effect effect){
         this.terrain = terrain;
         this.areaEffect = areaEffect;
         this.entity = entity;
@@ -80,4 +82,11 @@ public class Tile {
     public void insertEffect(Effect effect){ this.effect = effect; }
 
     public void removeEffect() { this.effect = null; }
+
+    public Terrain getTerrain() { return this.terrain; }
+
+    public Image acceptDrawingVisitor(TileDrawingVisitor visitor){
+        return visitor.accept(this);
+    }
+
 }

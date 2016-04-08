@@ -1,13 +1,17 @@
 package Models.Menu;
 
+import Controllers.GameViewController;
 import Controllers.MenuViewController;
 import Core.State;
 import Core.StateManager;
+import Models.Entities.Entity;
+import Models.Entities.Occupation.Smasher;
+import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
+import Utilities.Savable.GameLoader;
 import Views.AvatarCreationMenuView;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+import Views.GameView;
 
 import java.util.ArrayList;
 
@@ -155,7 +159,13 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
+
                         System.out.println("Smasher");
+                        Map map = GameLoader.loadDefaultMap();
+                        Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT); // TOD0: Improve avatar initial placement.
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
+                        GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        stateManager.setActiveState(new State(gameViewController, gameView));
                     }
 
                     @Override

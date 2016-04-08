@@ -14,8 +14,6 @@ public abstract class Effect {
     private Consequence consequence;
     private Direction direction;
 
-    //Uncomment this once the class is made
-    //private NavigationMediator navigationMediator;
 
     private void start(){
 

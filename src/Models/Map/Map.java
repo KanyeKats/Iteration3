@@ -3,28 +3,28 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.Effects.Effect;
 import Models.Items.Item;
+import Models.Map.MapUtilities.MapDrawingVisitor;
 import javafx.geometry.Point3D;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Observable;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Map {
+public class Map extends Observable {
 
-    private HashMap<Point, ArrayList<Tile>> tiles;
+    private HashMap<Point3D, Tile> tiles;
 
     // Map will be passed the HashMap that is created by the gameloader after parsing the XML file.
-    public Map(HashMap<Point, ArrayList<Tile>> tiles){
+    public Map(HashMap<Point3D, Tile> tiles){
         this.tiles = tiles;
     }
 
     public void insertEntity(Entity entity, Point3D point){
 
         // Get the tile at the given point.
-        Tile tile = getTileFromPoint(point);
+        Tile tile = tiles.get(point);
 
         // Insert the entity onto the tile.
         tile.insertEntity(entity);
@@ -37,7 +37,7 @@ public class Map {
     public void removeEntity(Point3D point){
 
         // Get the tile at the given point.
-        Tile tile = getTileFromPoint(point);
+        Tile tile = tiles.get(point);
 
         // Remove the entity at the tile.
         tile.removeEntity();
@@ -46,16 +46,25 @@ public class Map {
     public void moveEntity(Entity entity, Point3D destination){
 
         // Get the destination tile.
-        Tile destinationTile = getTileFromPoint(destination);
+        Tile destinationTile = tiles.get(destination);
 
         // Get the source tile.
         Point3D source = entity.getLocation();
-        Tile sourceTile = getTileFromPoint(source);
+        Tile sourceTile = tiles.get(source);
 
-        // Check movement conditions
-        if(!entityCanMove(sourceTile, destinationTile)){
+        // Check if the tiles are in bounds of the map.
+        if(source==null || destination==null){
             return;
         }
+
+        // TODO: Implement movement. The following things will need to be done.
+        // TODO: 1) Check if there is an obstacle or interactive item that will prevent movement.
+        // TODO:    This can be done with tile.getItem().preventsMovement(); This violates LOD though.
+        // TODO: 2) Check fi there is an entity on the same tile already.
+        // TODO: 3) Check the terrain type (if its water, and also eleveation differences
+        // TODO:    If the desired tile is too high, prevent movement, if it is lower, fall to the earth and deal damage.
+
+        // NOTE: The activation of area effects and items is the responsibility of the tile once it moves onto it.
 
         // Remove the entity from the source and add it to the destination.
         sourceTile.removeEntity();
@@ -71,20 +80,11 @@ public class Map {
         moveEntity(entity, destination);
     }
 
-    private boolean entityCanMove(Tile source, Tile destination){
-
-        // Check if the tile is in range of the map.
-        if(source==null || destination==null){
-            return false;
-        }
-
-        // TODO: Figure out how to implement movement. Its kinda weird with entities falling off cliffs/ some flying/ some walking on water.
-    }
 
     public void insertItem(Item item, Point3D point){
 
         // Get the tile.
-        Tile tile = getTileFromPoint(point);
+        Tile tile = tiles.get(point);
 
         // Insert the item onto that tile.
         tile.insertItem(item);
@@ -93,7 +93,7 @@ public class Map {
     public void removeItem(Item item, Point3D point){
 
         // Get the tile.
-        Tile tile = getTileFromPoint(point);
+        Tile tile = tiles.get(point);
 
         // Insert the item onto that tile.
         tile.removeItem(item);
@@ -102,7 +102,7 @@ public class Map {
     public void insertAreaEffect(AreaEffect areaEffect, Point3D point){
 
         // Get the tile.
-        Tile tile = getTileFromPoint(point);
+        Tile tile = tiles.get(point);
 
         // Insert the areaEffect onto that tile.
         tile.insertAreaEffect(areaEffect);
@@ -111,7 +111,7 @@ public class Map {
     public void removeAreaEffect(Point3D point){
 
         // Get the tile.
-        Tile tile = getTileFromPoint(point);
+        Tile tile = tiles.get(point);
 
         // Remove the areaeffect on that tile.
         tile.removeAreaEffect();
@@ -120,7 +120,7 @@ public class Map {
     public void insertEffect(Effect effect, Point3D point){
 
         // Get the tile.
-        Tile tile = getTileFromPoint(point);
+        Tile tile = tiles.get(point);
 
         // Insert the areaEffect onto that tile.
         tile.insertEffect(effect);
@@ -129,19 +129,14 @@ public class Map {
     public void removeEffect(Point3D point){
 
         // Get the tile.
-        Tile tile = getTileFromPoint(point);
+        Tile tile = tiles.get(point);
 
         // Remove the areaeffect on that tile.
         tile.removeEffect();
     }
 
-    public Image getTileImage(){
-        // TODO: Implement this.
-        return null;
+    public void acceptDrawingVisitor(MapDrawingVisitor visitor){
+        visitor.accept(tiles);
     }
 
-    private Tile getTileFromPoint(Point3D point){
-        Point point2d = new Point((int)point.getX(), (int)point.getY());
-        return  tiles.get(point2d).get((int)point.getZ());
-    }
 }
