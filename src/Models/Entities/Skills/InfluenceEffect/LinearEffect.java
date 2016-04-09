@@ -3,6 +3,7 @@ package Models.Entities.Skills.InfluenceEffect;
 import Models.Consequences.Consequence;
 import Models.Map.Map;
 import javafx.geometry.Point3D;
+import javafx.scene.image.Image;
 
 /**
  * Created by johnkaufmann on 4/2/16.

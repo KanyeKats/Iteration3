@@ -19,8 +19,8 @@ public class AngularEffect extends Effect {
 
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
+//    @Override
+//    public Image getImage() {
+//        return null;
+//    }
 }

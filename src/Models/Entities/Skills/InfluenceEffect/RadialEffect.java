@@ -4,6 +4,7 @@ import Models.Consequences.Consequence;
 import Models.Map.Map;
 import Utilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
+import javafx.scene.image.Image;
 
 
 /**
@@ -29,6 +30,7 @@ public class RadialEffect extends Effect {
 
     @Override
     public Image getImage() {
+
         return null;
     }
 }

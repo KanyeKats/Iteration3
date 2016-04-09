@@ -19,9 +19,9 @@ public class PrismEffect extends Effect{
 
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
+//    @Override
+//    public Image getImage() {
+//        return null;
+//    }
 }
 
