@@ -20,4 +20,9 @@ public class ConicalEffect extends Effect {
     protected void traverseThroughTiles() {
 
     }
+
+    @Override
+    public Image getImage() {
+        return null;
+    }
 }

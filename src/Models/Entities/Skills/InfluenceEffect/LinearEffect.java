@@ -20,4 +20,9 @@ public class LinearEffect extends Effect {
     protected void traverseThroughTiles() {
 
     }
+
+    @Override
+    public Image getImage() {
+        return null;
+    }
 }

@@ -1,7 +1,7 @@
 package Models.Map.MapUtilities;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Effects.Effect;
+import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.AreaEffect;
 import Models.Map.Tile;
