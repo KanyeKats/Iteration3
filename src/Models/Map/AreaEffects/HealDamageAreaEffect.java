@@ -9,6 +9,8 @@ import Models.Entities.Stats.Stats;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
 
+import java.awt.*;
+
 /**
  * Created by johnkaufmann on 4/7/16.
  */
@@ -26,6 +28,11 @@ public class HealDamageAreaEffect extends AreaEffect {
         // Set visibility and removability
         this.isVisible = true;
         this.isRemovable = false;
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
     }
 
     @Override

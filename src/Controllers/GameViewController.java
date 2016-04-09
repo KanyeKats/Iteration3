@@ -27,6 +27,8 @@ public class GameViewController extends ViewController {
 
     @Override
     protected void initKeyBindings() {
+
+        // Movement Key Bindings.
         keyBindings.addBinding(KeyEvent.VK_W, new Action() {
             @Override
             public void execute() {

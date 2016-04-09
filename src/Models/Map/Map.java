@@ -15,6 +15,7 @@ import java.util.Observable;
 public class Map extends Observable {
 
     private HashMap<Point3D, Tile> tiles;
+    // TODO: Not really a todo but make sure you notify observers when you change something that will affect the visual representation.
 
     // Map will be passed the HashMap that is created by the gameloader after parsing the XML file.
     public Map(HashMap<Point3D, Tile> tiles){
@@ -51,9 +52,6 @@ public class Map extends Observable {
         // Get the source tile.
         Point3D source = entity.getLocation();
         Tile sourceTile = tiles.get(source);
-
-        System.out.println("SOURCE: " + source.toString());
-        System.out.println("DEISTINATION: " + destination.toString());
 
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || destinationTile==null){

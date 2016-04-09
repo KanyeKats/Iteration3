@@ -88,12 +88,9 @@ public class Entity extends Observable {
     // TODO: Skeleton movement method
     public final void move(Direction direction) {
         // TODO: needs to take into acc movement speed.
-        orientation = direction;
-        map.moveEntity(this, direction);
 
-        // Notify observers
-//        setChanged();
-//        notifyObservers();
+        updateOrientation(direction);
+        map.moveEntity(this, direction);
     }
 
     // Not a mistake, I think it will be good to have overloaded move methods
@@ -223,6 +220,17 @@ public class Entity extends Observable {
         images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
         images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
         images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
+        images.put(Direction.UP, Assets.PLAYER_NORTH);
+        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
+
+    }
+
+    private void updateOrientation(Direction direction){
+
+        if(direction == Direction.DOWN || direction == Direction.UP){
+            images.put(direction, images.get(orientation));
+        }
+        orientation = direction;
     }
 
     public Image getImage(){
