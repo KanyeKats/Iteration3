@@ -12,6 +12,7 @@ public class Assets {
     public static BufferedImage EARTH;
     public static BufferedImage WATER;
     public static BufferedImage SKY;
+    public static BufferedImage PLACEHOLDER;
 
     public static BufferedImage PLAYER_NORTH;
     public static BufferedImage PLAYER_SOUTH;
@@ -62,5 +63,7 @@ public class Assets {
         // TODO: Init all the item assets.
 
         // TODO: Init all the effect assets.
+        SpriteSheet placeholderSheet = new SpriteSheet(imageLoader.loadImage("./res/etc/placeholder-blk.png"));
+        PLACEHOLDER = placeholderSheet.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
     }
 }

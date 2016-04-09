@@ -7,7 +7,11 @@ import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
+import Models.Items.Takable.Equippable.Boots.Boot;
+import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
+import Models.Items.Takable.Equippable.Helmets.Helmet;
+import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Views.Graphics.Assets;
@@ -66,23 +70,24 @@ public class Entity extends Observable {
         occupation.initStats(this.stats);
         occupation.initSkills(activeSkillList,passiveSkillList);
         initImages();
+
+        // TODO: Remove!! Just testing item factory and equipping.
+        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
+        equip(bluePhat);
+        Boot moccassins = BootFactory.bootsFromID(1001);
+        equip(moccassins);
+
     }
 
     public void equip(EquippableItem item){
-        // Boolean will be returned by the equipment equip function if the item was successfully equipped.
-        boolean successfulEquip = equipment.equip(item);
-
-        // Apply the stat mods if equipping was successful.. or do that in equipment? TDA violation?
-        // WE are currently doing it in equipment because it is easier... and clearer for all cases,
-        // like for unequipping.
-//        if (successfulEquip) {
-//            StatModificationList mods = item.getStatModificationList();
-//            mods.applyModifications(stats);
-//        }
+        // Only equip the item if this instance of entity fufills the stat requirement to equip the item.
+        if (item.fufillEquipRequirement(this)) {
+            item.equip(equipment);
+        }
     }
 
     public void unequip(EquippableItem item){
-        equipment.unequip(item);
+        item.unequip(equipment);
     }
 
     // TODO: Skeleton movement method
