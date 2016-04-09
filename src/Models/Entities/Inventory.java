@@ -2,16 +2,20 @@ package Models.Entities;
 
 import Models.Items.Item;
 
+import java.util.ArrayList;
+
 /**
  * Created by Aidan on 4/6/2016.
  */
 public class Inventory {
 
     private Item[] items; //this can be an arraylist as well
+    private ArrayList<Item> items;
     private int numOfItems;
     private int inventorySize;
 
     public Inventory(int inventorySize){
+        items = 
         this.items = new Item[inventorySize];
         for(Item item: items){
             item = null;
