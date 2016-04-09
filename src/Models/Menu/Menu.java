@@ -7,6 +7,7 @@ import Core.StateManager;
 import Models.Entities.Entity;
 import Models.Entities.Occupation.Smasher;
 import Models.Map.Map;
+import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.Savable.GameLoader;
@@ -153,7 +154,8 @@ public class Menu extends java.util.Observable{
 
                         System.out.println("Smasher");
                         Map map = GameLoader.loadDefaultMap();
-                        Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map); // TOD0: Improve avatar initial placement.
+                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
+                        Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);

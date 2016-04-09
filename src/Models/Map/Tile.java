@@ -39,6 +39,25 @@ public class Tile {
         return entity!=null && entity.isVisible();
     }
 
+    public boolean preventsMovement(Entity entityAttemptingMovement) {
+
+        // Check if an entity prevents movement
+        if (this.containsEntity()) {
+            return true;
+        }
+
+        // Check if an item prevents movement
+        for(Iterator<Item> iterator = items.iterator(); iterator.hasNext();) {
+            Item item = iterator.next();
+            if (item.preventsMovement(entityAttemptingMovement)) {
+                return true;
+            }
+        }
+
+        // If none of the above prevents movement, return false
+        return false;
+    }
+
     public void insertEntity(Entity entity){
         this.entity = entity;
 

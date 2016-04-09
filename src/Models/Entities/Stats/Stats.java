@@ -38,8 +38,16 @@ public class Stats {
     // A public function to modify any stat's current value
     // Primarily used by stat modification(s).
     public void setStat(Stat stat, int delta) {
+        // Get the stat and increase it
         Integer currentValue = stats.get(stat);
         currentValue += delta;
+
+        // Check if we exceeded this stat's level cap.
+        // If we did, this function will return the capped level,
+        // Else, it will return the same value we passed in
+        currentValue = stat.checkLevelCap(currentValue);
+
+        // Set the stats new value
         stats.put(stat, currentValue);
     }
 
@@ -66,7 +74,9 @@ public class Stats {
         stats.put(Stat.RADIUS_OF_VISIBILITY, 10);
     }
 
-    // Derived stats getters
+
+    /// Derived stats getters ////
+
     public int getMaxHealth() {
         // Get primary stats
         Integer level = stats.get(Stat.LEVEL);

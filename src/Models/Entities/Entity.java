@@ -5,6 +5,7 @@ import Models.Entities.Occupation.Occupation;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
+import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
 import Models.Items.Takable.Equippable.Boots.Boot;
@@ -15,14 +16,14 @@ import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
+import Utilities.Constants;
 import Models.Map.Tile;
 import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Observable;
+import java.util.*;
 
 /**
  * Created by Bradley on 4/5/2016.
@@ -41,6 +42,11 @@ public class Entity extends Observable {
     private Direction orientation;
     private Map map;
     private HashMap<Direction, BufferedImage> images;
+    private boolean canMove;
+    private Timer movementTimer;
+
+    // TODO: Ask about terrain checking... not sure if this is ok
+    private ArrayList<Terrain> passableTerrains;
 
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
@@ -59,7 +65,7 @@ public class Entity extends Observable {
         initImages();
     }
 
-    public Entity(Occupation occupation, Point3D location, Map map){
+    public Entity(Occupation occupation, Point3D location, Map map, Terrain... passableTerrains){
         this.occupation = occupation;
         this.location = location;
         this.stats = new Stats();
@@ -68,10 +74,15 @@ public class Entity extends Observable {
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
         this.orientation = Direction.NORTH;
         this.map = map;
+        this.passableTerrains = new ArrayList<>(Arrays.asList(passableTerrains));
         isVisible = true;
         occupation.initStats(this.stats);
         occupation.initSkills(activeSkillList,passiveSkillList);
         initImages();
+
+        // Setup the movement timer.
+        movementTimer = new Timer();
+        canMove = true;
 
         // TODO: Remove!! Just testing item factory and equipping.
         Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
@@ -92,12 +103,27 @@ public class Entity extends Observable {
         item.unequip(equipment);
     }
 
-    // TODO: Skeleton movement method
     public final void move(Direction direction) {
-        // TODO: needs to take into acc movement speed.
 
-        updateOrientation(direction);
-        map.moveEntity(this, direction);
+        // Move with taking movement speed in to account
+        if (canMove) {
+            // Move the entity
+            updateOrientation(direction);
+            map.moveEntity(this, direction);
+
+            // Don't allow the entity to move
+            canMove = false;
+
+            // Allow the entity to move again by setting canMove to true
+            // after movement delay time has elapsed.
+            movementTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    canMove = true;
+                }
+            }, calculateMovementDelay());
+        }
+
     }
 
     // Not a mistake, I think it will be good to have overloaded move methods
@@ -218,6 +244,14 @@ public class Entity extends Observable {
         return map;
     }
 
+    public ArrayList<Terrain> getPassableTerrains() {
+        return passableTerrains;
+    }
+
+    public void setPassableTerrains(ArrayList<Terrain> passableTerrains) {
+        this.passableTerrains = passableTerrains;
+    }
+
     private void initImages(){
 
         images = new HashMap<>();
@@ -230,6 +264,23 @@ public class Entity extends Observable {
         images.put(Direction.UP, Assets.PLAYER_NORTH);
         images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
 
+    }
+
+    private int calculateMovementDelay() {
+        // Calculate the timer delay based off of the "Movement" stat,
+        // Using some funky math Sergio did to gauge how much your stat
+        // modifies the visual "speediness" of movement.
+        int movementTimerDelay =  Constants.MAX_MOVEMENT_DELAY_MS - (stats.getStat(Stat.MOVEMENT) * 17);
+
+        // Guard to make sure the movement delay is not less than 5ms.
+        if (movementTimerDelay < Constants.MIN_MOVEMENT_DELAY_MS) {
+            movementTimerDelay = Constants.MIN_MOVEMENT_DELAY_MS;
+        }
+
+        // Return it to the timer
+//        System.out.println("MOVEMENT DELAY IS: ");
+//        System.out.println(movementTimerDelay + "ms");
+        return movementTimerDelay;
     }
 
     private void updateOrientation(Direction direction){
