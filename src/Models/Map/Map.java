@@ -6,6 +6,8 @@ import Models.Items.Item;
 import Models.Map.MapUtilities.MapDrawingVisitor;
 import javafx.geometry.Point3D;
 
+import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -46,8 +48,23 @@ public class Map extends Observable {
 
     public void moveEntity(Entity entity, Point3D destination){
 
-        // Get the destination tile.
+        // TODO: Implement movement. The following things will need to be done.
+        // TODO: 1) Check if there is an obstacle or interactive item that will prevent movement.
+        // TODO:    This can be done with tile.getItem().preventsMovement(); This violates LOD though.
+        // TODO: 2) Check fi there is an entity on the same tile already.
+        // TODO: 3) Check the terrain type (if its water, and also eleveation differences
+        // TODO:    If the desired tile is too high, prevent movement, if it is lower, fall to the earth and deal damage.
+
+        // Update the destination point
+        // This method will return the appropirate destination tile by checking all movement related factors.
+        // See its comments for more info
+        destination = checkDestinationTile(destination, entity);
+
         Tile destinationTile = tiles.get(destination);
+
+        // NOTE: The activation of area effects and items is the responsibility of the tile once it moves onto it.
+
+
 
         // Get the source tile.
         Point3D source = entity.getLocation();
@@ -58,14 +75,6 @@ public class Map extends Observable {
             return;
         }
 
-        // TODO: Implement movement. The following things will need to be done.
-        // TODO: 1) Check if there is an obstacle or interactive item that will prevent movement.
-        // TODO:    This can be done with tile.getItem().preventsMovement(); This violates LOD though.
-        // TODO: 2) Check fi there is an entity on the same tile already.
-        // TODO: 3) Check the terrain type (if its water, and also eleveation differences
-        // TODO:    If the desired tile is too high, prevent movement, if it is lower, fall to the earth and deal damage.
-
-        // NOTE: The activation of area effects and items is the responsibility of the tile once it moves onto it.
 
         // Remove the entity from the source and add it to the destination.
         sourceTile.removeEntity();
@@ -142,6 +151,79 @@ public class Map extends Observable {
 
     public void acceptDrawingVisitor(MapDrawingVisitor visitor){
         visitor.accept(tiles);
+    }
+
+    // Checks the destination tile for movement hindrance and items/AoEs/Entities
+    private Point3D checkDestinationTile(Point3D originalDestinationPoint, Entity entity) {
+
+        // Get the original destination tile
+        Tile originalDestinationTile = tiles.get(originalDestinationPoint);
+
+        // TODO: Check for terrain type
+        Terrain terrain = originalDestinationTile.getTerrain();
+
+        // Get the entity's current point location before any movement
+        Point3D entityCurrentLocation = entity.getLocation();
+        
+        // Compare height of dest. point, with entity's current height
+        double range = 1.0;
+        double entityCurrentZ = entityCurrentLocation.getZ();
+
+        // Get the max column height at this x,y position.
+        int destinationPointX = (int)originalDestinationPoint.getX();
+        int destinationPointY = (int)originalDestinationPoint.getY();
+
+        double destinationMaxZHeight = getMaxColumnHeightAtPoint(destinationPointX, destinationPointY);
+
+        System.out.println("THE MAX COLUMN HEIGHT AT THE TILE WERE ATTEMPTING TO MOVE AT IS ");
+        System.out.println(destinationMaxZHeight);
+
+        // If on the same height level, allow normal movement
+        if (entityCurrentZ == destinationMaxZHeight) {
+            return originalDestinationPoint;
+        }
+        // The column is too tall, block movement
+        else if (destinationMaxZHeight > entityCurrentZ + range) {
+            return entityCurrentLocation;
+        }
+        // If destination max Z is greater than entity's current z by one. we can move up one.
+        // OR we are at a cliff.... need to drop down!!
+        else if (destinationMaxZHeight - entityCurrentZ == range || entityCurrentZ - destinationMaxZHeight > 0){
+            Point3D updatedDestinationPoint = new Point3D(destinationPointX, destinationPointY, destinationMaxZHeight);
+            return updatedDestinationPoint;
+        }
+        // Check for hindrance of movement
+        // If hindered, Don't allow the entity to move.
+        // Return its current location is the "new" destination
+        else if (originalDestinationTile.preventsMovement(entity)) {
+            return entityCurrentLocation;
+        }
+        // Otherwise.. allow movement!
+        else {
+            return originalDestinationPoint;
+        }
+    }
+
+    public double getMaxColumnHeightAtPoint(int x, int y) {
+        // Max column height is 10.
+        // TODO: define this 10 constant somewhere
+
+        double maxZHeight = 0.0;
+
+        Point3D pointToCheck;
+        Tile tileToCheck;
+        for (int z = 0; z < 10; z++) {
+            pointToCheck = new Point3D(x, y, z);
+            tileToCheck = tiles.get(pointToCheck);
+
+            // TODO: make this a while loop using this condition lol....
+            if (tileToCheck.getTerrain() == Terrain.SKY) {
+                break;
+            }
+
+            maxZHeight = z;
+        }
+        return maxZHeight;
     }
 
 }
