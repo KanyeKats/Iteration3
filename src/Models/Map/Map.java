@@ -52,8 +52,11 @@ public class Map extends Observable {
         Point3D source = entity.getLocation();
         Tile sourceTile = tiles.get(source);
 
+        System.out.println("SOURCE: " + source.toString());
+        System.out.println("DEISTINATION: " + destination.toString());
+
         // Check if the tiles are in bounds of the map.
-        if(source==null || destination==null){
+        if(sourceTile==null || destinationTile==null){
             return;
         }
 
@@ -72,6 +75,10 @@ public class Map extends Observable {
 
         // Update the entity's location
         entity.setLocation(destination);
+
+        // Notify observers taht the map changes
+        setChanged();
+        notifyObservers();
     }
 
     public void moveEntity(Entity entity, Direction direction){

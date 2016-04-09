@@ -92,4 +92,8 @@ public class Tile {
     public Entity getEntity() {
         return entity;
     }
+
+    public Image getEntityImage(){
+        return entity!=null ? entity.getImage() : null;
+    }
 }

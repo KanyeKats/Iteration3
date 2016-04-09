@@ -25,10 +25,10 @@ public class KeyBindings {
     }
 
     public void keyReleased(int keyCode){
-        Action action = bindings.get(keyCode);
-        if(action!=null){
-            action.finish();
-        }
+//        Action action = bindings.get(keyCode);
+//        if(action!=null){
+//            action.finish();
+//        }
     }
 
     // TODO: Provide an interface to change keybindings with.

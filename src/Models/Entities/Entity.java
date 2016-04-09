@@ -3,7 +3,6 @@ package Models.Entities;
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
-import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.Stats;
@@ -11,11 +10,12 @@ import Models.Items.Item;
 import Models.Items.Takable.Equippable.EquippableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
+import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 /**
@@ -34,6 +34,7 @@ public class Entity extends Observable {
     private Point3D location;
     private Direction orientation;
     private Map map;
+    private HashMap<Direction, BufferedImage> images;
 
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
@@ -49,20 +50,22 @@ public class Entity extends Observable {
         this.orientation = orientation;
         this.map = map;
         isVisible = true;
+        initImages();
     }
 
-    public Entity(Occupation occupation, Point3D location){
+    public Entity(Occupation occupation, Point3D location, Map map){
         this.occupation = occupation;
         this.location = location;
         this.stats = new Stats();
         this.inventory = new Inventory(10);
         this.equipment = new Equipment(stats, inventory);
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-        this.orientation = Direction.DOWN;
+        this.orientation = Direction.NORTH;
+        this.map = map;
         isVisible = true;
         occupation.initStats(this.stats);
         occupation.initSkills(activeSkillList,passiveSkillList);
-
+        initImages();
     }
 
     public void equip(EquippableItem item){
@@ -84,7 +87,13 @@ public class Entity extends Observable {
 
     // TODO: Skeleton movement method
     public final void move(Direction direction) {
-        // TODO: Needs to be implemented, needs to take into acc movement speed.
+        // TODO: needs to take into acc movement speed.
+        orientation = direction;
+        map.moveEntity(this, direction);
+
+        // Notify observers
+//        setChanged();
+//        notifyObservers();
     }
 
     // Not a mistake, I think it will be good to have overloaded move methods
@@ -203,5 +212,21 @@ public class Entity extends Observable {
 
     public Map getMap(){
         return map;
+    }
+
+    private void initImages(){
+
+        images = new HashMap<>();
+        images.put(Direction.NORTH, Assets.PLAYER_NORTH);
+        images.put(Direction.NORTH_EAST, Assets.PLAYER_NORTH_EAST);
+        images.put(Direction.SOUTH_EAST, Assets.PLAYER_SOUTH_EAST);
+        images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
+        images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
+        images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
+    }
+
+    public Image getImage(){
+
+        return isVisible ? images.get(orientation) : null;
     }
 }
