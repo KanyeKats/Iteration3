@@ -12,6 +12,7 @@ public class Assets {
     public static BufferedImage EARTH;
     public static BufferedImage WATER;
     public static BufferedImage SKY;
+    public static BufferedImage PLACEHOLDER;
 
     public static void init(){
 
@@ -23,5 +24,12 @@ public class Assets {
         // TODO Put all terrains on a single spritsheet
         SpriteSheet water = new SpriteSheet(imageLoader.loadImage("./res/map/terrain/water.png"));
         WATER = water.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        SpriteSheet placeholderSheet = new SpriteSheet(imageLoader.loadImage("./res/etc/placeholder-blk.png"));
+        PLACEHOLDER = placeholderSheet.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+
+
+
     }
 }
