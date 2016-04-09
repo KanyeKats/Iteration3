@@ -23,7 +23,7 @@ public class Fear extends Enchantment {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect = new LinearEffect(BASE_RANGE, entity.getPoint3D(), consequence, entity.getMap());
+                effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getMap());
                 effect.run();
                 isCooledDown = false;
                 doTheCoolDown();

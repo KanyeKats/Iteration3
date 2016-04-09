@@ -1,5 +1,6 @@
 package Models.Items;
 
+import Models.Entities.Entity;
 import java.awt.*;
 
 /**
@@ -26,6 +27,10 @@ public abstract class Item {
         this.ID = ID;
     }
 
+    // Interacts with an entity and returns a boolean if the interaction should result in its removal.
+    public abstract boolean onTouch(Entity entity);
+
+    public abstract boolean preventsMovement(Entity entity);
     public Image getImage() {
         return image;
     }

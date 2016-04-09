@@ -3,13 +3,12 @@ import Core.Display;
 import Core.InputDispatcher;
 import Core.State;
 import Core.StateManager;
-import Models.Menu.*;
 import Utilities.Constants;
+import Views.Graphics.Assets;
 import Views.StartMenuView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Menu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -26,6 +25,7 @@ public class RunGame extends JFrame implements ActionListener{
     public RunGame(){
 
         // Initialize the game.
+        Assets.init();
         createCoreComponents();
         createTimer();
         initFrame();
