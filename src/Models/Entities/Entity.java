@@ -14,11 +14,14 @@ import Models.Items.Takable.Equippable.Helmets.Helmet;
 import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
 import Models.Map.Direction;
 import Models.Map.Map;
+import Models.Map.Terrain;
 import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -40,6 +43,9 @@ public class Entity extends Observable {
     private Map map;
     private HashMap<Direction, BufferedImage> images;
 
+    // TODO: Ask about terrain checking... not sure if this is ok
+    private ArrayList<Terrain> passableTerrains;
+
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
     public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map){
@@ -57,7 +63,7 @@ public class Entity extends Observable {
         initImages();
     }
 
-    public Entity(Occupation occupation, Point3D location, Map map){
+    public Entity(Occupation occupation, Point3D location, Map map, Terrain... passableTerrains){
         this.occupation = occupation;
         this.location = location;
         this.stats = new Stats();
@@ -66,6 +72,7 @@ public class Entity extends Observable {
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
         this.orientation = Direction.NORTH;
         this.map = map;
+        this.passableTerrains = new ArrayList<>(Arrays.asList(passableTerrains));
         isVisible = true;
         occupation.initStats(this.stats);
         occupation.initSkills(activeSkillList,passiveSkillList);
@@ -214,6 +221,14 @@ public class Entity extends Observable {
 
     public Map getMap(){
         return map;
+    }
+
+    public ArrayList<Terrain> getPassableTerrains() {
+        return passableTerrains;
+    }
+
+    public void setPassableTerrains(ArrayList<Terrain> passableTerrains) {
+        this.passableTerrains = passableTerrains;
     }
 
     private void initImages(){
