@@ -9,14 +9,13 @@ import Models.Items.Takable.TakableItem;
  */
 public class ConsumableItem extends TakableItem {
 
-    public ConsumableItem() {
-
-        this.statModificationList = new StatModificationList()
+    public ConsumableItem(StatModificationList statModList) {
+        this.statModificationList = statModList;
     }
 
     @Override
     public void onUse(Entity entity) {
-        entity.getInventory().remove(this);
+        entity.getInventory().removeItem(this);
         statModificationList.applyModifications(entity.getStats());
     }
 }
