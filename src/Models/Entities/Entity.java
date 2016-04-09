@@ -14,6 +14,8 @@ import Models.Items.Takable.Equippable.Helmets.Helmet;
 import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
 import Models.Map.Direction;
 import Models.Map.Map;
+import Models.Map.Terrain;
+import Models.Map.Tile;
 import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 
@@ -241,5 +243,11 @@ public class Entity extends Observable {
     public Image getImage(){
 
         return isVisible ? images.get(orientation) : null;
+    }
+
+    //TODO: Will need to cover a +/- 1 in height eventually
+    public Tile getTileInFront(){
+        Point3D point = orientation.getPointAdjacentTo(location);
+        return map.getTile(point);
     }
 }

@@ -27,20 +27,16 @@ public class PickPocket extends ActiveSkill {
         }
     }
 
-    //TODO: Is there too much LoD going on here to be comfortable?
     private boolean tileHasNPC(Entity entity){
-        Point3D point = entity.getOrientation().getPointAdjacentTo(entity.getLocation());
-        Entity npc = entity.getMap().getEntity(point);
+        Entity npc = entity.getTileInFront().getEntity();
         if(npc != null)
             return true;
         else
             return false;
     }
 
-    //TODO: Is there too much LoD going on here to be comfortable?
     private void stealItem(Entity entity){
-        Point3D point = entity.getOrientation().getPointAdjacentTo(entity.getLocation());
-        Entity npc = entity.getMap().getEntity(point);
+        Entity npc = entity.getTileInFront().getEntity();
         entity.addItemToInventory(npc.getInventory().removeRandomItem());
     }
 }
