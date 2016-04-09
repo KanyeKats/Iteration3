@@ -9,10 +9,12 @@ import Models.Items.Takable.TakableItem;
  */
 public class ConsumableItem extends TakableItem {
 
+    //Constructor takes in a StatModificationList
     public ConsumableItem(StatModificationList statModList) {
         this.statModificationList = statModList;
     }
 
+    //On use, this method removes the item from inventory, and applies the statmodlist
     @Override
     public void onUse(Entity entity) {
         entity.getInventory().removeItem(this);

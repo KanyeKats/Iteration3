@@ -140,8 +140,8 @@ public class Entity extends Observable {
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
 
-    public void addItemToInventory(Item item){
-
+    public boolean addItemToInventory(Item item){
+        return inventory.addItem(item);
     }
 
     public void dropItem(int positionInInventory){
