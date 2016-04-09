@@ -144,4 +144,9 @@ public class Map extends Observable {
         visitor.accept(tiles);
     }
 
+    public Entity getEntity(Point3D point){
+        Tile tile = tiles.get(point);
+        return tile.getEntity();
+    }
+
 }

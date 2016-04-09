@@ -2,17 +2,20 @@ package Models.Entities;
 
 import Models.Items.Item;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Created by Aidan on 4/6/2016.
  */
 public class Inventory {
 
-    private Item[] items; //this can be an arraylist as well
+    private ArrayList<Item> items; //this can be an arraylist as well
     private int numOfItems;
     private int inventorySize;
 
     public Inventory(int inventorySize){
-        this.items = new Item[inventorySize];
+        this.items = new ArrayList<>();
         for(Item item: items){
             item = null;
         }
@@ -48,6 +51,13 @@ public class Inventory {
 
     public int size(){
         return numOfItems;
+    }
+
+    public Item removeRandomItem(){
+        Random rand = new Random();
+        int randomItem = rand.nextInt(numOfItems+1);
+        --numOfItems;
+        return items.remove(randomItem);
     }
 
 }
