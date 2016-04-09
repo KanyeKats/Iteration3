@@ -28,7 +28,7 @@ public class Sneak extends Occupation {
                 new StatModification(Stat.AGILITY,10),
                 new StatModification(Stat.INTELLECT,5),
                 new StatModification(Stat.HARDINESS,6),
-                new StatModification(Stat.MOVEMENT,9),
+                new StatModification(Stat.MOVEMENT,18),
                 new StatModification(Stat.MAX_HEALTH,50),
                 new StatModification(Stat.MAX_MANA,50),
                 new StatModification(Stat.EXPERIENCE, 0));

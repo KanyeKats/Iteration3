@@ -3,6 +3,7 @@ package Models.Map;
 import Views.Graphics.Assets;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  * Created by johnkaufmann on 3/31/16.
@@ -28,4 +29,14 @@ public enum Terrain {
     };
 
     public abstract BufferedImage getImage();
+
+    // Checks if this current terrain is in a passed in list of terrains
+    public boolean inList(ArrayList<Terrain> terrains) {
+        for (Terrain t: terrains) {
+            if (t == this) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
