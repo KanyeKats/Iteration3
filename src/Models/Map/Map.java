@@ -36,24 +36,27 @@ public class Map extends Observable {
     // to the bottom of the cliff. TODO: will need to check if we dropped off a cliff + deal damage.
     // Next, we check for an item (obstacle/interactive) or entity which will block movement.
     // Finally, we check the terrain type of the updated destination
-    public void moveEntity(Entity entity, Point3D destination){
-        // Update the destination point
-        // This method will return the appropirate destination tile by checking all movement related factors.
-        // See its comments for more info
-        destination = updateDestinationPoint(destination, entity);
-
-        Tile destinationTile = tiles.get(destination);
-
-        // NOTE: The activation of area effects and items is the responsibility of the tile once it moves onto it.
-
+    public void moveEntity(Entity entity, Point3D destination) {
         // Get the source tile.
         Point3D source = entity.getLocation();
         Tile sourceTile = tiles.get(source);
+
+        Tile destinationTile = tiles.get(destination);
 
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || destinationTile==null){
             return;
         }
+
+        // Update the destination point
+        // This method will return the appropirate destination tile by checking all movement related factors.
+        // See its comments for more info
+        destination = updateDestinationPoint(destination, entity);
+
+        destinationTile = tiles.get(destination);
+
+        // NOTE: The activation of area effects and items is the responsibility of the tile once it moves onto it.
+
 
         // Remove the entity from the source and add it to the destination.
         sourceTile.removeEntity();
@@ -198,7 +201,7 @@ public class Map extends Observable {
         int destinationPointX = (int)originalDestinationPoint.getX();
         int destinationPointY = (int)originalDestinationPoint.getY();
 
-        double destinationMaxZHeight = getMaxColumnHeightAtPoint(destinationPointX, destinationPointY);
+        double destinationMaxZHeight = getMaxColumnHeightAtPoint(originalDestinationPoint);
 
         System.out.println("THE MAX COLUMN HEIGHT AT THE TILE WERE ATTEMPTING TO MOVE AT IS ");
         System.out.println(destinationMaxZHeight);
@@ -221,9 +224,13 @@ public class Map extends Observable {
 
     //// HELPERS ////
 
-    public int getMaxColumnHeightAtPoint(int x, int y) {
-        // Start at the lowest z point
-        int z = 0;
+    public int getMaxColumnHeightAtPoint(Point3D point) {
+        int x = (int)point.getX();
+        int y = (int)point.getY();
+
+        // Start at the current Z point
+        int originalZ = (int)point.getZ();
+        int z = originalZ;
 
         // Get tile and point
         Point3D pointToCheck = new Point3D(x, y, z);
@@ -235,12 +242,25 @@ public class Map extends Observable {
             pointToCheck = new Point3D(x, y, z);
             tileToCheck = tiles.get(pointToCheck);
         }
-        return z - 1;
+
+        // Means, we need to look down
+        if (z == originalZ) {
+            while (z > 0 && tileToCheck.getTerrain() != Terrain.EARTH ) {
+                z--;
+                pointToCheck = new Point3D(x, y, z);
+                tileToCheck = tiles.get(pointToCheck);
+            }
+            return z;
+        } else {
+            return z-1;
+        }
+
+
     }
 
-    public int getColumnHeightDifferenceBetween2DPoints(Point pointA, Point pointB) {
-        int pointAMaxHeight = getMaxColumnHeightAtPoint((int)pointA.getX(), (int)pointA.getY());
-        int pointBMaxHeight = getMaxColumnHeightAtPoint((int)pointB.getX(), (int)pointB.getY());
+    public int getColumnHeightDifferenceBetweenPoints(Point3D pointA, Point3D pointB) {
+        int pointAMaxHeight = getMaxColumnHeightAtPoint(pointA);
+        int pointBMaxHeight = getMaxColumnHeightAtPoint(pointB);
 
         return Math.abs(pointAMaxHeight - pointBMaxHeight);
     }
