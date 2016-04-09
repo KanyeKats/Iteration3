@@ -248,4 +248,7 @@ public class Map extends Observable {
         return Math.abs(pointAMaxHeight - pointBMaxHeight);
     }
 
+    public Tile getTile(Point3D point){
+        return tiles.get(point);
+    }
 }

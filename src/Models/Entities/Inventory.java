@@ -2,38 +2,35 @@ package Models.Entities;
 
 import Models.Items.Item;
 
+import java.util.ArrayList;
+
 /**
  * Created by Aidan on 4/6/2016.
  */
 public class Inventory {
-
-    private Item[] items; //this can be an arraylist as well
-    private int numOfItems;
+    private ArrayList<Item> items;
     private int inventorySize;
 
     public Inventory(int inventorySize){
-        this.items = new Item[inventorySize];
-        for(Item item: items){
-            item = null;
-        }
+        items = new ArrayList<>(inventorySize);
         this.inventorySize = inventorySize;
-        numOfItems = 0;
     }
 
     public void addItem(Item item){
-        if(isFull()){
+        if(items.size() >= inventorySize){
             return;
         }
+        items.add(item);
+    }
 
-        for(Item inventoryItem: items)
-            if(inventoryItem == null){
-                inventoryItem = item;
-            }
-        numOfItems++;
+    public void removeItem(Item item) {
+        if ( items.contains(item) ) {
+            items.remove(item);
+        }
     }
 
     public boolean isFull(){
-        return(numOfItems == inventorySize);
+        return ( items.size() >= inventorySize );
     }
 
     //The contains(ID) class Rokas wanted
@@ -47,7 +44,7 @@ public class Inventory {
     }
 
     public int size(){
-        return numOfItems;
+        return items.size();
     }
 
 }
