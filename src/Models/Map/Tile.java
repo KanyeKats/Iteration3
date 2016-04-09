@@ -1,7 +1,7 @@
 package Models.Map;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Effects.Effect;
+import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.MapUtilities.TileDrawingVisitor;
 
@@ -37,6 +37,25 @@ public class Tile {
 
     public boolean containsVisibleEntity(){
         return entity!=null && entity.isVisible();
+    }
+
+    public boolean preventsMovement(Entity entityAttemptingMovement) {
+
+        // Check if an entity prevents movement
+        if (this.containsEntity()) {
+            return true;
+        }
+
+        // Check if an item prevents movement
+        for(Iterator<Item> iterator = items.iterator(); iterator.hasNext();) {
+            Item item = iterator.next();
+            if (item.preventsMovement(entityAttemptingMovement)) {
+                return true;
+            }
+        }
+
+        // If none of the above prevents movement, return false
+        return false;
     }
 
     public void insertEntity(Entity entity){

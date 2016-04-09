@@ -39,6 +39,7 @@ public class MapNavigationUtilities {
                     point4Dend[2] = point4Dstart[2] - k;
                     if(point4Dend[0] + point4Dend[1] + point4Dend[2] == 0){
                         Point3D newpoint = convertCubictoAxial(point4Dend);
+                        System.out.println(newpoint.toString());
                         Tile tileInRange = map.getTile(newpoint);
                         //if tile is not null because it is not on the map
                         tilesInRange.add(tileInRange);
