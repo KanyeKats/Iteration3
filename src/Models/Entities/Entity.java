@@ -95,7 +95,7 @@ public class Entity extends Observable {
     public void equip(EquippableItem item){
         // Only equip the item if this instance of entity fufills the stat requirement to equip the item.
         if (item.fufillEquipRequirement(this)) {
-            item.equip(equipment);
+            item.equip(equipment, passiveSkillList);
         }
     }
 

@@ -1,17 +1,14 @@
 package Models.Map;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Effects.Effect;
-import Models.Entities.Stats.Stat;
+import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Observable;
 

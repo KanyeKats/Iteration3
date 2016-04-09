@@ -2,7 +2,7 @@ package Utilities.Savable;//package Utilities.Savable;
 //
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Effects.Effect;
+import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.*;
 import javafx.geometry.Point3D;
