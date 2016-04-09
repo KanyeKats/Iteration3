@@ -15,7 +15,7 @@ public enum RangedWeaponFactory {
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel throwing knives", "Some sharp, steel throwing knives", req);
+            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel throwing knives", "Some sharp, steel throwing knives", req, 9000);
         }
     },
     NINJA_STARS(9001) {
@@ -23,7 +23,7 @@ public enum RangedWeaponFactory {
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Ninja Throwing Stars", "Sharp, quick ninja throwing stars", req);
+            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Ninja Throwing Stars", "Sharp, quick ninja throwing stars", req, 9001);
         }
     },
     CROSSBOW(9002) {
@@ -31,7 +31,7 @@ public enum RangedWeaponFactory {
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Crossbow", "A heavy hitting crossbow", req);
+            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Crossbow", "A heavy hitting crossbow", req, 9002);
         }
     },
     DARK_BOW(9003) {
@@ -39,7 +39,7 @@ public enum RangedWeaponFactory {
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Darkbow", "An insanely powerful, dark compound bow.", req);
+            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Darkbow", "An insanely powerful, dark compound bow.", req, 9003);
         }
     };
 
