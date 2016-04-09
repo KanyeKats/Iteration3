@@ -154,7 +154,6 @@ public class Map extends Observable {
         visitor.accept(tiles);
     }
 
-
     //// MOVEMENT CHECKERS ////
 
     // Checks the destination tile for movement hindrance and height differences

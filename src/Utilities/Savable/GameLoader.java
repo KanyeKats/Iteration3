@@ -1,4 +1,4 @@
-package Utilities.Savable;//package Utilities.Savable;
+package Utilities.Savable;//package MapNavigationUtilities.Savable;
 //
 
 import Models.Entities.Entity;

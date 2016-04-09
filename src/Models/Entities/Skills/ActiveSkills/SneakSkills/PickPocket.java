@@ -2,6 +2,7 @@ package Models.Entities.Skills.ActiveSkills.SneakSkills;
 
 import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
+
 import Models.Map.Direction;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
@@ -20,6 +21,7 @@ public class PickPocket extends ActiveSkill {
     }
 
     public void activate(Entity entity){
+
         if(isCooledDown && tileHasNPC(entity)){
             if(percentChanceByLevel()){
                 stealItem(entity);

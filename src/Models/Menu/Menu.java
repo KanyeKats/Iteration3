@@ -10,6 +10,7 @@ import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
+import Utilities.MapNavigationUtilities;
 import Utilities.Savable.GameLoader;
 import Views.AvatarCreationMenuView;
 import Views.GameView;

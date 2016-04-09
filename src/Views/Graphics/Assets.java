@@ -3,6 +3,7 @@ package Views.Graphics;
 import Utilities.Constants;
 
 import java.awt.image.BufferedImage;
+import javafx.scene.image.Image;
 
 /**
  * Created by Aidan on 4/6/2016.
@@ -24,6 +25,7 @@ public class Assets {
     public static BufferedImage ITEM_BAG;
 
     private static final int SPRITE_SIZE = 30;
+
 
     public static void init(){
 

@@ -66,4 +66,5 @@ public class TileDrawingVisitor {
         int y = Constants.TILE_HEIGHT / 2 - image.getHeight(null) / 2;
         g.drawImage(image, x, y, null);
     }
+
 }
