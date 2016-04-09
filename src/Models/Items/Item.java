@@ -31,7 +31,7 @@ public abstract class Item {
     public abstract boolean onTouch(Entity entity);
 
     public abstract boolean preventsMovement(Entity entity);
-    public Image getImage() {
+    public final Image getImage() {
         return image;
     }
 

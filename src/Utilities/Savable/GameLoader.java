@@ -23,7 +23,7 @@ import java.util.HashMap;
  */
 public class GameLoader {
 
-    public static final Point3D DEFAULT_STARTING_POINT = new Point3D(0, 0, 0); // Just made sure this was a valid point in the default map. Should be done better probably.
+    public static final Point3D DEFAULT_STARTING_POINT = new Point3D(3, 0, 0); // Just made sure this was a valid point in the default map. Should be done better probably.
 
     public static Map loadMap(String filepath){
 
@@ -61,7 +61,7 @@ public class GameLoader {
                 // TODO: Implement these functions
                 AreaEffect areaEffect = null;
                 Decal decal = null;
-                ArrayList<Item> items = null;
+                ArrayList<Item> items = new ArrayList<>();
                 Entity entity = null;
                 Effect effect = null;
 

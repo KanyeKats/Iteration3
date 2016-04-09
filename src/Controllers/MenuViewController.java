@@ -2,7 +2,6 @@ package Controllers;
 
 import Core.StateManager;
 import Models.Menu.Menu;
-import Models.Menu.MenuOption;
 import Utilities.Action;
 
 import java.awt.event.KeyEvent;
@@ -28,18 +27,12 @@ public class MenuViewController extends ViewController{
             public void execute() {
                 menu.previousOption();
             }
-
-            @Override
-            public void finish() {}
         });
         keyBindings.addBinding(KeyEvent.VK_DOWN, new Action() {
             @Override
             public void execute() {
                 menu.nextOption();
             }
-
-            @Override
-            public void finish() {}
         });
         keyBindings.addBinding(KeyEvent.VK_ENTER, new Action() {
             @Override
@@ -49,9 +42,6 @@ public class MenuViewController extends ViewController{
                     actions.get(0).execute(); // LOD Violations :(
                 }
             }
-
-            @Override
-            public void finish() {}
         });
         keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
             @Override
@@ -59,8 +49,6 @@ public class MenuViewController extends ViewController{
                 stateManager.goToPreviousState();
             }
 
-            @Override
-            public void finish() {}
         });
     }
 
