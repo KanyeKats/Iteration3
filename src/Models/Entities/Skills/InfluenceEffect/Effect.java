@@ -1,13 +1,11 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.Consequence;
+import Models.Consequences.Consequence;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
-
-import java.awt.*;
 
 /**
  * Created by johnkaufmann on 3/30/16.

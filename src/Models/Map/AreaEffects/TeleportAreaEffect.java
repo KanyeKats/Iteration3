@@ -1,7 +1,6 @@
 package Models.Map.AreaEffects;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.BehaviorConsequence;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
 import javafx.geometry.Point3D;

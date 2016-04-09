@@ -1,6 +1,6 @@
 package Models.Entities.Skills.Effects;
 
-import Models.Entities.Skills.Consequences.Consequence;
+import Models.Consequences.Consequence;
 import Models.Map.Direction;
 
 import java.awt.*;

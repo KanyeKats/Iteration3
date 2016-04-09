@@ -1,7 +1,7 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.BehaviorConsequence;
+import Models.Consequences.BehaviorConsequence;
 import Models.Entities.Skills.InfluenceEffect.ConicalEffect;
 
 /**

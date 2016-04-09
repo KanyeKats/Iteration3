@@ -1,7 +1,7 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
+import Models.Consequences.ImmediateStatConsequence;
 import Models.Entities.Skills.InfluenceEffect.ConicalEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
