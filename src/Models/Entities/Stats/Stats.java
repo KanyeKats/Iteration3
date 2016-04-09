@@ -22,9 +22,8 @@ public class Stats {
     public Stats() {
         stats = new EnumMap<Stat, Integer>(Stat.class);
 
-        for(Stat stat : Stat.values()){
-            stats.put(stat, 0);
-        }
+        // Init default values for stats. Mostly 0's.
+        initStats();
 
         // Construct and Populate the derived stats map
         derived = new EnumMap<Stat, DerivedStatGetter>(Stat.class);
@@ -56,6 +55,16 @@ public class Stats {
         }
     }
 
+    private void initStats() {
+        for(Stat stat : Stat.values()){
+            stats.put(stat, 0);
+        }
+        // Set specific values for specific stats
+        stats.put(Stat.LEVEL,1 );
+        stats.put(Stat.EXP_TO_LEVEL, 50);
+        stats.put(Stat.LIVES, 3);
+        stats.put(Stat.RADIUS_OF_VISIBILITY, 10);
+    }
 
     // Derived stats getters
     public int getMaxHealth() {

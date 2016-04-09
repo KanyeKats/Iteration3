@@ -9,6 +9,8 @@ import Models.Entities.Stats.Stats;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
 
+import java.awt.*;
+
 /**
  * Created by johnkaufmann on 4/7/16.
  * TODO:
@@ -41,5 +43,10 @@ public class InstantDeathAreaEffect extends AreaEffect {
 
         // Execute the entity... LITERALLY!
         consequence.execute(entity);
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
     }
 }

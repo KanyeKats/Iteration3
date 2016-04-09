@@ -5,6 +5,8 @@ import Models.Map.AreaEffect;
 import Models.Map.Decal;
 import javafx.geometry.Point3D;
 
+import java.awt.*;
+
 /**
  * Created by johnkaufmann on 4/6/16.
  * TODO:
@@ -28,5 +30,10 @@ public class TeleportAreaEffect extends AreaEffect {
     public void activate(Entity entity) {
         // Move the entity to the target point.
         entity.move(targetLocation);
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
     }
 }

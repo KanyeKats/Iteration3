@@ -9,6 +9,8 @@ import Models.Map.AreaEffect;
 import Models.Map.Decal;
 import Models.Map.Direction;
 
+import java.awt.*;
+
 /**
  * Created by johnkaufmann on 4/7/16.
  * TODO:
@@ -55,5 +57,10 @@ public class RiverAreaEffect extends AreaEffect {
 
         // Set the entity's sped back
         removeRiverSpeedMods.applyModifications(stats);
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
     }
 }
