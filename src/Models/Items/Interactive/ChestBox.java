@@ -5,6 +5,7 @@ import Models.Entities.Inventory;
 import Models.Entities.Requirements.RequirementList;
 import Models.Items.Takable.TakableItem;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -15,9 +16,13 @@ public class ChestBox extends InteractiveItem {
     private ArrayList<TakableItem> chestContents;
 
     //Constructor takes in a RequirementList and an arraylist of TakableItems
-    public ChestBox(RequirementList reqs, ArrayList<TakableItem> chestContents) {
+    public ChestBox(Image image, RequirementList reqs, String name, String desc, int ID) {
         super(reqs);
-        this.chestContents = chestContents;
+        this.chestContents = null;
+        this.image = image;
+        this.name = name;
+        this.description = desc;
+        this.ID = ID;
     }
 
     //on touch, if the reqs are fullfilled, all the items in the chestbox are transfered to entity
@@ -43,4 +48,6 @@ public class ChestBox extends InteractiveItem {
     public boolean preventsMovement(Entity entity) {
         return true;
     }
+
+    public void setChestContents(ArrayList<TakableItem> contents) { this.chestContents = contents; }
 }

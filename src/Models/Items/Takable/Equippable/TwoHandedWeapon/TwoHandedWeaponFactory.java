@@ -15,7 +15,7 @@ public enum TwoHandedWeaponFactory {
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Two-Handed Sword", "A basic two-handed bronze sword; stronger, but slower than its one-handed counterpart.", req);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Two-Handed Sword", "A basic two-handed bronze sword; stronger, but slower than its one-handed counterpart.", req, 7000);
         }
     },
     IRON_2H(7001) {
@@ -23,7 +23,7 @@ public enum TwoHandedWeaponFactory {
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Two-Handed Sword", "A basic two-handed iron sword; stronger, but slower than its one-handed counterpart.", req);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Two-Handed Sword", "A basic two-handed iron sword; stronger, but slower than its one-handed counterpart.", req, 7001);
         }
     },
     DRAGON_2H(7002) {
@@ -31,7 +31,7 @@ public enum TwoHandedWeaponFactory {
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Dragon Two-Handed Sword", "A heavy hitting dragon two-handed sword", req);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Dragon Two-Handed Sword", "A heavy hitting dragon two-handed sword", req, 7002);
         }
     },
     GODSWORD(7003) {
@@ -39,7 +39,7 @@ public enum TwoHandedWeaponFactory {
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Armadyl Godsword", "An insanely powerful sword. Beware.", req);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Armadyl Godsword", "An insanely powerful sword. Beware.", req, 7003);
         }
     };
 

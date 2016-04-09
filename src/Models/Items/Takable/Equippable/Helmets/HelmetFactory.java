@@ -15,7 +15,7 @@ public enum HelmetFactory {
         public Helmet createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Blue Party Hat", "A rare blue party hat, you must be an OG player", req);
+            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Blue Party Hat", "A rare blue party hat, you must be an OG player", req, 3000);
         }
     },
     RED_PHAT(3001) {
@@ -23,7 +23,7 @@ public enum HelmetFactory {
         public Helmet createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Red Party Hat", "A rare red party hat, you must be pretty old", req);
+            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Red Party Hat", "A rare red party hat, you must be pretty old", req, 3001);
         }
     },
     PURPLE_PHAT(3002) {
@@ -31,7 +31,7 @@ public enum HelmetFactory {
         public Helmet createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Purple Party Hat", "A rare purple party hat, you gotta be OG", req);
+            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Purple Party Hat", "A rare purple party hat, you gotta be OG", req, 3002);
         }
     },
     SANTA_HAT(3003) {
@@ -39,7 +39,7 @@ public enum HelmetFactory {
         public Helmet createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Santa Hat", "A glorious santa hat which is sure to protect you from damage.", req);
+            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Santa Hat", "A glorious santa hat which is sure to protect you from damage.", req, 3003);
         }
     };
 
@@ -66,9 +66,9 @@ public enum HelmetFactory {
     // If so, return an instance of that enum
     // Otherwise, return null, an invalid ID was passed in
     public static Helmet helmetFromID(int id) {
-        for (HelmetFactory Helmet : values()) {
-            if (Helmet.getID() == id) {
-                return Helmet.createInstance();
+        for (HelmetFactory helmet : values()) {
+            if (helmet.getID() == id) {
+                return helmet.createInstance();
             }
         }
         return null;
