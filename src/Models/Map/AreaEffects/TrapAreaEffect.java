@@ -9,6 +9,7 @@ import Models.Entities.Stats.StatModificationList;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -38,6 +39,11 @@ public class TrapAreaEffect extends AreaEffect {
 
         // Execute the consequence
         consequence.execute(entity);
+    }
+
+    @Override
+    public Image getImage() {
+        return null;
     }
 
     // TODO: Not sure if this should be here? maybe in detect trap skill?

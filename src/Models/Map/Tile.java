@@ -92,4 +92,14 @@ public class Tile {
     public Entity getEntity() {
         return entity;
     }
+
+    public Image getEntityImage(){
+        return entity!=null ? entity.getImage() : null;
+    }
+
+    public AreaEffect getAreaEffect() { return this.areaEffect; }
+
+    public ArrayList<Item> getItems() { return this.items; }
+
+    public Effect getEffect() { return this.effect; }
 }

@@ -3,19 +3,23 @@ package Models.Entities;
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
-import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
+import Models.Items.Takable.Equippable.Boots.Boot;
+import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
+import Models.Items.Takable.Equippable.Helmets.Helmet;
+import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
 import Models.Map.Direction;
 import Models.Map.Map;
+import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 
 /**
@@ -34,6 +38,7 @@ public class Entity extends Observable {
     private Point3D location;
     private Direction orientation;
     private Map map;
+    private HashMap<Direction, BufferedImage> images;
 
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
@@ -49,42 +54,48 @@ public class Entity extends Observable {
         this.orientation = orientation;
         this.map = map;
         isVisible = true;
+        initImages();
     }
 
-    public Entity(Occupation occupation, Point3D location){
+    public Entity(Occupation occupation, Point3D location, Map map){
         this.occupation = occupation;
         this.location = location;
         this.stats = new Stats();
         this.inventory = new Inventory(10);
         this.equipment = new Equipment(stats, inventory);
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-        this.orientation = Direction.DOWN;
+        this.orientation = Direction.NORTH;
+        this.map = map;
         isVisible = true;
         occupation.initStats(this.stats);
         occupation.initSkills(activeSkillList,passiveSkillList);
+        initImages();
+
+        // TODO: Remove!! Just testing item factory and equipping.
+        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
+        equip(bluePhat);
+        Boot moccassins = BootFactory.bootsFromID(1001);
+        equip(moccassins);
 
     }
 
     public void equip(EquippableItem item){
-        // Boolean will be returned by the equipment equip function if the item was successfully equipped.
-        boolean successfulEquip = equipment.equip(item);
-
-        // Apply the stat mods if equipping was successful.. or do that in equipment? TDA violation?
-        // WE are currently doing it in equipment because it is easier... and clearer for all cases,
-        // like for unequipping.
-//        if (successfulEquip) {
-//            StatModificationList mods = item.getStatModificationList();
-//            mods.applyModifications(stats);
-//        }
+        // Only equip the item if this instance of entity fufills the stat requirement to equip the item.
+        if (item.fufillEquipRequirement(this)) {
+            item.equip(equipment);
+        }
     }
 
     public void unequip(EquippableItem item){
-        equipment.unequip(item);
+        item.unequip(equipment);
     }
 
     // TODO: Skeleton movement method
     public final void move(Direction direction) {
-        // TODO: Needs to be implemented, needs to take into acc movement speed.
+        // TODO: needs to take into acc movement speed.
+
+        updateOrientation(direction);
+        map.moveEntity(this, direction);
     }
 
     // Not a mistake, I think it will be good to have overloaded move methods
@@ -203,5 +214,32 @@ public class Entity extends Observable {
 
     public Map getMap(){
         return map;
+    }
+
+    private void initImages(){
+
+        images = new HashMap<>();
+        images.put(Direction.NORTH, Assets.PLAYER_NORTH);
+        images.put(Direction.NORTH_EAST, Assets.PLAYER_NORTH_EAST);
+        images.put(Direction.SOUTH_EAST, Assets.PLAYER_SOUTH_EAST);
+        images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
+        images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
+        images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
+        images.put(Direction.UP, Assets.PLAYER_NORTH);
+        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
+
+    }
+
+    private void updateOrientation(Direction direction){
+
+        if(direction == Direction.DOWN || direction == Direction.UP){
+            images.put(direction, images.get(orientation));
+        }
+        orientation = direction;
+    }
+
+    public Image getImage(){
+
+        return isVisible ? images.get(orientation) : null;
     }
 }

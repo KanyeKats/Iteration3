@@ -30,4 +30,6 @@ public abstract class Effect {
     protected void dealConsequence(){
 
     }
+
+    public abstract Image getImage();
 }
