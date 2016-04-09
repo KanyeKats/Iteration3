@@ -1,5 +1,6 @@
 package Models.Items.Takable.Equippable.Leggings;
 
+import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -13,28 +14,32 @@ public enum LeggingFactory {
         @Override
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Yoga Pants", "Some comfy, cute yoga pants");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Yoga Pants", "Some comfy, cute yoga pants", req);
         }
     },
     BRONZE_PLATE_LEGS(5001) {
         @Override
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Platelegs", "A pair of bronze platelegs");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Platelegs", "A pair of bronze platelegs", req);
         }
     },
     IRON_PLATE_LEGS(5002) {
         @Override
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Platelegs", "A pair of iron platelegs");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Platelegs", "A pair of iron platelegs", req);
         }
     },
     STEEL_PLATE_LEGS(5003) {
         @Override
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Platelegs", "A pair of steel platelegs");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Platelegs", "A pair of steel platelegs", req);
         }
     };
 

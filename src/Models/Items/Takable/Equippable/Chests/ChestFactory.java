@@ -1,5 +1,6 @@
 package Models.Items.Takable.Equippable.Chests;
 
+import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -13,28 +14,32 @@ public enum ChestFactory {
         @Override
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Frat Tank", "A sporty tank to show off your gains");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Frat Tank", "A sporty tank to show off your gains", req);
         }
     },
     SWAMPHACKS_TEE(2001) {
         @Override
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "SwampHacks Tee", "A tee shirt to show off your nerdiness.");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "SwampHacks Tee", "A tee shirt to show off your nerdiness.", req);
         }
     },
     CHAINMAIL(2002) {
         @Override
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.", req);
         }
     },
     CHESTPLATE(2003) {
         @Override
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chestplate", "Stronger than chainmail, protects you from greater damage");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chestplate", "Stronger than chainmail, protects you from greater damage", req);
         }
     };
 

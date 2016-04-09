@@ -1,5 +1,6 @@
 package Models.Items.Takable.Equippable.Boots;
 
+import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -15,28 +16,32 @@ public enum BootFactory {
         @Override
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Moccasins", "Some comfy moccasins");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Moccasins", "Some comfy moccasins", req);
         }
     },
     IRON(1001) {
         @Override
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Boots", "Some boots made of Iron.");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Boots", "Some boots made of Iron.", req);
         }
     },
     BRONZE(1002) {
         @Override
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Boots", "Some boots made of Bronze.");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Boots", "Some boots made of Bronze.", req);
         }
     },
     STEEL(1003) {
         @Override
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Boots", "Some boots made of Steel.");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Boots", "Some boots made of Steel.", req);
         }
     };
 

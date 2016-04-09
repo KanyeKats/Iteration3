@@ -1,5 +1,6 @@
 package Models.Items.Takable.Equippable.Gauntlets;
 
+import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -13,28 +14,32 @@ public enum GuantletFactory {
         @Override
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
-            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Wooden Guantlets", "A pair of wooden guantlets");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Wooden Guantlets", "A pair of wooden guantlets", req);
         }
     },
     BRASS_KNUCKLES(4001) {
         @Override
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
-            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Brass Knuckles", "A pair of dangerous brass knuckles");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Brass Knuckles", "A pair of dangerous brass knuckles", req);
         }
     },
     JACKSON_GLOVES(4002) {
         @Override
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
-            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Jackson Gloves", "A single white glove");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Jackson Gloves", "A single white glove", req);
         }
     },
     BLADE_FIST(4003) {
         @Override
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
-            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Blade Fists", "You'll have some sharp fists with these!");
+            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Blade Fists", "You'll have some sharp fists with these!", req);
         }
     };
 

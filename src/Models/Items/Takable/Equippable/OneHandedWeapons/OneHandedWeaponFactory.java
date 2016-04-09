@@ -1,5 +1,6 @@
 package Models.Items.Takable.Equippable.OneHandedWeapons;
 
+import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -13,28 +14,32 @@ public enum OneHandedWeaponFactory {
         @Override
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
-            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze short sword", "A basic bronze sword");
+            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
+            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze short sword", "A basic bronze sword", req);
         }
     },
     IRON_LONG_SWORD(6001) {
         @Override
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
-            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron longsword", "An iron longsword");
+            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
+            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron longsword", "An iron longsword" ,req);
         }
     },
     DDS(6002) {
         @Override
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
-            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Dragon Dagger Super-Poisened", "A super poisened dragon dagger. This weapons special attack is deadly.");
+            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
+            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Dragon Dagger Super-Poisened", "A super poisened dragon dagger. This weapons special attack is deadly.", req);
         }
     },
     ABBY_WHIP(6003) {
         @Override
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
-            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Abyssal whip", "A super quick, super strong weapon.");
+            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
+            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Abyssal whip", "A super quick, super strong weapon.", req);
         }
     };
 

@@ -1,5 +1,6 @@
 package Models.Items.Takable.Equippable.TwoHandedWeapon;
 
+import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -13,28 +14,32 @@ public enum TwoHandedWeaponFactory {
         @Override
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Two-Handed Sword", "A basic two-handed bronze sword; stronger, but slower than its one-handed counterpart.");
+            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Two-Handed Sword", "A basic two-handed bronze sword; stronger, but slower than its one-handed counterpart.", req);
         }
     },
     IRON_2H(7001) {
         @Override
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Two-Handed Sword", "A basic two-handed iron sword; stronger, but slower than its one-handed counterpart.");
+            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Two-Handed Sword", "A basic two-handed iron sword; stronger, but slower than its one-handed counterpart.", req);
         }
     },
     DRAGON_2H(7002) {
         @Override
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Dragon Two-Handed Sword", "A heavy hitting dragon two-handed sword");
+            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Dragon Two-Handed Sword", "A heavy hitting dragon two-handed sword", req);
         }
     },
     GODSWORD(7003) {
         @Override
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Armadyl Godsword", "An insanely powerful sword. Beware.");
+            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Armadyl Godsword", "An insanely powerful sword. Beware.", req);
         }
     };
 
