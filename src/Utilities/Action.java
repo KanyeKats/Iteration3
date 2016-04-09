@@ -6,5 +6,4 @@ package Utilities;
 public interface Action {
 
     void execute();
-    void finish();
 }

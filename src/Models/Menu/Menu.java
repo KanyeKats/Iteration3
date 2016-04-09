@@ -7,13 +7,17 @@ import Core.StateManager;
 import Models.Entities.Entity;
 import Models.Entities.Occupation.Smasher;
 import Models.Map.Map;
+import Models.Map.Terrain;
+import Models.Map.Tile;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.Savable.GameLoader;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
+import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Bradley on 4/4/2016.
@@ -76,9 +80,6 @@ public class Menu extends java.util.Observable{
                         AvatarCreationMenuView view = new AvatarCreationMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatarCreationMenu);
                         stateManager.setActiveState(new State(controller, view));
                     }
-
-                    @Override
-                    public void finish() {}
                 });
                 return actions;
             }
@@ -104,9 +105,6 @@ public class Menu extends java.util.Observable{
 
                         // TODO: Implement this.
                     }
-
-                    @Override
-                    public void finish() {}
                 });
                 return actions;
             }
@@ -130,9 +128,6 @@ public class Menu extends java.util.Observable{
                     public void execute() {
                         System.exit(0);
                     }
-
-                    @Override
-                    public void finish() {}
                 });
                 return actions;
             }
@@ -161,15 +156,15 @@ public class Menu extends java.util.Observable{
                     public void execute() {
 
                         System.out.println("Smasher");
-                        Map map = GameLoader.loadDefaultMap();
-                        Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT); // TOD0: Improve avatar initial placement.
+                        Map map = new Map(new HashMap<>());
+                        map.load("./res/map/default_map.xml");
+                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
+                        Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
+                        map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         stateManager.setActiveState(new State(gameViewController, gameView));
                     }
-
-                    @Override
-                    public void finish() {}
                 });
                 return actions;
             }
@@ -194,9 +189,6 @@ public class Menu extends java.util.Observable{
                         System.out.println("Summoner");
                         // TODO: Implement this.
                     }
-
-                    @Override
-                    public void finish() {}
                 });
                 return actions;
             }
@@ -220,9 +212,6 @@ public class Menu extends java.util.Observable{
                     public void execute() {
                         System.out.println("Sneak");
                     }
-
-                    @Override
-                    public void finish() {}
                 });
                 return actions;
             }

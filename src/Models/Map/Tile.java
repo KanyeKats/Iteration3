@@ -39,16 +39,35 @@ public class Tile {
         return entity!=null && entity.isVisible();
     }
 
+    public boolean preventsMovement(Entity entityAttemptingMovement) {
+
+        // Check if an entity prevents movement
+        if (this.containsEntity()) {
+            return true;
+        }
+
+        // Check if an item prevents movement
+        for(Iterator<Item> iterator = items.iterator(); iterator.hasNext();) {
+            Item item = iterator.next();
+            if (item.preventsMovement(entityAttemptingMovement)) {
+                return true;
+            }
+        }
+
+        // If none of the above prevents movement, return false
+        return false;
+    }
+
     public void insertEntity(Entity entity){
         this.entity = entity;
 
         // Activate items
-        for(Iterator<Item> iterator = items.iterator(); iterator.hasNext();){
+        for (Iterator<Item> iterator = items.iterator(); iterator.hasNext(); ) {
             Item item = iterator.next();
 
             // Activate the item and see if it should be removed from the map after its activation.
             boolean removeItem = item.onTouch(entity);
-            if(removeItem){
+            if (removeItem) {
                 iterator.remove();
             }
         }
@@ -92,4 +111,14 @@ public class Tile {
     public Entity getEntity() {
         return entity;
     }
+
+    public Image getEntityImage(){
+        return entity!=null ? entity.getImage() : null;
+    }
+
+    public AreaEffect getAreaEffect() { return this.areaEffect; }
+
+    public ArrayList<Item> getItems() { return this.items; }
+
+    public Effect getEffect() { return this.effect; }
 }

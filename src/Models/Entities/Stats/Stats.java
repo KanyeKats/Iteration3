@@ -22,9 +22,8 @@ public class Stats {
     public Stats() {
         stats = new EnumMap<Stat, Integer>(Stat.class);
 
-        for(Stat stat : Stat.values()){
-            stats.put(stat, 0);
-        }
+        // Init default values for stats. Mostly 0's.
+        initStats();
 
         // Construct and Populate the derived stats map
         derived = new EnumMap<Stat, DerivedStatGetter>(Stat.class);
@@ -39,8 +38,16 @@ public class Stats {
     // A public function to modify any stat's current value
     // Primarily used by stat modification(s).
     public void setStat(Stat stat, int delta) {
+        // Get the stat and increase it
         Integer currentValue = stats.get(stat);
         currentValue += delta;
+
+        // Check if we exceeded this stat's level cap.
+        // If we did, this function will return the capped level,
+        // Else, it will return the same value we passed in
+        currentValue = stat.checkLevelCap(currentValue);
+
+        // Set the stats new value
         stats.put(stat, currentValue);
     }
 
@@ -56,8 +63,20 @@ public class Stats {
         }
     }
 
+    private void initStats() {
+        for(Stat stat : Stat.values()){
+            stats.put(stat, 0);
+        }
+        // Set specific values for specific stats
+        stats.put(Stat.LEVEL,1 );
+        stats.put(Stat.EXP_TO_LEVEL, 50);
+        stats.put(Stat.LIVES, 3);
+        stats.put(Stat.RADIUS_OF_VISIBILITY, 10);
+    }
 
-    // Derived stats getters
+
+    /// Derived stats getters ////
+
     public int getMaxHealth() {
         // Get primary stats
         Integer level = stats.get(Stat.LEVEL);

@@ -57,10 +57,6 @@ public class MapDrawingVisitor {
             // Get the image from this tile.
             Image tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor());
 
-            if(currentPoint.getZ() == center.getZ() && currentPoint.getX() == center.getX() && currentPoint.getY() == center.getY() -1){
-                System.out.println(currentPoint.toString());
-            }
-
             // Figure out where to put it!
             // X and Y will start at the center of the screen.
             int pixelX = viewportWidth/2;

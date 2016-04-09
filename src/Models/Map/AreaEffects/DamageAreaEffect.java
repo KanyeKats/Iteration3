@@ -7,6 +7,9 @@ import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
+import Views.Graphics.Assets;
+
+import java.awt.*;
 
 /**
  * Created by johnkaufmann on 4/7/16.
@@ -37,5 +40,11 @@ public class DamageAreaEffect extends AreaEffect {
 
         // Execute the consequence
         consequence.execute(entity);
+    }
+
+    @Override
+    public Image getImage() {
+//        return Assets.DAMAGE_AREA_EFFECT;
+        return null;
     }
 }
