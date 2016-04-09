@@ -3,6 +3,7 @@ package Models.Entities;
 import Models.Items.Item;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Aidan on 4/6/2016.
@@ -45,6 +46,12 @@ public class Inventory {
 
     public int size(){
         return items.size();
+    }
+
+    public Item removeRandomItem(){
+        Random rand = new Random();
+        int randomItem = rand.nextInt(items.size());
+        return items.remove(randomItem);
     }
 
 }
