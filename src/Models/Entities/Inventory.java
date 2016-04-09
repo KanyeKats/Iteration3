@@ -17,11 +17,12 @@ public class Inventory {
         this.inventorySize = inventorySize;
     }
 
-    public void addItem(Item item){
+    public boolean addItem(Item item){
         if(items.size() >= inventorySize){
-            return;
+            return false;
         }
         items.add(item);
+        return true;
     }
 
     public void removeItem(Item item) {
