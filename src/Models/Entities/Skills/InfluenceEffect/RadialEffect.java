@@ -26,4 +26,9 @@ public class RadialEffect extends Effect {
         MapNavigationUtilities.getTilesinPlane(location,range,map);
 
     }
+
+    @Override
+    public Image getImage() {
+        return null;
+    }
 }

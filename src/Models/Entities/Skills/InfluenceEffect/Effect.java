@@ -88,4 +88,6 @@ public abstract class Effect implements Runnable {
         //given an entity execute that consequence
         consequence.execute(entity);
     }
+
+    public abstract Image getImage();
 }
