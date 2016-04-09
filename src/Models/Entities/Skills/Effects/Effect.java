@@ -9,10 +9,16 @@ import java.awt.*;
  * Created by josh on 4/6/16.
  */
 public abstract class Effect {
-    private int range;
-    private Point location;
-    private Consequence consequence;
-    private Direction direction;
+    //I think these need to be changed to protected so that they can be used by the subclasses - Aidan
+//    private int range;
+//    private Point location;
+//    private Consequence consequence;
+//    private Direction direction;
+
+    protected int range;
+    protected Point location;
+    protected Consequence consequence;
+    protected Direction direction;
 
 
     private void start(){

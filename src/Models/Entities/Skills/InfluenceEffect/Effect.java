@@ -7,20 +7,33 @@ import Models.Map.Map;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
 
+import java.awt.*;
+
 /**
  * Created by johnkaufmann on 3/30/16.
  * TODO:
  */
 public abstract class Effect implements Runnable {
-    private int range;
-    private Point3D location;
-    private Consequence consequence;
-    private Direction direction;
+
+    //I think these need to be changed to protected so that they can be used by the subclasses - Aidan
+
+
+//    private int range;
+//    private Point3D location;
+//    private Consequence consequence;
+//    private Direction direction;
+
+    protected int range;
+    protected Point3D location;
+    protected Consequence consequence;
+    protected Direction direction;
+    protected Map map;
 
     public Effect(int range, Point3D location, Consequence consequence, Map map) {
         this.range = range;
         this.location = location;
         this.consequence = consequence;
+        this.map = map;
         start();
     }
 

@@ -2,6 +2,7 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
 import Models.Map.Map;
+import Utilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
 
 
@@ -20,6 +21,9 @@ public class RadialEffect extends Effect {
     //propagate radially
     @Override
     protected void traverseThroughTiles() {
+
+        //I have this part in now we need to do visual effects
+        MapNavigationUtilities.getTilesinPlane(location,range,map);
 
     }
 }
