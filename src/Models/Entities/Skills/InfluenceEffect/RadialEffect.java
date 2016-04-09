@@ -2,9 +2,11 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
 import Models.Map.Map;
+import Models.Map.Tile;
 import Utilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
-import javafx.scene.image.Image;
+import java.awt.Image;
+import java.util.ArrayList;
 
 
 /**
@@ -24,13 +26,16 @@ public class RadialEffect extends Effect {
     protected void traverseThroughTiles() {
 
         //I have this part in now we need to do visual effects
-        MapNavigationUtilities.getTilesinPlane(location,range,map);
-
+        ArrayList<Tile> tilesinRange = MapNavigationUtilities.getTilesinPlane(location,range,map);
+        for(Tile tile: tilesinRange){
+            if(tile.getEntity() != null){
+                consequence.execute(tile.getEntity());
+            }
+        }
     }
 
     @Override
     public Image getImage() {
-
         return null;
     }
 }

@@ -7,8 +7,7 @@ import Models.Map.Map;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.Image;
 
 /**
  * Created by johnkaufmann on 3/30/16.

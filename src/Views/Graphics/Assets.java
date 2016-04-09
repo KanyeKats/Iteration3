@@ -3,6 +3,7 @@ package Views.Graphics;
 import Utilities.Constants;
 
 import java.awt.image.BufferedImage;
+import javafx.scene.image.Image;
 
 /**
  * Created by Aidan on 4/6/2016.

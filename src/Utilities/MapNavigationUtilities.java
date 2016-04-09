@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class MapNavigationUtilities {
 
+    //finds tiles adjacent to entity
     public static ArrayList<Tile> findNeighbors(Point3D point, Map map){
         ArrayList<Tile> neighbors = new ArrayList<>();
         neighbors.add(map.getTile(point.add(1,-1,0)));
@@ -31,18 +32,18 @@ public class MapNavigationUtilities {
         double[] point4Dend = new double[4];
 
         ArrayList<Tile> tilesInRange = new ArrayList<>();
-        for(int i = -range; i < range; i++) {
-            for (int j = -range; j < range; j++) {
-                for (int k = -range; k < range; k++) {
+        for(int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                for (int k = -range; k <= range; k++) {
                     point4Dend[0] = point4Dstart[0] - i;
                     point4Dend[1] = point4Dstart[1] - j;
                     point4Dend[2] = point4Dstart[2] - k;
-                    if(point4Dend[0] + point4Dend[1] + point4Dend[2] == 0){
+                    if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
                         Point3D newpoint = convertCubictoAxial(point4Dend);
-                        System.out.println(newpoint.toString());
-                        Tile tileInRange = map.getTile(newpoint);
-                        //if tile is not null because it is not on the map
-                        tilesInRange.add(tileInRange);
+                        Tile tile = map.getTile(newpoint);
+                        if(tile != null) {
+                            tilesInRange.add(tile);
+                        }
                     }
                 }
             }

@@ -3,6 +3,7 @@ package Models.Entities.Skills.InfluenceEffect;
 import Models.Consequences.Consequence;
 import Models.Map.Map;
 import javafx.geometry.Point3D;
+import java.awt.Image;
 
 /**
  * Created by johnkaufmann on 4/2/16.
@@ -19,9 +20,9 @@ public class PrismEffect extends Effect{
 
     }
 
-//    @Override
-//    public Image getImage() {
-//        return null;
-//    }
+    @Override
+    public Image getImage() {
+        return null;
+    }
 }
 

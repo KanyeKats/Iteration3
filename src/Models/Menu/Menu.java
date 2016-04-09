@@ -161,8 +161,6 @@ public class Menu extends java.util.Observable{
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         stateManager.setActiveState(new State(gameViewController, gameView));
-                        //Test
-                        MapNavigationUtilities.getTilesinPlane(avatar.getLocation(),4,map);
                     }
                 });
                 return actions;
