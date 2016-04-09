@@ -3,6 +3,7 @@ package Models.Items.Takable.Equippable;
 import Models.Entities.Entity;
 import Models.Entities.Equipment;
 import Models.Entities.Requirements.StatRequirement;
+import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.Stats;
 import Models.Items.Takable.TakableItem;
 
@@ -22,7 +23,7 @@ public abstract class EquippableItem extends TakableItem {
     }
 
     // All subtypes will equip themself to a certain slot in equipment.
-    public abstract boolean equip(Equipment equipment);
+    public abstract boolean equip(Equipment equipment, PassiveSkillList passiveSkillList);
 
     // All subtyps will unequip themselves, by removing themself from the appropiate slot
     public abstract EquippableItem unequip(Equipment equipment);
