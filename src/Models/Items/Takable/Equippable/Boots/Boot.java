@@ -2,6 +2,7 @@ package Models.Items.Takable.Equippable.Boots;
 
 import Models.Entities.Equipment;
 import Models.Entities.Requirements.StatRequirement;
+import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.StatModificationList;
 import Models.Items.Takable.Equippable.EquippableItem;
 
@@ -21,7 +22,7 @@ public class Boot extends EquippableItem{
     }
 
     @Override
-    public boolean equip(Equipment equipment) {
+    public boolean equip(Equipment equipment, PassiveSkillList passiveSkillList) {
         // If pass an equipment condition do the following...
 
         // Remove old equipment at this slot. Always call this method.

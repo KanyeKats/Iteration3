@@ -48,6 +48,7 @@ public class Entity extends Observable {
     // TODO: Ask about terrain checking... not sure if this is ok
     private ArrayList<Terrain> passableTerrains;
 
+
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
     public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map){
@@ -62,7 +63,11 @@ public class Entity extends Observable {
         this.orientation = orientation;
         this.map = map;
         isVisible = true;
+        occupation.initStats(this.stats);
+        occupation.initSkills(activeSkillList,passiveSkillList);
+
         initImages();
+
     }
 
     public Entity(Occupation occupation, Point3D location, Map map, Terrain... passableTerrains){
@@ -95,7 +100,7 @@ public class Entity extends Observable {
     public void equip(EquippableItem item){
         // Only equip the item if this instance of entity fufills the stat requirement to equip the item.
         if (item.fufillEquipRequirement(this)) {
-            item.equip(equipment);
+            item.equip(equipment, passiveSkillList);
         }
     }
 
@@ -135,8 +140,8 @@ public class Entity extends Observable {
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
 
-    public void addItemToInventory(Item item){
-
+    public boolean addItemToInventory(Item item){
+        return inventory.addItem(item);
     }
 
     public void dropItem(int positionInInventory){

@@ -1,7 +1,7 @@
 package Models.Entities.Skills.ActiveSkills;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.Consequence;
+import Models.Consequences.Consequence;
 import Models.Entities.Skills.Skill;
 
 import java.util.Timer;

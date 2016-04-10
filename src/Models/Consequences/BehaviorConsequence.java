@@ -1,4 +1,4 @@
-package Models.Entities.Skills.Consequences;
+package Models.Consequences;
 
 import Models.Entities.Entity;
 import javafx.geometry.Point3D;

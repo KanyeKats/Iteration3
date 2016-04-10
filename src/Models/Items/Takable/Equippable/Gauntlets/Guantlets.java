@@ -2,6 +2,9 @@ package Models.Items.Takable.Equippable.Gauntlets;
 
 import Models.Entities.Equipment;
 import Models.Entities.Requirements.StatRequirement;
+import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
+import Models.Entities.Skills.PassiveSkills.PassiveSkillsVisitors.BrawlingVisitor;
+import Models.Entities.Skills.PassiveSkills.PassiveSkillsVisitors.TwoHandedVisitor;
 import Models.Entities.Stats.StatModificationList;
 import Models.Items.Takable.Equippable.EquippableItem;
 
@@ -21,7 +24,7 @@ public class Guantlets extends EquippableItem {
     }
 
     @Override
-    public boolean equip(Equipment equipment) {
+    public boolean equip(Equipment equipment, PassiveSkillList passiveSkillList) {
         // If pass an equipment condition do the following...
 
         // Remove old equipment at this slot. Always call this method.
@@ -29,6 +32,9 @@ public class Guantlets extends EquippableItem {
         equipment.unequipBothHands();
         equipment.addStatModsOfEquipment(this);
         equipment.setBothhands(this);
+        for(int i = 0; i < passiveSkillList.size(); i++) {
+            passiveSkillList.get(i).acceptVisitor(new BrawlingVisitor());
+        }
         return true;
     }
 

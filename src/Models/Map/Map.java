@@ -1,34 +1,29 @@
 package Models.Map;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Effects.Effect;
-import Models.Entities.Stats.Stat;
+import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
 import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.io.File;
-import java.io.StringReader;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Observable;
 
@@ -174,7 +169,6 @@ public class Map extends Observable implements Savable {
         visitor.accept(tiles);
     }
 
-
     //// MOVEMENT CHECKERS ////
 
     // Checks the destination tile for movement hindrance and height differences
@@ -272,65 +266,84 @@ public class Map extends Observable implements Savable {
     @Override
     public String save() {
         try {
-
+            //get ready to build the xml file
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
-            // root elements
+            //determine true 2D dimensions of the map (10 tiles high always!)
+            int size = (int)Math.sqrt(tiles.size()/10);
+            String dimension = String.valueOf(size);
+
+            // build map document
             Document doc = docBuilder.newDocument();
-            Element rootElement = doc.createElement("company");
+
+            //create map element
+            Element rootElement = doc.createElement("map");
+
+            //add the maps dimensions as attributes
+            rootElement.setAttribute("height", dimension);
+            rootElement.setAttribute("width", dimension);
+
+            //add to the document
             doc.appendChild(rootElement);
 
-            // staff elements
-            Element staff = doc.createElement("Staff");
-            rootElement.appendChild(staff);
+            //iterate through all the tiles on the map and save them
+            for (java.util.Map.Entry<Point3D,Tile> entry: tiles.entrySet()) {
 
-            // set attribute to staff element
-            Attr attr = doc.createAttribute("id");
-            attr.setValue("1");
-            staff.setAttributeNode(attr);
+                //create tile element
+                Element tile = doc.createElement("tile");
 
-            // shorten way
-            // staff.setAttribute("id", "1");
+                //get the tiles point
+                Point3D p = entry.getKey();
 
-            // firstname elements
-            Element firstname = doc.createElement("firstname");
-            firstname.appendChild(doc.createTextNode("yong"));
-            staff.appendChild(firstname);
+                //save the location of the tile as attributes
+                tile.setAttribute("x", String.valueOf((int) p.getX()));
+                tile.setAttribute("y", String.valueOf((int) p.getY()));
+                tile.setAttribute("z", String.valueOf((int) p.getZ()));
 
-            // lastname elements
-            Element lastname = doc.createElement("lastname");
-            lastname.appendChild(doc.createTextNode("mook kim"));
-            staff.appendChild(lastname);
+                //add the tile to the map
+                rootElement.appendChild(tile);
 
-            // nickname elements
-            Element nickname = doc.createElement("nickname");
-            nickname.appendChild(doc.createTextNode("mkyong"));
-            staff.appendChild(nickname);
+                try {
+                    //get the tiles properties from the tiles implementation of the savable interface
+                    String xml = entry.getValue().save();
+                    Document doc2 = docBuilder.parse(new ByteArrayInputStream(xml.getBytes()));
 
-            // salary elements
-            Element salary = doc.createElement("salary");
-            salary.appendChild(doc.createTextNode("100000"));
-            staff.appendChild(salary);
+                    //form the node from the string returned from tile
+                    Node node = doc.importNode(doc2.getDocumentElement(), true);
+
+                    //add those properties to the map
+                    tile.appendChild(node);
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
             // write the content into xml file
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer transformer = tFactory.newTransformer();
+
+            //make the xml in string format
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+
+            //transform the source
             DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(new File("/res/map/test/test.xml"));
-
-            // Output to console for testing
-            // StreamResult result = new StreamResult(System.out);
-
             transformer.transform(source, result);
 
-            System.out.println("File saved!");
+            System.out.println("Map saved!");
+
+            //return the XML string
+            return writer.toString();
 
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
         } catch (TransformerException tfe) {
             tfe.printStackTrace();
         }
+        //NEVER REACHABLE
         return null;
     }
 
@@ -341,23 +354,28 @@ public class Map extends Observable implements Savable {
     }
 
     @Override
-    public void load(String filepath) {
+    public void load(String data) {
         try {
             // Create a document from the xml file
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse(new File(filepath));
 
-            // Normalize
-            doc.getDocumentElement().normalize();
+            //read the XML string
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(data));
+            Document doc = docBuilder.parse(is);
 
+            //find MAP node
             NodeList mapList = doc.getElementsByTagName("map");
             Element mapElement = (Element) mapList.item(0);
 
-            // Get the tilesNodes from the xml file.
+            // Get the tilesNodes from the xml file
             NodeList tileNodes = mapElement.getElementsByTagName("tile");
+
+            //find out how many tiles there are
             int numTiles = tileNodes.getLength();
 
+            //instantiate every tile to the map
             for(int i=0; i<numTiles; i++){
 
                 Element tileElement = (Element) tileNodes.item(i);
@@ -366,20 +384,26 @@ public class Map extends Observable implements Savable {
                 int y = Integer.parseInt(tileElement.getAttribute("y"));
                 int z = Integer.parseInt(tileElement.getAttribute("z"));
 
-                // Create the terrain
-                Terrain terrain = getTerrain(tileElement);
+                //send the string of the node to the tile for construction
+                StringWriter sw = new StringWriter();
+                try {
+                    Transformer t = TransformerFactory.newInstance().newTransformer();
+                    t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+                    t.setOutputProperty(OutputKeys.INDENT, "no");
+                    t.transform(new DOMSource(tileElement), new StreamResult(sw));
+                } catch (TransformerException te) {
+                    System.out.println("nodeToString Transformer Exception");
+                }
 
-                // TODO: Implement these functions
-                AreaEffect areaEffect = null;
-                Decal decal = null;
-                ArrayList<Item> items = null;
-                Entity entity = null;
-                Effect effect = null;
+                //construct an empty tile and load it into the game
+                Tile tile = new Tile();
+                tile.load(sw.toString());
+
+
 
                 // Check to see if this column has already been started
-                tiles.put(new Point3D(x, y, z), new Tile(terrain , areaEffect, entity, items, decal, effect));
+                this.tiles.put(new Point3D(x, y, z), tile);
             }
-
         } catch (SAXParseException e) {
             System.out.println("Error parsing");
             e.printStackTrace();

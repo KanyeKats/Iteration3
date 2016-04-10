@@ -3,6 +3,8 @@ package Utilities.Savable;
 import Models.Map.Map;
 import Models.Map.Tile;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +16,9 @@ import java.util.ArrayList;
  * TODO: finish and discuss with group
  */
 public class GameSaver {
+    public static void saveMap(Map map) {
+        writeToFile(map.save(), "./res/map/test.xml");
+    }
 //    private Map map;
 //
 //    public GameSaver(Map map) {
@@ -34,12 +39,11 @@ public class GameSaver {
 //        writeToFile(keyBinding.save(), "KeyBinding0.txt");
 //    }
 //
-//    private static void writeToFile(ArrayList<String> data, String fileName) {
-//        Path file = Paths.get(fileName);
-//        try {
-//            Files.write(file, data, Charset.forName("UTF-8"));
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    private static void writeToFile(String data, String fileName) {
+        try(  PrintWriter out = new PrintWriter( fileName )  ){
+            out.println( data );
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

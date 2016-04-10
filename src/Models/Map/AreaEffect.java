@@ -2,7 +2,7 @@ package Models.Map;
 
 import Models.Entities.Entity;
 
-import java.awt.*;
+import java.awt.Image;
 
 /**
  * Created by johnkaufmann on 4/6/16.

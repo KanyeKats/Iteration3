@@ -1,8 +1,8 @@
-package Utilities.Savable;//package Utilities.Savable;
+package Utilities.Savable;//package MapNavigationUtilities.Savable;
 //
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Effects.Effect;
+import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.*;
 import javafx.geometry.Point3D;
@@ -13,7 +13,7 @@ import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,6 +24,11 @@ public class GameLoader {
 
     public static final Point3D DEFAULT_STARTING_POINT = new Point3D(0, 0, 0); // Just made sure this was a valid point in the default map. Should be done better probably.
 
+    public static Map loadMap(String fileName) {
+        Map map = new Map(new HashMap<>());
+        map.load(readFromFile(fileName));
+        return map;
+    }
 //        public static void LoadAll() {
 //        //loop through the savable objects and write them to a file
 //
@@ -40,30 +45,32 @@ public class GameLoader {
 //        keyBinding.load(readFromFile("KeyBinding0.txt"));
 //    }
 //
-//    private static void readFromFile(String fileName) {
-//        // This will reference one line at a time
-//        String line = null;
-//        // This will be returned at the end of the function
-//        ArrayList<String> data = new ArrayList<>();
-//
-//        try {
-//            // FileReader reads text files in the default encoding.
-//            FileReader fileReader = new FileReader(fileName);
-//
-//            // Always wrap FileReader in BufferedReader.
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//
-//            while((line = bufferedReader.readLine()) != null) {
-//                data.add(line);
-//            }
-//
-//            bufferedReader.close();
-//        }
-//        catch(FileNotFoundException ex) {
-//            System.out.println("Unable to open file '" + fileName + "'");
-//        }
-//        catch(IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+    private static String readFromFile(String fileName) {
+        // This will reference one line at a time
+        String line = null;
+        // This will be returned at the end of the function
+        String data = "";
+
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader = new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                data+=line;
+            }
+
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + fileName + "'");
+        }
+        catch(IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return data;
+    }
 }
