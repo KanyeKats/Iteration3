@@ -10,14 +10,17 @@ import java.util.HashMap;
  */
 public class GameLoader {
 
+    // TODO: 4/9/16 this will be fixed once we have default maps
     public static final Point3D DEFAULT_STARTING_POINT = new Point3D(0, 0, 0); // Just made sure this was a valid point in the default map. Should be done better probably.
 
+    //given an XML file load the map
     public static Map loadMap(String fileName) {
         Map map = new Map(new HashMap<>());
         map.load(readFromFile(fileName));
         return map;
     }
 
+    //HELPER METHOD: Just reads from a file and returns a string of the data
     private static String readFromFile(String fileName) {
         // This will reference one line at a time
         String line = null;
