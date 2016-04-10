@@ -3,7 +3,7 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
-import Models.Map.MapUtilities.TileDrawingVisitor;
+import Utilities.MapUtilities.TileDrawingVisitor;
 
 import java.awt.*;
 import java.util.ArrayList;

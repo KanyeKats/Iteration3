@@ -19,5 +19,6 @@ public abstract class AreaEffect {
 
     public abstract void activate(Entity entity);
     public void setVisibility(boolean visibility){ isVisible = visibility; }
+    public boolean getVisibility(){ return this.isVisible; }
     public abstract Image getImage();
 }

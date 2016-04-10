@@ -23,7 +23,7 @@ public class Polymorph extends Enchantment {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getMap());
+                effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap());
                 effect.run();
                 isCooledDown = false;
                 doTheCoolDown();

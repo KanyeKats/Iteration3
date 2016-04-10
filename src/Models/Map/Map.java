@@ -3,7 +3,7 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
-import Models.Map.MapUtilities.MapDrawingVisitor;
+import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
 import javafx.geometry.Point3D;
 

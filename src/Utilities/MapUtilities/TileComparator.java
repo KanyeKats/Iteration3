@@ -1,4 +1,4 @@
-package Models.Map.MapUtilities;
+package Utilities.MapUtilities;
 
 import javafx.geometry.Point3D;
 

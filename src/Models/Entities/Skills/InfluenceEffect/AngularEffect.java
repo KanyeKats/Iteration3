@@ -1,6 +1,7 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
+import Models.Map.Direction;
 import Models.Map.Map;
 import javafx.geometry.Point3D;
 import java.awt.Image;
@@ -10,8 +11,8 @@ import java.awt.Image;
  * TODO:
  */
 public class AngularEffect extends Effect {
-    public AngularEffect(int range, Point3D location, Consequence consequence, Map map) {
-        super(range, location, consequence, map);
+    public AngularEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
+        super(range, location, consequence, direction, map);
         start();
     }
 

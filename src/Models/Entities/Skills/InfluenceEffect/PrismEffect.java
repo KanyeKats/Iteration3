@@ -1,6 +1,7 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
+import Models.Map.Direction;
 import Models.Map.Map;
 import javafx.geometry.Point3D;
 import java.awt.Image;
@@ -10,14 +11,14 @@ import java.awt.Image;
  * TODO:
  */
 public class PrismEffect extends Effect{
-    public PrismEffect(int range, Point3D location, Consequence consequence, Map map) {
-        super(range, location, consequence, map);
+    public PrismEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
+        super(range, location, consequence,direction, map);
         start();
     }
 
     @Override
     protected void traverseThroughTiles() {
-
+        //TODO: does the prism effect have two dimensions of range it needs? both how many columns there are as well as the comlumn's height?
     }
 
     @Override

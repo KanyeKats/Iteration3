@@ -6,14 +6,18 @@ import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
 import Models.Entities.Occupation.Smasher;
+import Models.Entities.Skills.InfluenceEffect.LinearEffect;
+import Models.Entities.Skills.InfluenceEffect.RadialEffect;
+import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
-import Utilities.MapNavigationUtilities;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.GameLoader;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
+import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 
