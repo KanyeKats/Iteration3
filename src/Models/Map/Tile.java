@@ -4,15 +4,31 @@ import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.MapUtilities.TileDrawingVisitor;
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXParseException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Tile {
+public class Tile implements Savable {
 
     private Terrain terrain;
     private AreaEffect areaEffect;
@@ -29,6 +45,15 @@ public class Tile {
         this.items = items;
         this.decal = decal;
         this.effect = effect;
+    }
+
+    public Tile() {
+        this.terrain = null;
+        this.areaEffect = null;
+        this.entity = null;
+        this.items = new ArrayList<>();
+        this.decal = null;
+        this.effect = null;
     }
 
     public boolean containsEntity(){
@@ -62,12 +87,12 @@ public class Tile {
         this.entity = entity;
 
         // Activate items
-        for(Iterator<Item> iterator = items.iterator(); iterator.hasNext();){
+        for (Iterator<Item> iterator = items.iterator(); iterator.hasNext(); ) {
             Item item = iterator.next();
 
             // Activate the item and see if it should be removed from the map after its activation.
             boolean removeItem = item.onTouch(entity);
-            if(removeItem){
+            if (removeItem) {
                 iterator.remove();
             }
         }
@@ -121,4 +146,74 @@ public class Tile {
     public ArrayList<Item> getItems() { return this.items; }
 
     public Effect getEffect() { return this.effect; }
+
+    @Override
+    public String save() {
+        try {
+            //build an XML document
+            DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
+            DocumentBuilder build = dFact.newDocumentBuilder();
+            Document doc = build.newDocument();
+
+            //set terrain type
+            Element terrain = doc.createElement("terrain");
+            terrain.setAttribute("type", getTerrain().name());
+            doc.appendChild(terrain);
+
+            //transform the XML document to a string
+            TransformerFactory tFact = TransformerFactory.newInstance();
+            Transformer trans = tFact.newTransformer();
+
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+            DOMSource source = new DOMSource(doc);
+            trans.transform(source, result);
+
+            //return the XML in string format
+            return writer.toString();
+
+        } catch (TransformerException ex) {
+            System.out.println("Error outputting document");
+        } catch (ParserConfigurationException ex) {
+            System.out.println("Error building document");
+        }
+        return null;
+    }
+
+    @Override
+    public void load(String data) {
+        try {
+            // Create a document from the xml file
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
+
+            //read the XML string
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(data));
+            Document doc = docBuilder.parse(is);
+
+            //find the TILE node
+            NodeList tileList = doc.getElementsByTagName("tile");
+            Element tile = (Element) tileList.item(0);
+
+            // Create the terrain
+            Element terrainElement = (Element) tile.getElementsByTagName("terrain").item(0);
+            String terrainType = terrainElement.getAttribute("type");
+            this.terrain = terrain.valueOf(terrainType);
+
+            // TODO: Implement these functions
+            this.areaEffect = null;
+            this.decal = null;
+            this.items = new ArrayList<>();
+            this.entity = null;
+            this.effect = null;
+
+        } catch (SAXParseException e) {
+            System.out.println("Error parsing");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Error parsing map again");
+            e.printStackTrace();
+        }
+    }
 }

@@ -5,9 +5,24 @@ import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
+import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
+import org.w3c.dom.*;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -15,7 +30,7 @@ import java.util.Observable;
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Map extends Observable {
+public class Map extends Observable implements Savable {
 
     //// CLASS DECLARATIONS ////
 
@@ -38,7 +53,7 @@ public class Map extends Observable {
     // Finally, we check the terrain type of the updated destination
     public void moveEntity(Entity entity, Point3D destination){
         // Update the destination point
-        // This method will return the appropirate destination tile by checking all movement related factors.
+        // This method will return the appropriate destination tile by checking all movement related factors.
         // See its comments for more info
         destination = updateDestinationPoint(destination, entity);
 
@@ -62,7 +77,7 @@ public class Map extends Observable {
         // Update the entity's location
         entity.setLocation(destination);
 
-        // Notify observers taht the map changes
+        // Notify observers that the map changes
         setChanged();
         notifyObservers();
     }
@@ -246,5 +261,155 @@ public class Map extends Observable {
 
     public Tile getTile(Point3D point){
         return tiles.get(point);
+    }
+
+    @Override
+    public String save() {
+        try {
+            //get ready to build the xml file
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+            //determine true 2D dimensions of the map (10 tiles high always!)
+            int size = (int)Math.sqrt(tiles.size()/10);
+            String dimension = String.valueOf(size);
+
+            // build map document
+            Document doc = docBuilder.newDocument();
+
+            //create map element
+            Element rootElement = doc.createElement("map");
+
+            //add the maps dimensions as attributes
+            rootElement.setAttribute("height", dimension);
+            rootElement.setAttribute("width", dimension);
+
+            //add to the document
+            doc.appendChild(rootElement);
+
+            //iterate through all the tiles on the map and save them
+            for (java.util.Map.Entry<Point3D,Tile> entry: tiles.entrySet()) {
+
+                //create tile element
+                Element tile = doc.createElement("tile");
+
+                //get the tiles point
+                Point3D p = entry.getKey();
+
+                //save the location of the tile as attributes
+                tile.setAttribute("x", String.valueOf((int) p.getX()));
+                tile.setAttribute("y", String.valueOf((int) p.getY()));
+                tile.setAttribute("z", String.valueOf((int) p.getZ()));
+
+                //add the tile to the map
+                rootElement.appendChild(tile);
+
+                try {
+                    //get the tiles properties from the tiles implementation of the savable interface
+                    String xml = entry.getValue().save();
+                    Document doc2 = docBuilder.parse(new ByteArrayInputStream(xml.getBytes()));
+
+                    //form the node from the string returned from tile
+                    Node node = doc.importNode(doc2.getDocumentElement(), true);
+
+                    //add those properties to the map
+                    tile.appendChild(node);
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // write the content into xml file
+            TransformerFactory tFactory = TransformerFactory.newInstance();
+            Transformer transformer = tFactory.newTransformer();
+
+            //make the xml in string format
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+
+            //transform the source
+            DOMSource source = new DOMSource(doc);
+            transformer.transform(source, result);
+
+            System.out.println("Map saved!");
+
+            //return the XML string
+            return writer.toString();
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        }
+        //NEVER REACHABLE
+        return null;
+    }
+
+    private Terrain getTerrain(Element tileElement) {
+        Element terrainElement = (Element) tileElement.getElementsByTagName("terrain").item(0);
+        String terrainType = terrainElement.getAttribute("type");
+        return Terrain.valueOf(terrainType);
+    }
+
+    @Override
+    public void load(String data) {
+        try {
+            // Create a document from the xml file
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
+
+            //read the XML string
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(data));
+            Document doc = docBuilder.parse(is);
+
+            //find MAP node
+            NodeList mapList = doc.getElementsByTagName("map");
+            Element mapElement = (Element) mapList.item(0);
+
+            // Get the tilesNodes from the xml file
+            NodeList tileNodes = mapElement.getElementsByTagName("tile");
+
+            //find out how many tiles there are
+            int numTiles = tileNodes.getLength();
+
+            //instantiate every tile to the map
+            for(int i=0; i<numTiles; i++){
+
+                Element tileElement = (Element) tileNodes.item(i);
+
+                int x = Integer.parseInt(tileElement.getAttribute("x"));
+                int y = Integer.parseInt(tileElement.getAttribute("y"));
+                int z = Integer.parseInt(tileElement.getAttribute("z"));
+
+                //send the string of the node to the tile for construction
+                StringWriter sw = new StringWriter();
+                try {
+                    Transformer t = TransformerFactory.newInstance().newTransformer();
+                    t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+                    t.setOutputProperty(OutputKeys.INDENT, "no");
+                    t.transform(new DOMSource(tileElement), new StreamResult(sw));
+                } catch (TransformerException te) {
+                    System.out.println("nodeToString Transformer Exception");
+                }
+
+                //construct an empty tile and load it into the game
+                Tile tile = new Tile();
+                tile.load(sw.toString());
+
+
+
+                // Check to see if this column has already been started
+                this.tiles.put(new Point3D(x, y, z), tile);
+            }
+        } catch (SAXParseException e) {
+            System.out.println("Error parsing");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Error parsing map again");
+            e.printStackTrace();
+        }
     }
 }

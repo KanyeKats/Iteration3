@@ -9,10 +9,6 @@ import java.awt.Image;
  *
  */
 public abstract class AreaEffect {
-
-
-//    public abstract void onTouch(Entity entity);
-//    protected Consequence consequence;
     protected Decal decal;
     protected boolean isVisible;
     protected boolean isRemovable;
