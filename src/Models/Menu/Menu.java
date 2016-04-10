@@ -159,6 +159,7 @@ public class Menu extends java.util.Observable{
 
                         System.out.println("Smasher");
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
+                        GameSaver.saveMap(map);
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);

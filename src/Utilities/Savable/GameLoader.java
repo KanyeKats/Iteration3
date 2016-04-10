@@ -2,6 +2,20 @@ package Utilities.Savable;
 
 import Models.Map.*;
 import javafx.geometry.Point3D;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXParseException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.util.HashMap;
 
@@ -16,7 +30,28 @@ public class GameLoader {
     //given an XML file load the map
     public static Map loadMap(String fileName) {
         Map map = new Map(new HashMap<>());
-        map.load(readFromFile(fileName));
+        try {
+            // Create a document from the xml file
+            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
+
+            //read the XML string
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(readFromFile(fileName)));
+            Document doc = docBuilder.parse(is);
+
+            //find MAP node
+            NodeList mapList = doc.getElementsByTagName("map");
+            Element mapElement = (Element) mapList.item(0);
+
+            map.load(mapElement);
+        } catch (SAXParseException e) {
+            System.out.println("Error parsing");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Error parsing map again");
+            e.printStackTrace();
+        }
         return map;
     }
 
