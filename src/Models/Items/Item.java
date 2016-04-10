@@ -1,12 +1,16 @@
 package Models.Items;
 
 import Models.Entities.Entity;
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.awt.*;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public abstract class Item {
+public abstract class Item implements Savable {
     //just needed to use item for its ID
     protected int ID;
 
@@ -41,5 +45,15 @@ public abstract class Item {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+
     }
 }

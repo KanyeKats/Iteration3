@@ -18,8 +18,11 @@ import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Constants;
 import Models.Map.Tile;
+import Utilities.Savable.Savable;
 import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -28,7 +31,7 @@ import java.util.*;
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Entity extends Observable {
+public class Entity extends Observable implements Savable {
     //TODO: make occupation
     private Occupation occupation;
     private Stats stats;
@@ -305,5 +308,15 @@ public class Entity extends Observable {
     public Tile getTileInFront(){
         Point3D point = orientation.getPointAdjacentTo(location);
         return map.getTile(point);
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+
     }
 }

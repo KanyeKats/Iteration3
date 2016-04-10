@@ -5,7 +5,10 @@ import Models.Consequences.Consequence;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
+import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.awt.Image;
 
@@ -13,7 +16,7 @@ import java.awt.Image;
  * Created by johnkaufmann on 3/30/16.
  * TODO:
  */
-public abstract class Effect implements Runnable {
+public abstract class Effect implements Runnable, Savable {
 
     //I think these need to be changed to protected so that they can be used by the subclasses - Aidan
 
@@ -90,4 +93,14 @@ public abstract class Effect implements Runnable {
     }
 
     public abstract Image getImage();
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+
+    }
 }

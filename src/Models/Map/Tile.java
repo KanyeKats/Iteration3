@@ -4,7 +4,15 @@ import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.MapUtilities.TileDrawingVisitor;
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
+import javax.print.Doc;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,7 +20,7 @@ import java.util.Iterator;
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Tile {
+public class Tile implements Savable {
 
     private Terrain terrain;
     private AreaEffect areaEffect;
@@ -29,6 +37,15 @@ public class Tile {
         this.items = items;
         this.decal = decal;
         this.effect = effect;
+    }
+
+    public Tile() {
+        this.terrain = null;
+        this.areaEffect = null;
+        this.entity = null;
+        this.items = new ArrayList<>();
+        this.decal = null;
+        this.effect = null;
     }
 
     public boolean containsEntity(){
@@ -62,12 +79,12 @@ public class Tile {
         this.entity = entity;
 
         // Activate items
-        for(Iterator<Item> iterator = items.iterator(); iterator.hasNext();){
+        for (Iterator<Item> iterator = items.iterator(); iterator.hasNext(); ) {
             Item item = iterator.next();
 
             // Activate the item and see if it should be removed from the map after its activation.
             boolean removeItem = item.onTouch(entity);
-            if(removeItem){
+            if (removeItem) {
                 iterator.remove();
             }
         }
@@ -121,4 +138,49 @@ public class Tile {
     public ArrayList<Item> getItems() { return this.items; }
 
     public Effect getEffect() { return this.effect; }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        //save terrain
+        Element terrain = doc.createElement("terrain");
+        terrain.setAttribute("type", getTerrain().name());
+        parentElement.appendChild(terrain);
+
+        //save areaEffect
+//        areaEffect.save(doc, parentElement);
+
+        //save Decal
+//        decal.save(doc, parentElement);
+
+        //save Items
+//        Element itemsElement = doc.createElement("items");
+//        itemsElement.setAttribute("itemAmt", String.valueOf(items.size()));
+//        for (Item item : items) {
+//            item.save(doc, parentElement);
+//        }
+//        parentElement.appendChild(itemsElement);
+
+        //save Entity
+//        entity.save(doc, parentElement);
+
+        //save effect
+//        effect.save(doc, parentElement);
+
+        //return the tile element
+        return doc;
+    }
+
+    @Override
+    public void load(Element data) {
+        NodeList tileNodes = data.getElementsByTagName("terrain");
+        Element terrainElement = (Element) tileNodes.item(0);
+        this.terrain = terrain.valueOf(terrainElement.getAttribute("type"));
+
+        // TODO: Implement these functions
+        this.areaEffect = null;
+        this.decal = null;
+        this.items = new ArrayList<>();
+        this.entity = null;
+        this.effect = null;
+    }
 }
