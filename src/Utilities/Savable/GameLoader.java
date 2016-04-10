@@ -1,20 +1,8 @@
-package Utilities.Savable;//package MapNavigationUtilities.Savable;
-//
+package Utilities.Savable;
 
-import Models.Entities.Entity;
-import Models.Entities.Skills.InfluenceEffect.Effect;
-import Models.Items.Item;
 import Models.Map.*;
 import javafx.geometry.Point3D;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXParseException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -29,22 +17,7 @@ public class GameLoader {
         map.load(readFromFile(fileName));
         return map;
     }
-//        public static void LoadAll() {
-//        //loop through the savable objects and write them to a file
-//
-//
-//        for (Tile tile : map.getTiles()) {
-//            //load all entities, items, area effects
-//            tile.load(readFromFile("Game0.txt"));
-//        }
-//
-//        //load map
-//        map.save(readFromFile("Map0.txt"));
-//
-//        //load key bindings
-//        keyBinding.load(readFromFile("KeyBinding0.txt"));
-//    }
-//
+
     private static String readFromFile(String fileName) {
         // This will reference one line at a time
         String line = null;
