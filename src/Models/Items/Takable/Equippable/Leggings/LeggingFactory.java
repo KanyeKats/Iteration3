@@ -15,7 +15,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Yoga Pants", "Some comfy, cute yoga pants", req);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Yoga Pants", "Some comfy, cute yoga pants", req, 5000);
         }
     },
     BRONZE_PLATE_LEGS(5001) {
@@ -23,7 +23,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Platelegs", "A pair of bronze platelegs", req);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Platelegs", "A pair of bronze platelegs", req, 5001);
         }
     },
     IRON_PLATE_LEGS(5002) {
@@ -31,7 +31,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Platelegs", "A pair of iron platelegs", req);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Platelegs", "A pair of iron platelegs", req, 5002);
         }
     },
     STEEL_PLATE_LEGS(5003) {
@@ -39,7 +39,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Platelegs", "A pair of steel platelegs", req);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Platelegs", "A pair of steel platelegs", req, 5003);
         }
     };
 
@@ -66,9 +66,9 @@ public enum LeggingFactory {
     // If so, return an instance of that enum
     // Otherwise, return null, an invalid ID was passed in
     public static Legging leggingsFromID(int id) {
-        for (LeggingFactory Legging : values()) {
-            if (Legging.getID() == id) {
-                return Legging.createInstance();
+        for (LeggingFactory legging : values()) {
+            if (legging.getID() == id) {
+                return legging.createInstance();
             }
         }
         return null;

@@ -15,12 +15,13 @@ import java.awt.*;
  */
 public class Staff extends EquippableItem{
     // We will just be instantiating different "Versions" of this equipment type
-    public Staff(Image image, StatModificationList mods, String name, String description, StatRequirement requirement) {
+    public Staff(Image image, StatModificationList mods, String name, String description, StatRequirement requirement, int ID) {
         this.image = image;
         this.statModificationList = mods;
         this.name = name;
         this.description = description;
         this.requirementToEquip = requirement;
+        this.ID = ID;
     }
 
     @Override
