@@ -1,4 +1,4 @@
-package Models.Map.MapUtilities;
+package Utilities.MapUtilities;
 
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;

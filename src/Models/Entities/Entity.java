@@ -42,7 +42,7 @@ public class Entity extends Observable implements Savable {
     private BufferedImage sprite;
     private boolean isVisible;
     private Point3D location;
-    private Direction orientation;
+    private Direction direction;
     private Map map;
     private HashMap<Direction, BufferedImage> images;
     private boolean canMove;
@@ -63,7 +63,7 @@ public class Entity extends Observable implements Savable {
         this.equipment = equipment;
         this.sprite = sprite;
         this.location = location;
-        this.orientation = orientation;
+        this.direction = direction;
         this.map = map;
         isVisible = true;
         occupation.initStats(this.stats);
@@ -80,7 +80,7 @@ public class Entity extends Observable implements Savable {
         this.inventory = new Inventory(10);
         this.equipment = new Equipment(stats, inventory);
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-        this.orientation = Direction.NORTH;
+        this.direction = Direction.NORTH;
         this.map = map;
         this.passableTerrains = new ArrayList<>(Arrays.asList(passableTerrains));
         isVisible = true;
@@ -116,7 +116,7 @@ public class Entity extends Observable implements Savable {
         // Move with taking movement speed in to account
         if (canMove) {
             // Move the entity
-            updateOrientation(direction);
+            this.direction = direction;
             map.moveEntity(this, direction);
 
             // Don't allow the entity to move
@@ -240,12 +240,12 @@ public class Entity extends Observable implements Savable {
         this.location = location;
     }
 
-    public Direction getOrientation() {
-        return orientation;
+    public Direction getDirection() {
+        return direction;
     }
 
-    public void setOrientation(Direction orientation) {
-        this.orientation = orientation;
+    public void setDirection(Direction orientation) {
+        this.direction = direction;
     }
 
     public Map getMap(){
@@ -269,8 +269,6 @@ public class Entity extends Observable implements Savable {
         images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
         images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
         images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
-        images.put(Direction.UP, Assets.PLAYER_NORTH);
-        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
 
     }
 
@@ -291,22 +289,14 @@ public class Entity extends Observable implements Savable {
         return movementTimerDelay;
     }
 
-    private void updateOrientation(Direction direction){
-
-        if(direction == Direction.DOWN || direction == Direction.UP){
-            images.put(direction, images.get(orientation));
-        }
-        orientation = direction;
-    }
-
     public Image getImage(){
 
-        return isVisible ? images.get(orientation) : null;
+        return isVisible ? images.get(direction) : null;
     }
 
     //TODO: Will need to cover a +/- 1 in height eventually
     public Tile getTileInFront(){
-        Point3D point = orientation.getPointAdjacentTo(location);
+        Point3D point = direction.getPointAdjacentTo(location);
         return map.getTile(point);
     }
 

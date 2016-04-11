@@ -1,10 +1,12 @@
-package Utilities;
+package Utilities.MapUtilities;
 
 import Models.Entities.Entity;
+import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -25,9 +27,10 @@ public class MapNavigationUtilities {
 
     }
 
+
+
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, Map map){
 
-        ArrayList<Tile> resultTiles = new ArrayList<>();
         double[] point4Dstart = convertAxialtoCuubic(point);
         double[] point4Dend = new double[4];
 
@@ -38,6 +41,7 @@ public class MapNavigationUtilities {
                     point4Dend[0] = point4Dstart[0] - i;
                     point4Dend[1] = point4Dstart[1] - j;
                     point4Dend[2] = point4Dstart[2] - k;
+                    point4Dend[3] = point.getZ();
                     if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
                         Point3D newpoint = convertCubictoAxial(point4Dend);
                         Tile tile = map.getTile(newpoint);
@@ -46,6 +50,27 @@ public class MapNavigationUtilities {
                         }
                     }
                 }
+            }
+        }
+        return tilesInRange;
+    }
+
+    public static ArrayList<Tile> getTilesinSphere(Point3D point, int range, Map map){
+
+        ArrayList<Tile> tilesInRange = new ArrayList<>();
+
+        //upper half of sphere
+        for(int i = -range, j = 0; i < 0; i++, j++){
+            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),j,map);
+            for(Tile tile: tilesInPlane) {
+                    tilesInRange.add(tile);
+            }
+        }
+        //lower half of sphere
+        for(int i = 0, j = range; i <= range; i++, j--){
+            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),j,map);
+            for(Tile tile: tilesInPlane) {
+                tilesInRange.add(tile);
             }
         }
         return tilesInRange;

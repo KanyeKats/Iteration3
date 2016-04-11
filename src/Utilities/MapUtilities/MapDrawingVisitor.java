@@ -1,4 +1,4 @@
-package Models.Map.MapUtilities;
+package Utilities.MapUtilities;
 
 import Models.Map.Tile;
 import Utilities.Constants;

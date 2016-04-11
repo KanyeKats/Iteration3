@@ -6,28 +6,24 @@ import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
-import java.awt.Image;
+
+import java.awt.*;
 import java.util.ArrayList;
 
-
 /**
- * Created by johnkaufmann on 4/2/16.
- * TODO:
+ * Created by Aidan on 4/10/2016.
  */
-public class RadialEffect extends Effect {
+public class SphericalEffect extends Effect {
 
-    public RadialEffect(int range, Point3D location, Consequence consequence, Map map) {
-
-        super(range, location, consequence, map);
+    public SphericalEffect(int range, Point3D location, Consequence consequence, Map map){
+        super(range,location,consequence,map);
         start();
     }
 
-    //propagate radially
     @Override
     protected void traverseThroughTiles() {
 
-        //I have this part in now we need to do visual effects
-        ArrayList<Tile> tilesinRange = MapNavigationUtilities.getTilesinPlane(location,range,map);
+        ArrayList<Tile> tilesinRange = MapNavigationUtilities.getTilesinSphere(location,range,map);
         for(Tile tile: tilesinRange){
             if(tile.getEntity() != null){
                 consequence.execute(tile.getEntity());

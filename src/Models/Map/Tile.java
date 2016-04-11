@@ -3,7 +3,6 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
-import Models.Map.MapUtilities.TileDrawingVisitor;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,6 +12,8 @@ import javax.print.Doc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import Utilities.MapUtilities.TileDrawingVisitor;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;

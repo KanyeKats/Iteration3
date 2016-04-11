@@ -20,16 +20,9 @@ public abstract class Effect implements Runnable, Savable {
 
     //I think these need to be changed to protected so that they can be used by the subclasses - Aidan
 
-
-//    private int range;
-//    private Point3D location;
-//    private Consequence consequence;
-//    private Direction direction;
-
     protected int range;
     protected Point3D location;
     protected Consequence consequence;
-    protected Direction direction;
     protected Map map;
 
     public Effect(int range, Point3D location, Consequence consequence, Map map) {
