@@ -21,4 +21,8 @@ public abstract class AreaEffect {
     public void setVisibility(boolean visibility){ isVisible = visibility; }
     public boolean getVisibility(){ return this.isVisible; }
     public abstract Image getImage();
+
+    public boolean isRemovable() {
+        return isRemovable;
+    }
 }

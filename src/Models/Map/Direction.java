@@ -42,21 +42,27 @@ public enum Direction {
             Point3D p = new Point3D(point.getX(), point.getY(), point.getZ());
             return p.add(-1, 0, 0);
         }
-    },
-    UP {
-        public Point3D getPointAdjacentTo(Point3D point){
-            Point3D p = new Point3D(point.getX(), point.getY(), point.getZ());
-            p = p.add(0, 0, 1);
-            return p.getZ() < 10 ? p : null;
-        }
-    },
-    DOWN {
-        public Point3D getPointAdjacentTo(Point3D point){
-            Point3D p = new Point3D(point.getX(), point.getY(), point.getZ());
-            p = p.add(0, 0, -1);
-            return p.getZ() >= 0 ? p : null;
-        }
     };
 
     public abstract Point3D getPointAdjacentTo(Point3D point);
+
+
+
+    public Direction next() {
+        int length = values().length;
+        int current = this.ordinal();
+        if (current > length-1) {
+            current = 0;
+        }
+        return values()[current + 1];
+    }
+    public Direction previous(){
+        int length = values().length;
+        int current = this.ordinal();
+        if (current < 0) {
+            current = length - 1;
+        }
+        return values()[current - 1];
+    }
+
 }

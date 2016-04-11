@@ -1,10 +1,12 @@
 package Utilities.MapUtilities;
 
 import Models.Entities.Entity;
+import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +27,8 @@ public class MapNavigationUtilities {
 
     }
 
+
+
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, Map map){
 
         double[] point4Dstart = convertAxialtoCuubic(point);
@@ -40,7 +44,6 @@ public class MapNavigationUtilities {
                     point4Dend[3] = point.getZ();
                     if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
                         Point3D newpoint = convertCubictoAxial(point4Dend);
-                        System.out.println(newpoint.toString());
                         Tile tile = map.getTile(newpoint);
                         if(tile != null) {
                             tilesInRange.add(tile);

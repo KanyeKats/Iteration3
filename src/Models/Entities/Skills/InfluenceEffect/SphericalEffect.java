@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public class SphericalEffect extends Effect {
 
-    public SphericalEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map){
-        super(range,location,consequence, direction,map);
+    public SphericalEffect(int range, Point3D location, Consequence consequence, Map map){
+        super(range,location,consequence,map);
         start();
     }
 

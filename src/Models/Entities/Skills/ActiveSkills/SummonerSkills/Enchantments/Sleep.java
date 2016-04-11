@@ -23,7 +23,7 @@ public class Sleep extends Enchantment {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect = new RadialEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap());
+                effect = new RadialEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getMap());
                 effect.run();
                 isCooledDown = false;
                 doTheCoolDown();

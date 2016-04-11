@@ -11,8 +11,10 @@ import java.awt.Image;
  * TODO:
  */
 public class AngularEffect extends Effect {
+    private Direction direction;
     public AngularEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
-        super(range, location, consequence, direction, map);
+        super(range, location, consequence, map);
+        this.direction = direction;
         start();
     }
 

@@ -2,6 +2,7 @@ package Models.Entities.Skills.ActiveSkills.SneakSkills;
 
 import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
+import Models.Map.AreaEffect;
 import Models.Map.Map;
 
 /**
@@ -20,12 +21,15 @@ public class RemoveTrap extends ActiveSkill {
         //if there is a trap
 
         //TODO: Trap is detected but how do i know if the area effect I am facing is a trap?
-        //Map map = entity.getMap();
 
-        //if(map.getTile(entity.getOrientation().getPointAdjacentTo(entity.getLocation())).getAreaEffect().)
-        if(isCooledDown){
-            if(percentChanceByLevel()){
-                //Implement removing a trap
+        //Stringed so many calls together
+        //TODO: Use the get tile in front method
+        AreaEffect potentialTrap = entity.getMap().getTile(entity.getDirection().getPointAdjacentTo(entity.getLocation())).getAreaEffect();
+        if(potentialTrap != null && potentialTrap.isRemovable()){
+            if(isCooledDown) {
+                if (percentChanceByLevel()) {
+                    //Implement removing a trap
+                }
             }
         }
     }

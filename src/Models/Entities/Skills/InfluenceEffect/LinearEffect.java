@@ -12,19 +12,11 @@ import java.awt.Image;
  * TODO:
  */
 public class LinearEffect extends Effect {
-    private final int range;
-    private final Point3D location;
-    private final Consequence consequence;
     private final Direction direction;
-    private final Map map;
 
     public LinearEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
-        super(range, location, consequence, direction, map);
-        this.range = range;
-        this.location = location;
-        this.consequence = consequence;
+        super(range, location, consequence, map);
         this.direction = direction;
-        this.map = map;
         start();
     }
 

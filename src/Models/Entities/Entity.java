@@ -113,7 +113,7 @@ public class Entity extends Observable {
         // Move with taking movement speed in to account
         if (canMove) {
             // Move the entity
-            updateDirection(direction);
+            this.direction = direction;
             map.moveEntity(this, direction);
 
             // Don't allow the entity to move
@@ -266,8 +266,6 @@ public class Entity extends Observable {
         images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
         images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
         images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
-        images.put(Direction.UP, Assets.PLAYER_NORTH);
-        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
 
     }
 
@@ -286,14 +284,6 @@ public class Entity extends Observable {
 //        System.out.println("MOVEMENT DELAY IS: ");
 //        System.out.println(movementTimerDelay + "ms");
         return movementTimerDelay;
-    }
-
-    private void updateDirection(Direction direction){
-
-        if(direction == Direction.DOWN || direction == Direction.UP){
-            images.put(direction, images.get(direction));
-        }
-        direction = direction;
     }
 
     public Image getImage(){

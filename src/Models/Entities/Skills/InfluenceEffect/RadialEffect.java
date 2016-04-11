@@ -16,9 +16,9 @@ import java.util.ArrayList;
  */
 public class RadialEffect extends Effect {
 
-    public RadialEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
+    public RadialEffect(int range, Point3D location, Consequence consequence, Map map) {
 
-        super(range, location, consequence, direction, map);
+        super(range, location, consequence, map);
         start();
     }
 

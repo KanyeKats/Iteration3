@@ -20,14 +20,12 @@ public abstract class Effect implements Runnable {
     protected int range;
     protected Point3D location;
     protected Consequence consequence;
-    protected Direction direction;
     protected Map map;
 
-    public Effect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
+    public Effect(int range, Point3D location, Consequence consequence, Map map) {
         this.range = range;
         this.location = location;
         this.consequence = consequence;
-        this.direction = direction;
         this.map = map;
         start();
     }
