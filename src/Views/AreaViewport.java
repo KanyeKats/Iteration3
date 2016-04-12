@@ -34,7 +34,7 @@ public class AreaViewport extends View {
         renderBackground(g);
 
         // Draw the map onto the graphics
-        map.acceptDrawingVisitor(new MapDrawingVisitor(viewContent, avatar.getLocation()));
+        map.draw(viewContent, avatar.getLocation());
 
         // Notify the observers of this view (GameView) that it changed.
         this.setChanged();

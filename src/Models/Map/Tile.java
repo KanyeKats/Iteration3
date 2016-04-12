@@ -21,6 +21,8 @@ public class Tile {
     private ArrayList<Item> items;
     private Effect effect;
     // TODO: User visitor pattern to construct tile image?
+    // pixel point used for moving
+    private Point pixelPoint;
 
     public Tile(Terrain terrain, AreaEffect areaEffect, Entity entity, ArrayList<Item> items, Decal decal, Effect effect){
         this.terrain = terrain;
@@ -58,9 +60,11 @@ public class Tile {
         return false;
     }
 
-    public void insertEntity(Entity entity){
+    public void insertEntity(Entity entity) {
         this.entity = entity;
+    }
 
+    public void activateTileObjectsOnEntity(Entity entity) {
         // Activate items
         for(Iterator<Item> iterator = items.iterator(); iterator.hasNext();){
             Item item = iterator.next();
@@ -121,4 +125,12 @@ public class Tile {
     public ArrayList<Item> getItems() { return this.items; }
 
     public Effect getEffect() { return this.effect; }
+
+    public Point getPixelPoint() {
+        return pixelPoint;
+    }
+
+    public void setPixelPoint(Point pixelPoint) {
+        this.pixelPoint = pixelPoint;
+    }
 }
