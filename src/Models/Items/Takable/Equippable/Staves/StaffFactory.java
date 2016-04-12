@@ -15,7 +15,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Air Staff", "A basic staff of air. Makes you do more magic damage", req);
+            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Air Staff", "A basic staff of air. Makes you do more magic damage", req, 8000);
         }
     },
     FIRE_STAFF(8001) {
@@ -23,7 +23,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Fire Staff", "A basic staff of fire. Makes you do more magic damage", req);
+            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Fire Staff", "A basic staff of fire. Makes you do more magic damage", req, 8001);
         }
     },
     MYSTIC_STAFF(8002) {
@@ -31,7 +31,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Mystic Staff", "A magical, mystic staff", req);
+            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Mystic Staff", "A magical, mystic staff", req, 8002);
         }
     },
     LIGHT_STAFF(8003) {
@@ -39,7 +39,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Staff of Light", "An insanely staff, harnessing the power of light. Beware.", req);
+            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Staff of Light", "An insanely staff, harnessing the power of light. Beware.", req, 8003);
         }
     };
 

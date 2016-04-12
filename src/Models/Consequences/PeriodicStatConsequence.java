@@ -1,4 +1,4 @@
-package Models.Entities.Skills.Consequences;
+package Models.Consequences;
 
 import Models.Entities.Entity;
 import Models.Entities.Stats.StatModificationList;

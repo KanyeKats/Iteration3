@@ -17,7 +17,7 @@ public enum BootFactory {
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Moccasins", "Some comfy moccasins", req);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Moccasins", "Some comfy moccasins", req, 1000);
         }
     },
     IRON(1001) {
@@ -25,7 +25,7 @@ public enum BootFactory {
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Boots", "Some boots made of Iron.", req);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Boots", "Some boots made of Iron.", req, 1001);
         }
     },
     BRONZE(1002) {
@@ -33,7 +33,7 @@ public enum BootFactory {
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Boots", "Some boots made of Bronze.", req);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Boots", "Some boots made of Bronze.", req, 1002);
         }
     },
     STEEL(1003) {
@@ -41,7 +41,7 @@ public enum BootFactory {
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Boots", "Some boots made of Steel.", req);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Boots", "Some boots made of Steel.", req, 1003);
         }
     };
 

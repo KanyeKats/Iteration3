@@ -1,8 +1,7 @@
 package Models.Entities.Skills.ActiveSkills.CommonSkills;
 
-import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
-import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
+import Models.Consequences.ImmediateStatConsequence;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;

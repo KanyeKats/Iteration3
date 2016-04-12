@@ -3,11 +3,12 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
-import Models.Map.MapUtilities.MapDrawingVisitor;
+import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
+import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
+import org.w3c.dom.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -15,7 +16,7 @@ import java.util.Observable;
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Map extends Observable {
+public class Map extends Observable implements Savable {
 
     //// CLASS DECLARATIONS ////
 
@@ -37,11 +38,20 @@ public class Map extends Observable {
     // Next, we check for an item (obstacle/interactive) or entity which will block movement.
     // Finally, we check the terrain type of the updated destination
     public void moveEntity(Entity entity, Point3D destination) {
+
+        // Update the destination point
+        // This method will return the appropriate destination tile by checking all movement related factors.
+        // See its comments for more info
+        destination = updateDestinationPoint(destination, entity);
+
+        Tile destinationTile = tiles.get(destination);
+
+        // NOTE: The activation of area effects and items is the responsibility of the tile once it moves onto it.
+
         // Get the source tile.
         Point3D source = entity.getLocation();
         Tile sourceTile = tiles.get(source);
 
-        Tile destinationTile = tiles.get(destination);
 
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || destinationTile==null){
@@ -65,7 +75,7 @@ public class Map extends Observable {
         // Update the entity's location
         entity.setLocation(destination);
 
-        // Notify observers taht the map changes
+        // Notify observers that the map changes
         setChanged();
         notifyObservers();
     }
@@ -156,7 +166,6 @@ public class Map extends Observable {
     public void acceptDrawingVisitor(MapDrawingVisitor visitor){
         visitor.accept(tiles);
     }
-
 
     //// MOVEMENT CHECKERS ////
 
@@ -267,5 +276,77 @@ public class Map extends Observable {
 
     public Tile getTile(Point3D point){
         return tiles.get(point);
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        //determine true 2D dimensions of the map (10 tiles high always!)
+        int size = (int)Math.sqrt(tiles.size()/10);
+        String dimension = String.valueOf(size);
+
+        //create map element
+        Element mapElement = doc.createElement("map");
+
+        //add the maps dimensions as attributes
+        mapElement.setAttribute("height", dimension);
+        mapElement.setAttribute("width", dimension);
+
+        //add to the document
+        parentElement.appendChild(mapElement);
+
+        //iterate through all the tiles on the map and save them
+        for (java.util.Map.Entry<Point3D,Tile> entry: tiles.entrySet()) {
+
+            //create tile element
+            Element tile = doc.createElement("tile");
+
+            //get the tiles point and tile
+            Point3D p = entry.getKey();
+            Tile t = entry.getValue();
+
+            //save the location of the tile as attributes
+            tile.setAttribute("x", String.valueOf((int) p.getX()));
+            tile.setAttribute("y", String.valueOf((int) p.getY()));
+            tile.setAttribute("z", String.valueOf((int) p.getZ()));
+
+            //add the tile to the map
+            mapElement.appendChild(tile);
+
+            t.save(doc, tile);
+        }
+
+        return doc;
+    }
+
+    @Override
+    public void load(Element data) {
+        try {
+            // Get the tilesNodes from the xml file
+            NodeList tileNodes = data.getElementsByTagName("tile");
+
+            //find out how many tiles there are
+            int numTiles = tileNodes.getLength();
+
+            //instantiate every tile to the map
+            for(int i=0; i<numTiles; i++) {
+
+                Element tileElement = (Element) tileNodes.item(i);
+
+                int x = Integer.parseInt(tileElement.getAttribute("x"));
+                int y = Integer.parseInt(tileElement.getAttribute("y"));
+                int z = Integer.parseInt(tileElement.getAttribute("z"));
+
+                //construct an empty tile and load it into the game
+                Tile tile = new Tile();
+                tile.load(tileElement);
+
+
+                // Check to see if this column has already been started
+                this.tiles.put(new Point3D(x, y, z), tile);
+            }
+        } catch (Exception e) {
+            System.out.println("Error parsing map again");
+            e.printStackTrace();
+        }
     }
 }
