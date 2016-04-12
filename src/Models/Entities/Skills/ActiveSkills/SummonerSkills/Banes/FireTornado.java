@@ -24,7 +24,7 @@ public class FireTornado extends Bane {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect = new PrismEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap());
+                effect = new PrismEffect(BASE_RANGE,BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap());
                 effect.run();
                 isCooledDown = false;
                 doTheCoolDown();

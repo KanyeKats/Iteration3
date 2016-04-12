@@ -78,7 +78,7 @@ public class MapDrawingVisitor {
             // Get the next tile to be rendered.
             Tile currentTile = tile.get(currentPoint);
 
-            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(new Point3D(center.getX(),center.getY() +1, center.getZ()), 3,Constants.COLUMN_HEIGHT, tile);
+            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(new Point3D(avatarCenter.getX(),avatarCenter.getY() +1, avatarCenter.getZ()), 3,Constants.COLUMN_HEIGHT, tile);
             // Get the image from this tile.
             Image tileImage;
             if(tilesinSight.contains(currentTile)) {
@@ -87,6 +87,7 @@ public class MapDrawingVisitor {
             }
             else{
                 if(currentTile.wasVisited()){
+                    //TODO: get a grayer version of the original tile instead of just a gray hexagon
                     tileImage = Assets.HALFFOG;
                 }
                 else {
