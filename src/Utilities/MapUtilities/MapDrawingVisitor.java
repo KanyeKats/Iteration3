@@ -1,6 +1,8 @@
 package Utilities.MapUtilities;
 
 import Models.Entities.Entity;
+import Models.Map.MapUtilities.EntityDrawer;
+import Models.Map.MapUtilities.MapUtilities;
 import Models.Map.Tile;
 import Utilities.Constants;
 import javafx.geometry.Point3D;
