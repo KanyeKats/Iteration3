@@ -5,6 +5,8 @@ import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.*;
+import Models.Map.AreaEffects.RiverAreaEffect;
+import Utilities.Constants;
 import javafx.geometry.Point3D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -64,6 +66,12 @@ public class GameLoader {
                 ArrayList<Item> items = new ArrayList<>();
                 Entity entity = null;
                 Effect effect = null;
+
+                // TODO: Remove, for testing
+                // Add rivers whereever water is.
+                if (terrain == terrain.WATER) {
+                    areaEffect = new RiverAreaEffect(Direction.SOUTH_EAST, 35);
+                }
 
                 // Check to see if this column has already been started
                 tiles.put(new Point3D(x, y, z), new Tile(terrain , areaEffect, entity, items, decal, effect));
