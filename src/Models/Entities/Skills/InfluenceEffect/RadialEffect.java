@@ -21,17 +21,9 @@ public class RadialEffect extends Effect {
         start();
     }
 
-    //propagate radially
     @Override
-    protected void traverseThroughTiles() {
-
-        //I have this part in now we need to do visual effects
-        ArrayList<Tile> tilesinRange = MapNavigationUtilities.getTilesinPlane(getLocation(),getRange(),getMap());
-        for(Tile tile: tilesinRange){
-            if(tile.getEntity() != null){
-                getConsequence().execute(tile.getEntity());
-            }
-        }
+    protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
+        return MapNavigationUtilities.getTilesinPlane(getLocation(),getRange(),getMap());
     }
 
     @Override

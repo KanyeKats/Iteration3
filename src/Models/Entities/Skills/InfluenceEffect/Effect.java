@@ -44,7 +44,7 @@ public abstract class Effect implements Runnable, Savable {
         ArrayList <ArrayList<Tile>> affectedTiles = getAffectedTiles();
 
         //traverse through map at a certain speed for a certain range
-        for (int i = 0; i < range; i++) {
+        for (int i = 0; i < range-1; i++) {
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
@@ -74,7 +74,14 @@ public abstract class Effect implements Runnable, Savable {
     protected abstract ArrayList<ArrayList<Tile>> getAffectedTiles();
 
     //increase range by one
-    protected abstract void traverseThroughTiles(ArrayList<Tile> tiles);
+    protected void traverseThroughTiles(ArrayList<Tile> tiles) {
+        for (Tile tile : tiles) {
+            Entity entity = getEntity(tile);
+            if (hasEntity(entity)) {
+                dealConsequence(entity);
+            }
+        }
+    }
 
     protected Entity getEntity(Tile tile) {
         return tile.getEntity();

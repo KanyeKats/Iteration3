@@ -4,6 +4,7 @@ import Core.StateManager;
 import Models.Consequences.ImmediateStatConsequence;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.AngularEffect;
+import Models.Entities.Skills.InfluenceEffect.RadialEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -74,7 +75,7 @@ public class GameViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_1, new Action() {
             @Override
             public void execute() {
-                new AngularEffect(5, new Point3D(0,0,0), new ImmediateStatConsequence(new StatModificationList(
+                new RadialEffect(5, new Point3D(0,0,0), new ImmediateStatConsequence(new StatModificationList(
                         new StatModification(Stat.STRENGTH,10),
                         new StatModification(Stat.AGILITY,6),
                         new StatModification(Stat.INTELLECT,0),
@@ -82,7 +83,7 @@ public class GameViewController extends ViewController {
                         new StatModification(Stat.MOVEMENT,15),
                         new StatModification(Stat.MAX_HEALTH,50),
                         new StatModification(Stat.MAX_MANA,0),
-                        new StatModification(Stat.EXPERIENCE, 0))), map, Direction.NORTH);
+                        new StatModification(Stat.EXPERIENCE, 0))), map);
             }
         });
     }

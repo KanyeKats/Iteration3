@@ -26,14 +26,14 @@ public class MapNavigationUtilities {
 
     }
 
-    public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, Map map){
+    public static ArrayList<ArrayList<Tile>> getTilesinPlane(Point3D point, int range, Map map){
 
-        ArrayList<Tile> resultTiles = new ArrayList<>();
+        ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
         double[] point4Dstart = convertAxialtoCuubic(point);
         double[] point4Dend = new double[4];
 
-        ArrayList<Tile> tilesInRange = new ArrayList<>();
         for(int i = -range; i <= range; i++) {
+            ArrayList<Tile> tempList = new ArrayList<>();
             for (int j = -range; j <= range; j++) {
                 for (int k = -range; k <= range; k++) {
                     point4Dend[0] = point4Dstart[0] - i;
@@ -43,13 +43,14 @@ public class MapNavigationUtilities {
                         Point3D newpoint = convertCubictoAxial(point4Dend);
                         Tile tile = map.getTile(newpoint);
                         if(tile != null) {
-                            tilesInRange.add(tile);
+                            tempList.add(tile);
                         }
                     }
                 }
             }
+            resultTiles.add(tempList);
         }
-        return tilesInRange;
+        return resultTiles;
     }
 
     public static ArrayList<ArrayList<Tile>> getTilesInAngularPlane(Point3D point, int range, Map map, Direction direction) {
@@ -80,7 +81,6 @@ public class MapNavigationUtilities {
             point = direction.getPointAdjacentTo(point);
             resultTiles.add(tempTiles);
         }
-
         return resultTiles;
     }
 

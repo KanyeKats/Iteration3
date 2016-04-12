@@ -2,8 +2,10 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
 import Models.Map.Map;
+import Models.Map.Tile;
 import javafx.geometry.Point3D;
 import java.awt.Image;
+import java.util.ArrayList;
 
 /**
  * Created by johnkaufmann on 4/2/16.
@@ -16,7 +18,12 @@ public class PrismEffect extends Effect{
     }
 
     @Override
-    protected void traverseThroughTiles() {
+    protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
+        return null;
+    }
+
+    @Override
+    protected void traverseThroughTiles(ArrayList<Tile> tiles) {
 
     }
 
