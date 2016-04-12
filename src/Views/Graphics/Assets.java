@@ -27,6 +27,7 @@ public class Assets {
     //Fog
     public static BufferedImage HALFFOG;
     public static BufferedImage FULLFOG;
+    public static BufferedImage EARTHSHROUDED;
 
     // Area of Effects
     public static BufferedImage LEVEL;
@@ -98,8 +99,14 @@ public class Assets {
         // TODO: Init all the item assets.
 
         // TODO: Init all the effect assets.
+
+
         SpriteSheet placeholderSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/placeholder-blk.png"));
         PLACEHOLDER = placeholderSheet.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        //Fog Tiles
+        SpriteSheet earthShroudedSheet = new SpriteSheet(ImageLoader.loadImage("./res/map/terrain/earthShrouded.png"));
+        EARTHSHROUDED = earthShroudedSheet.crop(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
 
         SpriteSheet halfFogSheet = new SpriteSheet(ImageLoader.loadImage("./res/map/terrain/halfFog.png"));
         HALFFOG = halfFogSheet.crop(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));

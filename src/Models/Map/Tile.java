@@ -132,8 +132,8 @@ public class Tile implements Savable {
 
     public Terrain getTerrain() { return this.terrain; }
 
-    public Image acceptDrawingVisitor(TileDrawingVisitor visitor){
-        return visitor.accept(this);
+    public Image acceptDrawingVisitor(TileDrawingVisitor visitor, boolean isInSight){
+        return visitor.accept(this,isInSight);
     }
 
     public Entity getEntity() {

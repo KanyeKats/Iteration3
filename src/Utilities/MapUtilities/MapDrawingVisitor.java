@@ -74,26 +74,19 @@ public class MapDrawingVisitor {
         while(!priorityQueue.isEmpty()){
 
             Point3D currentPoint = priorityQueue.poll();
-
             // Get the next tile to be rendered.
             Tile currentTile = tile.get(currentPoint);
 
-            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(new Point3D(avatarCenter.getX(),avatarCenter.getY() +1, avatarCenter.getZ()), 3,Constants.COLUMN_HEIGHT, tile);
+            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPlane(avatarCenter, 3, tile);
             // Get the image from this tile.
             Image tileImage;
             if(tilesinSight.contains(currentTile)) {
-                tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor());
+                tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), true);
                 currentTile.setVisited();
             }
             else{
-                if(currentTile.wasVisited()){
-                    //TODO: get a grayer version of the original tile instead of just a gray hexagon
-                    tileImage = Assets.HALFFOG;
+                    tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
                 }
-                else {
-                    tileImage = Assets.FULLFOG;
-                }
-            }
 
             // Figure out where to put it!
             // X and Y will start at the center of the screen.

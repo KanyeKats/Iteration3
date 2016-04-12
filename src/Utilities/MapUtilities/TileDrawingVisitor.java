@@ -18,11 +18,11 @@ import java.util.ArrayList;
  */
 public class TileDrawingVisitor {
 
-    public BufferedImage accept(Tile tile) {
+    public BufferedImage accept(Tile tile, boolean isInSight) {
 
 
         // Create the terrain tile image
-        BufferedImage tileImage = ImageLoader.copyImage(tile.getTerrain().getImage());
+        BufferedImage tileImage = ImageLoader.copyImage(tile.getTerrain().getImage(isInSight, tile.wasVisited()));
         Graphics g = tileImage.getGraphics();
 
         // Extract the graphics object rom the tile image.
