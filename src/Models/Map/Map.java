@@ -27,7 +27,6 @@ public class Map extends Observable {
         this.tiles = tiles;
     }
 
-
     //// MOVEMENT FUNCTIONS ////
 
     // The following things are being taken into consideration for movement:

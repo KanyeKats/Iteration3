@@ -2,10 +2,12 @@ package Utilities.MapUtilities;
 
 import Models.Map.Tile;
 import Utilities.Constants;
+import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
@@ -54,8 +56,21 @@ public class MapDrawingVisitor {
             // Get the next tile to be rendered.
             Tile currentTile = tile.get(currentPoint);
 
+            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(center.add(0,1,0), 4,Constants.COLUMN_HEIGHT, tile);
             // Get the image from this tile.
-            Image tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor());
+            Image tileImage;
+            if(tilesinSight.contains(currentTile)) {
+                tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor());
+                currentTile.setVisited();
+            }
+            else{
+                if(currentTile.wasVisited()){
+                    tileImage = Assets.HALFFOG;
+                }
+                else {
+                    tileImage = Assets.FULLFOG;
+                }
+            }
 
             // Figure out where to put it!
             // X and Y will start at the center of the screen.

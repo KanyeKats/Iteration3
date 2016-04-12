@@ -24,6 +24,9 @@ public class Assets {
 
     public static BufferedImage ITEM_BAG;
 
+    public static BufferedImage HALFFOG;
+    public static BufferedImage FULLFOG;
+
     private static final int SPRITE_SIZE = 30;
 
 
@@ -67,5 +70,12 @@ public class Assets {
         // TODO: Init all the effect assets.
         SpriteSheet placeholderSheet = new SpriteSheet(imageLoader.loadImage("./res/etc/placeholder-blk.png"));
         PLACEHOLDER = placeholderSheet.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        SpriteSheet halfFogSheet = new SpriteSheet(imageLoader.loadImage("./res/map/terrain/halfFog.png"));
+        HALFFOG = halfFogSheet.crop(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
+
+        SpriteSheet fullFogSheet = new SpriteSheet(imageLoader.loadImage("./res/map/terrain/fullFog.png"));
+        FULLFOG = fullFogSheet.crop(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
+
     }
 }
