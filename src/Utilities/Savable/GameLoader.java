@@ -1,6 +1,8 @@
 package Utilities.Savable;
 
 import Models.Map.*;
+import Models.Map.AreaEffects.RiverAreaEffect;
+import Utilities.Constants;
 import javafx.geometry.Point3D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -45,6 +47,7 @@ public class GameLoader {
             Element mapElement = (Element) mapList.item(0);
 
             map.load(mapElement);
+
         } catch (SAXParseException e) {
             System.out.println("Error parsing");
             e.printStackTrace();

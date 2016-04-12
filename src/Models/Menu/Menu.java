@@ -161,6 +161,7 @@ public class Menu extends java.util.Observable{
                     public void execute() {
 
                         System.out.println("Smasher");
+
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         GameSaver.saveMap(map);
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};

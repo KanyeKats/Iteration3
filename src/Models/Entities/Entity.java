@@ -42,10 +42,13 @@ public class Entity extends Observable implements Savable {
     private BufferedImage sprite;
     private boolean isVisible;
     private Point3D location;
+    private Point pixelLocation;
     private Direction direction;
     private Map map;
     private HashMap<Direction, BufferedImage> images;
     private boolean canMove;
+    private boolean justMoved;
+    private boolean enteredNewTile;
     private Timer movementTimer;
 
     // TODO: Ask about terrain checking... not sure if this is ok
@@ -63,7 +66,7 @@ public class Entity extends Observable implements Savable {
         this.equipment = equipment;
         this.sprite = sprite;
         this.location = location;
-        this.direction = direction;
+        this.direction = orientation;
         this.map = map;
         isVisible = true;
         occupation.initStats(this.stats);
@@ -88,9 +91,11 @@ public class Entity extends Observable implements Savable {
         occupation.initSkills(activeSkillList,passiveSkillList);
         initImages();
 
-        // Setup the movement timer.
+        // Set movment variables
         movementTimer = new Timer();
         canMove = true;
+        justMoved = false;
+        enteredNewTile = false;
 
         // TODO: Remove!! Just testing item factory and equipping.
         Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
@@ -112,26 +117,40 @@ public class Entity extends Observable implements Savable {
     }
 
     public final void move(Direction direction) {
-
         // Move with taking movement speed in to account
         if (canMove) {
-            // Move the entity
-            this.direction = direction;
-            map.moveEntity(this, direction);
-
             // Don't allow the entity to move
             canMove = false;
 
-            // Allow the entity to move again by setting canMove to true
-            // after movement delay time has elapsed.
-            movementTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    canMove = true;
-                }
-            }, calculateMovementDelay());
+            // Move the entity
+            this.direction = direction;
+            map.moveEntity(this, direction);
         }
 
+    }
+    public final void moveComplete() {
+        this.justMoved = true;
+        this.enteredNewTile = false;
+
+        // Notify observers that the map changes
+        setChanged();
+        notifyObservers();
+
+        // Allow movement again
+        this.canMove = true;
+    }
+
+    public final boolean enteredNewTile() {
+        if (!enteredNewTile) {
+            enteredNewTile = true;
+            return true;
+        }
+        return false;
+    }
+
+    public final void failedMovement() {
+        this.canMove = true;
+        this.justMoved = false;
     }
 
     // Not a mistake, I think it will be good to have overloaded move methods
@@ -240,6 +259,32 @@ public class Entity extends Observable implements Savable {
         this.location = location;
     }
 
+    public Point getPixelLocation() {
+        // Returns the top left pixel point of the entity's image on the screen
+        return pixelLocation;
+    }
+
+    public Point getCenterPixelLocation(){
+        // Returns the center pixel point of the entity's image on the screen
+        int pixelX = (int)getPixelLocation().getX();
+        int pixelY = (int)getPixelLocation().getY();
+        pixelX += getImage().getWidth(null)/2;
+        pixelY += getImage().getHeight(null)/2;
+        return new Point(pixelX, pixelY);
+    }
+
+    public void setPixelLocation(Point pixelLocation) {
+        this.pixelLocation = pixelLocation;
+    }
+
+    public void initPixelLocation(Point pixelLocation) {
+        if (this.pixelLocation == null || justMoved )
+            this.pixelLocation = pixelLocation;
+            if (justMoved) {
+                justMoved = false;
+            }
+    }
+
     public Direction getDirection() {
         return direction;
     }
@@ -272,22 +317,22 @@ public class Entity extends Observable implements Savable {
 
     }
 
-    private int calculateMovementDelay() {
-        // Calculate the timer delay based off of the "Movement" stat,
-        // Using some funky math Sergio did to gauge how much your stat
-        // modifies the visual "speediness" of movement.
-        int movementTimerDelay =  Constants.MAX_MOVEMENT_DELAY_MS - (stats.getStat(Stat.MOVEMENT) * 17);
-
-        // Guard to make sure the movement delay is not less than 5ms.
-        if (movementTimerDelay < Constants.MIN_MOVEMENT_DELAY_MS) {
-            movementTimerDelay = Constants.MIN_MOVEMENT_DELAY_MS;
-        }
-
-        // Return it to the timer
+//    public int calculateMovementDelay() {
+//        // Calculate the timer delay based off of the "Movement" stat,
+//        // Using some funky math Sergio did to gauge how much your stat
+//        // modifies the visual "speediness" of movement.
+//        int movementTimerDelay =  Constants.MAX_MOVEMENT_DELAY_MS - (stats.getStat(Stat.MOVEMENT) * 17);
+//
+//        // Guard to make sure the movement delay is not less than 5ms.
+//        if (movementTimerDelay < Constants.MIN_MOVEMENT_DELAY_MS) {
+//            movementTimerDelay = Constants.MIN_MOVEMENT_DELAY_MS;
+//        }
+//
+//        // Return it to the timer
 //        System.out.println("MOVEMENT DELAY IS: ");
 //        System.out.println(movementTimerDelay + "ms");
-        return movementTimerDelay;
-    }
+//        return movementTimerDelay;
+//    }
 
     public Image getImage(){
 

@@ -2,27 +2,18 @@ package Models.Map;
 
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
+import Models.Entities.Stats.Stat;
 import Models.Items.Item;
+
+import Models.Map.MapUtilities.MapUtilities;
 import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
 import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
 import org.w3c.dom.*;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.awt.*;
-import java.io.*;
+import java.awt.image.BufferedImage;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -35,11 +26,21 @@ public class Map extends Observable implements Savable {
     //// CLASS DECLARATIONS ////
 
     private HashMap<Point3D, Tile> tiles;
+    private Set<Entity> entitiesOnMap;
     // TODO: Not really a todo but make sure you notify observers when you change something that will affect the visual representation.
 
     // Map will be passed the HashMap that is created by the gameloader after parsing the XML file.
     public Map(HashMap<Point3D, Tile> tiles){
+        // Init properties
         this.tiles = tiles;
+        this.entitiesOnMap = new LinkedHashSet<>();
+
+        // Iterate over tile and add each entity to our set of entities.
+        for (Tile tile : this.tiles.values()) {
+            if (tile.containsEntity()) {
+                this.entitiesOnMap.add(tile.getEntity());
+            }
+        }
     }
 
 
@@ -51,41 +52,130 @@ public class Map extends Observable implements Savable {
     // to the bottom of the cliff. TODO: will need to check if we dropped off a cliff + deal damage.
     // Next, we check for an item (obstacle/interactive) or entity which will block movement.
     // Finally, we check the terrain type of the updated destination
-    public void moveEntity(Entity entity, Point3D destination){
+    public void moveEntity(Entity entity, Point3D destination) {
+        // Get the source tile.
+        Point3D source = entity.getLocation();
+        Tile sourceTile = tiles.get(source);
+
         // Update the destination point
         // This method will return the appropriate destination tile by checking all movement related factors.
         // See its comments for more info
         destination = updateDestinationPoint(destination, entity);
 
-        Tile destinationTile = tiles.get(destination);
-
-        // NOTE: The activation of area effects and items is the responsibility of the tile once it moves onto it.
-
-        // Get the source tile.
-        Point3D source = entity.getLocation();
-        Tile sourceTile = tiles.get(source);
+        final Tile updatedDestinationTile = tiles.get(destination);
 
         // Check if the tiles are in bounds of the map.
-        if(sourceTile==null || destinationTile==null){
+        if(sourceTile==null || updatedDestinationTile==null || destination==source){
+            entity.failedMovement();
             return;
         }
 
-        // Remove the entity from the source and add it to the destination.
-        sourceTile.removeEntity();
-        destinationTile.insertEntity(entity);
+        // Get the entites movement speed.
+        int movementSpeed = entity.getStats().getStat(Stat.MOVEMENT);
 
-        // Update the entity's location
-        entity.setLocation(destination);
-
-        // Notify observers that the map changes
-        setChanged();
-        notifyObservers();
+        // Move him at that rate, upon completion of translation, we will apply items/AoEs/etc on the tile.
+        translateEntity(entity, destination, movementSpeed);
     }
 
     public void moveEntity(Entity entity, Direction direction){
         Point3D destination = direction.getPointAdjacentTo(entity.getLocation());
         moveEntity(entity, destination);
     }
+
+    public void translateEntity(Entity entity, Point3D targetPoint3D, int pixelRate) {
+        // Get entity's current point
+        Point3D entityCurrentPoint = entity.getLocation();
+
+        // Get target tile and entity tile
+        Tile entityCurrentTile = tiles.get(entityCurrentPoint);
+        Tile targetTile = tiles.get(targetPoint3D);
+
+        // Get pixel points of each
+        Point currentPixelLocation = entityCurrentTile.getPixelPoint();
+        Point targetPixelLocation = targetTile.getPixelPoint();
+
+        // Get x and y distances from entity's current point to the desired one.
+        double dy = targetPixelLocation.getY() - currentPixelLocation.getY();
+        double dx = targetPixelLocation.getX() - currentPixelLocation.getX();
+
+        // Calculate the rate at which we increase the entity's y and x pixel values
+        // While translating
+        int xRate;
+        int yRate;
+        if (dx !=0 ) {
+            xRate = dx > 0 ? pixelRate : -pixelRate;
+        } else xRate = 0;
+        if (dy !=0 ) {
+            yRate = dy > 0 ? pixelRate : -pixelRate;
+        } else yRate = 0;
+
+        // If going diagonal, reduce yRate by 70%
+        if (yRate != 0 && xRate != 0) {
+            yRate = (int)(yRate*(0.70));
+        }
+        final int theYRate = yRate;
+
+        // Create Timer and Periodic Timer Task and run it
+        Timer entityMover = new Timer();
+        TimerTask translateEntity = new TimerTask() {
+            // Entity's final coord's which we will be manipulating
+            // Upon every iteration
+            int finalX = (int)currentPixelLocation.getX();
+            int finalY = (int)currentPixelLocation.getY();
+            Point finalPoint = new Point(finalX, finalY);
+
+            @Override
+            public void run() {
+                // Increase x and y pixel values of entity.
+                finalX += xRate;
+                finalY += theYRate;
+
+                // Set this new pixel point to the entity
+                finalPoint.setLocation(finalX, finalY);
+                entity.setPixelLocation(finalPoint);
+
+                // If entity's pixel center entered the new tile,
+                // Remove him from the old one and insert him onto the new.
+                if (MapUtilities.isInBoundsOfTile(entity.getCenterPixelLocation(), targetTile)) {
+                    // This if block should only be triggered once.
+                    if (entity.enteredNewTile()) {
+                       // Remove entity from its current tile
+                        entityCurrentTile.removeEntity();
+                        // Insert him at new tile
+                        targetTile.insertEntity(entity);
+                    }
+                }
+
+                // If we've reached the target pixel destination...
+                if (MapUtilities.isAtTargetPoint(finalPoint, targetPixelLocation, xRate, theYRate)) {
+                    // Stop executing
+                    entityMover.cancel();
+                    entityMover.purge();
+
+                    // Set his logical and pixel location
+                    entity.setLocation(targetPoint3D);
+                    entity.setPixelLocation(targetPixelLocation);
+
+                    // Tell the entity his move has completed!
+                    entity.moveComplete();
+
+                    // activate shit on the tile on him
+                    targetTile.activateTileObjectsOnEntity(entity);
+                    return;
+                }
+
+                // Notify observers that the map changes.
+                // --> Re-render Area Viewport.
+                // --> Re-render moved entity.
+                setChanged();
+                notifyObservers();
+            }
+        };
+
+        // Translate the entity every ms
+        entityMover.scheduleAtFixedRate(translateEntity, 0, 1);
+    }
+
 
     //// MAP MODIFIERS ////
 
@@ -99,6 +189,9 @@ public class Map extends Observable implements Savable {
 
         // Update the entity's location
         entity.setLocation(point);
+
+        // Add the entity to the list of entites
+        entitiesOnMap.add(entity);
     }
 
     // This should only be used when an Entity is dead.
@@ -165,8 +258,11 @@ public class Map extends Observable implements Savable {
         tile.removeEffect();
     }
 
-    public void acceptDrawingVisitor(MapDrawingVisitor visitor){
-        visitor.accept(tiles);
+//    public void acceptDrawingVisitor(MapDrawingVisitor visitor){
+//        visitor.accept(tiles);
+//    }
+    public void draw(BufferedImage image, Point3D center) {
+        MapDrawingVisitor.accept(tiles, image, center);
     }
 
     //// MOVEMENT CHECKERS ////
@@ -174,6 +270,11 @@ public class Map extends Observable implements Savable {
     // Checks the destination tile for movement hindrance and height differences
     // Returns an updated destination point based on the above factos
     private Point3D updateDestinationPoint(Point3D originalDestinationPoint, Entity entity) {
+
+        // Check if the tile is in bounds of the map.
+        if( tiles.get(originalDestinationPoint)==null){
+            return originalDestinationPoint;
+        }
 
         // Get the entity's current point location before any movement
         Point3D entityCurrentLocation = entity.getLocation();
@@ -212,10 +313,10 @@ public class Map extends Observable implements Savable {
         int destinationPointX = (int)originalDestinationPoint.getX();
         int destinationPointY = (int)originalDestinationPoint.getY();
 
-        double destinationMaxZHeight = getMaxColumnHeightAtPoint(destinationPointX, destinationPointY);
+        double destinationMaxZHeight = getMaxColumnHeightAtPoint(originalDestinationPoint);
 
-        System.out.println("THE MAX COLUMN HEIGHT AT THE TILE WERE ATTEMPTING TO MOVE AT IS ");
-        System.out.println(destinationMaxZHeight);
+//        System.out.println("THE MAX COLUMN HEIGHT AT THE TILE WERE ATTEMPTING TO MOVE AT IS ");
+//        System.out.println(destinationMaxZHeight);
 
         // The column is too tall, block movement
         if (destinationMaxZHeight > entityCurrentZ + tolerance) {
@@ -235,9 +336,13 @@ public class Map extends Observable implements Savable {
 
     //// HELPERS ////
 
-    public int getMaxColumnHeightAtPoint(int x, int y) {
-        // Start at the lowest z point
-        int z = 0;
+    public int getMaxColumnHeightAtPoint(Point3D point) {
+        int x = (int)point.getX();
+        int y = (int)point.getY();
+
+        // Start at the current Z point
+        int originalZ = (int)point.getZ();
+        int z = originalZ;
 
         // Get tile and point
         Point3D pointToCheck = new Point3D(x, y, z);
@@ -249,12 +354,25 @@ public class Map extends Observable implements Savable {
             pointToCheck = new Point3D(x, y, z);
             tileToCheck = tiles.get(pointToCheck);
         }
-        return z - 1;
+
+        // Means, we need to look down
+        if (z == originalZ) {
+            while (z > 0 && tileToCheck.getTerrain() != Terrain.EARTH ) {
+                z--;
+                pointToCheck = new Point3D(x, y, z);
+                tileToCheck = tiles.get(pointToCheck);
+            }
+            return z;
+        } else {
+            return z-1;
+        }
+
+
     }
 
-    public int getColumnHeightDifferenceBetween2DPoints(Point pointA, Point pointB) {
-        int pointAMaxHeight = getMaxColumnHeightAtPoint((int)pointA.getX(), (int)pointA.getY());
-        int pointBMaxHeight = getMaxColumnHeightAtPoint((int)pointB.getX(), (int)pointB.getY());
+    public int getColumnHeightDifferenceBetweenPoints(Point3D pointA, Point3D pointB) {
+        int pointAMaxHeight = getMaxColumnHeightAtPoint(pointA);
+        int pointBMaxHeight = getMaxColumnHeightAtPoint(pointB);
 
         return Math.abs(pointAMaxHeight - pointBMaxHeight);
     }
