@@ -2,7 +2,6 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Entities.Entity;
 import Models.Consequences.Consequence;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
@@ -14,23 +13,12 @@ import java.awt.Image;
 
 /**
  * Created by johnkaufmann on 3/30/16.
- * TODO:
  */
 public abstract class Effect implements Runnable, Savable {
-
-    //I think these need to be changed to protected so that they can be used by the subclasses - Aidan
-
-
-//    private int range;
-//    private Point3D location;
-//    private Consequence consequence;
-//    private Direction direction;
-
-    protected int range;
-    protected Point3D location;
-    protected Consequence consequence;
-    protected Direction direction;
-    protected Map map;
+    private int range;
+    private Point3D location;
+    private Consequence consequence;
+    private Map map;
 
     public Effect(int range, Point3D location, Consequence consequence, Map map) {
         this.range = range;
@@ -83,16 +71,41 @@ public abstract class Effect implements Runnable, Savable {
     //increase range by one
     protected abstract void traverseThroughTiles();
 
-    protected boolean hasEntity(Tile tile) {
-        return tile.getEntity() != null;
+    protected void apply(Point3D point) {
+        Entity entity = getEntity(map.getTile(point));
+        if (hasEntity(entity)) {
+            dealConsequence(entity);
+        }
     }
 
+    protected Entity getEntity(Tile tile) {
+        return tile.getEntity();
+    }
+
+    protected boolean hasEntity(Entity entity) { return entity != null; }
+
+    //given an entity execute that consequence
     protected void dealConsequence(Entity entity) {
-        //given an entity execute that consequence
         consequence.execute(entity);
     }
 
     public abstract Image getImage();
+
+    public int getRange() {
+        return range;
+    }
+
+    public Point3D getLocation() {
+        return location;
+    }
+
+    public Consequence getConsequence() {
+        return consequence;
+    }
+
+    public Map getMap() {
+        return map;
+    }
 
     @Override
     public Document save(Document doc, Element parentElement) {
