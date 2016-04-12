@@ -65,7 +65,7 @@ public enum GuantletFactory {
     // Check if the enum's ID is equal to the passed in ID,
     // If so, return an instance of that enum
     // Otherwise, return null, an invalid ID was passed in
-    public static Guantlets GuantletFromID(int id) {
+    public static Guantlets guantletFromID(int id) {
         for (GuantletFactory guantlet : values()) {
             if (guantlet.getID() == id) {
                 return guantlet.createInstance();
