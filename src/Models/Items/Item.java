@@ -1,6 +1,22 @@
 package Models.Items;
 
 import Models.Entities.Entity;
+import Models.Items.Interactive.InteractiveItem;
+import Models.Items.Interactive.InteractiveItemFactory;
+import Models.Items.Obstacle.ObstacleFactory;
+import Models.Items.OneShot.OneShotItemFactory;
+import Models.Items.Takable.Consumable.ConsumableItemFactory;
+import Models.Items.Takable.Equippable.Boots.BootFactory;
+import Models.Items.Takable.Equippable.Chests.ChestFactory;
+import Models.Items.Takable.Equippable.Gauntlets.GuantletFactory;
+import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
+import Models.Items.Takable.Equippable.Leggings.LeggingFactory;
+import Models.Items.Takable.Equippable.OneHandedWeapons.OneHandedWeaponFactory;
+import Models.Items.Takable.Equippable.RangedWeapons.RangedWeaponFactory;
+import Models.Items.Takable.Equippable.Staves.StaffFactory;
+import Models.Items.Takable.Equippable.TwoHandedWeapon.TwoHandedWeaponFactory;
+import Models.Items.Takable.TakableItem;
+import Models.Items.Takable.Usable.UsableItemFactory;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -55,5 +71,84 @@ public abstract class Item implements Savable {
     @Override
     public void load(Element data) {
 
+    }
+
+    public static Item itemFromID(int ID) {
+        // Search every factory lol
+
+        for (InteractiveItemFactory i : InteractiveItemFactory.values()) {
+            if (i.getID() == ID) {
+                return InteractiveItemFactory.interactiveItemFromID(ID);
+            }
+        }
+        for (ObstacleFactory i : ObstacleFactory.values()) {
+            if (i.getID() == ID) {
+                return ObstacleFactory.obstacleFromID(ID);
+            }
+        }
+        for (OneShotItemFactory i : OneShotItemFactory.values()) {
+            if (i.getID() == ID) {
+                return OneShotItemFactory.oneShotItemFromID(ID);
+            }
+        }
+        for (ConsumableItemFactory i : ConsumableItemFactory.values()) {
+            if (i.getID() == ID) {
+                return ConsumableItemFactory.consumableItemFromID(ID);
+            }
+        }
+        for (UsableItemFactory i : UsableItemFactory.values()) {
+            if (i.getID() == ID) {
+                return UsableItemFactory.usableItemFromID(ID);
+            }
+        }
+        for (BootFactory i : BootFactory.values()) {
+            if (i.getID() == ID) {
+                return BootFactory.bootsFromID(ID);
+            }
+        }
+        for (ChestFactory i : ChestFactory.values()) {
+            if (i.getID() == ID) {
+                return ChestFactory.chestFromID(ID);
+            }
+        }
+        for (GuantletFactory i : GuantletFactory.values()) {
+            if (i.getID() == ID) {
+                return GuantletFactory.guantletFromID(ID);
+            }
+        }
+        for (HelmetFactory i : HelmetFactory.values()) {
+            if (i.getID() == ID) {
+                return HelmetFactory.helmetFromID(ID);
+            }
+        }
+        for (LeggingFactory i : LeggingFactory.values()) {
+            if (i.getID() == ID) {
+                return LeggingFactory.leggingsFromID(ID);
+            }
+        }
+        for (OneHandedWeaponFactory i : OneHandedWeaponFactory.values()) {
+            if (i.getID() == ID) {
+                return OneHandedWeaponFactory.oneHandedWeaponFromID(ID);
+            }
+        }
+        for (TwoHandedWeaponFactory i : TwoHandedWeaponFactory.values()) {
+            if (i.getID() == ID) {
+                return TwoHandedWeaponFactory.twoHandedWeaponFromID(ID);
+            }
+        }
+        for (StaffFactory i : StaffFactory.values()) {
+            if (i.getID() == ID) {
+                return StaffFactory.staffFromID(ID);
+            }
+        }
+        for (RangedWeaponFactory i : RangedWeaponFactory.values()) {
+            if (i.getID() == ID) {
+                return RangedWeaponFactory.rangedWeaponFromID(ID);
+            }
+        }
+
+
+        // Return null if passed in an invalid ID
+        throw new IllegalArgumentException("Invalid Item ID");
     }
 }

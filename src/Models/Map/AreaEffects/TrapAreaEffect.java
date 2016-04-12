@@ -21,7 +21,7 @@ public class TrapAreaEffect extends AreaEffect {
         this.trappedTime = trappedTime;
 
         // Set decal
-        this.decal = Decal.trap;
+        this.decal = Decal.trap();
 
         // Set visibility and removability
         this.isVisible = false;
@@ -35,11 +35,6 @@ public class TrapAreaEffect extends AreaEffect {
 
         // Execute the consequence
         consequence.execute(entity);
-    }
-
-    @Override
-    public Image getImage() {
-        return null;
     }
 
     // TODO: Not sure if this should be here? maybe in detect trap skill?

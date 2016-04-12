@@ -26,7 +26,7 @@ public class RiverAreaEffect extends AreaEffect {
         this.flowSpeed = flowSpeed;
 
         // Set decal
-        this.decal = Decal.river;
+        this.decal = Decal.river();
 
         // Set visibility and removability
         this.isVisible = true;
@@ -56,8 +56,4 @@ public class RiverAreaEffect extends AreaEffect {
         stats.setStat(Stat.MOVEMENT, entitysOriginalSpeed);
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
 }

@@ -4,6 +4,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by rokas on 4/9/16.
@@ -13,14 +14,14 @@ public enum ConsumableItemFactory {
         @Override
         public ConsumableItem createInstance() {
             StatModification buff = new StatModification(Stat.MANA, 50);
-            return new ConsumableItem(Assets.PLACEHOLDER, new StatModificationList(buff), "Mana Potion", "Restores 50 mana.", 10000);
+            return new ConsumableItem(ImageLoader.loadImage("./res/items/potion.png"), new StatModificationList(buff), "Mana Potion", "Restores 50 mana.", 10000);
         }
     },
     HEALTH_POTION(10001) {
         @Override
         public ConsumableItem createInstance() {
             StatModification buff = new StatModification(Stat.HEALTH, 50);
-            return new ConsumableItem(Assets.PLACEHOLDER, new StatModificationList(buff), "Health Potion", "Restores 50 health.", 10001);
+            return new ConsumableItem(ImageLoader.loadImage("./res/items/green_potion.png"), new StatModificationList(buff), "Health Potion", "Restores 50 health.", 10001);
         }
     };
 

@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class ImageLoader {
 
-    public BufferedImage loadImage(String path) {
+    public static BufferedImage loadImage(String path) {
         try {
             return ImageIO.read(new File(path));
 //            return ImageIO.read(getClass().getResourceAsStream(path));

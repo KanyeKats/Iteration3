@@ -65,7 +65,7 @@ public enum OneHandedWeaponFactory {
     // Check if the enum's ID is equal to the passed in ID,
     // If so, return an instance of that enum
     // Otherwise, return null, an invalid ID was passed in
-    public static OneHandedWeapon twoHandedWeaponFromID(int id) {
+    public static OneHandedWeapon oneHandedWeaponFromID(int id) {
         for (OneHandedWeaponFactory weapon : values()) {
             if (weapon.getID() == id) {
                 return weapon.createInstance();

@@ -63,25 +63,32 @@ def generate(mapSizeX, mapSizeY, terrainArray, outputFileName, available_aoes):
                 # possibly set an AOE here.
                 # not limiting the amnt of aoes that can be spawned currentl
                 # Only place AOE's on Z level of 0 for now
-                if spawnAOE() and z == 0:
+                if spawnThingWithProbabilityOf(6) and z == 0:
                     print 'Generated an AOE at pt ' + str(x) + ", " + str(y) + ", " + str(z)
                     available_aoes -= 1
                     generateRandomAOE(element, mapSizeX, mapSizeY, 10)
+
+                if spawnThingWithProbabilityOf(2) and z == 0:
+                    print 'Generated an item at pt ' + str(x) + ", " + str(y) + ", " + str(z)
+                    generateRandomItem(element)
 
     # Write to the file
     outputFile = open(outputFileName + ".xml", "w")
     outputFile.write(prettify(root))
 
 
-def spawnAOE():
+# takes in a number like 5, 10, 15, etc for % probability.
+# "15% chance to spawn something"
+# Then returns and decides to spawn or not
+def spawnThingWithProbabilityOf(probability):
     # generates a random number between 0 and 1
     chance = random.random()
 
-    # 10% chance to spawn AOE
-    if chance >= .10 and chance <= .20:
-        return True
-    else:
-        return False
+    # convert 15% to .15
+    probability = float(probability)/100.0
+
+    # 5% chance to spawn an item
+    return chance <= probability
 
 
 def generateRandomHealOrDamageAmount(max_val):
@@ -96,6 +103,21 @@ def generateRandomTrapTime():
 
 def generateRandom3DPoint(x_max, y_max, z_max):
     return (random.randint(0, x_max), random.randint(0, y_max), random.randint(0, z_max))
+
+
+def generateRandomItem(parentXMLElement):
+    # make a list of available item ids we wanna put on the map
+    ITEM_IDS = ['10000', '10001']
+
+    # Get a random item from the list
+    end_range = len(ITEM_IDS) - 1
+    item = ITEM_IDS[random.randint(0, end_range)]
+
+    # Create the XML object
+    item_xml = SubElement(parentXMLElement, "item")
+
+    # Set id attribute
+    item_xml.set("id", item)
 
 
 def generateRandomAOE(parentXMLElement, mapSizeX, mapSizeY, mapSizeZ):
@@ -138,9 +160,7 @@ if __name__ == "__main__":
     content.pop(0)
     content.pop(0)
 
-    # make a dictionary of available items
-    ITEM_IDS = []
-    # only wanna spawn a maximum of 30 aoe's.
+    # only wanna spawn a maximum of 30 aoe's. (not using this limit atm)
     available_aoes = 30
 
     # Get the terrain from the file
