@@ -1,6 +1,6 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Boons;
 
-import Models.Entities.Skills.Consequences.PeriodicStatConsequence;
+import Models.Consequences.PeriodicStatConsequence;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;

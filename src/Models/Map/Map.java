@@ -4,19 +4,24 @@ import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Entities.Stats.Stat;
 import Models.Items.Item;
-import Models.Map.MapUtilities.MapDrawingVisitor;
-import Models.Map.MapUtilities.MapUtilities;
-import Utilities.Constants;
-import javafx.geometry.Point3D;
 
+import Models.Map.MapUtilities.MapUtilities;
+import Utilities.MapUtilities.MapDrawingVisitor;
+import Utilities.Constants;
+import Utilities.Savable.Savable;
+import javafx.geometry.Point3D;
+import org.w3c.dom.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Observable;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Map extends Observable {
+public class Map extends Observable implements Savable {
 
     //// CLASS DECLARATIONS ////
 
@@ -260,7 +265,6 @@ public class Map extends Observable {
         MapDrawingVisitor.accept(tiles, image, center);
     }
 
-
     //// MOVEMENT CHECKERS ////
 
     // Checks the destination tile for movement hindrance and height differences
@@ -375,5 +379,77 @@ public class Map extends Observable {
 
     public Tile getTile(Point3D point){
         return tiles.get(point);
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        //determine true 2D dimensions of the map (10 tiles high always!)
+        int size = (int)Math.sqrt(tiles.size()/10);
+        String dimension = String.valueOf(size);
+
+        //create map element
+        Element mapElement = doc.createElement("map");
+
+        //add the maps dimensions as attributes
+        mapElement.setAttribute("height", dimension);
+        mapElement.setAttribute("width", dimension);
+
+        //add to the document
+        parentElement.appendChild(mapElement);
+
+        //iterate through all the tiles on the map and save them
+        for (java.util.Map.Entry<Point3D,Tile> entry: tiles.entrySet()) {
+
+            //create tile element
+            Element tile = doc.createElement("tile");
+
+            //get the tiles point and tile
+            Point3D p = entry.getKey();
+            Tile t = entry.getValue();
+
+            //save the location of the tile as attributes
+            tile.setAttribute("x", String.valueOf((int) p.getX()));
+            tile.setAttribute("y", String.valueOf((int) p.getY()));
+            tile.setAttribute("z", String.valueOf((int) p.getZ()));
+
+            //add the tile to the map
+            mapElement.appendChild(tile);
+
+            t.save(doc, tile);
+        }
+
+        return doc;
+    }
+
+    @Override
+    public void load(Element data) {
+        try {
+            // Get the tilesNodes from the xml file
+            NodeList tileNodes = data.getElementsByTagName("tile");
+
+            //find out how many tiles there are
+            int numTiles = tileNodes.getLength();
+
+            //instantiate every tile to the map
+            for(int i=0; i<numTiles; i++) {
+
+                Element tileElement = (Element) tileNodes.item(i);
+
+                int x = Integer.parseInt(tileElement.getAttribute("x"));
+                int y = Integer.parseInt(tileElement.getAttribute("y"));
+                int z = Integer.parseInt(tileElement.getAttribute("z"));
+
+                //construct an empty tile and load it into the game
+                Tile tile = new Tile();
+                tile.load(tileElement);
+
+
+                // Check to see if this column has already been started
+                this.tiles.put(new Point3D(x, y, z), tile);
+            }
+        } catch (Exception e) {
+            System.out.println("Error parsing map again");
+            e.printStackTrace();
+        }
     }
 }

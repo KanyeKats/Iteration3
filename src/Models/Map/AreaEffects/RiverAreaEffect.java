@@ -1,8 +1,6 @@
 package Models.Map.AreaEffects;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.BehaviorConsequence;
-import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;

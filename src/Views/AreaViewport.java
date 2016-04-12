@@ -2,7 +2,7 @@ package Views;
 
 import Models.Entities.Entity;
 import Models.Map.Map;
-import Models.Map.MapUtilities.MapDrawingVisitor;
+import Utilities.MapUtilities.MapDrawingVisitor;
 
 import java.awt.*;
 

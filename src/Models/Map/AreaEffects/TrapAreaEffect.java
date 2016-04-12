@@ -1,11 +1,7 @@
 package Models.Map.AreaEffects;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.BehaviorConsequence;
-import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
-import Models.Entities.Stats.Stat;
-import Models.Entities.Stats.StatModification;
-import Models.Entities.Stats.StatModificationList;
+import Models.Consequences.BehaviorConsequence;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
 
@@ -47,6 +43,10 @@ public class TrapAreaEffect extends AreaEffect {
     }
 
     // TODO: Not sure if this should be here? maybe in detect trap skill?
+
+    //TODO: I agree this sould not be here, it should be in the trap skill
+    //TODO: because it is the skill that is making the trap visiible.  ... - Aidan
+
     public void attemptToDetectTrap(int chanceToDetect) {
         Random rand = new Random();
 

@@ -1,4 +1,4 @@
-package Models.Map.MapUtilities;
+package Utilities.MapUtilities;
 
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
@@ -60,4 +60,5 @@ public class TileDrawingVisitor {
         int y = Constants.TILE_HEIGHT / 2 - image.getHeight(null) / 2;
         g.drawImage(image, x, y, null);
     }
+
 }

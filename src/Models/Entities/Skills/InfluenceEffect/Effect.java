@@ -1,28 +1,35 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.Consequence;
+import Models.Consequences.Consequence;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
+import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
-import java.awt.*;
+import java.awt.Image;
 
 /**
  * Created by johnkaufmann on 3/30/16.
  * TODO:
  */
-public abstract class Effect implements Runnable {
-    private int range;
-    private Point3D location;
-    private Consequence consequence;
-    private Direction direction;
+public abstract class Effect implements Runnable, Savable {
+
+    //I think these need to be changed to protected so that they can be used by the subclasses - Aidan
+
+    protected int range;
+    protected Point3D location;
+    protected Consequence consequence;
+    protected Map map;
 
     public Effect(int range, Point3D location, Consequence consequence, Map map) {
         this.range = range;
         this.location = location;
         this.consequence = consequence;
+        this.map = map;
         start();
     }
 
@@ -79,4 +86,14 @@ public abstract class Effect implements Runnable {
     }
 
     public abstract Image getImage();
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+
+    }
 }

@@ -1,42 +1,59 @@
-//package Utilities.Savable;
-//
-//import java.nio.charset.Charset;
-//import java.nio.file.Files;
-//import java.nio.file.Path;
-//import java.nio.file.Paths;
-//import java.util.ArrayList;
-//
-///**
-// * Created by johnkaufmann on 3/31/16.
-// * TODO: finish and discuss with group
-// */
-//public class GameSaver {
-//    private Map map;
-//
-//    public GameSaver(Map map) {
-//        this.map = map;
-//    }
-//
-//    public static void SaveAll() {
-//        //loop through the savable objects and write them to a file
-//        for (Tile tile : map.getTiles()) {
-//            //save all entities, save all items, save all area effects
-//            writeToFile(tile.save(), "Game0.txt");
-//        }
-//
-//        //save map
-//        writeToFile(map.save(), "Map0.txt");
-//
-//        //save key bindings
-//        writeToFile(keyBinding.save(), "KeyBinding0.txt");
-//    }
-//
-//    private static void writeToFile(ArrayList<String> data, String fileName) {
-//        Path file = Paths.get(fileName);
-//        try {
-//            Files.write(file, data, Charset.forName("UTF-8"));
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//}
+package Utilities.Savable;
+
+import Models.Map.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+/**
+ * Created by johnkaufmann on 3/31/16.
+ */
+public class GameSaver {
+    public static void saveMap(Map map) {
+        try {
+            DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
+            DocumentBuilder build = dFact.newDocumentBuilder();
+            Document doc = build.newDocument();
+
+            Element root = doc.createElement("game");
+            doc.appendChild(root);
+
+            map.save(doc, root);
+
+            TransformerFactory tFact = TransformerFactory.newInstance();
+            Transformer trans = tFact.newTransformer();
+            trans.setOutputProperty(OutputKeys.INDENT, "yes");
+
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+            DOMSource source = new DOMSource(doc);
+            trans.transform(source, result);
+            writeToFile(writer.toString(), "./res/map/test.xml");
+
+        } catch (TransformerException ex) {
+            System.out.println("Error outputting document");
+        } catch (ParserConfigurationException ex) {
+            System.out.println("Error building document");
+        }
+//        writeToFile(map.save(), "./res/map/test.xml");
+    }
+    private static void writeToFile(String data, String fileName) {
+        try(  PrintWriter out = new PrintWriter( fileName )  ){
+            out.println( data );
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}

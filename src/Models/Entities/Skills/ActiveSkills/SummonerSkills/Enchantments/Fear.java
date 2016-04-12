@@ -1,7 +1,7 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.BehaviorConsequence;
+import Models.Consequences.BehaviorConsequence;
 import Models.Entities.Skills.InfluenceEffect.LinearEffect;
 
 /**
@@ -23,7 +23,7 @@ public class Fear extends Enchantment {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getMap());
+                effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap());
                 effect.run();
                 isCooledDown = false;
                 doTheCoolDown();

@@ -1,7 +1,7 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes;
 
 import Models.Entities.Entity;
-import Models.Entities.Skills.Consequences.ImmediateStatConsequence;
+import Models.Consequences.ImmediateStatConsequence;
 import Models.Entities.Skills.InfluenceEffect.PrismEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
@@ -24,7 +24,7 @@ public class FireTornado extends Bane {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect = new PrismEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getMap());
+                effect = new PrismEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap());
                 effect.run();
                 isCooledDown = false;
                 doTheCoolDown();

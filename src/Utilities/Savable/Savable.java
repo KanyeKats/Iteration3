@@ -1,12 +1,14 @@
 package Utilities.Savable;
 
-import java.util.ArrayList;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.print.Doc;
 
 /**
  * Created by johnkaufmann on 3/31/16.
- * TODO:
  */
 public interface Savable {
-    public String save();
-    public void load(ArrayList<String> data);
+    public Document save(Document doc, Element parentElement);
+    public void load(Element data);
 }
