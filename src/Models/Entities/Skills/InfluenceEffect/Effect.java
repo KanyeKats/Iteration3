@@ -10,6 +10,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.awt.Image;
+import java.util.ArrayList;
 
 /**
  * Created by johnkaufmann on 3/30/16.
@@ -40,7 +41,7 @@ public abstract class Effect implements Runnable, Savable {
         long fps = 0;
         final int TARGET_FPS = 60;
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
-        traverseThroughTiles();
+        ArrayList <ArrayList<Tile>> affectedTiles = getAffectedTiles();
 
         //traverse through map at a certain speed for a certain range
         for (int i = 0; i < range; i++) {
@@ -60,7 +61,7 @@ public abstract class Effect implements Runnable, Savable {
             }
 
             // check to see if an entity is there and then hit them with the attack!
-//            traverseThroughTiles();
+            traverseThroughTiles(affectedTiles.get(i));
 
             try {
                 Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
@@ -70,16 +71,10 @@ public abstract class Effect implements Runnable, Savable {
         }
     }
 
-    //increase range by one
-    protected abstract void traverseThroughTiles();
+    protected abstract ArrayList<ArrayList<Tile>> getAffectedTiles();
 
-    protected void apply(Point3D point) {
-        Entity entity = getEntity(map.getTile(point));
-        System.out.println(point.getX() + "," + point.getY());
-        if (hasEntity(entity)) {
-            dealConsequence(entity);
-        }
-    }
+    //increase range by one
+    protected abstract void traverseThroughTiles(ArrayList<Tile> tiles);
 
     protected Entity getEntity(Tile tile) {
         return tile.getEntity();

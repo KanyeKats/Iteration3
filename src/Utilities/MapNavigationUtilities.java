@@ -52,16 +52,16 @@ public class MapNavigationUtilities {
         return tilesInRange;
     }
 
-    public static ArrayList<ArrayList<Tile>> getTilesinAngularPlane(Point3D point, int range, Map map, Direction direction) {
+    public static ArrayList<ArrayList<Tile>> getTilesInAngularPlane(Point3D point, int range, Map map, Direction direction) {
         Point3D pt = direction.getPointAdjacentTo(point);
-        Direction leftDir = rotateEnum(4);
-        Direction rightDir = rotateEnum(2);
+        Direction leftDir = rotateEnum(4, direction);
+        Direction rightDir = rotateEnum(2, direction);
         ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
-        ArrayList<Tile> rTiles = new ArrayList<>();
 
         for (int i = 1; i < range; i++) {
 
-            rTiles.add(map.getTile(pt));
+            ArrayList<Tile> tempTiles = new ArrayList<>();
+            tempTiles.add(map.getTile(pt));
 
             //set up for expansion on both sides
             Point3D leftSide = pt; //curr point + 4
@@ -72,19 +72,21 @@ public class MapNavigationUtilities {
             for (int j = 0; j < i/2; j++) {
                 leftSide = leftDir.getPointAdjacentTo(leftSide);
                 rightSide = rightDir.getPointAdjacentTo(rightSide);
-                rTiles.add(map.getTile(leftSide));
-                apply(leftSide);
-                apply(rightSide);
+                tempTiles.add(map.getTile(leftSide));
+                tempTiles.add(map.getTile(rightSide));
             }
 
             //move to the next radius
             point = direction.getPointAdjacentTo(point);
+            resultTiles.add(tempTiles);
         }
+
+        return resultTiles;
     }
 
     //rotate the enum given an integer
-    private static Direction rotateEnum(int i) {
-        Direction d = getDirection().values()[getDirection().ordinal() + i % 5];
+    private static Direction rotateEnum(int i, Direction direction) {
+        Direction d = direction.values()[direction.ordinal() + i % 5];
         return d;
     }
 
