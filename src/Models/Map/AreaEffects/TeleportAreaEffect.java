@@ -19,7 +19,7 @@ public class TeleportAreaEffect extends AreaEffect {
         this.targetLocation = targetLocation;
 
         // Set decal
-        this.decal = Decal.teleport;
+        this.decal = Decal.teleport();
 
         // Set visibility and removability
         this.isVisible = true;
@@ -32,8 +32,4 @@ public class TeleportAreaEffect extends AreaEffect {
         entity.move(targetLocation);
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
 }

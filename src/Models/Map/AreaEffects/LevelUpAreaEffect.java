@@ -18,7 +18,7 @@ public class LevelUpAreaEffect extends AreaEffect {
 
     public LevelUpAreaEffect() {
         // Set decal
-        this.decal = Decal.level;
+        this.decal = Decal.level();
 
         // Set visibility and removability
         this.isVisible = true;
@@ -38,8 +38,4 @@ public class LevelUpAreaEffect extends AreaEffect {
         consequence.execute(entity);
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
 }

@@ -18,7 +18,7 @@ import java.awt.*;
 public class InstantDeathAreaEffect extends AreaEffect {
     public InstantDeathAreaEffect() {
         // Set decal
-        this.decal = Decal.level;
+        this.decal = Decal.death();
 
         // Set visibility and removability
         this.isVisible = true;
@@ -40,8 +40,4 @@ public class InstantDeathAreaEffect extends AreaEffect {
         consequence.execute(entity);
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
 }
