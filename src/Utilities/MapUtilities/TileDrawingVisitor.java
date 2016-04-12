@@ -44,12 +44,6 @@ public class TileDrawingVisitor {
             }
         }
 
-        // Draw the entity
-        Entity entity = tile.getEntity();
-        if(entity!=null && entity.getImage()!=null){
-            drawComponent(entity.getImage(), g);
-        }
-
         // Draw the effects
         Effect effect = tile.getEffect();
         if(effect!=null && effect.getImage()!=null){

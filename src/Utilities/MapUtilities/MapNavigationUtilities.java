@@ -87,13 +87,6 @@ public class MapNavigationUtilities {
 
         ArrayList<Tile> tilesInRange = new ArrayList<>();
 
-        //upper half of sphere
-        for(int i = -rangeofColumn; i < 0; i++){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
-            for(Tile tile: tilesInPlane) {
-                tilesInRange.add(tile);
-            }
-        }
         //lower half of sphere
         for(int i = 0; i <= rangeofColumn; i++){
             ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
@@ -109,13 +102,6 @@ public class MapNavigationUtilities {
 
         ArrayList<Tile> tilesInRange = new ArrayList<>();
 
-        //upper half of sphere
-        for(int i = -rangeofColumn; i < 0; i++){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
-            for(Tile tile: tilesInPlane) {
-                tilesInRange.add(tile);
-            }
-        }
         //lower half of sphere
         for(int i = 0; i <= rangeofColumn; i++){
             ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);

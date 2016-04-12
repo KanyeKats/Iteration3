@@ -1,75 +1,52 @@
-package Utilities.Savable;//package MapNavigationUtilities.Savable;
-//
+package Utilities.Savable;
 
-import Models.Entities.Entity;
-import Models.Entities.Skills.InfluenceEffect.Effect;
-import Models.Items.Item;
 import Models.Map.*;
+import Models.Map.AreaEffects.RiverAreaEffect;
+import Utilities.Constants;
 import javafx.geometry.Point3D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.util.ArrayList;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.*;
 import java.util.HashMap;
 
 /**
  * Created by johnkaufmann on 3/31/16.
- * TODO: finish and discuss with group
  */
 public class GameLoader {
 
+    // TODO: 4/9/16 this will be fixed once we have default maps
     public static final Point3D DEFAULT_STARTING_POINT = new Point3D(0, 0, 0); // Just made sure this was a valid point in the default map. Should be done better probably.
 
-    public static Map loadMap(String filepath){
-
+    //given an XML file load the map
+    public static Map loadMap(String fileName) {
+        Map map = new Map(new HashMap<>());
         try {
             // Create a document from the xml file
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
-            Document doc = docBuilder.parse(new File(filepath));
 
-            // Normalize
-            doc.getDocumentElement().normalize();
+            //read the XML string
+            InputSource is = new InputSource();
+            is.setCharacterStream(new StringReader(readFromFile(fileName)));
+            Document doc = docBuilder.parse(is);
 
+            //find MAP node
             NodeList mapList = doc.getElementsByTagName("map");
             Element mapElement = (Element) mapList.item(0);
 
-
-            // Create empty tiles
-            HashMap<Point3D, Tile> tiles = new HashMap<>();
-
-            // Get the tilesNodes from the xml file.
-            NodeList tileNodes = mapElement.getElementsByTagName("tile");
-            int numTiles = tileNodes.getLength();
-
-            for(int i=0; i<numTiles; i++){
-
-                Element tileElement = (Element) tileNodes.item(i);
-
-                int x = Integer.parseInt(tileElement.getAttribute("x"));
-                int y = Integer.parseInt(tileElement.getAttribute("y"));
-                int z = Integer.parseInt(tileElement.getAttribute("z"));
-
-                // Create the terrain
-                Terrain terrain = getTerrain(tileElement);
-
-                // TODO: Implement these functions
-                AreaEffect areaEffect = null;
-                Decal decal = null;
-                ArrayList<Item> items = new ArrayList<>();
-                Entity entity = null;
-                Effect effect = null;
-
-                // Check to see if this column has already been started
-                tiles.put(new Point3D(x, y, z), new Tile(terrain , areaEffect, entity, items, decal, effect));
-            }
-
-            return new Map(tiles);
+            map.load(mapElement);
 
         } catch (SAXParseException e) {
             System.out.println("Error parsing");
@@ -78,60 +55,36 @@ public class GameLoader {
             System.out.println("Error parsing map again");
             e.printStackTrace();
         }
-
-        return null;
+        return map;
     }
 
-    public static Map loadDefaultMap(){
-        return loadMap("./res/map/default_map.xml");
-    }
+    //HELPER METHOD: Just reads from a file and returns a string of the data
+    private static String readFromFile(String fileName) {
+        // This will reference one line at a time
+        String line = null;
+        // This will be returned at the end of the function
+        String data = "";
 
-    private static Terrain getTerrain(Element tileElement) {
-        Element terrainElement = (Element) tileElement.getElementsByTagName("terrain").item(0);
-        String terrainType = terrainElement.getAttribute("type");
-        return Terrain.valueOf(terrainType);
-    }
+        try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader = new FileReader(fileName);
 
-    //    public static void LoadAll() {
-//        //loop through the savable objects and write them to a file
-//
-//
-//        for (Tile tile : map.getTiles()) {
-//            //load all entities, items, area effects
-//            tile.load(readFromFile("Game0.txt"));
-//        }
-//
-//        //load map
-//        map.save(readFromFile("Map0.txt"));
-//
-//        //load key bindings
-//        keyBinding.load(readFromFile("KeyBinding0.txt"));
-//    }
-//
-//    private static void readFromFile(String fileName) {
-//        // This will reference one line at a time
-//        String line = null;
-//        // This will be returned at the end of the function
-//        ArrayList<String> data = new ArrayList<>();
-//
-//        try {
-//            // FileReader reads text files in the default encoding.
-//            FileReader fileReader = new FileReader(fileName);
-//
-//            // Always wrap FileReader in BufferedReader.
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//
-//            while((line = bufferedReader.readLine()) != null) {
-//                data.add(line);
-//            }
-//
-//            bufferedReader.close();
-//        }
-//        catch(FileNotFoundException ex) {
-//            System.out.println("Unable to open file '" + fileName + "'");
-//        }
-//        catch(IOException ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+                data+=line;
+            }
+
+            bufferedReader.close();
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + fileName + "'");
+        }
+        catch(IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return data;
+    }
 }

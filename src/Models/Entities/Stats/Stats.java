@@ -37,7 +37,7 @@ public class Stats {
 
     // A public function to modify any stat's current value
     // Primarily used by stat modification(s).
-    public void setStat(Stat stat, int delta) {
+    public void modifyStat(Stat stat, int delta) {
         // Get the stat and increase it
         Integer currentValue = stats.get(stat);
         currentValue += delta;
@@ -46,6 +46,8 @@ public class Stats {
         // If we did, this function will return the capped level,
         // Else, it will return the same value we passed in
         currentValue = stat.checkLevelCap(currentValue);
+
+        if (currentValue < 1 ) currentValue = 1;
 
         // Set the stats new value
         stats.put(stat, currentValue);
@@ -61,6 +63,19 @@ public class Stats {
         } else {
             return stats.get(type);
         }
+    }
+
+    // A public function to set a stat to any value. Not just add/subtract to it
+    public void setStat(Stat stat, int value) {
+        // Check if this vlaue exceeds the level cap
+        // If we did, this function will return the capped level,
+        // Else, it will return the same value we passed in
+        value = stat.checkLevelCap(value);
+
+        if (value < 1 ) value = 1;
+
+        // Set the stats new value
+        stats.put(stat, value);
     }
 
     private void initStats() {
