@@ -1,6 +1,7 @@
 package Utilities;
 
 import Models.Entities.Entity;
+import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
@@ -49,6 +50,42 @@ public class MapNavigationUtilities {
             }
         }
         return tilesInRange;
+    }
+
+    public static ArrayList<ArrayList<Tile>> getTilesinAngularPlane(Point3D point, int range, Map map, Direction direction) {
+        Point3D pt = direction.getPointAdjacentTo(point);
+        Direction leftDir = rotateEnum(4);
+        Direction rightDir = rotateEnum(2);
+        ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
+        ArrayList<Tile> rTiles = new ArrayList<>();
+
+        for (int i = 1; i < range; i++) {
+
+            rTiles.add(map.getTile(pt));
+
+            //set up for expansion on both sides
+            Point3D leftSide = pt; //curr point + 4
+            Point3D rightSide = pt; //curr point + 2
+
+            //if even then expand out i/2 in both directions
+            //if odd expand out i/2 (truncated) in both directions
+            for (int j = 0; j < i/2; j++) {
+                leftSide = leftDir.getPointAdjacentTo(leftSide);
+                rightSide = rightDir.getPointAdjacentTo(rightSide);
+                rTiles.add(map.getTile(leftSide));
+                apply(leftSide);
+                apply(rightSide);
+            }
+
+            //move to the next radius
+            point = direction.getPointAdjacentTo(point);
+        }
+    }
+
+    //rotate the enum given an integer
+    private static Direction rotateEnum(int i) {
+        Direction d = getDirection().values()[getDirection().ordinal() + i % 5];
+        return d;
     }
 
     public static double[] convertAxialtoCuubic(Point3D axialPoint){

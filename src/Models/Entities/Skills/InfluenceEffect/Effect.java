@@ -30,6 +30,7 @@ public abstract class Effect implements Runnable, Savable {
 
     protected void start() {
         //starts a thread that moves this effect throughout the map
+        new Thread(this).start();
     }
 
     @Override
@@ -39,6 +40,7 @@ public abstract class Effect implements Runnable, Savable {
         long fps = 0;
         final int TARGET_FPS = 60;
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
+        traverseThroughTiles();
 
         //traverse through map at a certain speed for a certain range
         for (int i = 0; i < range; i++) {
@@ -58,7 +60,7 @@ public abstract class Effect implements Runnable, Savable {
             }
 
             // check to see if an entity is there and then hit them with the attack!
-            traverseThroughTiles();
+//            traverseThroughTiles();
 
             try {
                 Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
@@ -73,6 +75,7 @@ public abstract class Effect implements Runnable, Savable {
 
     protected void apply(Point3D point) {
         Entity entity = getEntity(map.getTile(point));
+        System.out.println(point.getX() + "," + point.getY());
         if (hasEntity(entity)) {
             dealConsequence(entity);
         }

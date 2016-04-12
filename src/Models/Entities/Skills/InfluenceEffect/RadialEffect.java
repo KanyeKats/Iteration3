@@ -26,10 +26,10 @@ public class RadialEffect extends Effect {
     protected void traverseThroughTiles() {
 
         //I have this part in now we need to do visual effects
-        ArrayList<Tile> tilesinRange = MapNavigationUtilities.getTilesinPlane(location,range,map);
+        ArrayList<Tile> tilesinRange = MapNavigationUtilities.getTilesinPlane(getLocation(),getRange(),getMap());
         for(Tile tile: tilesinRange){
             if(tile.getEntity() != null){
-                consequence.execute(tile.getEntity());
+                getConsequence().execute(tile.getEntity());
             }
         }
     }

@@ -269,8 +269,8 @@ public class Entity extends Observable implements Savable {
         images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
         images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
         images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
-        images.put(Direction.UP, Assets.PLAYER_NORTH);
-        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
+//        images.put(Direction.UP, Assets.PLAYER_NORTH);
+//        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
 
     }
 
@@ -293,9 +293,9 @@ public class Entity extends Observable implements Savable {
 
     private void updateOrientation(Direction direction){
 
-        if(direction == Direction.DOWN || direction == Direction.UP){
-            images.put(direction, images.get(orientation));
-        }
+//        if(direction == Direction.DOWN || direction == Direction.UP){
+//            images.put(direction, images.get(orientation));
+//        }
         orientation = direction;
     }
 
