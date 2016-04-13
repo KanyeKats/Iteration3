@@ -41,7 +41,7 @@ public class AreaViewport extends View {
         this.notifyObservers();
 
         // Cleanup
-        g.dispose();
+        //g.dispose();
     }
 
     private void renderBackground(Graphics g){
