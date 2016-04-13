@@ -36,4 +36,9 @@ public class Sleep extends Enchantment {
         ++level;
         consequence = new BehaviorConsequence(activeTime);
     }
+
+    @Override
+    public String toString(){
+        return "Sleep";
+    }
 }

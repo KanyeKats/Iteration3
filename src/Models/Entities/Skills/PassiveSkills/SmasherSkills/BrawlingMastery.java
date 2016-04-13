@@ -31,4 +31,8 @@ public class BrawlingMastery extends PassiveSkill {
         passiveSkillVisitor.activate(this);
     }
 
+    @Override
+    public String toString(){
+        return "Brawling Mastery";
+    }
 }

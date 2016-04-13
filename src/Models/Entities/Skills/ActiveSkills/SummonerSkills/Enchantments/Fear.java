@@ -36,4 +36,9 @@ public class Fear extends Enchantment {
         ++level;
         consequence = new BehaviorConsequence(activeTime);
     }
+
+    @Override
+    public String toString(){
+        return "Fear";
+    }
 }
