@@ -31,5 +31,8 @@ public class TwoHandedWeaponMastery extends PassiveSkill{
         passiveSkillVisitor.activate(this);
     }
 
-
+    @Override
+    public String toString(){
+        return "Two Handed Weapon Mastery";
+    }
 }

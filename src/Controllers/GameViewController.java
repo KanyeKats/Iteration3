@@ -1,10 +1,15 @@
 package Controllers;
 
+import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
+import Models.Entities.Stats.Stat;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
+import Utilities.Constants;
+import Views.SkillViewPort;
+import Views.StartMenuView;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -63,6 +68,15 @@ public class GameViewController extends ViewController {
             @Override
             public void execute() {
                 avatar.move(Direction.SOUTH_EAST);
+            }
+        });
+        keyBindings.addBinding(KeyEvent.VK_S, new Action() {
+            @Override
+            public void execute() {
+                Models.Menu.Menu skillViewPortMenu = Models.Menu.Menu.createSkillViewPortMenu(stateManager, avatar);
+                MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, skillViewPortMenu);
+                SkillViewPort skillViewPort = new SkillViewPort(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, skillViewPortMenu);
+                stateManager.setActiveState(new State(skillViewPortMenuController, skillViewPort));
             }
         });
     }

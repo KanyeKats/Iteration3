@@ -1,25 +1,27 @@
 package Models.Entities.Occupation;
 
+import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
+import Models.Entities.Skills.ActiveSkills.CommonSkills.BasicAttack;
+import Models.Entities.Skills.ActiveSkills.CommonSkills.BindWounds;
 import Models.Entities.Skills.ActiveSkills.SneakSkills.Creep;
 import Models.Entities.Skills.ActiveSkills.SneakSkills.DetectTrap;
 import Models.Entities.Skills.ActiveSkills.SneakSkills.PickPocket;
 import Models.Entities.Skills.ActiveSkills.SneakSkills.RemoveTrap;
+import Models.Entities.Skills.InfluenceEffect.RadialEffect;
+import Models.Entities.Skills.PassiveSkills.CommonSkills.Bargain;
+import Models.Entities.Skills.PassiveSkills.CommonSkills.Observation;
+import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.PassiveSkills.SneakSkills.RangedWeaponMastery;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
+import Models.Entities.Stats.Stats;
 
 /**
  * Created by Aidan on 4/6/2016.
  */
 public class Sneak extends Occupation {
 
-    Creep creep;
-    DetectTrap detectTrap;
-    PickPocket pickPocket;
-    RemoveTrap removeTrap;
-
-    RangedWeaponMastery rangedWeaponMastery;
 
     public Sneak(){
         super();
@@ -33,13 +35,26 @@ public class Sneak extends Occupation {
                 new StatModification(Stat.MAX_MANA,50),
                 new StatModification(Stat.EXPERIENCE, 0));
 
-        this.activeSkillList.add(creep);
-        this.activeSkillList.add(detectTrap);
-        this.activeSkillList.add(pickPocket);
-        this.activeSkillList.add(removeTrap);
+    }
 
-        this.passiveSkillList.add(rangedWeaponMastery);
+    @Override
+    public PassiveSkillList initPassiveSkills(Stats stats){
+        passiveSkillList.add(new Bargain(stats));
+        passiveSkillList.add(new Observation(stats));
+        passiveSkillList.add(new RangedWeaponMastery(stats));
+        return passiveSkillList;
+    }
 
+    @Override
+    public ActiveSkillList initActiveSkills(Stats stats){
+        activeSkillList.add(new BindWounds());
+        activeSkillList.add(new BasicAttack());
+        activeSkillList.add(new Creep());
+        activeSkillList.add(new DetectTrap());
+        activeSkillList.add(new PickPocket());
+        activeSkillList.add(new RemoveTrap());
+
+        return activeSkillList;
     }
 
 

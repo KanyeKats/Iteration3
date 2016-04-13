@@ -30,4 +30,9 @@ public class OneHandedWeaponMastery extends PassiveSkill {
     public void acceptVisitor(PassiveSkillVisitor passiveSkillVisitor) {
         passiveSkillVisitor.activate(this);
     }
+
+    @Override
+    public String toString(){
+        return "One Handed Weapon Mastery";
+    }
 }

@@ -28,4 +28,9 @@ public class BabyEinstein extends Boon {
         consequence = new ImmediateStatConsequence(new StatModificationList(intellectStatMod));
         activeTime = (int)(level * 0.6 * BASE_ACTIVE_TIME);
     }
+
+    @Override
+    public String toString(){
+        return "Baby Einstein";
+    }
 }

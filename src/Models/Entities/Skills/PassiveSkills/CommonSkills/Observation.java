@@ -35,4 +35,9 @@ public class Observation extends PassiveSkill{
     public void acceptVisitor(PassiveSkillVisitor passiveSkillVisitor) {
         passiveSkillVisitor.activate(this);
     }
+
+    @Override
+    public String toString(){
+        return "Observation";
+    }
 }

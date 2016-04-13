@@ -36,4 +36,9 @@ public class BasicAttack extends ActiveSkill {
         else
             return false;
     }
+
+    @Override
+    public String toString(){
+        return "Basic Attack";
+    }
 }

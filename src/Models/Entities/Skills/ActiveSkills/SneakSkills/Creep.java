@@ -36,4 +36,9 @@ public class Creep extends ActiveSkill {
             }
         }
     }
+
+    @Override
+    public String toString(){
+        return "Creep";
+    }
 }

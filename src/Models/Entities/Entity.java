@@ -70,8 +70,8 @@ public class Entity extends Observable implements Savable {
         this.map = map;
         isVisible = true;
         occupation.initStats(this.stats);
-        occupation.initSkills(activeSkillList,passiveSkillList);
-
+        activeSkillList = occupation.initActiveSkills(stats);
+        passiveSkillList = occupation.initPassiveSkills(stats);
         initImages();
 
     }
@@ -88,7 +88,8 @@ public class Entity extends Observable implements Savable {
         this.passableTerrains = new ArrayList<>(Arrays.asList(passableTerrains));
         isVisible = true;
         occupation.initStats(this.stats);
-        occupation.initSkills(activeSkillList,passiveSkillList);
+        activeSkillList = occupation.initActiveSkills(stats);
+        passiveSkillList = occupation.initPassiveSkills(stats);
         initImages();
 
         // Set movment variables
