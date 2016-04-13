@@ -40,6 +40,7 @@ public class MenuViewController extends ViewController{
                 ArrayList<Action> actions = menu.getSelectedActions();
                 if(!actions.isEmpty()){
                     actions.get(0).execute(); // LOD Violations :(
+                    menu.refresh();
                 }
             }
         });

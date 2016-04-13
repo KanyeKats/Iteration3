@@ -54,18 +54,21 @@ public class Menu extends java.util.Observable{
         return menuOptions.get(selectedIndex).getActions();
     }
 
+    public void refresh(){
+        setChanged();
+        notifyObservers();
+    }
+
     public void nextOption(){
         selectedIndex++;
         selectedIndex = (selectedIndex < menuOptions.size()) ? selectedIndex : 0; // This one's for you Josh :)
-        setChanged();
-        notifyObservers();
+        refresh();
     }
 
     public void previousOption(){
         selectedIndex--;
         selectedIndex = (selectedIndex >=0 ) ? selectedIndex : menuOptions.size() - 1;
-        setChanged();
-        notifyObservers();
+        refresh();
     }
 
     // Factory methods.
@@ -246,7 +249,7 @@ public class Menu extends java.util.Observable{
             options.add(new MenuOption() {
                 @Override
                 public String getTitle() {
-                    return passiveSkill.toString();
+                    return passiveSkill.toString() + " - " + passiveSkill.getLevel();
                 }
 
                 @Override
@@ -281,7 +284,7 @@ public class Menu extends java.util.Observable{
             options.add(new MenuOption() {
                 @Override
                 public String getTitle() {
-                    return activeSkill.toString();
+                    return activeSkill.toString() + " - " + activeSkill.getLevel();
                 }
 
                 @Override
