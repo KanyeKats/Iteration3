@@ -70,6 +70,7 @@ public class GameViewController extends ViewController {
                 avatar.move(Direction.SOUTH_EAST);
             }
         });
+
         keyBindings.addBinding(KeyEvent.VK_S, new Action() {
             @Override
             public void execute() {
@@ -77,6 +78,12 @@ public class GameViewController extends ViewController {
                 MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, skillViewPortMenu);
                 SkillViewPort skillViewPort = new SkillViewPort(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, skillViewPortMenu, avatar.getStats());
                 stateManager.setActiveState(new State(skillViewPortMenuController, skillViewPort));
+            }
+        });
+        keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
+            @Override
+            public void execute() {
+
             }
         });
     }

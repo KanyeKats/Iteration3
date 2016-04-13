@@ -238,6 +238,7 @@ public class Menu extends java.util.Observable{
         return new Menu(options);
     }
 
+<<<<<<< HEAD
     public static Menu createSkillViewPortMenu(StateManager stateManager, Entity avatar){
         PassiveSkillList passiveSkillList = avatar.getPassiveSkillList();
         ActiveSkillList activeSkillList = avatar.getActiveSkillList();
@@ -316,5 +317,109 @@ public class Menu extends java.util.Observable{
         return new Menu(options);
     }
 
+=======
+    //This method creates a pause menu model
+    public static Menu createPauseMenu(StateManager stateManager) {
+        ArrayList<MenuOption> options = new ArrayList<>();
+
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Resume";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Resume");
+                        stateManager.goToPreviousState();
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Save Game";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Save Game");
+
+                        // TODO: Implement this.
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Change Keys";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Change keys");
+                        //TODO:  implement this
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Exit Game";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.exit(0);
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        return new Menu(options);
+    }
+>>>>>>> 1de20619c82d2175126c352f8fa8dacb3e2bfafd
     // TODO: Create other factory methods.
 }
