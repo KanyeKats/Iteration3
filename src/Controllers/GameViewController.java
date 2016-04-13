@@ -75,7 +75,6 @@ public class GameViewController extends ViewController {
             public void execute() {
                 Models.Menu.Menu skillViewPortMenu = Models.Menu.Menu.createSkillViewPortMenu(stateManager, avatar);
                 MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, skillViewPortMenu);
-                avatar.getStats().setStat(Stat.SKILL_POINTS, 5);
                 SkillViewPort skillViewPort = new SkillViewPort(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, skillViewPortMenu, avatar.getStats());
                 stateManager.setActiveState(new State(skillViewPortMenuController, skillViewPort));
             }
