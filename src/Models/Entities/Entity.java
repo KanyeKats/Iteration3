@@ -308,12 +308,12 @@ public class Entity extends Observable implements Savable {
     private void initImages(){
 
         images = new HashMap<>();
-        images.put(Direction.NORTH, Assets.PLAYER_NORTH);
-        images.put(Direction.NORTH_EAST, Assets.PLAYER_NORTH_EAST);
-        images.put(Direction.SOUTH_EAST, Assets.PLAYER_SOUTH_EAST);
-        images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
-        images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
-        images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
+        images.put(Direction.NORTH, Assets.BUG_NORTH);
+        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST);
+        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST);
+        images.put(Direction.SOUTH, Assets.BUG_SOUTH);
+        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST);
+        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST);
 
     }
 
