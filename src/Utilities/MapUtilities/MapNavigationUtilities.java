@@ -7,6 +7,7 @@ import Models.Map.Tile;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Aidan on 4/8/2016.
@@ -42,6 +43,7 @@ public class MapNavigationUtilities {
                     if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
                         Point3D newpoint = convertCubictoAxial(point4Dend);
                         Tile tile = map.getTile(newpoint);
+                        //System.out.println(newpoint.toString());
                         if(tile != null) {
                             tempList.add(tile);
                         }
@@ -53,11 +55,71 @@ public class MapNavigationUtilities {
         return resultTiles;
     }
 
+<<<<<<< HEAD
     public static ArrayList<ArrayList<Tile>> getTilesInAngularPlane(Point3D point, int range, Map map, Direction direction) {
         Point3D pt = direction.getPointAdjacentTo(point);
         Direction leftDir = rotateEnum(4, direction);
         Direction rightDir = rotateEnum(2, direction);
         ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
+=======
+    public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, HashMap<Point3D, Tile> map){
+
+        double[] point4Dstart = convertAxialtoCuubic(point);
+        double[] point4Dend = new double[4];
+
+        ArrayList<Tile> tilesInRange = new ArrayList<>();
+        for(int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                for (int k = -range; k <= range; k++) {
+                    point4Dend[0] = point4Dstart[0] - i;
+                    point4Dend[1] = point4Dstart[1] - j;
+                    point4Dend[2] = point4Dstart[2] - k;
+                    point4Dend[3] = point.getZ();
+                    if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
+                        Point3D newpoint = convertCubictoAxial(point4Dend);
+                        Tile tile = map.get(newpoint);
+                        if(tile != null) {
+                            tilesInRange.add(tile);
+                        }
+                    }
+                }
+            }
+        }
+        return tilesInRange;
+    }
+
+    public static ArrayList<Tile> getTilesinPrism(Point3D point, int rangeofRadius, int rangeofColumn, Map map){
+
+        ArrayList<Tile> tilesInRange = new ArrayList<>();
+
+        //lower half of sphere
+        for(int i = 0; i <= rangeofColumn; i++){
+            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
+            for(Tile tile: tilesInPlane) {
+                tilesInRange.add(tile);
+            }
+        }
+        return tilesInRange;
+
+    }
+
+    public static ArrayList<Tile> getTilesinPrism(Point3D point, int rangeofRadius, int rangeofColumn, HashMap<Point3D,Tile> map){
+
+        ArrayList<Tile> tilesInRange = new ArrayList<>();
+
+        //lower half of sphere
+        for(int i = 0; i <= rangeofColumn; i++){
+            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
+            for(Tile tile: tilesInPlane) {
+                tilesInRange.add(tile);
+            }
+        }
+        return tilesInRange;
+
+    }
+
+    public static ArrayList<Tile> getTilesinSphere(Point3D point, int range, Map map){
+>>>>>>> origin/master
 
         for (int i = 1; i < range; i++) {
 

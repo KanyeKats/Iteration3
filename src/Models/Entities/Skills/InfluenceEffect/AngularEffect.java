@@ -1,7 +1,6 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
-import Models.Entities.Entity;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
@@ -27,22 +26,12 @@ public class AngularEffect extends Effect {
         return MapNavigationUtilities.getTilesInAngularPlane(getLocation(),getRange(),getMap(), getDirection());
     }
 
-    @Override
-    protected void traverseThroughTiles(ArrayList<Tile> tiles) {
-        for (Tile tile : tiles) {
-            Entity entity = getEntity(tile);
-            if (hasEntity(entity)) {
-                dealConsequence(entity);
-            }
-        }
-    }
-
     public Direction getDirection() {
         return direction;
     }
 
-  @Override
-   public Image getImage() {
+    @Override
+    public Image getImage() {
        return null;
    }
 }

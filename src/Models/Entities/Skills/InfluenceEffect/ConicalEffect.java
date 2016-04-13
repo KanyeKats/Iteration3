@@ -28,11 +28,6 @@ public class ConicalEffect extends Effect {
     }
 
     @Override
-    protected void traverseThroughTiles(ArrayList<Tile> tiles) {
-
-    }
-
-    @Override
     public Image getImage() {
         return null;
     }

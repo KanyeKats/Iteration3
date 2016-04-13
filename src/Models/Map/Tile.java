@@ -3,10 +3,12 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
+import Models.Map.AreaEffects.AreaEffectFactory;
 import Models.Map.AreaEffects.RiverAreaEffect;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.print.Doc;
@@ -30,6 +32,7 @@ public class Tile implements Savable {
     private Entity entity;
     private ArrayList<Item> items;
     private Effect effect;
+    private Boolean visited;
     // TODO: User visitor pattern to construct tile image?
     // pixel point used for moving
     private Point pixelPoint;
@@ -41,6 +44,7 @@ public class Tile implements Savable {
         this.items = items;
         this.decal = decal;
         this.effect = effect;
+        visited = false;
     }
 
     public Tile() {
@@ -50,6 +54,7 @@ public class Tile implements Savable {
         this.items = new ArrayList<>();
         this.decal = null;
         this.effect = null;
+        this.visited = false;
     }
 
     public boolean containsEntity(){
@@ -127,8 +132,8 @@ public class Tile implements Savable {
 
     public Terrain getTerrain() { return this.terrain; }
 
-    public Image acceptDrawingVisitor(TileDrawingVisitor visitor){
-        return visitor.accept(this);
+    public Image acceptDrawingVisitor(TileDrawingVisitor visitor, boolean isInSight){
+        return visitor.accept(this,isInSight);
     }
 
     public Entity getEntity() {
@@ -144,6 +149,10 @@ public class Tile implements Savable {
     public ArrayList<Item> getItems() { return this.items; }
 
     public Effect getEffect() { return this.effect; }
+
+    public Boolean wasVisited() { return this.visited; }
+
+    public void setVisited() { this.visited = true; }
 
     public Point getPixelPoint() {
         return pixelPoint;
@@ -185,15 +194,63 @@ public class Tile implements Savable {
     }
 
     @Override
-    public void load(Element data) {
-        NodeList tileNodes = data.getElementsByTagName("terrain");
-        Element terrainElement = (Element) tileNodes.item(0);
+    public void load(Element tileElement) {
+
+        // Get single terrain node per tile
+        NodeList terrainNode = tileElement.getElementsByTagName("terrain");
+
+        // Get terrain element
+        Element terrainElement = (Element) terrainNode.item(0);
+
+        // Add terrain to tile
         this.terrain = terrain.valueOf(terrainElement.getAttribute("type"));
 
-        // TODO: Implement these functions
-        this.areaEffect = null;
-        this.decal = null;
+
+        // Get the aoe child node of the tile
+        NodeList aoeNodes = tileElement.getElementsByTagName("area-effect");
+
+        // Check if this tile has an Area Effect by checking if the NodeList is not empty
+        if (aoeNodes.getLength() != 0) {
+            // Get the actual aoe element-node
+            Element aoeElement = (Element) aoeNodes.item(0);
+
+            // Grab
+            // the type and value
+            String aoeType = aoeElement.getAttribute("type");
+            String aoeValue = aoeElement.getAttribute("value");
+
+            // Create instance from AreaEffect factory and assign to this tile
+            this.areaEffect = AreaEffectFactory.valueOf(aoeType).createInstance(aoeValue);
+        } else {
+            this.areaEffect = null;
+        }
+
+
+        // Get the item child nodes of the tile
+        NodeList itemNodes = tileElement.getElementsByTagName("item");
+
         this.items = new ArrayList<>();
+        // Check if this tile has an Area Effect by checking if the NodeList is not empty
+        if (itemNodes.getLength() != 0) {
+            // Get all item elements
+            for (int i = 0; i < itemNodes.getLength(); i++) {
+                // Get the node/element
+                Node node = itemNodes.item(i);
+                Element itemElement = (Element) node;
+
+                // Grab the item id
+                String itemID = itemElement.getAttribute("id");
+                int id = Integer.parseInt(itemID);
+
+                // Construct an instance and add it to this tile's list of items.
+                Item item = Item.itemFromID(id);
+                this.items.add(item);
+            }
+        }
+
+
+        // TODO: Implement these functions
+        this.decal = null;
         this.entity = null;
         this.effect = null;
 

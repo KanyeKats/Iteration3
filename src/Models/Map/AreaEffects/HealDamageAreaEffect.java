@@ -22,16 +22,11 @@ public class HealDamageAreaEffect extends AreaEffect {
         this.healAmount = healAmount;
 
         // Set decal
-        this.decal = Decal.heal;
+        this.decal = Decal.heal();
 
         // Set visibility and removability
         this.isVisible = true;
         this.isRemovable = false;
-    }
-
-    @Override
-    public Image getImage() {
-        return null;
     }
 
     @Override

@@ -21,14 +21,8 @@ public class SphericalEffect extends Effect {
     }
 
     @Override
-    protected void traverseThroughTiles() {
-
-        ArrayList<Tile> tilesinRange = MapNavigationUtilities.getTilesinSphere(location,range,map);
-        for(Tile tile: tilesinRange){
-            if(tile.getEntity() != null){
-                consequence.execute(tile.getEntity());
-            }
-        }
+    protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
+        return null;
     }
 
     @Override
