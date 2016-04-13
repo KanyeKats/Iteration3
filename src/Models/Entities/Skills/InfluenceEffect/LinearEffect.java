@@ -1,8 +1,10 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
+import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -12,14 +14,20 @@ import java.util.ArrayList;
  * TODO:
  */
 public class LinearEffect extends Effect {
-    public LinearEffect(int range, Point3D location, Consequence consequence, Map map) {
+    private Direction direction;
+    public LinearEffect(int range, Point3D location, Consequence consequence, Map map, Direction direction) {
         super(range, location, consequence, map);
+        this.direction = direction;
         start();
     }
 
     @Override
     protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
-        return null;
+        return MapNavigationUtilities.getLinearTilesInPlane(getLocation(),getRange(),getMap(), getDirection());
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
     @Override

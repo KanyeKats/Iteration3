@@ -28,9 +28,6 @@ public class MapNavigationUtilities {
 
     }
 
-
-
-
     public static ArrayList<ArrayList<Tile>> getRadialTiles(Point3D point, int range, Map map){
 
         double[] point4Dstart = convertAxialtoCuubic(point);
@@ -139,6 +136,59 @@ public class MapNavigationUtilities {
 
             //move to the next radius
             point = direction.getPointAdjacentTo(point);
+            resultTiles.add(tempTiles);
+        }
+        return resultTiles;
+    }
+
+    public static ArrayList<ArrayList<Tile>> getTilesConicalTiles(Point3D point, int range, Map map, Direction direction) {
+        Point3D pt = direction.getPointAdjacentTo(point);
+        Direction leftDir = rotateEnum(4, direction);
+        Direction rightDir = rotateEnum(2, direction);
+        ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
+
+        for (int i = 1; i < range; i++) {
+
+            ArrayList<Tile> tempTiles = new ArrayList<>();
+            tempTiles.add(map.getTile(pt));
+
+            //set up for expansion on both sides
+            Point3D leftSide = pt; //curr point + 4
+            Point3D rightSide = pt; //curr point + 2
+
+            //if even then expand out i/2 in both directions
+            //if odd expand out i/2 (truncated) in both directions
+            for (int j = 0; j < i/2; j++) {
+                leftSide = leftDir.getPointAdjacentTo(leftSide);
+                Point3D upLeft = leftSide;
+                for (int k = 0; k < i/2; k++) {
+                    upLeft = upLeft.add(0,0,1);
+                    tempTiles.add(map.getTile(upLeft));
+                }
+                rightSide = rightDir.getPointAdjacentTo(rightSide);
+                Point3D upRight = rightSide;
+                for (int k = 0; k < i/2; k++) {
+                    upRight = upRight.add(0,0,1);
+                    tempTiles.add(map.getTile(upRight));
+                }
+                tempTiles.add(map.getTile(leftSide));
+                tempTiles.add(map.getTile(rightSide));
+            }
+
+            //move to the next radius
+            point = direction.getPointAdjacentTo(point);
+            resultTiles.add(tempTiles);
+        }
+        return resultTiles;
+    }
+
+    public static ArrayList<ArrayList<Tile>> getLinearTilesInPlane(Point3D point, int range, Map map, Direction direction) {
+        ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
+        Point3D nextPoint = point;
+        for (int i = 0; i < range; i++) {
+            ArrayList<Tile> tempTiles = new ArrayList<>();
+            tempTiles.add(map.getTile(nextPoint));
+            nextPoint = direction.getPointAdjacentTo(nextPoint);
             resultTiles.add(tempTiles);
         }
         return resultTiles;

@@ -4,6 +4,7 @@ import Models.Consequences.Consequence;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -24,7 +25,11 @@ public class ConicalEffect extends Effect {
 
     @Override
     protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
-        return null;
+        return MapNavigationUtilities.getTilesConicalTiles(getLocation(), getRange(), getMap(), getDirection());
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
     @Override
