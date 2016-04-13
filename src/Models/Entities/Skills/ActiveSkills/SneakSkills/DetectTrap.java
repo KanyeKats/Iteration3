@@ -5,7 +5,7 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 import Models.Entities.Skills.InfluenceEffect.RadialEffect;
 import Models.Map.Map;
 import Models.Map.Tile;
-import Utilities.MapNavigationUtilities;
+import Utilities.MapUtilities.MapNavigationUtilities;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class DetectTrap extends ActiveSkill {
     public void activate(Entity entity){
 
 
-        ArrayList<ArrayList<Tile>> potentialTrappedTiles = MapNavigationUtilities.getTilesinPlane(entity.getLocation(),2,entity.getMap());
+        ArrayList<ArrayList<Tile>> potentialTrappedTiles = MapNavigationUtilities.getRadialTiles(entity.getLocation(),2,entity.getMap());
 
         for (ArrayList<Tile> al : potentialTrappedTiles) {
             for (Tile tile : al) {

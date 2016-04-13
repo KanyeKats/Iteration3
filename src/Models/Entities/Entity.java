@@ -120,7 +120,7 @@ public class Entity extends Observable implements Savable {
         // Move with taking movement speed in to account
         if (canMove) {
             // Move the entity
-            updateOrientation(direction);
+//            updateOrientation(direction);
             map.moveEntity(this, direction);
 
             // Don't allow the entity to move
