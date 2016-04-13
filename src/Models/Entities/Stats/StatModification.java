@@ -8,11 +8,11 @@ public class StatModification {
     private int delta;
 
     public void apply(Stats stats) {
-        stats.setStat(stat, delta);
+        stats.modifyStat(stat, delta);
     }
 
     public void remove(Stats stats) {
-        stats.setStat(stat, -delta);
+        stats.modifyStat(stat, -delta);
     }
 
     public StatModification(Stat stat, int delta) {

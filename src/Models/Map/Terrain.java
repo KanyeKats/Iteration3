@@ -19,24 +19,38 @@ import java.util.ArrayList;
 public enum Terrain {
     EARTH(){
         @Override
-        public BufferedImage getImage() {
-            return Assets.EARTH;
+        public BufferedImage getImage(boolean isInSight, boolean wasVisited) {
+            if(isInSight){
+                return Assets.EARTH;
+            }
+            else if(wasVisited){
+                return Assets.EARTHSHROUDED;
+            }
+            return Assets.FULLFOG;
         }
     },
     SKY(){
         @Override
-        public BufferedImage getImage() {
+        public BufferedImage getImage(boolean isInSight, boolean wasVisited) {
+
             return Assets.SKY;
         }
     },
     WATER(){
         @Override
-        public BufferedImage getImage() {
-            return Assets.WATER;
+        public BufferedImage getImage(boolean isInSight, boolean wasVisited)
+        {
+            if(isInSight){
+                return Assets.WATER;
+            }
+            else if(wasVisited){
+                return Assets.WATERSHROUDED;
+            }
+            return Assets.FULLFOG;
         }
     };
 
-    public abstract BufferedImage getImage();
+    public abstract BufferedImage getImage(boolean isInSight, boolean wasVisited);
 
     // Checks if this current terrain is in a passed in list of terrains
     public boolean inList(ArrayList<Terrain> terrains) {

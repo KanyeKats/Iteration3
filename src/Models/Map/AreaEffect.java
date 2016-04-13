@@ -19,7 +19,6 @@ public abstract class AreaEffect implements Savable {
     public abstract void activate(Entity entity);
     public void setVisibility(boolean visibility){ isVisible = visibility; }
     public boolean getVisibility(){ return this.isVisible; }
-    public abstract Image getImage();
 
     @Override
     public Document save(Document doc, Element parentElement) {
@@ -30,6 +29,11 @@ public abstract class AreaEffect implements Savable {
     public void load(Element data) {
 
     }
+
+    public Image getImage() {
+        return decal.getDecalImage();
+    }
+
 
     public boolean isRemovable() {
         return isRemovable;

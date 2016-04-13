@@ -22,7 +22,7 @@ public class DamageAreaEffect extends AreaEffect {
         this.damageAmount = damageAmount;
 
         // Set decal
-        this.decal = Decal.damage;
+        this.decal = Decal.damage();
 
         // Set visibility and removability
         this.isVisible = true;
@@ -42,9 +42,4 @@ public class DamageAreaEffect extends AreaEffect {
         consequence.execute(entity);
     }
 
-    @Override
-    public Image getImage() {
-//        return Assets.DAMAGE_AREA_EFFECT;
-        return null;
-    }
 }
