@@ -46,6 +46,8 @@ public class Entity extends Observable implements Savable {
     private Map map;
     private HashMap<Direction, BufferedImage> images;
     private boolean canMove;
+    private boolean justMoved;
+    private boolean enteredNewTile;
     private Timer movementTimer;
 
     // TODO: Ask about terrain checking... not sure if this is ok
@@ -91,6 +93,8 @@ public class Entity extends Observable implements Savable {
         // Setup the movement timer.
         movementTimer = new Timer();
         canMove = true;
+        justMoved = false;
+        enteredNewTile = false;
 
         // TODO: Remove!! Just testing item factory and equipping.
         Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
@@ -132,6 +136,25 @@ public class Entity extends Observable implements Savable {
             }, calculateMovementDelay());
         }
 
+        // Notify observers that the map changes
+        setChanged();
+        notifyObservers();
+
+        // Allow movement again
+        this.canMove = true;
+    }
+
+    public final boolean enteredNewTile() {
+        if (!enteredNewTile) {
+            enteredNewTile = true;
+            return true;
+        }
+        return false;
+    }
+
+    public final void failedMovement() {
+        this.canMove = true;
+        this.justMoved = false;
     }
 
     // Not a mistake, I think it will be good to have overloaded move methods
@@ -244,8 +267,33 @@ public class Entity extends Observable implements Savable {
         return orientation;
     }
 
-    public void setOrientation(Direction orientation) {
-        this.orientation = orientation;
+    public Point getCenterPixelLocation(){
+        // Returns the center pixel point of the entity's image on the screen
+        int pixelX = (int)getPixelLocation().getX();
+        int pixelY = (int)getPixelLocation().getY();
+        pixelX += getImage().getWidth(null)/2;
+        pixelY += getImage().getHeight(null)/2;
+        return new Point(pixelX, pixelY);
+    }
+
+    public void setPixelLocation(Point pixelLocation) {
+        this.pixelLocation = pixelLocation;
+    }
+
+    public void initPixelLocation(Point pixelLocation) {
+        if (this.pixelLocation == null || justMoved )
+            this.pixelLocation = pixelLocation;
+            if (justMoved) {
+                justMoved = false;
+            }
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction orientation) {
+        this.direction = direction;
     }
 
     public Map getMap(){
@@ -269,35 +317,27 @@ public class Entity extends Observable implements Savable {
         images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
         images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
         images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
-//        images.put(Direction.UP, Assets.PLAYER_NORTH);
-//        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
+        images.put(Direction.UP, Assets.PLAYER_NORTH);
+        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
 
     }
 
-    private int calculateMovementDelay() {
-        // Calculate the timer delay based off of the "Movement" stat,
-        // Using some funky math Sergio did to gauge how much your stat
-        // modifies the visual "speediness" of movement.
-        int movementTimerDelay =  Constants.MAX_MOVEMENT_DELAY_MS - (stats.getStat(Stat.MOVEMENT) * 17);
-
-        // Guard to make sure the movement delay is not less than 5ms.
-        if (movementTimerDelay < Constants.MIN_MOVEMENT_DELAY_MS) {
-            movementTimerDelay = Constants.MIN_MOVEMENT_DELAY_MS;
-        }
-
-        // Return it to the timer
+//    public int calculateMovementDelay() {
+//        // Calculate the timer delay based off of the "Movement" stat,
+//        // Using some funky math Sergio did to gauge how much your stat
+//        // modifies the visual "speediness" of movement.
+//        int movementTimerDelay =  Constants.MAX_MOVEMENT_DELAY_MS - (stats.getStat(Stat.MOVEMENT) * 17);
+//
+//        // Guard to make sure the movement delay is not less than 5ms.
+//        if (movementTimerDelay < Constants.MIN_MOVEMENT_DELAY_MS) {
+//            movementTimerDelay = Constants.MIN_MOVEMENT_DELAY_MS;
+//        }
+//
+//        // Return it to the timer
 //        System.out.println("MOVEMENT DELAY IS: ");
 //        System.out.println(movementTimerDelay + "ms");
-        return movementTimerDelay;
-    }
-
-    private void updateOrientation(Direction direction){
-
-//        if(direction == Direction.DOWN || direction == Direction.UP){
-//            images.put(direction, images.get(orientation));
-//        }
-        orientation = direction;
-    }
+//        return movementTimerDelay;
+//    }
 
     public Image getImage(){
 

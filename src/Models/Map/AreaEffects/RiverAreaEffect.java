@@ -39,24 +39,21 @@ public class RiverAreaEffect extends AreaEffect {
         Stats stats = entity.getStats();
 
         // Get his current movement speed
-        int originalSpeed = stats.getStat(Stat.MOVEMENT);
+        int entitysOriginalSpeed = stats.getStat(Stat.MOVEMENT);
+
+        int netFlowSpeed = flowSpeed - entitysOriginalSpeed;
+
+        if (netFlowSpeed <= 0) return;
 
         // Create movement speed mod of the speed of the river's flow
-        StatModificationList movementSpeedMods = new StatModificationList(new StatModification(Stat.MOVEMENT, flowSpeed));
-
-        // Modify the entity's movement speed to the rivers flow speed
-        movementSpeedMods.applyModifications(stats);
+        stats.setStat(Stat.MOVEMENT, flowSpeed);
 
         // Now, move the entity in the appropriate direction with his buffed up river flow speed
         entity.move(flowDirection);
 
         // Once he's done moving, remove the movement speed buff and set back his original movement speed
-
-        // Create movement speed mod of entity's original speed
-        StatModificationList removeRiverSpeedMods = new StatModificationList(new StatModification(Stat.MOVEMENT, originalSpeed));
-
         // Set the entity's sped back
-        removeRiverSpeedMods.applyModifications(stats);
+        stats.setStat(Stat.MOVEMENT, entitysOriginalSpeed);
     }
 
     @Override

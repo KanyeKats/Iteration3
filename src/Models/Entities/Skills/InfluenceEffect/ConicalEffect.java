@@ -1,6 +1,7 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
+import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
@@ -12,8 +13,12 @@ import java.util.ArrayList;
  * TODO:
  */
 public class ConicalEffect extends Effect {
-    public ConicalEffect(int range, Point3D location, Consequence consequence, Map map) {
-        super(range, location, consequence, map);
+
+    private Direction direction;
+
+    public ConicalEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
+        super(range, location, consequence ,map);
+        this.direction = direction;
         start();
     }
 

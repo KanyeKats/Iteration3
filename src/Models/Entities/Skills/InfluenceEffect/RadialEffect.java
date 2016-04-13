@@ -1,6 +1,7 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
+import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.MapNavigationUtilities;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 
 /**
  * Created by johnkaufmann on 4/2/16.
- * TODO:
  */
 public class RadialEffect extends Effect {
 

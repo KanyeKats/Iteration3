@@ -25,7 +25,7 @@ public class FireBlast extends Bane {
         if(isCooledDown){
             if(percentChanceByLevel()) {
                 //effect = new AngularEffect();
-                effect = new AngularEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getMap(), entity.getOrientation());
+                effect = new AngularEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap());
                 effect.run();
                 isCooledDown = false;
                 doTheCoolDown();

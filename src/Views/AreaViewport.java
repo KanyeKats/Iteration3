@@ -2,7 +2,7 @@ package Views;
 
 import Models.Entities.Entity;
 import Models.Map.Map;
-import Models.Map.MapUtilities.MapDrawingVisitor;
+import Utilities.MapUtilities.MapDrawingVisitor;
 
 import java.awt.*;
 
@@ -34,7 +34,7 @@ public class AreaViewport extends View {
         renderBackground(g);
 
         // Draw the map onto the graphics
-        map.acceptDrawingVisitor(new MapDrawingVisitor(viewContent, avatar.getLocation()));
+        map.draw(viewContent, avatar.getLocation());
 
         // Notify the observers of this view (GameView) that it changed.
         this.setChanged();

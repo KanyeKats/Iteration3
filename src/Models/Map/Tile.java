@@ -3,7 +3,7 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
-import Models.Map.MapUtilities.TileDrawingVisitor;
+import Models.Map.AreaEffects.RiverAreaEffect;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,6 +13,8 @@ import javax.print.Doc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import Utilities.MapUtilities.TileDrawingVisitor;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,6 +31,8 @@ public class Tile implements Savable {
     private ArrayList<Item> items;
     private Effect effect;
     // TODO: User visitor pattern to construct tile image?
+    // pixel point used for moving
+    private Point pixelPoint;
 
     public Tile(Terrain terrain, AreaEffect areaEffect, Entity entity, ArrayList<Item> items, Decal decal, Effect effect){
         this.terrain = terrain;
@@ -75,9 +79,11 @@ public class Tile implements Savable {
         return false;
     }
 
-    public void insertEntity(Entity entity){
+    public void insertEntity(Entity entity) {
         this.entity = entity;
+    }
 
+    public void activateTileObjectsOnEntity(Entity entity) {
         // Activate items
         for (Iterator<Item> iterator = items.iterator(); iterator.hasNext(); ) {
             Item item = iterator.next();
@@ -139,6 +145,14 @@ public class Tile implements Savable {
 
     public Effect getEffect() { return this.effect; }
 
+    public Point getPixelPoint() {
+        return pixelPoint;
+    }
+
+    public void setPixelPoint(Point pixelPoint) {
+        this.pixelPoint = pixelPoint;
+    }
+
     @Override
     public Document save(Document doc, Element parentElement) {
         //save terrain
@@ -182,5 +196,10 @@ public class Tile implements Savable {
         this.items = new ArrayList<>();
         this.entity = null;
         this.effect = null;
+
+        // Add rivers whereever water is.
+        if (terrain == terrain.WATER) {
+            this.areaEffect = new RiverAreaEffect(Direction.SOUTH_EAST, 35);
+        }
     }
 }

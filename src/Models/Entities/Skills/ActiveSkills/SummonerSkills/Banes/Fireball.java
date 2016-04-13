@@ -24,7 +24,7 @@ public class Fireball extends Bane {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getMap());
+                effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(), entity.getMap());
                 effect.run();
                 isCooledDown = false;
                 doTheCoolDown();

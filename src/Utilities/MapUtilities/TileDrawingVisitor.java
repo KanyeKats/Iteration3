@@ -1,4 +1,4 @@
-package Models.Map.MapUtilities;
+package Utilities.MapUtilities;
 
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
@@ -42,12 +42,6 @@ public class TileDrawingVisitor {
             }else{
                 drawComponent(items.get(0).getImage(), g);
             }
-        }
-
-        // Draw the entity
-        Entity entity = tile.getEntity();
-        if(entity!=null && entity.getImage()!=null){
-            drawComponent(entity.getImage(), g);
         }
 
         // Draw the effects
