@@ -65,6 +65,13 @@ public class GameViewController extends ViewController {
                 avatar.move(Direction.SOUTH_EAST);
             }
         });
+        keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
+            @Override
+            public void execute() {
+
+            }
+
+        });
     }
 
     @Override
