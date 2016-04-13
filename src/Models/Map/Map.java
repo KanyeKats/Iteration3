@@ -43,7 +43,6 @@ public class Map extends Observable implements Savable {
         }
     }
 
-
     //// MOVEMENT FUNCTIONS ////
 
     // The following things are being taken into consideration for movement:

@@ -32,6 +32,7 @@ public class Tile implements Savable {
     private Entity entity;
     private ArrayList<Item> items;
     private Effect effect;
+    private Boolean visited;
     // TODO: User visitor pattern to construct tile image?
     // pixel point used for moving
     private Point pixelPoint;
@@ -43,6 +44,7 @@ public class Tile implements Savable {
         this.items = items;
         this.decal = decal;
         this.effect = effect;
+        visited = false;
     }
 
     public Tile() {
@@ -52,6 +54,7 @@ public class Tile implements Savable {
         this.items = new ArrayList<>();
         this.decal = null;
         this.effect = null;
+        this.visited = false;
     }
 
     public boolean containsEntity(){
@@ -129,8 +132,8 @@ public class Tile implements Savable {
 
     public Terrain getTerrain() { return this.terrain; }
 
-    public Image acceptDrawingVisitor(TileDrawingVisitor visitor){
-        return visitor.accept(this);
+    public Image acceptDrawingVisitor(TileDrawingVisitor visitor, boolean isInSight){
+        return visitor.accept(this,isInSight);
     }
 
     public Entity getEntity() {
@@ -146,6 +149,10 @@ public class Tile implements Savable {
     public ArrayList<Item> getItems() { return this.items; }
 
     public Effect getEffect() { return this.effect; }
+
+    public Boolean wasVisited() { return this.visited; }
+
+    public void setVisited() { this.visited = true; }
 
     public Point getPixelPoint() {
         return pixelPoint;

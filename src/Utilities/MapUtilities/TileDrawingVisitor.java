@@ -18,11 +18,11 @@ import java.util.ArrayList;
  */
 public class TileDrawingVisitor {
 
-    public BufferedImage accept(Tile tile) {
+    public BufferedImage accept(Tile tile, boolean isInSight) {
 
 
         // Create the terrain tile image
-        BufferedImage tileImage = ImageLoader.copyImage(tile.getTerrain().getImage());
+        BufferedImage tileImage = ImageLoader.copyImage(tile.getTerrain().getImage(isInSight, tile.wasVisited()));
         Graphics g = tileImage.getGraphics();
 
         // Extract the graphics object rom the tile image.
@@ -30,13 +30,13 @@ public class TileDrawingVisitor {
 
         // Draw the areaEffect
         AreaEffect areaEffect = tile.getAreaEffect();
-        if(areaEffect!=null && areaEffect.getImage()!=null){
+        if(areaEffect!=null && areaEffect.getImage()!=null && isInSight){
             drawComponent(areaEffect.getImage(), g);
         }
 
         // Draw the items
         ArrayList<Item> items = tile.getItems();
-        if(!items.isEmpty()){
+        if(!items.isEmpty() && isInSight){
             if (items.size() > 1){
                 drawComponent(Assets.ITEM_BAG, g);
             }else{
@@ -46,7 +46,7 @@ public class TileDrawingVisitor {
 
         // Draw the effects
         Effect effect = tile.getEffect();
-        if(effect!=null && effect.getImage()!=null){
+        if(effect!=null && effect.getImage()!=null && isInSight){
             drawComponent(effect.getImage(), g);
         }
 
