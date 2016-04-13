@@ -25,9 +25,9 @@ public class Assets {
     public static BufferedImage ITEM_BAG;
 
     //Fog
-    public static BufferedImage HALFFOG;
     public static BufferedImage FULLFOG;
     public static BufferedImage EARTHSHROUDED;
+    public static BufferedImage WATERSHROUDED;
 
     // Area of Effects
     public static BufferedImage LEVEL;
@@ -108,8 +108,8 @@ public class Assets {
         SpriteSheet earthShroudedSheet = new SpriteSheet(ImageLoader.loadImage("./res/map/terrain/earthShrouded.png"));
         EARTHSHROUDED = earthShroudedSheet.crop(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
 
-        SpriteSheet halfFogSheet = new SpriteSheet(ImageLoader.loadImage("./res/map/terrain/halfFog.png"));
-        HALFFOG = halfFogSheet.crop(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
+        SpriteSheet waterShroudedSheet = new SpriteSheet(ImageLoader.loadImage("./res/map/terrain/waterShrouded.png"));
+        WATERSHROUDED = waterShroudedSheet.crop(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
 
         SpriteSheet fullFogSheet = new SpriteSheet(ImageLoader.loadImage("./res/map/terrain/fullFog.png"));
         FULLFOG = fullFogSheet.crop(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));

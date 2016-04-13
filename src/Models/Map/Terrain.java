@@ -40,7 +40,13 @@ public enum Terrain {
         @Override
         public BufferedImage getImage(boolean isInSight, boolean wasVisited)
         {
-            return Assets.WATER;
+            if(isInSight){
+                return Assets.WATER;
+            }
+            else if(wasVisited){
+                return Assets.WATERSHROUDED;
+            }
+            return Assets.FULLFOG;
         }
     };
 
