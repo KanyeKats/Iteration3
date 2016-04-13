@@ -11,17 +11,18 @@ import java.awt.*;
 public class GameView extends View {
 
     private AreaViewport areaViewport;
-    //private StatusViewport statusViewport;
+    private StatusViewport statusViewport;
 //    private SkillsViewport skillsViewport;
 
     public GameView(int width, int height, Entity entity, Map map) {
         super(width, height);
+
         this.areaViewport = new AreaViewport(width, height, map, entity);
-       // this.statusViewport = new StatusViewport(width, height, entity);
+        this.statusViewport = new StatusViewport(width, height, entity);
 //        this.skillsViewport = new SkillsViewport(entity.getSkillList());
 
         areaViewport.addObserver(this);
-        //statusViewport.addObserver(this);
+        statusViewport.addObserver(this);
 //        skillsViewport.addObserver(this);
 
         repaint();
@@ -33,9 +34,13 @@ public class GameView extends View {
         // Extract the graphics object from this views content;
         Graphics g = viewContent.getGraphics();
 
+        // Set content changed for the viewports
+        areaViewport.setContentChanged(true);
+        statusViewport.setContentChanged(true);
+
         // Render the viewports onto this view.
         areaViewport.render(g);
-        //statusViewport.render(g);
+        statusViewport.render(g);
 
 //        skillsViewport.render(g);
 

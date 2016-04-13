@@ -6,6 +6,7 @@ import Utilities.Constants;
 import Views.View;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by Aidan on 4/12/2016.
@@ -19,7 +20,6 @@ public class StatusViewport extends View {
 
         this.avatar = avatar;
         avatar.addObserver(this);
-
         repaint();
     }
 
@@ -29,12 +29,12 @@ public class StatusViewport extends View {
     }
 
     public void renderStats() {
-        Graphics g = viewContent.getGraphics();
+        Graphics2D g = (Graphics2D) viewContent.getGraphics();
 
-        int x = width/4;
-        int y = height * 10/12 + height/48;
-        g.setColor(Color.WHITE);
-        g.drawRect(x + 10, y - 5, width/5, height/24);
+        int x = 0;
+        int y = height * 4/5;
+        g.setColor(new Color(70, 70, 70));
+        g.fillRect(x, y, width, height/5);
 
         this.setChanged();
         this.notifyObservers();

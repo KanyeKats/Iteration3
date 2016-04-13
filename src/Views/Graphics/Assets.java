@@ -87,22 +87,22 @@ public class Assets {
 
         //BUG player
         SpriteSheet bugN = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugback.png"));
-        BUG_NORTH = bugN.crop(0, 0, Constants.TILE_WIDTH, Constants.TILE_HEIGHT);
+        BUG_NORTH = bugN.crop(0, 0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
         SpriteSheet bugNE = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugrihgtup.png"));
-        BUG_NORTH_EAST = bugNE.crop(0, 0, Constants.TILE_WIDTH, Constants.TILE_WIDTH);
+        BUG_NORTH_EAST = bugNE.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
         SpriteSheet bugSE = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugrightdown.png"));
-        BUG_SOUTH_EAST = bugSE.crop(0, 0, Constants.TILE_WIDTH, Constants.TILE_WIDTH);
+        BUG_SOUTH_EAST = bugSE.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
         SpriteSheet bugS = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybug.png"));
-        BUG_SOUTH = bugS.crop(0, 0, Constants.TILE_WIDTH, Constants.TILE_WIDTH);
+        BUG_SOUTH = bugS.crop(0, 0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
         SpriteSheet bugSW = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugleftdown.png"));
-        BUG_SOUTH_WEST = bugSW.crop(0, 0, Constants.TILE_WIDTH, Constants.TILE_WIDTH);
+        BUG_SOUTH_WEST = bugSW.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
         SpriteSheet bugNW = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugleftup.png"));
-        BUG_NORTH_WEST = bugNW.crop(0, 0, Constants.TILE_WIDTH, Constants.TILE_WIDTH);
+        BUG_NORTH_WEST = bugNW.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
 
 

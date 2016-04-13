@@ -34,8 +34,9 @@ public abstract class ViewController {
     public abstract void mouseDragged(MouseEvent e);
     public abstract void update();
 
-    public void remapKey(int key1, int key2){
-        // TODO: Implement this.
+    public void remapKey(int oldKey, int newKey){
+        keyBindings.addBinding(newKey, keyBindings.getKeyAction(oldKey));
+        keyBindings.removeBinding(oldKey);
     }
 
 }

@@ -31,5 +31,11 @@ public class KeyBindings {
 //        }
     }
 
-    // TODO: Provide an interface to change keybindings with.
+    public Action getKeyAction(int keyCode){
+        return bindings.get(keyCode);
+    }
+
+    public void removeBinding(int keyCode){
+        bindings.remove(keyCode);
+    }
 }
