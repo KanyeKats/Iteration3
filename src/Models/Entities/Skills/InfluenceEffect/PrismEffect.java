@@ -4,7 +4,7 @@ import Models.Consequences.Consequence;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
-import Utilities.MapNavigationUtilities;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -24,7 +24,11 @@ public class PrismEffect extends Effect{
 
     @Override
     protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
-        return null;
+        return MapNavigationUtilities.getTilesinPrism(getLocation(),getRange(), getRange2(), getMap());
+    }
+
+    public int getRange2() {
+        return range2;
     }
 
     @Override

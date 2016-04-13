@@ -4,7 +4,7 @@ import Models.Consequences.Consequence;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
-import Utilities.MapNavigationUtilities;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
 import java.awt.Image;
 import java.util.ArrayList;

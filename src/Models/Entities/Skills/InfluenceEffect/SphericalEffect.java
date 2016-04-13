@@ -1,10 +1,9 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
-import Utilities.MapNavigationUtilities;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
@@ -22,7 +21,7 @@ public class SphericalEffect extends Effect {
 
     @Override
     protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
-        return null;
+        return MapNavigationUtilities.getTilesinSphere(getLocation(), getRange(), getMap());
     }
 
     @Override
