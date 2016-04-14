@@ -42,7 +42,8 @@ public class Entity extends Observable implements Savable {
     private BufferedImage sprite;
     private boolean isVisible;
     private Point3D location;
-    private Direction orientation;
+    private Point pixelLocation;
+    private Direction direction;
     private Map map;
     private HashMap<Direction, BufferedImage> images;
     private boolean canMove;
@@ -65,7 +66,7 @@ public class Entity extends Observable implements Savable {
         this.equipment = equipment;
         this.sprite = sprite;
         this.location = location;
-        this.orientation = orientation;
+        this.direction = orientation;
         this.map = map;
         isVisible = true;
         occupation.initStats(this.stats);
@@ -82,7 +83,7 @@ public class Entity extends Observable implements Savable {
         this.inventory = new Inventory(10);
         this.equipment = new Equipment(stats, inventory);
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-        this.orientation = Direction.NORTH;
+        this.direction = Direction.NORTH;
         this.map = map;
         this.passableTerrains = new ArrayList<>(Arrays.asList(passableTerrains));
         isVisible = true;
@@ -90,7 +91,7 @@ public class Entity extends Observable implements Savable {
         occupation.initSkills(activeSkillList,passiveSkillList);
         initImages();
 
-        // Setup the movement timer.
+        // Set movment variables
         movementTimer = new Timer();
         canMove = true;
         justMoved = false;
@@ -116,25 +117,20 @@ public class Entity extends Observable implements Savable {
     }
 
     public final void move(Direction direction) {
-
         // Move with taking movement speed in to account
         if (canMove) {
-            // Move the entity
-//            updateOrientation(direction);
-            map.moveEntity(this, direction);
-
             // Don't allow the entity to move
             canMove = false;
 
-            // Allow the entity to move again by setting canMove to true
-            // after movement delay time has elapsed.
-            movementTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    canMove = true;
-                }
-            }, calculateMovementDelay());
+            // Move the entity
+            this.direction = direction;
+            map.moveEntity(this, direction);
         }
+
+    }
+    public final void moveComplete() {
+        this.justMoved = true;
+        this.enteredNewTile = false;
 
         // Notify observers that the map changes
         setChanged();
@@ -263,8 +259,9 @@ public class Entity extends Observable implements Savable {
         this.location = location;
     }
 
-    public Direction getOrientation() {
-        return orientation;
+    public Point getPixelLocation() {
+        // Returns the top left pixel point of the entity's image on the screen
+        return pixelLocation;
     }
 
     public Point getCenterPixelLocation(){
@@ -317,8 +314,6 @@ public class Entity extends Observable implements Savable {
         images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
         images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
         images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
-        images.put(Direction.UP, Assets.PLAYER_NORTH);
-        images.put(Direction.DOWN, Assets.PLAYER_SOUTH);
 
     }
 
@@ -341,12 +336,12 @@ public class Entity extends Observable implements Savable {
 
     public Image getImage(){
 
-        return isVisible ? images.get(orientation) : null;
+        return isVisible ? images.get(direction) : null;
     }
 
     //TODO: Will need to cover a +/- 1 in height eventually
     public Tile getTileInFront(){
-        Point3D point = orientation.getPointAdjacentTo(location);
+        Point3D point = direction.getPointAdjacentTo(location);
         return map.getTile(point);
     }
 

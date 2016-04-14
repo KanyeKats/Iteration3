@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class LinearEffect extends Effect {
     private Direction direction;
-    public LinearEffect(int range, Point3D location, Consequence consequence, Map map, Direction direction) {
+    public LinearEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
         super(range, location, consequence, map);
         this.direction = direction;
         start();
