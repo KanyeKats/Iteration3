@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 /**
  * Created by johnkaufmann on 4/2/16.
- * TODO:
  */
 public class RadialEffect extends Effect {
 
@@ -22,17 +21,9 @@ public class RadialEffect extends Effect {
         start();
     }
 
-    //propagate radially
     @Override
-    protected void traverseThroughTiles() {
-
-        //I have this part in now we need to do visual effects
-        ArrayList<Tile> tilesinRange = MapNavigationUtilities.getTilesinPlane(location,range,map);
-        for(Tile tile: tilesinRange){
-            if(tile.getEntity() != null){
-                consequence.execute(tile.getEntity());
-            }
-        }
+    protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
+        return MapNavigationUtilities.getRadialTiles(getLocation(), getRange(), getMap());
     }
 
     @Override

@@ -28,12 +28,42 @@ public class MapNavigationUtilities {
 
     }
 
+    public static ArrayList<ArrayList<Tile>> getRadialTiles(Point3D point, int range, Map map){
+
+        double[] point4Dstart = convertAxialtoCuubic(point);
+        double[] point4Dend = new double[4];
+
+        ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
+        for(int x = 0; x <= range; x++){
+            ArrayList<Tile> tempTiles = new ArrayList<>();
+            for(int i = -range; i <= range; i++) {
+                for (int j = -range; j <= range; j++) {
+                    for (int k = -range; k <= range; k++) {
+                        point4Dend[0] = point4Dstart[0] - i;
+                        point4Dend[1] = point4Dstart[1] - j;
+                        point4Dend[2] = point4Dstart[2] - k;
+                        point4Dend[3] = point.getZ();
+                        if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
+                            Point3D newpoint = convertCubictoAxial(point4Dend);
+                            Tile tile = map.getTile(newpoint);
+                            if(tile != null) {
+                                tempTiles.add(tile);
+                            }
+                        }
+                    }
+                }
+            }
+            resultTiles.add(tempTiles);
+        }
+        return resultTiles;
+    }
+
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, Map map){
 
         double[] point4Dstart = convertAxialtoCuubic(point);
         double[] point4Dend = new double[4];
 
-        ArrayList<Tile> tilesInRange = new ArrayList<>();
+        ArrayList<Tile> resultTiles = new ArrayList<>();
         for(int i = -range; i <= range; i++) {
             for (int j = -range; j <= range; j++) {
                 for (int k = -range; k <= range; k++) {
@@ -44,23 +74,22 @@ public class MapNavigationUtilities {
                     if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
                         Point3D newpoint = convertCubictoAxial(point4Dend);
                         Tile tile = map.getTile(newpoint);
-                        //System.out.println(newpoint.toString());
                         if(tile != null) {
-                            tilesInRange.add(tile);
+                            resultTiles.add(tile);
                         }
                     }
                 }
             }
         }
-        return tilesInRange;
+        return resultTiles;
     }
 
-    public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, HashMap<Point3D, Tile> map){
+    public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, HashMap<Point3D,Tile> map){
 
         double[] point4Dstart = convertAxialtoCuubic(point);
         double[] point4Dend = new double[4];
 
-        ArrayList<Tile> tilesInRange = new ArrayList<>();
+        ArrayList<Tile> resultTiles = new ArrayList<>();
         for(int i = -range; i <= range; i++) {
             for (int j = -range; j <= range; j++) {
                 for (int k = -range; k <= range; k++) {
@@ -72,26 +101,121 @@ public class MapNavigationUtilities {
                         Point3D newpoint = convertCubictoAxial(point4Dend);
                         Tile tile = map.get(newpoint);
                         if(tile != null) {
-                            tilesInRange.add(tile);
+                            resultTiles.add(tile);
                         }
                     }
                 }
             }
         }
-        return tilesInRange;
+        return resultTiles;
     }
 
-    public static ArrayList<Tile> getTilesinPrism(Point3D point, int rangeofRadius, int rangeofColumn, Map map){
+    public static ArrayList<ArrayList<Tile>> getTilesInAngularPlane(Point3D point, int range, Map map, Direction direction) {
+        Point3D pt = direction.getPointAdjacentTo(point);
+        Direction leftDir = rotateEnum(4, direction);
+        Direction rightDir = rotateEnum(2, direction);
+        ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
 
-        ArrayList<Tile> tilesInRange = new ArrayList<>();
+        for (int i = 1; i < range; i++) {
 
-        //lower half of sphere
-        for(int i = 0; i <= rangeofColumn; i++){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
-            for(Tile tile: tilesInPlane) {
-                tilesInRange.add(tile);
+            ArrayList<Tile> tempTiles = new ArrayList<>();
+            tempTiles.add(map.getTile(pt));
+
+            //set up for expansion on both sides
+            Point3D leftSide = pt; //curr point + 4
+            Point3D rightSide = pt; //curr point + 2
+
+            //if even then expand out i/2 in both directions
+            //if odd expand out i/2 (truncated) in both directions
+            for (int j = 0; j < i/2; j++) {
+                leftSide = leftDir.getPointAdjacentTo(leftSide);
+                rightSide = rightDir.getPointAdjacentTo(rightSide);
+                tempTiles.add(map.getTile(leftSide));
+                tempTiles.add(map.getTile(rightSide));
             }
+
+            //move to the next radius
+            point = direction.getPointAdjacentTo(point);
+            resultTiles.add(tempTiles);
         }
+        return resultTiles;
+    }
+
+    public static ArrayList<ArrayList<Tile>> getTilesConicalTiles(Point3D point, int range, Map map, Direction direction) {
+        Point3D pt = direction.getPointAdjacentTo(point);
+        Direction leftDir = rotateEnum(4, direction);
+        Direction rightDir = rotateEnum(2, direction);
+        ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
+
+        for (int i = 1; i < range; i++) {
+
+            ArrayList<Tile> tempTiles = new ArrayList<>();
+            tempTiles.add(map.getTile(pt));
+
+            //set up for expansion on both sides
+            Point3D leftSide = pt; //curr point + 4
+            Point3D rightSide = pt; //curr point + 2
+
+            //if even then expand out i/2 in both directions
+            //if odd expand out i/2 (truncated) in both directions
+            for (int j = 0; j < i/2; j++) {
+                leftSide = leftDir.getPointAdjacentTo(leftSide);
+                Point3D upLeft = leftSide;
+                for (int k = 0; k < i/2; k++) {
+                    upLeft = upLeft.add(0,0,1);
+                    tempTiles.add(map.getTile(upLeft));
+                }
+                rightSide = rightDir.getPointAdjacentTo(rightSide);
+                Point3D upRight = rightSide;
+                for (int k = 0; k < i/2; k++) {
+                    upRight = upRight.add(0,0,1);
+                    tempTiles.add(map.getTile(upRight));
+                }
+                tempTiles.add(map.getTile(leftSide));
+                tempTiles.add(map.getTile(rightSide));
+            }
+
+            //move to the next radius
+            point = direction.getPointAdjacentTo(point);
+            resultTiles.add(tempTiles);
+        }
+        return resultTiles;
+    }
+
+    public static ArrayList<ArrayList<Tile>> getLinearTilesInPlane(Point3D point, int range, Map map, Direction direction) {
+        ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
+        Point3D nextPoint = point;
+        for (int i = 0; i < range; i++) {
+            ArrayList<Tile> tempTiles = new ArrayList<>();
+            tempTiles.add(map.getTile(nextPoint));
+            nextPoint = direction.getPointAdjacentTo(nextPoint);
+            resultTiles.add(tempTiles);
+        }
+        return resultTiles;
+    }
+
+    //rotate the enum given an integer
+    private static Direction rotateEnum(int i, Direction direction) {
+        Direction d = direction.values()[direction.ordinal() + i % 5];
+        return d;
+    }
+
+    public static ArrayList<ArrayList<Tile>> getTilesinPrism(Point3D point, int rangeofRadius, int rangeofColumn, Map map){
+
+        ArrayList<ArrayList<Tile>> tilesInRange = new ArrayList<>();
+
+        //upper half of prism
+        for(int i = 0; i <= rangeofColumn; i++){
+             tilesInRange.add(getTilesinPlane(point.add(0,0,i),rangeofRadius,map));
+
+        }
+
+        //lower half of prism
+        for(int i = -1; i <= -rangeofColumn; i--){
+            tilesInRange.add(getTilesinPlane(point.add(0,0,i),rangeofRadius,map));
+
+        }
+
         return tilesInRange;
 
     }
@@ -100,8 +224,16 @@ public class MapNavigationUtilities {
 
         ArrayList<Tile> tilesInRange = new ArrayList<>();
 
-        //lower half of sphere
+        //upper half of sphere
         for(int i = 0; i <= rangeofColumn; i++){
+            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
+            for(Tile tile: tilesInPlane) {
+                tilesInRange.add(tile);
+            }
+        }
+
+        //lower half of sphere
+        for(int i = -1; i <= -rangeofColumn; i--){
             ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
             for(Tile tile: tilesInPlane) {
                 tilesInRange.add(tile);
@@ -111,29 +243,26 @@ public class MapNavigationUtilities {
 
     }
 
-    public static ArrayList<Tile> getTilesinSphere(Point3D point, int range, Map map){
+    public static ArrayList<ArrayList<Tile>> getTilesinSphere(Point3D point, int range, Map map){
 
-        ArrayList<Tile> tilesInRange = new ArrayList<>();
+        ArrayList<ArrayList<Tile>> tilesInRange = new ArrayList<>();
 
         //upper half of sphere
         for(int i = -range, j = 0; i < 0; i++, j++){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),j,map);
-            for(Tile tile: tilesInPlane) {
-                    tilesInRange.add(tile);
-            }
+            tilesInRange.add(getTilesinPlane(point.add(0,0,i),j,map));
+
         }
         //lower half of sphere
         for(int i = 0, j = range; i <= range; i++, j--){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),j,map);
-            for(Tile tile: tilesInPlane) {
-                tilesInRange.add(tile);
-            }
+             tilesInRange.add(getTilesinPlane(point.add(0,0,i),j,map));
+
         }
         return tilesInRange;
     }
 
     public static double[] convertAxialtoCuubic(Point3D axialPoint){
-        double[] cubicPoint = new double[4];
+
+         double[] cubicPoint = new double[4];
         cubicPoint[0] = axialPoint.getX();
         cubicPoint[1] = -axialPoint.getY() - axialPoint.getX();
         cubicPoint[2] = axialPoint.getY();
@@ -152,5 +281,7 @@ public class MapNavigationUtilities {
         double dz = Math.abs(a[2] - b[2]);
         return (dx + dy + dz)/2;
     }
+
+
 
 }

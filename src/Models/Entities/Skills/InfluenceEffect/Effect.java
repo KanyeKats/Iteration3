@@ -2,7 +2,6 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Entities.Entity;
 import Models.Consequences.Consequence;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
@@ -11,19 +10,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.awt.Image;
+import java.util.ArrayList;
 
 /**
  * Created by johnkaufmann on 3/30/16.
- * TODO:
  */
 public abstract class Effect implements Runnable, Savable {
-
-    //I think these need to be changed to protected so that they can be used by the subclasses - Aidan
-
-    protected int range;
-    protected Point3D location;
-    protected Consequence consequence;
-    protected Map map;
+    private int range;
+    private Point3D location;
+    private Consequence consequence;
+    private Map map;
 
     public Effect(int range, Point3D location, Consequence consequence, Map map) {
         this.range = range;
@@ -35,6 +31,7 @@ public abstract class Effect implements Runnable, Savable {
 
     protected void start() {
         //starts a thread that moves this effect throughout the map
+        new Thread(this).start();
     }
 
     @Override
@@ -44,9 +41,10 @@ public abstract class Effect implements Runnable, Savable {
         long fps = 0;
         final int TARGET_FPS = 60;
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
+        ArrayList <ArrayList<Tile>> affectedTiles = getAffectedTiles();
 
         //traverse through map at a certain speed for a certain range
-        for (int i = 0; i < range; i++) {
+        for (int i = 0; i < range-1; i++) {
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
@@ -63,7 +61,7 @@ public abstract class Effect implements Runnable, Savable {
             }
 
             // check to see if an entity is there and then hit them with the attack!
-            traverseThroughTiles();
+            traverseThroughTiles(affectedTiles.get(i));
 
             try {
                 Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
@@ -73,19 +71,46 @@ public abstract class Effect implements Runnable, Savable {
         }
     }
 
-    //increase range by one
-    protected abstract void traverseThroughTiles();
+    protected abstract ArrayList<ArrayList<Tile>> getAffectedTiles();
 
-    protected boolean hasEntity(Tile tile) {
-        return tile.getEntity() != null;
+    //increase range by one
+    protected void traverseThroughTiles(ArrayList<Tile> tiles) {
+        for (Tile tile : tiles) {
+            Entity entity = getEntity(tile);
+            if (hasEntity(entity)) {
+                dealConsequence(entity);
+            }
+        }
     }
 
+    protected Entity getEntity(Tile tile) {
+        return tile.getEntity();
+    }
+
+    protected boolean hasEntity(Entity entity) { return entity != null; }
+
+    //given an entity execute that consequence
     protected void dealConsequence(Entity entity) {
-        //given an entity execute that consequence
         consequence.execute(entity);
     }
 
     public abstract Image getImage();
+
+    public int getRange() {
+        return range;
+    }
+
+    public Point3D getLocation() {
+        return location;
+    }
+
+    public Consequence getConsequence() {
+        return consequence;
+    }
+
+    public Map getMap() {
+        return map;
+    }
 
     @Override
     public Document save(Document doc, Element parentElement) {
