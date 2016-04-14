@@ -1,11 +1,15 @@
 package Models.Entities.Skills.PassiveSkills;
 
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.util.ArrayList;
 
 /**
  * Created by josh on 4/6/16.
  */
-public class PassiveSkillList {
+public class PassiveSkillList implements Savable {
 
     private ArrayList<PassiveSkill> passiveSkillList = new ArrayList<>();
 
@@ -39,5 +43,15 @@ public class PassiveSkillList {
 
     public int size(){
         return passiveSkillList.size();
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+
     }
 }

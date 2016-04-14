@@ -1,11 +1,15 @@
 package Models.Entities.Stats;
 
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.util.ArrayList;
 
 /**
  * Created by josh on 4/6/16.
  */
-public class StatModificationList {
+public class StatModificationList implements Savable {
     // List of stat modifications
     private ArrayList<StatModification> mods = new ArrayList<>();
 
@@ -38,5 +42,15 @@ public class StatModificationList {
 
     public ArrayList<StatModification> getMods() {
         return mods;
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+
     }
 }
