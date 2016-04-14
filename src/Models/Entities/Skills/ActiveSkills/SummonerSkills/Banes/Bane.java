@@ -24,9 +24,10 @@ public abstract class Bane extends ActiveSkill {
 
     @Override
     public void activate(Entity entity){
+        System.out.println("ACTIVATE BANE");
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect.run();
+                effect.start();
                 isCooledDown = false;
                 doTheCoolDown();
             }
@@ -36,9 +37,11 @@ public abstract class Bane extends ActiveSkill {
     //Calculates a random number, checks if it's more than 0.8^level
     @Override
     protected boolean percentChanceByLevel(){
-        if(Math.random() > Math.pow(0.8, level))
-            return true;
-        else
-            return false;
+        // TODO: Remove this after testing.
+//        if(Math.random() > Math.pow(0.8, level))
+//            return true;
+//        else
+//            return false;
+        return true;
     }
 }

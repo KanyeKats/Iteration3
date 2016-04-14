@@ -6,7 +6,8 @@ import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
-import java.awt.Image;
+
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -15,11 +16,11 @@ import java.util.ArrayList;
 public class AngularEffect extends Effect {
     Direction direction;
 
-    public AngularEffect(int range, Point3D location, Consequence consequence, Direction direction, Map map) {
-        super(range, location, consequence, map);
+    public AngularEffect(int range, Point3D location, Consequence consequence,  Direction direction, Map map, BufferedImage decal) {
+        super(range, location, consequence, map, decal);
         this.direction = direction;
-        start();
     }
+
 
     @Override
     protected ArrayList<ArrayList<Tile>> getAffectedTiles() {
@@ -30,8 +31,4 @@ public class AngularEffect extends Effect {
         return direction;
     }
 
-    @Override
-    public Image getImage() {
-       return null;
-   }
 }

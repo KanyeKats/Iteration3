@@ -6,20 +6,17 @@ import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
 import Models.Entities.Occupation.Smasher;
+import Models.Entities.Occupation.Summoner;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
-import Models.Entities.Skills.InfluenceEffect.LinearEffect;
-import Models.Entities.Skills.InfluenceEffect.RadialEffect;
 import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.Stat;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.Savable.GameLoader;
-import Utilities.Savable.GameSaver;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
 
@@ -196,7 +193,14 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.out.println("Summoner");
-                        // TODO: Implement this.
+
+                        Map map = GameLoader.loadMap("./res/map/default_map.xml");
+                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
+                        Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
+                        map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
+                        GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
                 return actions;

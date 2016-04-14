@@ -1,12 +1,10 @@
 package Utilities.MapUtilities;
 
-import Models.Entities.Entity;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -60,28 +58,7 @@ public class MapNavigationUtilities {
 
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, Map map){
 
-        double[] point4Dstart = convertAxialtoCuubic(point);
-        double[] point4Dend = new double[4];
-
-        ArrayList<Tile> resultTiles = new ArrayList<>();
-        for(int i = -range; i <= range; i++) {
-            for (int j = -range; j <= range; j++) {
-                for (int k = -range; k <= range; k++) {
-                    point4Dend[0] = point4Dstart[0] - i;
-                    point4Dend[1] = point4Dstart[1] - j;
-                    point4Dend[2] = point4Dstart[2] - k;
-                    point4Dend[3] = point.getZ();
-                    if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
-                        Point3D newpoint = convertCubictoAxial(point4Dend);
-                        Tile tile = map.getTile(newpoint);
-                        if(tile != null) {
-                            resultTiles.add(tile);
-                        }
-                    }
-                }
-            }
-        }
-        return resultTiles;
+        return getTilesinPlane(point, range, map.getTiles());
     }
 
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, HashMap<Point3D,Tile> map){
@@ -196,7 +173,7 @@ public class MapNavigationUtilities {
 
     //rotate the enum given an integer
     private static Direction rotateEnum(int i, Direction direction) {
-        Direction d = direction.values()[direction.ordinal() + i % 5];
+        Direction d = direction.values()[(direction.ordinal() + i) % 5];
         return d;
     }
 
@@ -281,7 +258,4 @@ public class MapNavigationUtilities {
         double dz = Math.abs(a[2] - b[2]);
         return (dx + dy + dz)/2;
     }
-
-
-
 }

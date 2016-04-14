@@ -5,7 +5,6 @@ import Models.Map.MapUtilities.EntityDrawer;
 import Models.Map.MapUtilities.MapUtilities;
 import Models.Map.Tile;
 import Utilities.Constants;
-import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
@@ -85,9 +84,8 @@ public class MapDrawingVisitor {
                 currentTile.setVisited();
             }
             else{
-                    tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
-                }
-
+                tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
+            }
             // Figure out where to put it!
             // X and Y will start at the center of the screen.
             int pixelX = viewportWidth/2;
@@ -120,6 +118,8 @@ public class MapDrawingVisitor {
                 currentEntity.initPixelLocation(pixelPoint);
                 EntityDrawer.drawEntity(currentEntity, g);
             }
+
+
         }
         g.dispose();
     }

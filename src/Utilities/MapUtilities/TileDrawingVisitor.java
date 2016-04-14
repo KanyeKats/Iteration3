@@ -1,6 +1,5 @@
 package Utilities.MapUtilities;
 
-import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.AreaEffect;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 public class TileDrawingVisitor {
 
     public BufferedImage accept(Tile tile, boolean isInSight) {
-
 
         // Create the terrain tile image
         BufferedImage tileImage = ImageLoader.copyImage(tile.getTerrain().getImage(isInSight, tile.wasVisited()));
@@ -47,6 +45,7 @@ public class TileDrawingVisitor {
         // Draw the effects
         Effect effect = tile.getEffect();
         if(effect!=null && effect.getImage()!=null && isInSight){
+            System.out.println("Drawing Effect");
             drawComponent(effect.getImage(), g);
         }
 

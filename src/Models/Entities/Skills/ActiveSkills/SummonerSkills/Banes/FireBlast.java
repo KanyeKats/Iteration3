@@ -6,6 +6,9 @@ import Models.Entities.Skills.InfluenceEffect.AngularEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
+import Views.Graphics.Assets;
+
+import java.awt.image.BufferedImage;
 
 /**
  * Created by josh on 4/6/16.
@@ -13,6 +16,8 @@ import Models.Entities.Stats.StatModificationList;
 public class FireBlast extends Bane {
 
     private final int BASE_COOLDOWN_TIME = 20000;       //20 seconds
+    private final BufferedImage decal = Assets.PLAYER_NORTH; // TODO: Dont use the bug anymore lol
+
 
 
     public FireBlast(){
@@ -25,8 +30,8 @@ public class FireBlast extends Bane {
         if(isCooledDown){
             if(percentChanceByLevel()) {
                 //effect = new AngularEffect();
-                effect = new AngularEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap());
-                effect.run();
+                effect = new AngularEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
+                effect.start();
                 isCooledDown = false;
                 doTheCoolDown();
             }
