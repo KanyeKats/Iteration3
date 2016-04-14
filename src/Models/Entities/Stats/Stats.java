@@ -1,12 +1,16 @@
 package Models.Entities.Stats;
 
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 
 /**
  * Created by sergiopuleri on 4/7/16.
  */
-public class Stats {
+public class Stats implements Savable {
 
     // The container that holds all of the current numerical values for stats.
     EnumMap<Stat, Integer> stats;
@@ -146,5 +150,15 @@ public class Stats {
     // http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html
     private interface DerivedStatGetter {
         int value();
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+
     }
 }

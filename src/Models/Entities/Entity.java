@@ -2,6 +2,7 @@ package Models.Entities;
 
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
+import Models.Entities.Occupation.Smasher;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
@@ -353,6 +354,18 @@ public class Entity extends Observable implements Savable {
 
     @Override
     public void load(Element data) {
-
+        Occupation occupation = new Smasher();
+        occupation.load(data);
+        Stats stats = new Stats();
+        stats.load(data);
+        Inventory inventory = new Inventory(10);
+        inventory.load(data);
+        Equipment equipment = new Equipment(stats, inventory);
+        equipment.load(data);
+        Point3D location = new Point3D(3,3,3); // TODO: 4/14/16 have to fix this to read in the point from the xml
+        Direction direction = Direction.NORTH; // TODO: 4/14/16 fix this aswell
+        Map map = new Map(new HashMap<>());
+        map.load(data);
+        isVisible = true; // TODO: 4/14/16 read in from the file
     }
 }

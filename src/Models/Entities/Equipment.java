@@ -11,11 +11,14 @@ import Models.Items.Takable.Equippable.OneHandedWeapons.OneHandedWeapon;
 import Models.Items.Takable.Equippable.RangedWeapons.RangedWeapon;
 import Models.Items.Takable.Equippable.Staves.Staff;
 import Models.Items.Takable.Equippable.TwoHandedWeapon.TwoHandedWeapon;
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Created by Aidan on 4/6/2016.
  */
-public class Equipment {
+public class Equipment implements Savable {
 
     // All of the available equip slots.
     // These are the places where you can hold an equippable item
@@ -193,4 +196,19 @@ public class Equipment {
         else return false;
     }
 
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+        this.head.load((Element) data.getElementsByTagName("head"));
+        this.chest.load((Element) data.getElementsByTagName("chest"));
+        this.legs.load((Element) data.getElementsByTagName("legs"));
+        this.boots.load((Element) data.getElementsByTagName("boots"));
+        this.lefthand.load((Element) data.getElementsByTagName("lefthand"));
+        this.righthand.load((Element) data.getElementsByTagName("righthand"));
+        this.bothhands.load((Element) data.getElementsByTagName("bothhands"));
+    }
 }
