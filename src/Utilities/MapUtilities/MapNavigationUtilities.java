@@ -233,7 +233,6 @@ public class MapNavigationUtilities {
                 tilesInRange.add(tile);
             }
         }
-
         return tilesInRange;
 
     }
@@ -277,6 +276,22 @@ public class MapNavigationUtilities {
         return (dx + dy + dz)/2;
     }
 
+    public static HashMap<Point3D, Tile> getTilesOnScreen(Point3D point, HashMap<Point3D,Tile> map) {
+        HashMap<Point3D, Tile> tilesInRange = new HashMap<>();
+        int screenWidth = Constants.SCREEN_WIDTH/Constants.TILE_WIDTH/2 + 2;
+        int screenHeight = Constants.SCREEN_HEIGHT/Constants.TILE_HEIGHT/2 + 2;
 
+        for(int i = -screenWidth; i <= screenWidth; i++){
+            for(int j = - screenHeight; j <= screenHeight; j++){
+                for(int k = 0; k < 10; k++) {
+                    Point3D keyPoint = new Point3D(point.getX()+ i, point.getY() + j, k);
+                    tilesInRange.put(keyPoint, map.get(keyPoint));
+                }
+            }
+        }
+        return tilesInRange;
+
+
+    }
 
 }
