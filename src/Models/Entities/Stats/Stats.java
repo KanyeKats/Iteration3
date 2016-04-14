@@ -48,6 +48,10 @@ public class Stats {
         currentValue = stat.checkLevelCap(currentValue);
 
         if (currentValue < 1 && stat != Stat.SKILL_POINTS) currentValue = 1;
+        if(stat == Stat.HEALTH && currentValue > getMaxHealth())
+            currentValue = getMaxHealth();
+        else if(stat == Stat.MANA && currentValue > getMaxMana())
+            currentValue = getMaxMana();
 
         // Set the stats new value
         stats.put(stat, currentValue);

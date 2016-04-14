@@ -65,8 +65,8 @@ public class StatusViewPort extends View {
         g.setColor(Color.BLACK);
         g.drawRect(manaBarx - manaBarwidth/2,manaBary, manaBarwidth,manaBarheight);
         g.setColor(Color.BLUE);
-        g.drawRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (health/maxHealth)),manaBarheight);
-        g.fillRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (health/maxHealth)),manaBarheight);
+        g.drawRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (mana/maxMana)),manaBarheight);
+        g.fillRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (mana/maxMana)),manaBarheight);
 
 
         this.setChanged();
