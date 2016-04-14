@@ -9,4 +9,8 @@ public abstract class Skill {
     public void incrementLevel(){
         ++level;
     }
+
+    public int getLevel(){
+        return level;
+    }
 }

@@ -1,19 +1,19 @@
 package Views;
 
+import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.Stats;
 import Models.Menu.Menu;
 import Models.Menu.MenuOption;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-//import java.awt.*;
-
 /**
- * Created by Bradley on 4/4/2016.
+ * Created by Josh on 4/13/2016.
  */
-public class AvatarCreationMenuView extends MenuView {
+public class SkillViewPort extends MenuView {
 
-    private final String TITLE = "Avatar Creation";
+    private final String TITLE = "Skills";
     private int optionWidth;
     private int optionHeight;
     private Font titleFont;
@@ -24,10 +24,12 @@ public class AvatarCreationMenuView extends MenuView {
     private Color color2;
     private int borderRadius;
     private int optionVerticalSpacing;
+    private Stats stats;
 
-    public AvatarCreationMenuView(int width, int height, Menu menu) {
+    public SkillViewPort(int width, int height, Menu menu, Stats stats) {
         super(width, height, menu);
 
+        this.stats = stats;
         optionWidth = width / 6;
         optionHeight = height / 25;
         titleFont = new Font("SansSerif", Font.BOLD, width / 12);
@@ -42,11 +44,12 @@ public class AvatarCreationMenuView extends MenuView {
         repaint();
     }
 
-    @Override
-    public void renderBackground() {
+    public void renderBackground(){
 
         // Extract the graphics from the view content
-        Graphics g = viewContent.getGraphics();
+        Graphics2D g = (Graphics2D)viewContent.getGraphics();
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHints(rh);
 
         // Draw a black background
         g.setColor(background);
@@ -55,19 +58,15 @@ public class AvatarCreationMenuView extends MenuView {
         g.dispose();
     }
 
-    @Override
-    public void renderOptions() {
+    public void renderOptions(){
 
         Graphics2D g = (Graphics2D)viewContent.getGraphics();
-
-        //AA
-        RenderingHints rh = new RenderingHints(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHints(rh);
 
         // Draw the title.
         drawTitle(g);
+
 
         // Find the starting point.
         if(titleFont==null){
@@ -79,7 +78,8 @@ public class AvatarCreationMenuView extends MenuView {
         g.setFont(optionFont);
         FontMetrics fm = g.getFontMetrics(optionFont);
 
-        for(int i=0; i < menu.getMenuOptions().size(); i++){
+        int i;
+        for(i=0; i < menu.getMenuOptions().size(); i++){
 
             // Get the current option;
             MenuOption option = menu.getMenuOptions().get(i);
@@ -103,6 +103,13 @@ public class AvatarCreationMenuView extends MenuView {
             g.setColor(secondaryCOlor);
             g.drawString(option.getTitle(), stringX, stringY);
         }
+
+        //Write out how many skill points there are
+        String skillPointString = "You have " + stats.getStat(Stat.SKILL_POINTS) + " skill points remaining.";
+        Rectangle2D stringRect = fm.getStringBounds(skillPointString, g);
+        int stringX = width/2 - (int)(stringRect.getWidth() / 2);
+        int stringY = (i+1) * optionHeight + (int)(stringRect.getHeight() /2) + fm.getAscent() + verticalStart + (i+1)*optionVerticalSpacing;
+        g.drawString(skillPointString, stringX, stringY);
 
         g.dispose();
     }

@@ -33,4 +33,9 @@ public class RemoveTrap extends ActiveSkill {
             }
         }
     }
+
+    @Override
+    public String toString(){
+        return "Remove Trap";
+    }
 }

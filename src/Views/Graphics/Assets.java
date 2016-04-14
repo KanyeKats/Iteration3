@@ -22,6 +22,13 @@ public class Assets {
     public static BufferedImage PLAYER_SOUTH_WEST;
     public static BufferedImage PLAYER_NORTH_WEST;
 
+    public static BufferedImage BUG_NORTH;
+    public static BufferedImage BUG_SOUTH;
+    public static BufferedImage BUG_NORTH_EAST;
+    public static BufferedImage BUG_SOUTH_EAST;
+    public static BufferedImage BUG_SOUTH_WEST;
+    public static BufferedImage BUG_NORTH_WEST;
+
     public static BufferedImage ITEM_BAG;
 
     //Fog
@@ -76,6 +83,30 @@ public class Assets {
 
         SpriteSheet sw = new SpriteSheet(ImageLoader.loadImage("./aiden_res/Entities/Player/PlayerSW.png"));
         PLAYER_SOUTH_WEST = sw.crop(0, 0, SPRITE_SIZE, SPRITE_SIZE);
+
+
+        //BUG player
+        SpriteSheet bugN = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugback.png"));
+        BUG_NORTH = bugN.crop(0, 0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        SpriteSheet bugNE = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugrihgtup.png"));
+        BUG_NORTH_EAST = bugNE.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        SpriteSheet bugSE = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugrightdown.png"));
+        BUG_SOUTH_EAST = bugSE.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        SpriteSheet bugS = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybug.png"));
+        BUG_SOUTH = bugS.crop(0, 0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        SpriteSheet bugSW = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugleftdown.png"));
+        BUG_SOUTH_WEST = bugSW.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+        SpriteSheet bugNW = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugleftup.png"));
+        BUG_NORTH_WEST = bugNW.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
+
+
+
+
 
         // Init all the areaEffect assets.
         SpriteSheet star = new SpriteSheet(ImageLoader.loadImage("./res/decals/gold-star.png"));

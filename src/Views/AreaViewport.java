@@ -5,6 +5,7 @@ import Models.Map.Map;
 import Utilities.MapUtilities.MapDrawingVisitor;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by Bradley on 4/7/16.
@@ -41,7 +42,7 @@ public class AreaViewport extends View {
         this.notifyObservers();
 
         // Cleanup
-        g.dispose();
+        //g.dispose();
     }
 
     private void renderBackground(Graphics g){

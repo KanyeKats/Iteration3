@@ -29,4 +29,9 @@ public class LifeBloom extends Boon {
         activeTime = (int)(level * 0.6 * BASE_ACTIVE_TIME);
         consequence = new PeriodicStatConsequence(new StatModificationList(healthStatMod), PERIOD, activeTime/PERIOD);
     }
+
+    @Override
+    public String toString(){
+        return "Life Bloom";
+    }
 }

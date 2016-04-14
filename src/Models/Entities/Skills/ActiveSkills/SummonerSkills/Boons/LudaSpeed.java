@@ -28,4 +28,9 @@ public class LudaSpeed extends Boon {
         consequence = new ImmediateStatConsequence(new StatModificationList(speedStatMod));
         activeTime = (int)(level * 0.6 * BASE_ACTIVE_TIME);
     }
+
+    @Override
+    public String toString(){
+        return "Luda Speed";
+    }
 }

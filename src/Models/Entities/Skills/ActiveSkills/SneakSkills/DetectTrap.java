@@ -16,7 +16,7 @@ public class DetectTrap extends ActiveSkill {
 
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
 
-    public DetectTrap(RadialEffect radialEffect){
+    public DetectTrap(){
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
@@ -39,5 +39,10 @@ public class DetectTrap extends ActiveSkill {
                 }
             }
         }
+    }
+
+    @Override
+    public String toString(){
+        return "Detect Trap";
     }
 }

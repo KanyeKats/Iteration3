@@ -6,14 +6,12 @@ import Models.Menu.MenuOption;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-//import java.awt.*;
-
 /**
- * Created by Bradley on 4/4/2016.
+ * Created by rokas on 4/13/16.
  */
-public class AvatarCreationMenuView extends MenuView {
+public class PauseMenuView extends MenuView {
 
-    private final String TITLE = "Avatar Creation";
+    private final String TITLE = "Pause";
     private int optionWidth;
     private int optionHeight;
     private Font titleFont;
@@ -25,8 +23,8 @@ public class AvatarCreationMenuView extends MenuView {
     private int borderRadius;
     private int optionVerticalSpacing;
 
-    public AvatarCreationMenuView(int width, int height, Menu menu) {
-        super(width, height, menu);
+    public PauseMenuView(int width, int height, Menu menu) {
+        super(width,height,menu);
 
         optionWidth = width / 6;
         optionHeight = height / 25;
@@ -40,19 +38,14 @@ public class AvatarCreationMenuView extends MenuView {
         borderRadius = 10;
 
         repaint();
+
     }
 
     @Override
     public void renderBackground() {
-
-        // Extract the graphics from the view content
-        Graphics g = viewContent.getGraphics();
-
-        // Draw a black background
-        g.setColor(background);
-        g.fillRect(0, 0, width, height);
-
-        g.dispose();
+        Graphics2D g2d = (Graphics2D)viewContent.getGraphics();
+        g2d.setColor(Color.BLACK);
+        g2d.dispose();
     }
 
     @Override
@@ -66,10 +59,8 @@ public class AvatarCreationMenuView extends MenuView {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHints(rh);
 
-        // Draw the title.
         drawTitle(g);
 
-        // Find the starting point.
         if(titleFont==null){
             System.out.println("ITS NULL!");
         }
@@ -103,11 +94,8 @@ public class AvatarCreationMenuView extends MenuView {
             g.setColor(secondaryCOlor);
             g.drawString(option.getTitle(), stringX, stringY);
         }
-
-        g.dispose();
     }
-
-    private void drawTitle(Graphics g){
+    private void drawTitle(Graphics2D g){
         g.setFont(titleFont);
         FontMetrics fm = g.getFontMetrics();
 
