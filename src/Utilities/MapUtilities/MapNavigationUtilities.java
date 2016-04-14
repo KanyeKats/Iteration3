@@ -4,6 +4,7 @@ import Models.Entities.Entity;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
+import Utilities.Constants;
 import javafx.geometry.Point3D;
 
 import java.lang.reflect.Array;
@@ -220,25 +221,19 @@ public class MapNavigationUtilities {
 
     }
 
-    public static ArrayList<Tile> getTilesinPrism(Point3D point, int rangeofRadius, int rangeofColumn, HashMap<Point3D,Tile> map){
+    public static ArrayList<Tile> getTilesinPrism(Point3D point, int rangeofRadius, HashMap<Point3D,Tile> map){
 
         ArrayList<Tile> tilesInRange = new ArrayList<>();
 
+
         //upper half of sphere
-        for(int i = 0; i <= rangeofColumn; i++){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
+        for(int i = 0; i < Constants.COLUMN_HEIGHT; i++){
+            ArrayList<Tile> tilesInPlane = getTilesinPlane(new Point3D(point.getX(),point.getY(),i),rangeofRadius,map);
             for(Tile tile: tilesInPlane) {
                 tilesInRange.add(tile);
             }
         }
 
-        //lower half of sphere
-        for(int i = -1; i <= -rangeofColumn; i--){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
-            for(Tile tile: tilesInPlane) {
-                tilesInRange.add(tile);
-            }
-        }
         return tilesInRange;
 
     }

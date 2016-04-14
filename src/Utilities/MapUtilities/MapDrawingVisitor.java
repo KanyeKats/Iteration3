@@ -78,7 +78,7 @@ public class MapDrawingVisitor  {
             // Get the next tile to be rendered.
             Tile currentTile = tile.get(currentPoint);
 
-            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(avatarCenter, rangeofVisibility,Constants.COLUMN_HEIGHT, tile);
+            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(avatarCenter, rangeofVisibility, tile);
             // Get the image from this tile.
             Image tileImage;
             if(tilesinSight.contains(currentTile)) {
