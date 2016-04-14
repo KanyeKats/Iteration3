@@ -28,8 +28,6 @@ public class MapNavigationUtilities {
 
     }
 
-
-
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, Map map){
 
         double[] point4Dstart = convertAxialtoCuubic(point);
@@ -135,8 +133,7 @@ public class MapNavigationUtilities {
     }
 
     public static double[] convertAxialtoCuubic(Point3D axialPoint){
-
-         double[] cubicPoint = new double[4];
+        double[] cubicPoint = new double[4];
         cubicPoint[0] = axialPoint.getX();
         cubicPoint[1] = -axialPoint.getY() - axialPoint.getX();
         cubicPoint[2] = axialPoint.getY();
@@ -155,7 +152,5 @@ public class MapNavigationUtilities {
         double dz = Math.abs(a[2] - b[2]);
         return (dx + dy + dz)/2;
     }
-
-
 
 }

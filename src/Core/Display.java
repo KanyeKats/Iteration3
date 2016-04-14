@@ -29,7 +29,6 @@ public class Display extends JPanel{
 
     @Override
     public void paintComponent(Graphics g){
-        super.paintComponent(g);
         try{
             activeView.render(g);
         } catch(NullPointerException e){
