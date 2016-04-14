@@ -83,7 +83,7 @@ public class Entity extends Observable implements Savable {
         this.inventory = new Inventory(10);
         this.equipment = new Equipment(stats, inventory);
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-        this.direction = Direction.NORTH;
+        this.direction = Direction.SOUTH;
         this.map = map;
         this.passableTerrains = new ArrayList<>(Arrays.asList(passableTerrains));
         isVisible = true;

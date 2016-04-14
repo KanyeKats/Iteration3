@@ -6,6 +6,8 @@ import Models.Entities.Skills.ActiveSkills.CommonSkills.BindWounds;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Bargain;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Observation;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
+import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
 
@@ -26,6 +28,7 @@ public abstract class Occupation {
 
         this.activeSkillList = new ActiveSkillList();
         this.passiveSkillList = new PassiveSkillList();
+        this.statModificationList = new StatModificationList();
 
         this.activeSkillList.add(basicAttack);
         this.activeSkillList.add(bindWounds);
@@ -36,7 +39,11 @@ public abstract class Occupation {
     }
 
     public void initStats(Stats stats){
+
         statModificationList.applyModifications(stats);
+        stats.setStat(Stat.HEALTH, stats.getMaxHealth());
+        stats.setStat(Stat.MANA,stats.getMaxMana());
+
     }
 
     public void initSkills(ActiveSkillList activeSkillList, PassiveSkillList passiveSkillList){

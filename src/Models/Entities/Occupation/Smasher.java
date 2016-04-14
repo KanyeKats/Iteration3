@@ -28,8 +28,6 @@ public class Smasher extends Occupation {
                 new StatModification(Stat.INTELLECT,0),
                 new StatModification(Stat.HARDINESS,10),
                 new StatModification(Stat.MOVEMENT,17),
-                new StatModification(Stat.MAX_HEALTH,50),
-                new StatModification(Stat.MAX_MANA,0),
                 new StatModification(Stat.EXPERIENCE, 0));
 
         this.passiveSkillList.add(brawlingMastery);

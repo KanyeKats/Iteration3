@@ -28,8 +28,6 @@ public class Summoner extends Occupation {
                 new StatModification(Stat.INTELLECT, 10),
                 new StatModification(Stat.HARDINESS, 4),
                 new StatModification(Stat.MOVEMENT, 17),
-                new StatModification(Stat.MAX_HEALTH, 50),
-                new StatModification(Stat.MAX_MANA, 50),
                 new StatModification(Stat.EXPERIENCE, 0));
 
         this.activeSkillList.add(fireball);
