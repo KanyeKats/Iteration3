@@ -30,6 +30,12 @@ public class StatModificationList {
         }
     }
 
+    public void addModification(StatModification... modifications){
+        for(StatModification modification: modifications){
+            mods.add(modification);
+        }
+    }
+
     public ArrayList<StatModification> getMods() {
         return mods;
     }

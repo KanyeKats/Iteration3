@@ -238,7 +238,6 @@ public class Menu extends java.util.Observable{
         return new Menu(options);
     }
 
-<<<<<<< HEAD
     public static Menu createSkillViewPortMenu(StateManager stateManager, Entity avatar){
         PassiveSkillList passiveSkillList = avatar.getPassiveSkillList();
         ActiveSkillList activeSkillList = avatar.getActiveSkillList();
@@ -317,7 +316,7 @@ public class Menu extends java.util.Observable{
         return new Menu(options);
     }
 
-=======
+
     //This method creates a pause menu model
     public static Menu createPauseMenu(StateManager stateManager) {
         ArrayList<MenuOption> options = new ArrayList<>();
@@ -420,6 +419,6 @@ public class Menu extends java.util.Observable{
         });
         return new Menu(options);
     }
->>>>>>> 1de20619c82d2175126c352f8fa8dacb3e2bfafd
+
     // TODO: Create other factory methods.
 }

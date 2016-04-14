@@ -83,7 +83,7 @@ public class Entity extends Observable implements Savable {
         this.inventory = new Inventory(10);
         this.equipment = new Equipment(stats, inventory);
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
-        this.direction = Direction.NORTH;
+        this.direction = Direction.SOUTH;
         this.map = map;
         this.passableTerrains = new ArrayList<>(Arrays.asList(passableTerrains));
         isVisible = true;
@@ -309,12 +309,12 @@ public class Entity extends Observable implements Savable {
     private void initImages(){
 
         images = new HashMap<>();
-        images.put(Direction.NORTH, Assets.PLAYER_NORTH);
-        images.put(Direction.NORTH_EAST, Assets.PLAYER_NORTH_EAST);
-        images.put(Direction.SOUTH_EAST, Assets.PLAYER_SOUTH_EAST);
-        images.put(Direction.SOUTH, Assets.PLAYER_SOUTH);
-        images.put(Direction.SOUTH_WEST, Assets.PLAYER_SOUTH_WEST);
-        images.put(Direction.NORTH_WEST, Assets.PLAYER_NORTH_WEST);
+        images.put(Direction.NORTH, Assets.BUG_NORTH);
+        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST);
+        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST);
+        images.put(Direction.SOUTH, Assets.BUG_SOUTH);
+        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST);
+        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST);
 
     }
 

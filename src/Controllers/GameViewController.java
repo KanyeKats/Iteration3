@@ -8,6 +8,7 @@ import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
+import Views.PauseMenuView;
 import Views.SkillViewPort;
 import Views.StartMenuView;
 
@@ -83,7 +84,10 @@ public class GameViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
             @Override
             public void execute() {
-
+                Models.Menu.Menu pauseMenu = Models.Menu.Menu.createPauseMenu(stateManager);
+                MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, pauseMenu);
+                PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, pauseMenu);
+                stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));
             }
         });
     }
