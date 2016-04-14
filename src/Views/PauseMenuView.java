@@ -1,7 +1,5 @@
 package Views;
 
-import Models.Entities.Stats.Stat;
-import Models.Entities.Stats.Stats;
 import Models.Menu.Menu;
 import Models.Menu.MenuOption;
 
@@ -9,11 +7,11 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 /**
- * Created by Josh on 4/13/2016.
+ * Created by rokas on 4/13/16.
  */
-public class SkillViewPort extends MenuView {
+public class PauseMenuView extends MenuView {
 
-    private final String TITLE = "Skills";
+    private final String TITLE = "Pause";
     private int optionWidth;
     private int optionHeight;
     private Font titleFont;
@@ -24,12 +22,10 @@ public class SkillViewPort extends MenuView {
     private Color color2;
     private int borderRadius;
     private int optionVerticalSpacing;
-    private Stats stats;
 
-    public SkillViewPort(int width, int height, Menu menu, Stats stats) {
-        super(width, height, menu);
+    public PauseMenuView(int width, int height, Menu menu) {
+        super(width,height,menu);
 
-        this.stats = stats;
         optionWidth = width / 6;
         optionHeight = height / 25;
         titleFont = new Font("SansSerif", Font.BOLD, width / 12);
@@ -42,33 +38,29 @@ public class SkillViewPort extends MenuView {
         borderRadius = 10;
 
         repaint();
+
     }
 
-    public void renderBackground(){
-
-        // Extract the graphics from the view content
-        Graphics2D g = (Graphics2D)viewContent.getGraphics();
-        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setRenderingHints(rh);
-
-        // Draw a black background
-        g.setColor(background);
-        g.fillRect(0, 0, width, height);
-
-        g.dispose();
+    @Override
+    public void renderBackground() {
+        Graphics2D g2d = (Graphics2D)viewContent.getGraphics();
+        g2d.setColor(Color.BLACK);
+        g2d.dispose();
     }
 
-    public void renderOptions(){
+    @Override
+    public void renderOptions() {
 
         Graphics2D g = (Graphics2D)viewContent.getGraphics();
-        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        //AA
+        RenderingHints rh = new RenderingHints(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHints(rh);
 
-        // Draw the title.
         drawTitle(g);
 
-
-        // Find the starting point.
         if(titleFont==null){
             System.out.println("ITS NULL!");
         }
@@ -78,8 +70,7 @@ public class SkillViewPort extends MenuView {
         g.setFont(optionFont);
         FontMetrics fm = g.getFontMetrics(optionFont);
 
-        int i;
-        for(i=0; i < menu.getMenuOptions().size(); i++){
+        for(int i=0; i < menu.getMenuOptions().size(); i++){
 
             // Get the current option;
             MenuOption option = menu.getMenuOptions().get(i);
@@ -103,18 +94,8 @@ public class SkillViewPort extends MenuView {
             g.setColor(secondaryCOlor);
             g.drawString(option.getTitle(), stringX, stringY);
         }
-
-        //Write out how many skill points there are
-        String skillPointString = "You have " + stats.getStat(Stat.SKILL_POINTS) + " skill points remaining.";
-        Rectangle2D stringRect = fm.getStringBounds(skillPointString, g);
-        int stringX = width/2 - (int)(stringRect.getWidth() / 2);
-        int stringY = (i+1) * optionHeight + (int)(stringRect.getHeight() /2) + fm.getAscent() + verticalStart + (i+1)*optionVerticalSpacing;
-        g.drawString(skillPointString, stringX, stringY);
-
-        g.dispose();
     }
-
-    private void drawTitle(Graphics g){
+    private void drawTitle(Graphics2D g){
         g.setFont(titleFont);
         FontMetrics fm = g.getFontMetrics();
 
