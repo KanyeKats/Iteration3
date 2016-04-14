@@ -1,6 +1,10 @@
 package Models.Entities;
 
 import Models.Items.Item;
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,7 +12,7 @@ import java.util.Random;
 /**
  * Created by Aidan on 4/6/2016.
  */
-public class Inventory {
+public class Inventory implements Savable {
     private ArrayList<Item> items;
     private int inventorySize;
 
@@ -55,4 +59,51 @@ public class Inventory {
         return items.remove(randomItem);
     }
 
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    // TODO: 4/14/16 does not work..
+    @Override
+    public void load(Element data) {
+        try {
+            // Get the tilesNodes from the xml file
+            NodeList itemNodes = data.getElementsByTagName("tile");
+
+            //find out how many tiles there are
+            int numItems = itemNodes.getLength();
+
+            //instantiate every tile to the map
+            for(int i=0; i<numItems; i++) {
+
+                Element tileElement = (Element) itemNodes.item(i);
+
+                int x = Integer.parseInt(tileElement.getAttribute("x"));
+                int y = Integer.parseInt(tileElement.getAttribute("y"));
+                int z = Integer.parseInt(tileElement.getAttribute("z"));
+
+                //construct an empty tile and load it into the game
+                Item item = new Item() {
+                    @Override
+                    public boolean onTouch(Entity entity) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean preventsMovement(Entity entity) {
+                        return false;
+                    }
+                };
+                item.load(tileElement);
+
+
+                // Check to see if this column has already been started
+                this.items.add(item);
+            }
+        } catch (Exception e) {
+            System.out.println("Error parsing map again");
+            e.printStackTrace();
+        }
+    }
 }

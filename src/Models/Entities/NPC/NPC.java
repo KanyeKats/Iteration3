@@ -8,6 +8,7 @@ import Models.Entities.Occupation.Occupation;
 import Models.Entities.Stats.Stats;
 import Models.Map.Direction;
 import Models.Map.Map;
+import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
 
 import java.awt.image.BufferedImage;
@@ -25,4 +26,6 @@ public class NPC extends Entity {
     public NPC(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D point3D, Direction orientation, Map map) {
         super(occupation, stats, inventory, equipment, sprite, point3D, orientation, map);
     }
+
+
 }

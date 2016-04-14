@@ -10,11 +10,14 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * Created by Aidan on 4/6/2016.
  */
-public abstract class Occupation {
+public abstract class Occupation implements Savable {
     protected ActiveSkillList activeSkillList;
     protected PassiveSkillList passiveSkillList;
     protected StatModificationList statModificationList;
@@ -44,5 +47,15 @@ public abstract class Occupation {
 
     public abstract PassiveSkillList initPassiveSkills(Stats stats);
 
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
 
+    @Override
+    public void load(Element data) {
+        this.activeSkillList.load((Element) data.getElementsByTagName("activeSkillList"));
+        this.passiveSkillList.load((Element) data.getElementsByTagName("passiveSkillList"));
+        this.statModificationList.load((Element) data.getElementsByTagName("statModificationList"));
+    }
 }
