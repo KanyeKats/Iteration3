@@ -1,17 +1,16 @@
 package Views;
 
-import Models.Menu.Menu;
-import Models.Menu.MenuOption;
+import Models.Menu.*;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 /**
- * Created by rokas on 4/13/16.
+ * Created by Josh on 4/14/2016.
  */
-public class PauseMenuView extends MenuView {
+public class ReconfigureKeysView extends MenuView {
 
-    private final String TITLE = "Pause";
+    private final String TITLE = "Controls";
     private int optionWidth;
     private int optionHeight;
     private Font titleFont;
@@ -23,8 +22,8 @@ public class PauseMenuView extends MenuView {
     private int borderRadius;
     private int optionVerticalSpacing;
 
-    public PauseMenuView(int width, int height, Menu menu) {
-        super(width,height,menu);
+    public ReconfigureKeysView(int width, int height, Models.Menu.Menu menu) {
+        super(width, height, menu);
 
         optionWidth = width / 6;
         optionHeight = height / 25;
@@ -38,29 +37,33 @@ public class PauseMenuView extends MenuView {
         borderRadius = 10;
 
         repaint();
-
     }
 
-    @Override
-    public void renderBackground() {
-        Graphics2D g2d = (Graphics2D)viewContent.getGraphics();
-        g2d.setColor(Color.BLACK);
-        g2d.dispose();
-    }
+    public void renderBackground(){
 
-    @Override
-    public void renderOptions() {
-
+        // Extract the graphics from the view content
         Graphics2D g = (Graphics2D)viewContent.getGraphics();
-
-        //AA
-        RenderingHints rh = new RenderingHints(
-                RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHints(rh);
 
+        // Draw a black background
+        g.setColor(background);
+        g.fillRect(0, 0, width, height);
+
+        g.dispose();
+    }
+
+    public void renderOptions(){
+
+        Graphics2D g = (Graphics2D)viewContent.getGraphics();
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHints(rh);
+
+        // Draw the title.
         drawTitle(g);
 
+
+        // Find the starting point.
         if(titleFont==null){
             System.out.println("ITS NULL!");
         }
@@ -70,7 +73,8 @@ public class PauseMenuView extends MenuView {
         g.setFont(optionFont);
         FontMetrics fm = g.getFontMetrics(optionFont);
 
-        for(int i=0; i < menu.getMenuOptions().size(); i++){
+        int i;
+        for(i=0; i < menu.getMenuOptions().size(); i++){
 
             // Get the current option;
             MenuOption option = menu.getMenuOptions().get(i);
@@ -94,9 +98,11 @@ public class PauseMenuView extends MenuView {
             g.setColor(secondaryCOlor);
             g.drawString(option.getTitle(), stringX, stringY);
         }
+
         g.dispose();
     }
-    private void drawTitle(Graphics2D g){
+
+    private void drawTitle(Graphics g){
         g.setFont(titleFont);
         FontMetrics fm = g.getFontMetrics();
 

@@ -2,6 +2,7 @@ package Models.Menu;
 
 import Controllers.GameViewController;
 import Controllers.MenuViewController;
+import Controllers.ViewController;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
@@ -20,11 +21,17 @@ import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
+import Utilities.KeyBindings;
 import Utilities.Savable.GameLoader;
 import Utilities.Savable.GameSaver;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
+import Views.ReconfigureKeysView;
+import javafx.scene.input.KeyCode;
 
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 /**
@@ -330,7 +337,7 @@ public class Menu extends java.util.Observable{
     }
 
     //This method creates a pause menu model
-    public static Menu createPauseMenu(StateManager stateManager) {
+    public static Menu createPauseMenu(StateManager stateManager, GameViewController gameViewController) {
         ArrayList<MenuOption> options = new ArrayList<>();
 
         options.add(new MenuOption() {
@@ -395,7 +402,10 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.out.println("Change keys");
-                        //TODO:  implement this
+                        Models.Menu.Menu reconfigureKeysMenu = Models.Menu.Menu.createReconfigureKeysMenu(stateManager, gameViewController);
+                        MenuViewController reconfigureKeysMenuController = new MenuViewController(stateManager, reconfigureKeysMenu);
+                        ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
+                        stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
                     }
                 });
                 return actions;
@@ -482,6 +492,57 @@ public class Menu extends java.util.Observable{
                 return null;
             }
         });
+        return new Menu(options);
+    }
+
+    public static Menu createReconfigureKeysMenu(StateManager stateManager, GameViewController gameViewController){
+        KeyBindings keyBindings = gameViewController.getKeyBindings();
+        ArrayList<MenuOption> options = new ArrayList<>();
+
+        for(int i : keyBindings.getKeys()){
+            options.add(new MenuOption() {
+                @Override
+                public String getTitle() {
+                    return keyBindings.getKeyAction(i).toString() + ":  " + KeyEvent.getKeyText(i);
+                }
+
+                @Override
+                public ArrayList<Action> getActions() {
+                    ArrayList<Action> actions = new ArrayList<>();
+                    actions.add(new Action() {
+                        @Override
+                        public void execute() {
+                            System.out.println(keyBindings.getKeyAction(i).toString());
+
+                            JFrame jf = new JFrame();
+                            jf.setVisible(true);
+                            KeyListener listen = new KeyListener(){
+                                public void keyTyped(KeyEvent e){}
+                                public void keyReleased(KeyEvent e){}
+                                public void keyPressed(KeyEvent e){
+                                    gameViewController.remapKey(i, e.getKeyCode());
+                                    System.out.println("New key: " + KeyEvent.getKeyText(e.getKeyCode()));
+                                    jf.dispose();
+                                    stateManager.goToPreviousState();
+                                    Models.Menu.Menu reconfigureKeysMenu = Models.Menu.Menu.createReconfigureKeysMenu(stateManager, gameViewController);
+                                    MenuViewController reconfigureKeysMenuController = new MenuViewController(stateManager, reconfigureKeysMenu);
+                                    ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
+                                    stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
+                                }
+                            };
+                            jf.addKeyListener(listen);
+                        }
+                    });
+                    return actions;
+                }
+
+                @Override
+                public Object getAttachment() {
+                    return null;
+                }
+            });
+        }
+
         return new Menu(options);
     }
 

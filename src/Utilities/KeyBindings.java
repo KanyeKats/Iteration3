@@ -1,16 +1,17 @@
 package Utilities;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Bradley on 4/4/2016.
  */
 public class KeyBindings {
 
-    private HashMap<Integer, Action> bindings;
+    private LinkedHashMap<Integer, Action> bindings;
 
     public KeyBindings(){
-        this.bindings = new HashMap<>();
+        this.bindings = new LinkedHashMap<>();
     }
 
     public void addBinding(Integer key, Action value){
@@ -37,5 +38,12 @@ public class KeyBindings {
 
     public void removeBinding(int keyCode){
         bindings.remove(keyCode);
+    }
+
+    public ArrayList<Integer> getKeys(){
+        ArrayList<Integer> keys = new ArrayList<>();
+        for(int key : bindings.keySet())
+            keys.add(key);
+        return keys;
     }
 }

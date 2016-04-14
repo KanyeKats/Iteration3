@@ -22,13 +22,14 @@ public class GameViewController extends ViewController {
 
     private Entity avatar;
     private Map map;
+    private GameViewController controller;
 
 
     public GameViewController(StateManager stateManager, Entity avatar, Map map) {
         super(stateManager);
         this.avatar = avatar;
         this.map = map;
-
+        controller = this;
     }
 
     @Override
@@ -40,36 +41,54 @@ public class GameViewController extends ViewController {
             public void execute() {
                 avatar.move(Direction.NORTH);
             }
+
+            @Override
+            public String toString(){ return "Move North";}
         });
         keyBindings.addBinding(KeyEvent.VK_Q, new Action() {
             @Override
             public void execute() {
                 avatar.move(Direction.NORTH_WEST);
             }
+
+            @Override
+            public String toString(){ return "Move Northwest";}
         });
         keyBindings.addBinding(KeyEvent.VK_E, new Action() {
             @Override
             public void execute() {
                 avatar.move(Direction.NORTH_EAST);
             }
+
+            @Override
+            public String toString(){ return "Move Northeast";}
         });
         keyBindings.addBinding(KeyEvent.VK_X, new Action() {
             @Override
             public void execute() {
                 avatar.move(Direction.SOUTH);
             }
+
+            @Override
+            public String toString(){ return "Move South";}
         });
         keyBindings.addBinding(KeyEvent.VK_Z, new Action() {
             @Override
             public void execute() {
                 avatar.move(Direction.SOUTH_WEST);
             }
+
+            @Override
+            public String toString(){ return "Move Southwest";}
         });
         keyBindings.addBinding(KeyEvent.VK_C, new Action() {
             @Override
             public void execute() {
                 avatar.move(Direction.SOUTH_EAST);
             }
+
+            @Override
+            public String toString(){ return "Move Southeast";}
         });
 
         keyBindings.addBinding(KeyEvent.VK_S, new Action() {
@@ -80,15 +99,21 @@ public class GameViewController extends ViewController {
                 SkillViewPort skillViewPort = new SkillViewPort(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, skillViewPortMenu, avatar.getStats());
                 stateManager.setActiveState(new State(skillViewPortMenuController, skillViewPort));
             }
+
+            @Override
+            public String toString(){ return "Skills Menu";}
         });
         keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
             @Override
             public void execute() {
-                Models.Menu.Menu pauseMenu = Models.Menu.Menu.createPauseMenu(stateManager);
+                Models.Menu.Menu pauseMenu = Models.Menu.Menu.createPauseMenu(stateManager, controller);
                 MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, pauseMenu);
                 PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, pauseMenu);
                 stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));
             }
+
+            @Override
+            public String toString(){ return "Pause";}
         });
     }
 

@@ -35,8 +35,21 @@ public abstract class ViewController {
     public abstract void update();
 
     public void remapKey(int oldKey, int newKey){
-        keyBindings.addBinding(newKey, keyBindings.getKeyAction(oldKey));
-        keyBindings.removeBinding(oldKey);
+        KeyBindings newKeys = new KeyBindings();
+        for(int i : keyBindings.getKeys()) {
+            if(i == oldKey) {
+                newKeys.addBinding(newKey, keyBindings.getKeyAction(oldKey));
+                keyBindings.removeBinding(oldKey);
+            }
+            else{
+                newKeys.addBinding(i, keyBindings.getKeyAction(i));
+            }
+        }
+        keyBindings = newKeys;
+    }
+
+    public KeyBindings getKeyBindings(){
+        return keyBindings;
     }
 
 }
