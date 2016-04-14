@@ -6,8 +6,13 @@ import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
 import Models.Entities.Occupation.Smasher;
+import Models.Entities.Skills.ActiveSkills.ActiveSkill;
+import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.InfluenceEffect.LinearEffect;
 import Models.Entities.Skills.InfluenceEffect.RadialEffect;
+import Models.Entities.Skills.PassiveSkills.PassiveSkill;
+import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
+import Models.Entities.Stats.Stat;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
@@ -49,18 +54,21 @@ public class Menu extends java.util.Observable{
         return menuOptions.get(selectedIndex).getActions();
     }
 
+    public void refresh(){
+        setChanged();
+        notifyObservers();
+    }
+
     public void nextOption(){
         selectedIndex++;
         selectedIndex = (selectedIndex < menuOptions.size()) ? selectedIndex : 0; // This one's for you Josh :)
-        setChanged();
-        notifyObservers();
+        refresh();
     }
 
     public void previousOption(){
         selectedIndex--;
         selectedIndex = (selectedIndex >=0 ) ? selectedIndex : menuOptions.size() - 1;
-        setChanged();
-        notifyObservers();
+        refresh();
     }
 
     // Factory methods.
@@ -227,6 +235,84 @@ public class Menu extends java.util.Observable{
                 return null;
             }
         });
+        return new Menu(options);
+    }
+
+    public static Menu createSkillViewPortMenu(StateManager stateManager, Entity avatar){
+        PassiveSkillList passiveSkillList = avatar.getPassiveSkillList();
+        ActiveSkillList activeSkillList = avatar.getActiveSkillList();
+        ArrayList<MenuOption> options = new ArrayList<>();
+
+        for(int i = 0; i < passiveSkillList.size(); i++){
+            PassiveSkill passiveSkill = passiveSkillList.get(i);
+
+            options.add(new MenuOption() {
+                @Override
+                public String getTitle() {
+                    return passiveSkill.toString() + " - " + passiveSkill.getLevel();
+                }
+
+                @Override
+                public ArrayList<Action> getActions() {
+                    ArrayList<Action> actions = new ArrayList<>();
+                    actions.add(new Action() {
+                        @Override
+                        public void execute() {
+                            if(avatar.getStats().getStat(Stat.SKILL_POINTS) > 0){
+                                passiveSkill.incrementLevel();
+                                avatar.getStats().modifyStat(Stat.SKILL_POINTS, -1);
+                                System.out.println(passiveSkill.toString() + " upgraded!");
+                                System.out.println("You have " + avatar.getStats().getStat(Stat.SKILL_POINTS) + " remaining!");
+                            }
+                            else
+                                System.out.println("You don't have any skill points!");
+                        }
+                    });
+                    return actions;
+                }
+
+                @Override
+                public Object getAttachment() {
+                    return null;
+                }
+            });
+        }
+
+        for(int i = 0; i < activeSkillList.size(); i++){
+            ActiveSkill activeSkill = activeSkillList.get(i);
+
+            options.add(new MenuOption() {
+                @Override
+                public String getTitle() {
+                    return activeSkill.toString() + " - " + activeSkill.getLevel();
+                }
+
+                @Override
+                public ArrayList<Action> getActions() {
+                    ArrayList<Action> actions = new ArrayList<>();
+                    actions.add(new Action() {
+                        @Override
+                        public void execute() {
+                            if(avatar.getStats().getStat(Stat.SKILL_POINTS) > 0){
+                                activeSkill.incrementLevel();
+                                avatar.getStats().modifyStat(Stat.SKILL_POINTS, -1);
+                                System.out.println(activeSkill.toString() + " upgraded!");
+                                System.out.println("You have " + avatar.getStats().getStat(Stat.SKILL_POINTS) + " remaining!");
+                            }
+                            else
+                                System.out.println("You don't have any skill points!");
+                        }
+                    });
+                    return actions;
+                }
+
+                @Override
+                public Object getAttachment() {
+                    return null;
+                }
+            });
+        }
+
         return new Menu(options);
     }
 

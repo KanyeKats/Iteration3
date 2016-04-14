@@ -41,4 +41,9 @@ public class PickPocket extends ActiveSkill {
         Entity npc = entity.getTileInFront().getEntity();
         entity.addItemToInventory(npc.getInventory().removeRandomItem());
     }
+
+    @Override
+    public String toString(){
+        return "Pick-Pocket";
+    }
 }

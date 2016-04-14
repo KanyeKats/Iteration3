@@ -31,4 +31,9 @@ public class StaffMastery extends PassiveSkill{
         passiveSkillVisitor.activate(this);
     }
 
+    @Override
+    public String toString(){
+        return "Staff Mastery";
+    }
+
 }

@@ -31,4 +31,9 @@ public class RangedWeaponMastery extends PassiveSkill {
         passiveSkillVisitor.activate(this);
     }
 
+    @Override
+    public String toString(){
+        return "Ranged Weapon Mastery";
+    }
+
 }

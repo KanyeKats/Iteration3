@@ -47,7 +47,7 @@ public class Stats {
         // Else, it will return the same value we passed in
         currentValue = stat.checkLevelCap(currentValue);
 
-        if (currentValue < 1 ) currentValue = 1;
+        if (currentValue < 1 && stat != Stat.SKILL_POINTS) currentValue = 1;
 
         // Set the stats new value
         stats.put(stat, currentValue);

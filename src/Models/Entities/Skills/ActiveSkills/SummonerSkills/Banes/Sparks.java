@@ -38,4 +38,9 @@ public class Sparks extends Bane {
         StatModification damageStatMod = new StatModification(Stat.HEALTH, -BASE_DAMAGE_AMOUNT*level);
         consequence = new ImmediateStatConsequence(new StatModificationList(damageStatMod));
     }
+
+    @Override
+    public String toString(){
+        return "Sparks";
+    }
 }

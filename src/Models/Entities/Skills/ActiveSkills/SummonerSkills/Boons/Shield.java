@@ -28,4 +28,9 @@ public class Shield extends Boon {
         consequence = new ImmediateStatConsequence(new StatModificationList(defenseStatMod));
         activeTime = (int)(level * 0.6 * BASE_ACTIVE_TIME);
     }
+
+    @Override
+    public String toString(){
+        return "Shield";
+    }
 }

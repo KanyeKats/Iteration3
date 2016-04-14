@@ -26,4 +26,9 @@ public class BindWounds extends ActiveSkill {
         StatModification healthStatMod = new StatModification(Stat.HEALTH, BASE_HEAL_AMOUNT*level);
         consequence = new ImmediateStatConsequence(new StatModificationList(healthStatMod));
     }
+
+    @Override
+    public String toString(){
+        return "Bind Wounds";
+    }
 }
