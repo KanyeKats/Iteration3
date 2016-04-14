@@ -52,15 +52,22 @@ public class AvatarCreationMenuView extends MenuView {
         g.setColor(background);
         g.fillRect(0, 0, width, height);
 
-        // Draw the title.
-        drawTitle(g);
         g.dispose();
     }
 
     @Override
     public void renderOptions() {
 
-        Graphics g = viewContent.getGraphics();
+        Graphics2D g = (Graphics2D)viewContent.getGraphics();
+
+        //AA
+        RenderingHints rh = new RenderingHints(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHints(rh);
+
+        // Draw the title.
+        drawTitle(g);
 
         // Find the starting point.
         if(titleFont==null){
