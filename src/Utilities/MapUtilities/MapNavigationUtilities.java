@@ -221,21 +221,14 @@ public class MapNavigationUtilities {
 
     }
 
-    public static ArrayList<Tile> getTilesinPrism(Point3D point, int rangeofRadius, int rangeofColumn, HashMap<Point3D,Tile> map){
+    public static ArrayList<Tile> getTilesinPrism(Point3D point, int rangeofRadius, HashMap<Point3D,Tile> map){
 
         ArrayList<Tile> tilesInRange = new ArrayList<>();
 
-        //upper half of sphere
-        for(int i = 0; i <= rangeofColumn; i++){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
-            for(Tile tile: tilesInPlane) {
-                tilesInRange.add(tile);
-            }
-        }
 
-        //lower half of sphere
-        for(int i = -1; i >= -rangeofColumn; i--){
-            ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
+        //upper half of sphere
+        for(int i = 0; i < Constants.COLUMN_HEIGHT; i++){
+            ArrayList<Tile> tilesInPlane = getTilesinPlane(new Point3D(point.getX(),point.getY(),i),rangeofRadius,map);
             for(Tile tile: tilesInPlane) {
                 tilesInRange.add(tile);
             }
@@ -288,7 +281,6 @@ public class MapNavigationUtilities {
         int screenWidth = Constants.SCREEN_WIDTH/Constants.TILE_WIDTH/2 + 2;
         int screenHeight = Constants.SCREEN_HEIGHT/Constants.TILE_HEIGHT/2 + 2;
 
-        System.out.println(screenWidth);
         for(int i = -screenWidth; i <= screenWidth; i++){
             for(int j = - screenHeight; j <= screenHeight; j++){
                 for(int k = 0; k < 10; k++) {
@@ -297,7 +289,6 @@ public class MapNavigationUtilities {
                 }
             }
         }
-        System.out.println(tilesInRange.size());
         return tilesInRange;
 
 

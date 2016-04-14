@@ -1,6 +1,7 @@
 package Views;
 
 import Models.Entities.Entity;
+import Models.Entities.Stats.Stat;
 import Models.Map.Map;
 import Utilities.MapUtilities.MapDrawingVisitor;
 
@@ -35,7 +36,7 @@ public class AreaViewport extends View {
         renderBackground(g);
 
         // Draw the map onto the graphics
-        map.draw(viewContent, avatar.getLocation());
+        map.draw(viewContent, avatar.getLocation(), avatar.getStats().getStat(Stat.RADIUS_OF_VISIBILITY));
 
         // Notify the observers of this view (GameView) that it changed.
         this.setChanged();

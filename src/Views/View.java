@@ -27,10 +27,10 @@ public abstract class View extends Observable implements Observer{
 
     // Render will be called every tick and will just display the buffered image (so that it doesnt have to get re constructed every time)
     public void render(Graphics g){
-        g.drawImage(viewContent, 0, 0, width, height, null);
-        if(contentChanged){
-            contentChanged = false;
-        }
+//        if(contentChanged){
+            g.drawImage(viewContent, 0, 0, width, height, null);
+//            contentChanged = false;
+//        }
     }
 
     @Override
