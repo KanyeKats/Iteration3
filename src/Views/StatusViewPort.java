@@ -11,11 +11,11 @@ import java.awt.image.BufferedImage;
 /**
  * Created by Aidan on 4/12/2016.
  */
-public class StatusViewport extends View {
+public class StatusViewPort extends View {
 
     private Entity avatar;
 
-    public StatusViewport(int width, int height, Entity avatar) {
+    public StatusViewPort(int width, int height, Entity avatar) {
         super(width, height);
 
         this.avatar = avatar;
