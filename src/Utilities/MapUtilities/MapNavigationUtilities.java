@@ -4,6 +4,7 @@ import Models.Entities.Entity;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
+import Utilities.Constants;
 import javafx.geometry.Point3D;
 
 import java.lang.reflect.Array;
@@ -233,7 +234,7 @@ public class MapNavigationUtilities {
         }
 
         //lower half of sphere
-        for(int i = -1; i <= -rangeofColumn; i--){
+        for(int i = -1; i >= -rangeofColumn; i--){
             ArrayList<Tile> tilesInPlane = getTilesinPlane(point.add(0,0,i),rangeofRadius,map);
             for(Tile tile: tilesInPlane) {
                 tilesInRange.add(tile);
@@ -282,6 +283,24 @@ public class MapNavigationUtilities {
         return (dx + dy + dz)/2;
     }
 
+    public static HashMap<Point3D, Tile> getTilesOnScreen(Point3D point, HashMap<Point3D,Tile> map) {
+        HashMap<Point3D, Tile> tilesInRange = new HashMap<>();
+        int screenWidth = Constants.SCREEN_WIDTH/Constants.TILE_WIDTH/2 + 2;
+        int screenHeight = Constants.SCREEN_HEIGHT/Constants.TILE_HEIGHT/2 + 2;
 
+        System.out.println(screenWidth);
+        for(int i = -screenWidth; i <= screenWidth; i++){
+            for(int j = - screenHeight; j <= screenHeight; j++){
+                for(int k = 0; k < 10; k++) {
+                    Point3D keyPoint = new Point3D(point.getX()+ i, point.getY() + j, k);
+                    tilesInRange.put(keyPoint, map.get(keyPoint));
+                }
+            }
+        }
+        System.out.println(tilesInRange.size());
+        return tilesInRange;
+
+
+    }
 
 }

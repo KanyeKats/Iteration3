@@ -22,6 +22,7 @@ public class MapDrawingVisitor {
     private static int viewportWidth;
     private static int viewportHeight;
     private static Point3D center;
+    private static HashMap<Point3D, Tile> tilesOnScreen;
 
     public static void setViewportWidth(int w) {
         viewportWidth = w;
@@ -36,6 +37,9 @@ public class MapDrawingVisitor {
     }
 
     public static void accept(HashMap<Point3D, Tile> tile, BufferedImage viewContent, Point3D avatarCenter){
+        if(tilesOnScreen == null)
+            tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(avatarCenter, tile);
+
 
         // Set center, height, and width
         if (center == null) setCenter(avatarCenter);
@@ -51,6 +55,7 @@ public class MapDrawingVisitor {
         // Re-center on avatar if necessary.
         if (distance > 4) {
             setCenter(avatarCenter);
+            tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(avatarCenter, tile);
         }
 
         // Set up some useful variables
@@ -67,8 +72,10 @@ public class MapDrawingVisitor {
         // Put all the points into a priority queue based upon the order in which they should be rendered.
         PriorityQueue<Point3D> priorityQueue = new PriorityQueue<>(new TileComparator());
 
+        ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(avatarCenter, 3,Constants.COLUMN_HEIGHT, tilesOnScreen);
         for(Point3D point : tile.keySet()){
-            priorityQueue.offer(point);
+            if(tilesOnScreen.containsKey(point))
+                priorityQueue.offer(point);
         }
 
         while(!priorityQueue.isEmpty()){
@@ -77,7 +84,6 @@ public class MapDrawingVisitor {
             // Get the next tile to be rendered.
             Tile currentTile = tile.get(currentPoint);
 
-            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(avatarCenter, 3,Constants.COLUMN_HEIGHT, tile);
             // Get the image from this tile.
             Image tileImage;
             if(tilesinSight.contains(currentTile)) {
