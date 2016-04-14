@@ -43,9 +43,16 @@ public class PauseMenuView extends MenuView {
 
     @Override
     public void renderBackground() {
-        Graphics2D g2d = (Graphics2D)viewContent.getGraphics();
-        g2d.setColor(Color.BLACK);
-        g2d.dispose();
+        // Extract the graphics from the view content
+        Graphics2D g = (Graphics2D)viewContent.getGraphics();
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHints(rh);
+
+        // Draw a black background
+        g.setColor(background);
+        g.fillRect(0, 0, width, height);
+
+        g.dispose();
     }
 
     @Override
