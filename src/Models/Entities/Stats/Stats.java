@@ -48,6 +48,10 @@ public class Stats {
         currentValue = stat.checkLevelCap(currentValue);
 
         if (currentValue < 1 && stat != Stat.SKILL_POINTS) currentValue = 1;
+        if(stat == Stat.HEALTH && currentValue > getMaxHealth())
+            currentValue = getMaxHealth();
+        else if(stat == Stat.MANA && currentValue > getMaxMana())
+            currentValue = getMaxMana();
 
         // Set the stats new value
         stats.put(stat, currentValue);
@@ -86,7 +90,7 @@ public class Stats {
         stats.put(Stat.LEVEL,1 );
         stats.put(Stat.EXP_TO_LEVEL, 50);
         stats.put(Stat.LIVES, 3);
-        stats.put(Stat.RADIUS_OF_VISIBILITY, 10);
+        stats.put(Stat.RADIUS_OF_VISIBILITY, 3);
     }
 
 

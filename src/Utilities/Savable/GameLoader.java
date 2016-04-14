@@ -38,9 +38,8 @@ public class GameLoader {
             DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
 
             //read the XML string
-            InputSource is = new InputSource();
-            is.setCharacterStream(new StringReader(readFromFile(fileName)));
-            Document doc = docBuilder.parse(is);
+            File xmlFile = new File(fileName);
+            Document doc = docBuilder.parse(xmlFile);
 
             //find MAP node
             NodeList mapList = doc.getElementsByTagName("map");

@@ -11,14 +11,14 @@ import java.awt.*;
 public class GameView extends View {
 
     private AreaViewport areaViewport;
-    private StatusViewport statusViewport;
+    private StatusViewPort statusViewport;
 //    private SkillsViewport skillsViewport;
 
     public GameView(int width, int height, Entity entity, Map map) {
         super(width, height);
 
         this.areaViewport = new AreaViewport(width, height, map, entity);
-        this.statusViewport = new StatusViewport(width, height, entity);
+        this.statusViewport = new StatusViewPort(width, height, entity);
 //        this.skillsViewport = new SkillsViewport(entity.getSkillList());
 
         areaViewport.addObserver(this);

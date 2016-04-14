@@ -1,5 +1,8 @@
 package Core;
 
+import Controllers.MenuViewController;
+import Utilities.Constants;
+import Views.StartMenuView;
 import jdk.internal.util.xml.impl.Input;
 
 import java.util.InputMismatchException;
@@ -49,5 +52,13 @@ public class StateManager {
     private void reActivate(State state){
         inputDispatcher.setActiveController(state.getViewController());
         display.setActiveView(state.getView());
+    }
+
+    public void startOver(){
+        states.removeAllElements();
+        Models.Menu.Menu startMenu = Models.Menu.Menu.createStartMenu(this);
+        MenuViewController startMenuController = new MenuViewController(this, startMenu);
+        StartMenuView startMenuView = new StartMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, startMenu);
+        setActiveState(new State(startMenuController, startMenuView));
     }
 }
