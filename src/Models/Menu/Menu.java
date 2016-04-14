@@ -6,6 +6,8 @@ import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
 import Models.Entities.Occupation.Smasher;
+import Models.Entities.Occupation.Sneak;
+import Models.Entities.Occupation.Summoner;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.InfluenceEffect.LinearEffect;
@@ -196,7 +198,15 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.out.println("Summoner");
-                        // TODO: Implement this.
+
+
+                        Map map = GameLoader.loadMap("./res/map/default_map.xml");
+                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
+                        Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
+                        map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
+                        GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
                 return actions;
@@ -220,6 +230,14 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.out.println("Sneak");
+
+                        Map map = GameLoader.loadMap("./res/map/default_map.xml");
+                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
+                        Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
+                        map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
+                        GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
                 return actions;
