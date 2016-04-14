@@ -16,18 +16,14 @@ import Models.Entities.Stats.Stat;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
-import Models.Map.Tile;
 import Utilities.Action;
 import Utilities.Constants;
-import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.GameLoader;
 import Utilities.Savable.GameSaver;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
-import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Bradley on 4/4/2016.
@@ -171,7 +167,6 @@ public class Menu extends java.util.Observable{
                         System.out.println("Smasher");
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
-                        GameSaver.saveMap(map);
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);

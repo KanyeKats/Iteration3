@@ -24,15 +24,17 @@ public class DetectTrap extends ActiveSkill {
     public void activate(Entity entity){
 
 
-        ArrayList<Tile> potentialTrappedTiles = MapNavigationUtilities.getTilesinPlane(entity.getLocation(),2,entity.getMap());
+        ArrayList<ArrayList<Tile>> potentialTrappedTiles = MapNavigationUtilities.getRadialTiles(entity.getLocation(),2,entity.getMap());
 
-        for(Tile tile: potentialTrappedTiles) {
-            //if there is a trap
-            if (!tile.getAreaEffect().getVisibility()) {
-                if (isCooledDown) {
-                    if (percentChanceByLevel()) {
-                        //Implement making a trap visible
-                        tile.getAreaEffect().setVisibility(true);
+        for (ArrayList<Tile> al : potentialTrappedTiles) {
+            for (Tile tile : al) {
+                //if there is a trap
+                if (!tile.getAreaEffect().getVisibility()) {
+                    if (isCooledDown) {
+                        if (percentChanceByLevel()) {
+                            //Implement making a trap visible
+                            tile.getAreaEffect().setVisibility(true);
+                        }
                     }
                 }
             }

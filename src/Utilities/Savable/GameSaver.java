@@ -40,14 +40,12 @@ public class GameSaver {
             StreamResult result = new StreamResult(writer);
             DOMSource source = new DOMSource(doc);
             trans.transform(source, result);
-            writeToFile(writer.toString(), "./res/map/test.xml");
 
         } catch (TransformerException ex) {
             System.out.println("Error outputting document");
         } catch (ParserConfigurationException ex) {
             System.out.println("Error building document");
         }
-//        writeToFile(map.save(), "./res/map/test.xml");
     }
     private static void writeToFile(String data, String fileName) {
         try(  PrintWriter out = new PrintWriter( fileName )  ){
