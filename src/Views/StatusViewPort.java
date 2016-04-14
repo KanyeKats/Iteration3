@@ -35,7 +35,7 @@ public class StatusViewport extends View {
         int y = height * 4/5;
         g.setColor(new Color(70, 70, 70));
         g.fillRect(x, y, width * 4/10, height/5);
-        
+
         Font font = new Font("ROMAN_BASELINE",Font.BOLD,17);
         g.setFont(font);
         g.setColor(Color.WHITE);
