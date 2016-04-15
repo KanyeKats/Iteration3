@@ -8,6 +8,7 @@ import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
+
 import Views.*;
 
 import java.awt.event.KeyEvent;
@@ -22,14 +23,16 @@ public class GameViewController extends ViewController {
     private Entity avatar;
     private Map map;
     private GameViewController controller;
+    private AreaViewport areaViewport;
     private int refreshCounter; // This is done purely for performance enhancments.
 
 
-    public GameViewController(StateManager stateManager, Entity avatar, Map map) {
+    public GameViewController(StateManager stateManager, Entity avatar, Map map, AreaViewport areaViewport) {
         super(stateManager);
         this.avatar = avatar;
         this.map = map;
         controller = this;
+        this.areaViewport = areaViewport;
         refreshCounter = 0;
     }
 
@@ -40,7 +43,12 @@ public class GameViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_W, new Action() {
             @Override
             public void execute() {
-                avatar.move(Direction.NORTH);
+                if(areaViewport.isMoving()){
+                    areaViewport.move(Direction.NORTH);
+                }
+                else {
+                    avatar.move(Direction.NORTH);
+                }
             }
 
             @Override
@@ -49,7 +57,12 @@ public class GameViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_Q, new Action() {
             @Override
             public void execute() {
-                avatar.move(Direction.NORTH_WEST);
+                if(areaViewport.isMoving()){
+                    areaViewport.move(Direction.NORTH_WEST);
+                }
+                else {
+                    avatar.move(Direction.NORTH_WEST);
+                }
             }
 
             @Override
@@ -58,16 +71,25 @@ public class GameViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_E, new Action() {
             @Override
             public void execute() {
-                avatar.move(Direction.NORTH_EAST);
+                if(areaViewport.isMoving()){
+                    areaViewport.move(Direction.NORTH_EAST);
+                }
+                else {
+                    avatar.move(Direction.NORTH_EAST);
+                }
             }
-
             @Override
             public String toString(){ return "Move Northeast";}
         });
         keyBindings.addBinding(KeyEvent.VK_X, new Action() {
             @Override
             public void execute() {
-                avatar.move(Direction.SOUTH);
+                if(areaViewport.isMoving()){
+                    areaViewport.move(Direction.SOUTH);
+                }
+                else {
+                    avatar.move(Direction.SOUTH);
+                }
             }
 
             @Override
@@ -76,7 +98,12 @@ public class GameViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_Z, new Action() {
             @Override
             public void execute() {
-                avatar.move(Direction.SOUTH_WEST);
+                if(areaViewport.isMoving()){
+                    areaViewport.move(Direction.SOUTH_WEST);
+                }
+                else {
+                    avatar.move(Direction.SOUTH_WEST);
+                }
             }
 
             @Override
@@ -85,11 +112,30 @@ public class GameViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_C, new Action() {
             @Override
             public void execute() {
-                avatar.move(Direction.SOUTH_EAST);
+                if(areaViewport.isMoving()){
+                    areaViewport.move(Direction.SOUTH_EAST);
+                }
+                else {
+                    avatar.move(Direction.SOUTH_EAST);
+                }
             }
 
             @Override
             public String toString(){ return "Move Southeast";}
+        });
+
+        keyBindings.addBinding(KeyEvent.VK_Y, new Action() {
+            @Override
+            public void execute() {
+                if (areaViewport.isMoving()) {
+                    areaViewport.setMoving(false);
+                }
+                else {
+                    areaViewport.setMoving(true);
+                }
+            }
+            @Override
+            public String toString(){ return "Move Camera";}
         });
 
         keyBindings.addBinding(KeyEvent.VK_S, new Action() {

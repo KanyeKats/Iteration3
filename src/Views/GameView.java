@@ -47,4 +47,8 @@ public class GameView extends View {
         // Cleanup
         g.dispose();
     }
+
+    public AreaViewport getAreaViewPort(){
+        return this.areaViewport;
+    }
 }
