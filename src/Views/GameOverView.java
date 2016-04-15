@@ -27,7 +27,7 @@ public class GameOverView extends MenuView {
 
         optionWidth = width / 6;
         optionHeight = height / 25;
-        titleFont = new Font("SansSerif", Font.BOLD, width / 6);
+        titleFont = new Font("SansSerif", Font.BOLD, width / 12);
         optionFont = new Font("SansSerif", Font.BOLD, width / 86);
         optionVerticalMargin = (int) (width * 0.15);
         optionVerticalSpacing = 10;
