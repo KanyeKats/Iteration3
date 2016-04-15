@@ -74,11 +74,6 @@ public class Map extends Observable implements Savable {
         // Get the entites movement speed.
         int movementSpeed = entity.getStats().getStat(Stat.MOVEMENT);
 
-        // If an entities speed is 0, should not move
-        if (movementSpeed == 0) {
-            return;
-        }
-
         // Move him at that rate, upon completion of translation, we will apply items/AoEs/etc on the tile.
         translateEntity(entity, destination, movementSpeed);
     }
