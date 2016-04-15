@@ -12,7 +12,6 @@ import Utilities.Toast;
 import Views.GameOverView;
 import Views.PauseMenuView;
 import Views.SkillViewPort;
-import Views.StartMenuView;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -42,7 +41,7 @@ public class GameViewController extends ViewController {
             @Override
             public void execute() {
                 avatar.move(Direction.NORTH);
-                Toast.createToast("MOVING NORTH YO", 3);
+                Toast.getInstance().createToast("MOVING NORTH YO", 3);
             }
 
             @Override
@@ -70,6 +69,7 @@ public class GameViewController extends ViewController {
             @Override
             public void execute() {
                 avatar.move(Direction.SOUTH);
+                Toast.getInstance().createToast("ASDASDASDWQWE@!DASDC", 3);
             }
 
             @Override

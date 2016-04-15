@@ -6,18 +6,27 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by Magic_Buddha on 4/13/2016.
+ * Created by Magic_Buddha on 4/14/2016.
  */
 public class Toast extends Observable {
+    private static Toast ourInstance = new Toast();
+
+    public static Toast getInstance() {
+        return ourInstance;
+    }
+
+    private Toast() {}
+
+
     //holds toasts queue
-    private static LinkedList<TimedToast> messageQueue = new LinkedList<>();
+    private  LinkedList<TimedToast> messageQueue = new LinkedList<>();
 
-    private static int milliToSec = 1000;
-    private static String currentMessage = "";
-    private static boolean active = false;
-    private static Timer timer = new Timer();
+    private  int milliToSec = 1000;
+    private  String currentMessage = "";
+    private  boolean active = false;
+    private  Timer timer = new Timer();
 
-    public static void createToast(String message, int duration) {
+    public  void createToast(String message, int duration) {
         System.out.println("Added new Toast");
         TimedToast tt = new TimedToast(message,duration);
         messageQueue.addLast(tt);
@@ -26,21 +35,22 @@ public class Toast extends Observable {
         }
     }
 
-    public static boolean isActive() {
+    public  boolean isActive() {
         return active;
     }
 
-    public static String getCurrentMessage() {
+    public  String getCurrentMessage() {
         return currentMessage;
     }
 
-    private static void activateToasts() {
+    private  void activateToasts() {
         if ( messageQueue.size() > 0 ) {
             TimedToast tt = messageQueue.pollFirst();
             currentMessage = tt.getMessage();
-
             System.out.println("Starting... " + currentMessage);
             active = true;
+            setChanged();
+            notifyObservers();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -51,12 +61,14 @@ public class Toast extends Observable {
 
         } else {
             active = false;
+            setChanged();
+            notifyObservers();
         }
     }
 
 
     //used like a struct in c++
-    private static class TimedToast {
+    private class TimedToast {
 
         private String message;
         private int duration;
@@ -72,14 +84,5 @@ public class Toast extends Observable {
         public int getDuration() {
             return this.duration;
         }
-    }
-
-
-    public static void main(String args[]) {
-        Toast.createToast("pirmas", 1);
-        Toast.createToast("antras", 2);
-        Toast.createToast("tretcias", 3);
-        Toast.createToast("paskutinis", 1);
-
     }
 }

@@ -21,7 +21,6 @@ public class GameView extends View {
         this.areaViewport = new AreaViewport(width, height, map, entity);
         this.statusViewport = new StatusViewPort(width, height, entity);
         this.toastView = new ToastView(width, height);
-
 //        this.skillsViewport = new SkillsViewport(entity.getSkillList());
 
         areaViewport.addObserver(this);
