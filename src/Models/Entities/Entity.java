@@ -14,6 +14,7 @@ import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
 import Models.Items.Takable.Equippable.Helmets.Helmet;
 import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
+import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
@@ -81,7 +82,7 @@ public class Entity extends Observable implements Savable {
         this.occupation = occupation;
         this.location = location;
         this.stats = new Stats();
-        this.inventory = new Inventory(10);
+        this.inventory = new Inventory(20);
         this.equipment = new Equipment(stats, inventory);
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
         this.direction = Direction.SOUTH;
@@ -163,13 +164,18 @@ public class Entity extends Observable implements Savable {
     }
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
-
-    public boolean addItemToInventory(Item item){
+    public boolean addItemToInventory(TakableItem item){
         return inventory.addItem(item);
     }
 
-    public void dropItem(int positionInInventory){
+    public void dropItem(int positionInInventory) {
+        // Remove the item from the inventory
+        TakableItem item = this.inventory.removeItemAtIndex(positionInInventory);
 
+        // Drop it like its hot
+        if (item != null) {
+            map.insertItem(item, location);
+        }
     }
 
     public void useSkill(Skill skill){
@@ -358,7 +364,7 @@ public class Entity extends Observable implements Savable {
         occupation.load(data);
         Stats stats = new Stats();
         stats.load(data);
-        Inventory inventory = new Inventory(10);
+        Inventory inventory = new Inventory(20);
         inventory.load(data);
         Equipment equipment = new Equipment(stats, inventory);
         equipment.load(data);

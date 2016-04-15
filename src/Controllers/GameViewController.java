@@ -8,10 +8,7 @@ import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
-import Views.GameOverView;
-import Views.PauseMenuView;
-import Views.SkillViewPort;
-import Views.StartMenuView;
+import Views.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -104,6 +101,18 @@ public class GameViewController extends ViewController {
             @Override
             public String toString(){ return "Skills Menu";}
         });
+        keyBindings.addBinding(KeyEvent.VK_I, new Action() {
+            @Override
+            public void execute() {
+                InventoryView inventoryView = new InventoryView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory());
+                InventoryViewController inventoryViewController = new InventoryViewController(stateManager, inventoryView, avatar);
+                stateManager.setActiveState(new State(inventoryViewController, inventoryView));
+            }
+
+            @Override
+            public String toString(){ return "Inventory View";}
+        });
+
         keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
             @Override
             public void execute() {
