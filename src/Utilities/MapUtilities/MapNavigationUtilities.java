@@ -183,6 +183,45 @@ public class MapNavigationUtilities {
         return resultTiles;
     }
 
+    public static ArrayList<Point3D> getConicalPoints(Point3D point, int range, Map map, Direction direction) {
+        Point3D pt = direction.getPointAdjacentTo(point);
+        Direction leftDir = rotateEnum(4, direction);
+        Direction rightDir = rotateEnum(2, direction);
+        ArrayList<Point3D> resultPoints = new ArrayList<>();
+
+        for (int i = 1; i < range; i++) {
+
+            resultPoints.add(pt);
+
+            //set up for expansion on both sides
+            Point3D leftSide = pt; //curr point + 4
+            Point3D rightSide = pt; //curr point + 2
+
+            //if even then expand out i/2 in both directions
+            //if odd expand out i/2 (truncated) in both directions
+            for (int j = 0; j < i/2; j++) {
+                leftSide = leftDir.getPointAdjacentTo(leftSide);
+                Point3D upLeft = leftSide;
+                for (int k = 0; k < i/2; k++) {
+                    upLeft = upLeft.add(0,0,1);
+                    resultPoints.add(upLeft);
+                }
+                rightSide = rightDir.getPointAdjacentTo(rightSide);
+                Point3D upRight = rightSide;
+                for (int k = 0; k < i/2; k++) {
+                    upRight = upRight.add(0,0,1);
+                    resultPoints.add(upRight);
+                }
+                resultPoints.add(leftSide);
+                resultPoints.add(rightSide);
+            }
+
+            //move to the next radius
+            pt = direction.getPointAdjacentTo(pt);
+        }
+        return resultPoints;
+    }
+
     public static ArrayList<ArrayList<Tile>> getLinearTilesInPlane(Point3D point, int range, Map map, Direction direction) {
         ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
         Point3D nextPoint = point;

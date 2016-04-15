@@ -1,5 +1,6 @@
 package Models.Entities.NPC.AI.Brain;
 
+import Models.Entities.NPC.AI.Decision.Decision;
 import Models.Entities.NPC.AI.Personality;
 import Models.Entities.NPC.AI.VisualInfo;
 import Models.Entities.NPC.NPC;
@@ -11,16 +12,22 @@ public class Brain {
 
     private VisualCortex visualCortex;
     private FrontalLobe frontalLobe;
-    private MotorCortex motorCortex;
+    private NPC npc;
 
 
-    public Brain(Personality personality) {
+    public Brain(Personality personality, NPC npc) {
         this.visualCortex = new VisualCortex();
         this.frontalLobe = new FrontalLobe(personality);
-        this.motorCortex = new MotorCortex();
+        this.npc = npc;
     }
 
-    public void think(NPC npc){
-        VisualInfo visualInfo = visualCortex.process(npc, npc.getMap());
+    public void think(){
+
+        VisualInfo visualInfo = visualCortex.look(npc, npc.getMap());
+        frontalLobe.process(visualInfo, npc);
+    }
+
+    public boolean willTrade(){
+        return frontalLobe.willTrade();
     }
 }

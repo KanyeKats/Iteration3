@@ -23,12 +23,12 @@ public class NPC extends Entity {
 
     public NPC(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D point3D, Direction orientation, Map map, Personality personality) {
         super(occupation, stats, inventory, equipment, sprite, point3D, orientation, map);
-        this.brain = new Brain(personality);
+        this.brain = new Brain(personality, this);
     }
 
     @Override
     public void update() {
         super.update();
-        brain.think(this);
+        brain.think();
     }
 }
