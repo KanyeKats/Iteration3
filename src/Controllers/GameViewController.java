@@ -113,6 +113,24 @@ public class GameViewController extends ViewController {
             public String toString(){ return "Inventory View";}
         });
 
+
+        keyBindings.addBinding(KeyEvent.VK_SPACE, new Action() {
+            @Override
+            public void execute() {
+
+                if(avatar.getTileInFront().containsEntity()) {
+                    Models.Menu.Menu npcMenu = Models.Menu.Menu.createNPCMenu(stateManager, avatar, avatar.getTileInFront().getEntity());
+                    MenuViewController npcMenuController = new MenuViewController(stateManager, npcMenu);
+                    NPCMenuView npcMenuView = new NPCMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcMenu);
+                    stateManager.setActiveState(new State(npcMenuController, npcMenuView));
+                }
+            }
+
+            @Override
+            public String toString(){ return "NPC Menu View";}
+        });
+
+
         keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
             @Override
             public void execute() {
