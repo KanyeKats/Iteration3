@@ -1,8 +1,6 @@
 package Controllers;
 
 import Core.StateManager;
-import Models.Entities.Entity;
-import Models.Items.Takable.TakableItem;
 import Utilities.Action;
 import Views.NPCShopView;
 
@@ -16,14 +14,10 @@ public class NPCShopViewController extends ViewController {
 
     // References to the shop view to get selected, set selected, etc.
     private NPCShopView npcShopView;
-    // Needs ref to entities in order to trade items
-    private Entity avatar, npc;
 
-    public NPCShopViewController(StateManager stateManager, NPCShopView npcShopView, Entity avatar, Entity npc) {
+    public NPCShopViewController(StateManager stateManager, NPCShopView npcShopView) {
         super(stateManager);
         this.npcShopView = npcShopView;
-        this.avatar = avatar;
-        this.npc = npc;
         
     }
 
