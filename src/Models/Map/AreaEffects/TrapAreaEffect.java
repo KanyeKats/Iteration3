@@ -1,5 +1,6 @@
 package Models.Map.AreaEffects;
 
+import Models.Consequences.TrappedConsequence;
 import Models.Entities.Entity;
 import Models.Consequences.BehaviorConsequence;
 import Models.Map.AreaEffect;
@@ -24,14 +25,14 @@ public class TrapAreaEffect extends AreaEffect {
         this.decal = Decal.trap();
 
         // Set visibility and removability
-        this.isVisible = false;
+        this.isVisible = true;
         this.isRemovable = true;
     }
 
     @Override
     public void activate(Entity entity) {
         // TODO: we need to create a behavior consequence that stops movement for trap!
-        BehaviorConsequence consequence = new BehaviorConsequence(trappedTime);
+        BehaviorConsequence consequence = new TrappedConsequence(trappedTime);
 
         // Execute the consequence
         consequence.execute(entity);

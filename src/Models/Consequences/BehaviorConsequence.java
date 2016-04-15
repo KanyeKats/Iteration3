@@ -28,6 +28,8 @@ public class BehaviorConsequence extends Consequence {
             @Override
             public void run() {
                 //Reset behavior change
+                //prolly should be:
+                //remove(entity)
             }
         }, activeTime);
     }
