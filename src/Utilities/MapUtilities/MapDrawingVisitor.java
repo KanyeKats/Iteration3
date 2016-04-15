@@ -37,7 +37,7 @@ public class MapDrawingVisitor  {
         center = c;
     }
 
-    public static void accept(HashMap<Point3D, Tile> tile, BufferedImage viewContent, Point3D drawingCenter, int rangeofVisibility, boolean cameraMoving){
+    public static void accept(HashMap<Point3D, Tile> tile, BufferedImage viewContent, Point3D drawingCenter, Point3D avatarLocation, int rangeofVisibility, boolean cameraMoving){
             if(tilesOnScreen == null)
                 tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
 
@@ -71,7 +71,7 @@ public class MapDrawingVisitor  {
 
         // Put all the points into a priority queue based upon the order in which they should be rendered.
         PriorityQueue<Point3D> priorityQueue = new PriorityQueue<>(new TileComparator());
-        ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(drawingCenter, rangeofVisibility, tile);
+        ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(avatarLocation, rangeofVisibility, tile);
 
         for(Point3D point : tile.keySet()){
             if(tilesOnScreen.containsKey(point))
@@ -85,7 +85,7 @@ public class MapDrawingVisitor  {
             Tile currentTile = tile.get(currentPoint);
             // Get the image from this tile.
             Image tileImage;
-            if(tilesinSight.contains(currentTile) && !cameraMoving) {
+            if(tilesinSight.contains(currentTile)) {
                 tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), true);
                 currentTile.setVisited();
             }
@@ -128,6 +128,7 @@ public class MapDrawingVisitor  {
                 }
                 else{
                     currentEntity.setPixelLocation(pixelPoint);
+                    EntityDrawer.drawEntity(currentEntity, g);
                 }
             }
         }

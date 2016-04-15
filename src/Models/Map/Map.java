@@ -294,8 +294,8 @@ public class Map extends Observable implements Savable {
 //    public void acceptDrawingVisitor(MapDrawingVisitor visitor){
 //        visitor.accept(tiles);
 //    }
-    public void draw(BufferedImage image, Point3D center, int rangeofVisibility , boolean cameraMvoing) {
-        MapDrawingVisitor.accept(tiles, image, center, rangeofVisibility, cameraMvoing);
+    public void draw(BufferedImage image, Point3D center, Point3D avatarLocation, int rangeofVisibility , boolean cameraMvoing) {
+        MapDrawingVisitor.accept(tiles, image, center, avatarLocation, rangeofVisibility, cameraMvoing);
     }
 
     //// MOVEMENT CHECKERS ////

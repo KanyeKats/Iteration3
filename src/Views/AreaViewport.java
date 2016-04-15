@@ -53,7 +53,7 @@ public class AreaViewport extends View {
         else {
             renderLocation = camera.getLocation();
         }
-        map.draw(viewContent, renderLocation, avatar.getStats().getStat(Stat.RADIUS_OF_VISIBILITY),isMoving);
+        map.draw(viewContent, renderLocation, avatar.getLocation(), avatar.getStats().getStat(Stat.RADIUS_OF_VISIBILITY),isMoving);
         // Notify the observers of this view (GameView) that it changed.
         this.setChanged();
         this.notifyObservers();
