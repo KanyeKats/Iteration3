@@ -25,7 +25,7 @@ public class TrapAreaEffect extends AreaEffect {
         this.decal = Decal.trap();
 
         // Set visibility and removability
-        this.isVisible = true;
+        this.isVisible = false;
         this.isRemovable = true;
     }
 
