@@ -37,12 +37,12 @@ public class MapDrawingVisitor  {
         center = c;
     }
 
-    public static void accept(HashMap<Point3D, Tile> tile, BufferedImage viewContent, Point3D avatarCenter, int rangeofVisibility){
+    public static void accept(HashMap<Point3D, Tile> tile, BufferedImage viewContent, Point3D drawingCenter, int rangeofVisibility, boolean cameraMoving){
             if(tilesOnScreen == null)
-                tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(avatarCenter, tile);
+                tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
 
         // Set center, height, and width
-        if (center == null) setCenter(avatarCenter);
+        if (center == null) setCenter(drawingCenter);
         setViewportHeight(viewContent.getHeight());
         setViewportWidth(viewContent.getWidth());
 
@@ -50,12 +50,12 @@ public class MapDrawingVisitor  {
         Graphics g = viewContent.getGraphics();
 
         // Get distance between AreaViewPort's current center and the Avatar's location
-        int distance = MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(center), MapUtilities.to2DPoint(avatarCenter));
+        int distance = MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(center), MapUtilities.to2DPoint(drawingCenter));
 
         // Re-center on avatar if necessary.
         if (distance > 4) {
-            setCenter(avatarCenter);
-            tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(avatarCenter, tile);
+            setCenter(drawingCenter);
+            tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
         }
 
         // Set up some useful variables
@@ -71,7 +71,7 @@ public class MapDrawingVisitor  {
 
         // Put all the points into a priority queue based upon the order in which they should be rendered.
         PriorityQueue<Point3D> priorityQueue = new PriorityQueue<>(new TileComparator());
-        ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(avatarCenter, rangeofVisibility, tile);
+        ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(drawingCenter, rangeofVisibility, tile);
 
         for(Point3D point : tile.keySet()){
             if(tilesOnScreen.containsKey(point))
@@ -85,7 +85,7 @@ public class MapDrawingVisitor  {
             Tile currentTile = tile.get(currentPoint);
             // Get the image from this tile.
             Image tileImage;
-            if(tilesinSight.contains(currentTile)) {
+            if(tilesinSight.contains(currentTile) && !cameraMoving) {
                 tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), true);
                 currentTile.setVisited();
             }
