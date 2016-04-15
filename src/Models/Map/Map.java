@@ -71,21 +71,6 @@ public class Map extends Observable implements Savable {
             return;
         }
 
-        //for the teleport
-        if (MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(source),MapUtilities.to2DPoint(destination)) > 1) {
-            if (!updatedDestinationTile.containsEntity()) {
-                entity.setLocation(destination);
-                entity.setPixelLocation(updatedDestinationTile.getPixelPoint());
-                sourceTile.removeEntity();
-                updatedDestinationTile.insertEntity(entity);
-
-                updatedDestinationTile.activateTileObjectsOnEntity(entity);
-
-                setChanged();
-                notifyObservers();
-            }
-        }
-
         // Get the entites movement speed.
         int movementSpeed = entity.getStats().getStat(Stat.MOVEMENT);
 
@@ -225,6 +210,25 @@ public class Map extends Observable implements Savable {
 
         // Add the entity to the list of entites
         entitiesOnMap.add(entity);
+    }
+
+    public void moveEntityToNewTileAndRemoveFromOld(Entity entity, Point3D point) {
+        Tile destination = tiles.get(point);
+        Tile current = tiles.get(entity.getLocation());
+
+        current.removeEntity();
+
+        // insert
+        destination.insertEntity(entity);
+
+        entity.setLocation(point);
+        entity.setPixelLocation(destination.getPixelPoint());
+        entity.moveComplete();
+        destination.activateTileObjectsOnEntity(entity);
+
+        setChanged();
+        notifyObservers();
+
     }
 
     // This should only be used when an Entity is dead.
