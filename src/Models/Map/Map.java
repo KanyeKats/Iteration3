@@ -74,11 +74,6 @@ public class Map extends Observable implements Savable {
         // Get the entites movement speed.
         int movementSpeed = entity.getStats().getStat(Stat.MOVEMENT);
 
-        // If an entities speed is 0, should not move
-        if (movementSpeed == 0) {
-            return;
-        }
-
         // Move him at that rate, upon completion of translation, we will apply items/AoEs/etc on the tile.
         translateEntity(entity, destination, movementSpeed);
     }
@@ -311,8 +306,8 @@ public class Map extends Observable implements Savable {
 //    public void acceptDrawingVisitor(MapDrawingVisitor visitor){
 //        visitor.accept(tiles);
 //    }
-    public void draw(BufferedImage image, Point3D center, int rangeofVisibility) {
-        MapDrawingVisitor.accept(tiles, image, center, rangeofVisibility);
+    public void draw(BufferedImage image, Point3D center, Point3D avatarLocation, int rangeofVisibility , boolean cameraMvoing) {
+        MapDrawingVisitor.accept(tiles, image, center, avatarLocation, rangeofVisibility, cameraMvoing);
     }
 
     //// MOVEMENT CHECKERS ////

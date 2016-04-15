@@ -215,6 +215,12 @@ public class Entity extends Observable implements Savable {
         return activeSkillList;
     }
 
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public boolean getCanMove() { return this.canMove; }
+
     public void setActiveSkillList(ActiveSkillList activeSkillList) {
         this.activeSkillList = activeSkillList;
     }
@@ -286,11 +292,13 @@ public class Entity extends Observable implements Savable {
     }
 
     public void initPixelLocation(Point pixelLocation) {
-        if (this.pixelLocation == null || justMoved )
+        System.out.println(justMoved);
+        if (this.pixelLocation == null || justMoved) {
             this.pixelLocation = pixelLocation;
-            if (justMoved) {
-                justMoved = false;
-            }
+        }
+        if (justMoved) {
+            justMoved = false;
+        }
     }
 
     public Direction getDirection() {
