@@ -1,6 +1,5 @@
 package Models.Entities.NPC.AI.Brain;
 
-import Models.Entities.NPC.AI.Decision.Decision;
 import Models.Entities.NPC.AI.Personality;
 import Models.Entities.NPC.AI.VisualInfo;
 import Models.Entities.NPC.NPC;
@@ -30,4 +29,5 @@ public class Brain {
     public boolean willTrade(){
         return frontalLobe.willTrade();
     }
+    public String getDialog() { return frontalLobe.getDialog(); }
 }

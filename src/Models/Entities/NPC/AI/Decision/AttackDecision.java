@@ -22,6 +22,7 @@ public class AttackDecision implements Decision {
         if(MapUtilities.distanceBetweenPoints(npc.getLocation(), enemy.getLocation()) == 1){
             // If you are right next to the enemy, attack them.
             npc.getActiveSkillList().get(0).activate(enemy);
+            System.out.println("ATTACKING NOW");
         }else{
             // Otherwise walk towards them.
             Direction movementDirection = MapUtilities.closestDirectionBetweenAandB(npc.getLocation(), enemy.getLocation());
@@ -31,6 +32,6 @@ public class AttackDecision implements Decision {
 
     @Override
     public boolean continuePursuing(VisualInfo visualInfo) {
-        return false;
+        return true;
     }
 }

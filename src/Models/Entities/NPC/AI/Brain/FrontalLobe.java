@@ -2,14 +2,11 @@ package Models.Entities.NPC.AI.Brain;
 
 import Models.Entities.Entity;
 import Models.Entities.NPC.AI.Decision.*;
-import Models.Entities.NPC.AI.Memory;
 import Models.Entities.NPC.AI.Personality;
 import Models.Entities.NPC.AI.VisualInfo;
 import Models.Entities.NPC.NPC;
-import Models.Entities.Skills.InfluenceEffect.Effect;
 import javafx.geometry.Point3D;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -64,4 +61,5 @@ public class FrontalLobe {
     public boolean willTrade(){
         return personality.willTrade();
     }
+    public String getDialog() { return personality.getDialog(); }
 }

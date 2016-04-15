@@ -1,18 +1,12 @@
 package Models.Entities.NPC;
 
 import Models.Entities.Entity;
-import Models.Entities.Equipment;
-import Models.Entities.Inventory;
-import Models.Entities.NPC.AI.Personality;
 import Models.Entities.NPC.AI.Brain.Brain;
+import Models.Entities.NPC.AI.Personality;
 import Models.Entities.Occupation.Occupation;
-import Models.Entities.Stats.Stats;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
 import javafx.geometry.Point3D;
-
-import java.awt.image.BufferedImage;
 
 /**
  * Created by Aidan on 4/6/2016.
@@ -32,4 +26,6 @@ public class NPC extends Entity {
         super.update();
         brain.think();
     }
+
+    public String getDialog() { return brain.getDialog(); }
 }
