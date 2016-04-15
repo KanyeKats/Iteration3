@@ -1,4 +1,4 @@
-package Models.Entities.NPC.Brain;
+package Models.Entities.NPC.AI.Brain;
 
 /**
  * Created by Aidan on 4/7/2016.
