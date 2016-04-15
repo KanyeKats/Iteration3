@@ -8,11 +8,8 @@ import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
-import Views.AreaViewport;
-import Views.GameOverView;
-import Views.PauseMenuView;
-import Views.SkillViewPort;
-import Views.StartMenuView;
+
+import Views.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -150,6 +147,36 @@ public class GameViewController extends ViewController {
             @Override
             public String toString(){ return "Skills Menu";}
         });
+        keyBindings.addBinding(KeyEvent.VK_I, new Action() {
+            @Override
+            public void execute() {
+                InventoryView inventoryView = new InventoryView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory());
+                InventoryViewController inventoryViewController = new InventoryViewController(stateManager, inventoryView, avatar);
+                stateManager.setActiveState(new State(inventoryViewController, inventoryView));
+            }
+
+            @Override
+            public String toString(){ return "Inventory View";}
+        });
+
+
+        keyBindings.addBinding(KeyEvent.VK_SPACE, new Action() {
+            @Override
+            public void execute() {
+
+                if(avatar.getTileInFront().containsEntity()) {
+                    Models.Menu.Menu npcMenu = Models.Menu.Menu.createNPCMenu(stateManager, avatar, avatar.getTileInFront().getEntity());
+                    MenuViewController npcMenuController = new MenuViewController(stateManager, npcMenu);
+                    NPCMenuView npcMenuView = new NPCMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcMenu);
+                    stateManager.setActiveState(new State(npcMenuController, npcMenuView));
+                }
+            }
+
+            @Override
+            public String toString(){ return "NPC Menu View";}
+        });
+
+
         keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
             @Override
             public void execute() {

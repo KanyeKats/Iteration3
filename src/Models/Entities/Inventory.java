@@ -1,42 +1,82 @@
 package Models.Entities;
 
 import Models.Items.Item;
+import Models.Items.Takable.TakableItem;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Random;
 
 /**
  * Created by Aidan on 4/6/2016.
  */
-public class Inventory implements Savable {
-    private ArrayList<Item> items;
-    private int inventorySize;
+public class Inventory extends Observable implements Savable {
+    private ArrayList<TakableItem> items;
+    private int capacity;
 
-    public Inventory(int inventorySize){
-        items = new ArrayList<>(inventorySize);
-        this.inventorySize = inventorySize;
+    public Inventory(int capacity){
+        items = new ArrayList<>(capacity);
+        this.capacity = capacity;
     }
 
-    public boolean addItem(Item item){
-        if(items.size() >= inventorySize){
+    public boolean addItem(TakableItem item){
+        if(items.size() >= capacity){
             return false;
         }
+        // Add it
         items.add(item);
+
+        // Notify observers (inventory view)
+        setChanged();
+        notifyObservers();
+
         return true;
     }
 
-    public void removeItem(Item item) {
+    public void removeItem(TakableItem item) {
         if ( items.contains(item) ) {
             items.remove(item);
         }
+        // Notify observers (inventory view)
+        setChanged();
+        notifyObservers();
+    }
+
+    public TakableItem removeItemAtIndex(int index) {
+        if(index > -1 && index < size()) {
+            // Notify observers (inventory view)
+            setChanged();
+            notifyObservers();
+
+            // Remove nd return it
+            return this.items.remove(index);
+
+        }
+        else return null;
+    }
+
+    public ArrayList<TakableItem> getItems() {
+        return items;
     }
 
     public boolean isFull(){
-        return ( items.size() >= inventorySize );
+        return ( items.size() >= capacity);
+    }
+
+    public boolean isEmpty() {
+        return items.size() == 0;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public int getCurrentSize() {
+        return items.size();
     }
 
     //The contains(ID) class Rokas wanted
@@ -53,7 +93,7 @@ public class Inventory implements Savable {
         return items.size();
     }
 
-    public Item removeRandomItem(){
+    public TakableItem removeRandomItem(){
         Random rand = new Random();
         int randomItem = rand.nextInt(items.size());
         return items.remove(randomItem);
@@ -84,15 +124,10 @@ public class Inventory implements Savable {
                 int z = Integer.parseInt(tileElement.getAttribute("z"));
 
                 //construct an empty tile and load it into the game
-                Item item = new Item() {
+                TakableItem item = new TakableItem() {
                     @Override
-                    public boolean onTouch(Entity entity) {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean preventsMovement(Entity entity) {
-                        return false;
+                    public void onUse(Entity entity) {
+                        // idk
                     }
                 };
                 item.load(tileElement);
