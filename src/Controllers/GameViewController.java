@@ -8,6 +8,7 @@ import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
+import Utilities.Toast;
 import Views.GameOverView;
 import Views.PauseMenuView;
 import Views.SkillViewPort;
@@ -41,6 +42,7 @@ public class GameViewController extends ViewController {
             @Override
             public void execute() {
                 avatar.move(Direction.NORTH);
+                Toast.createToast("MOVING NORTH YO", 3);
             }
 
             @Override

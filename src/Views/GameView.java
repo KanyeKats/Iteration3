@@ -12,6 +12,7 @@ public class GameView extends View {
 
     private AreaViewport areaViewport;
     private StatusViewPort statusViewport;
+    private ToastView toastView;
 //    private SkillsViewport skillsViewport;
 
     public GameView(int width, int height, Entity entity, Map map) {
@@ -19,10 +20,13 @@ public class GameView extends View {
 
         this.areaViewport = new AreaViewport(width, height, map, entity);
         this.statusViewport = new StatusViewPort(width, height, entity);
+        this.toastView = new ToastView(width, height);
+
 //        this.skillsViewport = new SkillsViewport(entity.getSkillList());
 
         areaViewport.addObserver(this);
         statusViewport.addObserver(this);
+        toastView.addObserver(this);
 //        skillsViewport.addObserver(this);
 
         repaint();
@@ -37,10 +41,12 @@ public class GameView extends View {
         // Set content changed for the viewports
         areaViewport.setContentChanged(true);
         statusViewport.setContentChanged(true);
+        toastView.setContentChanged(true);
 
         // Render the viewports onto this view.
         areaViewport.render(g);
         statusViewport.render(g);
+        toastView.render(g);
 
 //        skillsViewport.render(g);
 
