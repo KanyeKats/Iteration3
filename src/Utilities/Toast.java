@@ -27,7 +27,7 @@ public class Toast extends Observable {
     private  Timer timer = new Timer();
 
     public  void createToast(String message, int duration) {
-        System.out.println("Added new Toast");
+//        System.out.println("Added new Toast");
         TimedToast tt = new TimedToast(message,duration);
         messageQueue.addLast(tt);
         if (!active) {
@@ -47,23 +47,33 @@ public class Toast extends Observable {
         if ( messageQueue.size() > 0 ) {
             TimedToast tt = messageQueue.pollFirst();
             currentMessage = tt.getMessage();
-            System.out.println("Starting... " + currentMessage);
+//            System.out.println("Starting... " + currentMessage);
             active = true;
-            setChanged();
-            notifyObservers();
+//            setChanged();
+//            notifyObservers();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    System.out.println("Done... " + currentMessage);
+//                    System.out.println("Done... " + currentMessage);
+                    active = false;
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            setChanged();
+                            notifyObservers();
+                        }
+                    }, 1 * milliToSec);
                     activateToasts();
                 }
             }, tt.getDuration() * milliToSec);
 
         } else {
             active = false;
-            setChanged();
-            notifyObservers();
+//            setChanged();
+//            notifyObservers();
         }
+        setChanged();
+        notifyObservers();
     }
 
 

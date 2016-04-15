@@ -38,15 +38,14 @@ public class ToastView extends View {
     }
 
     private void renderToast() {
-        System.out.println("in renderToast method before isActive check");
+//        System.out.println("in renderToast method before isActive check");
+        Graphics2D g2d = (Graphics2D) viewContent.getGraphics();
         if (toast.isActive()) {
-            Graphics2D g2d = (Graphics2D) viewContent.getGraphics();
-
             RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setRenderingHints(rh);
 
             message = toast.getCurrentMessage();
-
+            System.out.println("MESSAGE: " + message);
             FontMetrics fm = g2d.getFontMetrics(toastFont);
             Rectangle2D rect = fm.getStringBounds(message, g2d);
             messageWidth = (int) rect.getWidth();
@@ -62,6 +61,14 @@ public class ToastView extends View {
             g2d.setFont(toastFont);
             g2d.drawString(message, 180,170);
         } else {
+
+            g2d.setComposite(
+                    AlphaComposite.getInstance(AlphaComposite.CLEAR, 0.0f));
+            Rectangle2D.Double rect =
+                    new Rectangle2D.Double(0,0,width,height);
+            g2d.fill(rect);
+            setChanged();
+            notifyObservers();
         }
     }
 }
