@@ -21,6 +21,7 @@ import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.KeyBindings;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.GameLoader;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
