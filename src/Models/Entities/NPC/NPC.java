@@ -38,4 +38,6 @@ public class NPC extends Entity {
 
 
     }
+
+    public boolean willTrade() { return brain.willTrade(); }
 }

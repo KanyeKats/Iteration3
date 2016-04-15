@@ -215,6 +215,7 @@ public class Menu extends java.util.Observable{
                         // TODO: Remove after testing.
                         NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET);
                         map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
+
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
                         stateManager.setActiveState(new State(gameViewController, gameView));
@@ -565,8 +566,10 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        //TODO: Implement talking
                         System.out.println("Talk");
+                        String dialog = ((NPC) npc).getDialog();
+                        System.out.println(dialog);
+                        // TODO: Make this appear ain a dialog box.
                     }
                 });
                 return actions;
@@ -589,9 +592,14 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory());
-                        NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
-                        stateManager.setActiveState(new State(npcShopViewController, npcShopView));
+                        if(((NPC)npc).willTrade()){
+                            NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory());
+                            NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
+                            stateManager.setActiveState(new State(npcShopViewController, npcShopView));
+                        }else{
+                            System.out.println("He doesnt wanna trade with ya!");
+                            // TODO: Make a toast that says this.
+                        }
                     }
                 });
                 return actions;
