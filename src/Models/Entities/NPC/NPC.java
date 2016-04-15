@@ -28,4 +28,5 @@ public class NPC extends Entity {
     }
 
     public String getDialog() { return brain.getDialog(); }
+    public boolean willTrade() { return brain.willTrade(); }
 }
