@@ -1,5 +1,7 @@
 package Models.Entities;
 
+import Models.Consequences.BehaviorConsequence;
+import Models.Consequences.SleepConsequence;
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
@@ -359,6 +361,10 @@ public class Entity extends Observable implements Savable {
     public Tile getTileInFront(){
         Point3D point = direction.getPointAdjacentTo(location);
         return map.getTile(point);
+    }
+
+    public void makeSleep(SleepConsequence sleepConsequence){
+
     }
 
     @Override
