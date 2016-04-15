@@ -6,7 +6,6 @@ import Models.Entities.Occupation.Smasher;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
-import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
@@ -19,7 +18,6 @@ import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
-import Utilities.Constants;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
 import Views.Graphics.Assets;
@@ -375,5 +373,9 @@ public class Entity extends Observable implements Savable {
         Map map = new Map(new HashMap<>());
         map.load(data);
         isVisible = true; // TODO: 4/14/16 read in from the file
+    }
+
+    public void update(){
+        // TODO: Update any effects that have been placed upon this entity (Enchantment/ DamageOverTime/ etc). NOTE: We may do this a different way.
     }
 }

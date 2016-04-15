@@ -7,6 +7,8 @@ import Controllers.ViewController;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
+import Models.Entities.NPC.AI.Personality;
+import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Smasher;
 import Models.Entities.Occupation.Sneak;
 import Models.Entities.Occupation.Summoner;
@@ -29,6 +31,7 @@ import Views.AvatarCreationMenuView;
 import Views.GameView;
 import Views.NPCShopView;
 import Views.ReconfigureKeysView;
+import javafx.geometry.Point3D;
 import javafx.scene.input.KeyCode;
 
 import javax.swing.*;
@@ -213,6 +216,11 @@ public class Menu extends java.util.Observable{
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
+
+                        // TODO: Remove after testing.
+                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.HOSTILE);
+                        map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
+
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         stateManager.setActiveState(new State(gameViewController, gameView));
