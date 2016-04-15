@@ -1,9 +1,6 @@
 package Models.Consequences;
 
 import Models.Entities.Entity;
-import Models.Entities.Stats.Stat;
-import Models.Entities.Stats.StatModification;
-import Models.Entities.Stats.StatModificationList;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,8 +13,6 @@ public class TrappedConsequence extends BehaviorConsequence {
     //shhould prolly change super class to have this protected..
     private Timer timer = new Timer();
     private int activeTime;
-    private int originalSpeed;
-
 
     public TrappedConsequence(int activeTime) {
         super(activeTime);
@@ -44,15 +39,12 @@ public class TrappedConsequence extends BehaviorConsequence {
     //most likely could be private if changes done
     @Override
     public void remove(Entity entity) {
-        StatModification buff = new StatModification(Stat.MOVEMENT, originalSpeed);
-        StatModificationList modList = new StatModificationList(buff);
-        modList.applyModifications(entity.getStats());
+        entity.setCanMove(true);
+        System.out.println("Entity can move? :" + entity.getCanMove());
     }
 
     private void add(Entity entity) {
-        originalSpeed = entity.getStats().getStat(Stat.MOVEMENT);
-        StatModification deBuff = new StatModification(Stat.MOVEMENT, -originalSpeed);
-        StatModificationList modList = new StatModificationList(deBuff);
-        modList.applyModifications(entity.getStats());
+        entity.setCanMove(false);
+        System.out.println("Entity can move? :" + entity.getCanMove());
     }
 }
