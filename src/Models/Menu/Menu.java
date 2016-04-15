@@ -3,7 +3,6 @@ package Models.Menu;
 import Controllers.GameViewController;
 import Controllers.MenuViewController;
 import Controllers.NPCShopViewController;
-import Controllers.ViewController;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
@@ -14,25 +13,20 @@ import Models.Entities.Occupation.Sneak;
 import Models.Entities.Occupation.Summoner;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
-import Models.Entities.Skills.InfluenceEffect.LinearEffect;
-import Models.Entities.Skills.InfluenceEffect.RadialEffect;
 import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.Stat;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.KeyBindings;
 import Utilities.Savable.GameLoader;
-import Utilities.Savable.GameSaver;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
 import Views.NPCShopView;
 import Views.ReconfigureKeysView;
 import javafx.geometry.Point3D;
-import javafx.scene.input.KeyCode;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -218,7 +212,7 @@ public class Menu extends java.util.Observable{
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
 
                         // TODO: Remove after testing.
-                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.HOSTILE);
+                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET);
                         map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
 
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map);

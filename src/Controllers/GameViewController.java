@@ -166,7 +166,7 @@ public class GameViewController extends ViewController {
             PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
             stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));          }
 
-        if(refreshCounter % 10 == 0){
+        if(refreshCounter % Constants.FRAME_RATE == 0){
             Set<Entity> entitiesOnMap = map.getEntitiesOnMap();
             for(Entity entity : entitiesOnMap){
                 entity.update();
