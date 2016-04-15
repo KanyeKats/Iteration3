@@ -3,33 +3,30 @@ package Models.Menu;
 import Controllers.GameViewController;
 import Controllers.MenuViewController;
 import Controllers.NPCShopViewController;
-import Controllers.ViewController;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
+import Models.Entities.NPC.AI.Personality;
+import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Smasher;
 import Models.Entities.Occupation.Sneak;
 import Models.Entities.Occupation.Summoner;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
-import Models.Entities.Skills.InfluenceEffect.LinearEffect;
-import Models.Entities.Skills.InfluenceEffect.RadialEffect;
 import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.Stat;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.KeyBindings;
 import Utilities.Savable.GameLoader;
-import Utilities.Savable.GameSaver;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
 import Views.NPCShopView;
 import Views.ReconfigureKeysView;
-import javafx.scene.input.KeyCode;
+import javafx.geometry.Point3D;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -213,6 +210,15 @@ public class Menu extends java.util.Observable{
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
+<<<<<<< HEAD
+=======
+
+                        // TODO: Remove after testing.
+                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET);
+                        map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
+
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
+>>>>>>> d504aaf8377fa7507b3d6f51b8c5a2ae192ace32
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
                         stateManager.setActiveState(new State(gameViewController, gameView));

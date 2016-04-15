@@ -6,7 +6,6 @@ import Models.Entities.Occupation.Smasher;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
-import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
@@ -19,7 +18,6 @@ import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
-import Utilities.Constants;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
 import Views.Graphics.Assets;
@@ -162,7 +160,7 @@ public class Entity extends Observable implements Savable {
     // For example, teleporting, falling off a cliff etc
     public final void move(Point3D desiredPoint) {
         // TODO: implement
-        map.moveEntity(this, desiredPoint);
+        map.moveEntityToNewTileAndRemoveFromOld(this, desiredPoint);
     }
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
@@ -216,6 +214,12 @@ public class Entity extends Observable implements Savable {
     public ActiveSkillList getActiveSkillList() {
         return activeSkillList;
     }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public boolean getCanMove() { return this.canMove; }
 
     public void setActiveSkillList(ActiveSkillList activeSkillList) {
         this.activeSkillList = activeSkillList;
@@ -377,5 +381,9 @@ public class Entity extends Observable implements Savable {
         Map map = new Map(new HashMap<>());
         map.load(data);
         isVisible = true; // TODO: 4/14/16 read in from the file
+    }
+
+    public void update(){
+        // TODO: Update any effects that have been placed upon this entity (Enchantment/ DamageOverTime/ etc). NOTE: We may do this a different way.
     }
 }

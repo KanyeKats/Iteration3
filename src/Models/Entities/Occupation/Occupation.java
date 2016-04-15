@@ -39,8 +39,8 @@ public abstract class Occupation implements Savable {
     }
 
     public ActiveSkillList initActiveSkills(Stats stats){
+        activeSkillList.add(new BasicAttack()); // NOTE: It is important that basic attack is the first thing inserted.
         activeSkillList.add(new BindWounds());
-        activeSkillList.add(new BasicAttack());
 
         return activeSkillList;
     }

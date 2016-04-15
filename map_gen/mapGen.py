@@ -102,7 +102,8 @@ def generateRandomTrapTime():
 
 
 def generateRandom3DPoint(x_max, y_max, z_max):
-    return (random.randint(0, x_max), random.randint(0, y_max), random.randint(0, z_max))
+    # need to do from -x_max/2 to +xmax/2
+    return random.randint(-x_max/2, x_max/2), random.randint(-y_max/2, y_max/2), random.randint(0, z_max)
 
 
 def generateRandomItem(parentXMLElement):
