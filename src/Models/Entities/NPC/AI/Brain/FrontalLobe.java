@@ -41,16 +41,20 @@ public class FrontalLobe {
 
         // Arbitrarily, collecting items will take priority.
         if(!itemLocations.isEmpty() && personality.willCollectItem()){
+            System.out.println("GET ITEM!");
             currentDecision = new GoToItemDecision(itemLocations.get(0));
             currentDecision.executeDecision(npc);
         }else if(!areaEffectLocations.isEmpty() && personality.willActivateAreaEffect()){
-            currentDecision = new GoToAreaEffectDecision(itemLocations.get(0));
+            System.out.println("GET AOF!");
+            currentDecision = new GoToAreaEffectDecision(areaEffectLocations.get(0));
             currentDecision.executeDecision(npc);
         }else if(!entitiesFound.isEmpty()){
             if(personality.willFollow()){
+                System.out.println("FOLLOW!");
                 currentDecision = new FollowDecision(entitiesFound.get(0));
                 currentDecision.executeDecision(npc);
             }else if(personality.willAttack()){
+                System.out.println("ATTACK!");
                 currentDecision = new AttackDecision(entitiesFound.get(0));
                 currentDecision.executeDecision(npc);
             }

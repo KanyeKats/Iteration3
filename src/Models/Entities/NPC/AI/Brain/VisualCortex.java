@@ -35,19 +35,20 @@ public class VisualCortex {
         // Loop through the points and add the stuff that is seen to teh Visual Info object.
         for(Point3D point : pointsSeen){
             Tile tile = map.getTile(point);
+            if(tile!=null){
+                Entity entity = tile.getEntity();
+                ArrayList<Item> item = tile.getItems();
+                AreaEffect effect = tile.getAreaEffect();
 
-            Entity entity = tile.getEntity();
-            ArrayList<Item> item = tile.getItems();
-            AreaEffect effect = tile.getAreaEffect();
-
-            if(effect!=null){
-                visualInfo.addEntity(entity);
-            }
-            if(!item.isEmpty()){
-                visualInfo.addItem(point);
-            }
-            if(effect!=null){
-                visualInfo.addAreaEffect(point);
+                if(entity!=null){
+                    visualInfo.addEntity(entity);
+                }
+                if(!item.isEmpty()){
+                    visualInfo.addItem(point);
+                }
+                if(effect!=null){
+                    visualInfo.addAreaEffect(point);
+                }
             }
         }
 

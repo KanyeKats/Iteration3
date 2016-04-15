@@ -28,10 +28,11 @@ public class FollowDecision implements Decision {
     @Override
     public boolean continuePursuing(VisualInfo visualInfo) {
 
-        ArrayList<Entity> entityLocations = visualInfo.getEntities();
-        if(entityLocations.contains(followee)){
-            return true;
-        }
-        return false;
+//        ArrayList<Entity> entityLocations = visualInfo.getEntities();
+//        if(entityLocations.contains(followee)){
+//            return true;
+//        }
+//        return false;
+        return true; // Always try to keep following.
     }
 }

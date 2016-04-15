@@ -6,8 +6,8 @@ package Models.Entities.NPC.AI;
 public enum Personality {
     SHOP_KEEPER(0, 1, 0, 1, 0),
     FRIENDLY(0, 1, 0.2, 0.5, 0.2),
-    HOSTILE(1, 0, 0, 0.3, 0.9),
-    PET(0, 1, 1, 1, 1);
+    HOSTILE(1, 0, 0, 0.3, 0.0),
+    PET(0, 1, 1, 1, 0);
 
     private double attackOnSightProbability;
     private double tradeProbability;

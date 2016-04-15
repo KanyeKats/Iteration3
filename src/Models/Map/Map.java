@@ -201,6 +201,19 @@ public class Map extends Observable implements Savable {
 
         // Remove the entity at the tile.
         tile.removeEntity();
+
+        // Remove the entity from the set of entities.
+        removeEntityFromSetAtPoint(point);
+    }
+
+    private void removeEntityFromSetAtPoint(Point3D point){
+        for(Iterator<Entity> iterator = entitiesOnMap.iterator(); iterator.hasNext();){
+            Entity entity = iterator.next();
+
+            if(entity.getLocation() == point){
+                iterator.remove(); // By using an iterator, it is safe to remove the element while looping through.
+            }
+        }
     }
 
     public void insertItem(Item item, Point3D point){
@@ -450,5 +463,9 @@ public class Map extends Observable implements Savable {
             System.out.println("Error parsing map again");
             e.printStackTrace();
         }
+    }
+
+    public Set<Entity> getEntitiesOnMap(){
+        return entitiesOnMap;
     }
 }

@@ -14,6 +14,7 @@ import Views.StartMenuView;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.Set;
 
 /**
  * Created by Bradley on 4/7/16.
@@ -23,6 +24,7 @@ public class GameViewController extends ViewController {
     private Entity avatar;
     private Map map;
     private GameViewController controller;
+    private int refreshCounter; // This is done purely for performance enhancments.
 
 
     public GameViewController(StateManager stateManager, Entity avatar, Map map) {
@@ -30,6 +32,7 @@ public class GameViewController extends ViewController {
         this.avatar = avatar;
         this.map = map;
         controller = this;
+        refreshCounter = 0;
     }
 
     @Override
@@ -134,5 +137,13 @@ public class GameViewController extends ViewController {
             MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, gameOverMenu);
             PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
             stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));          }
+
+        if(refreshCounter % 10 == 0){
+            Set<Entity> entitiesOnMap = map.getEntitiesOnMap();
+            for(Entity entity : entitiesOnMap){
+                entity.update();
+            }
+        }
+        refreshCounter++;
     }
 }
