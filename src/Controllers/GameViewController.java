@@ -9,6 +9,7 @@ import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
 import Views.AreaViewport;
+import Views.GameOverView;
 import Views.PauseMenuView;
 import Views.SkillViewPort;
 import Views.StartMenuView;
@@ -177,7 +178,7 @@ public class GameViewController extends ViewController {
         if(avatar.getStats().getStat(Stat.LIVES) == 0){
             Models.Menu.Menu gameOverMenu = Models.Menu.Menu.createGameOverMenu(stateManager);
             MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, gameOverMenu);
-            PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
-            stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));          }
+            GameOverView gameOverView = new GameOverView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
+            stateManager.setActiveState(new State(skillViewPortMenuController, gameOverView));          }
     }
 }

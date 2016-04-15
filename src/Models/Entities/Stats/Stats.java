@@ -51,11 +51,22 @@ public class Stats implements Savable {
         // Else, it will return the same value we passed in
         currentValue = stat.checkLevelCap(currentValue);
 
-        if (currentValue < 1 && stat != Stat.SKILL_POINTS) currentValue = 1;
-        if(stat == Stat.HEALTH && currentValue > getMaxHealth())
-            currentValue = getMaxHealth();
-        else if(stat == Stat.MANA && currentValue > getMaxMana())
-            currentValue = getMaxMana();
+        if(stat == Stat.HEALTH) {
+            if (currentValue > getMaxHealth())
+                currentValue = getMaxHealth();
+            else if (currentValue <= 0) {
+                processDeath();
+                return;
+            }
+        }
+        else if(stat == Stat.MANA) {
+            if(currentValue > getMaxMana())
+                currentValue = getMaxMana();
+            else if(currentValue <= 0)
+                currentValue = 0;
+        }
+        else if (currentValue < 1 && stat != Stat.SKILL_POINTS)
+            currentValue = 1;
 
         // Set the stats new value
         stats.put(stat, currentValue);
@@ -141,6 +152,22 @@ public class Stats implements Savable {
         Integer level = stats.get(Stat.LEVEL);
         // Return computed value
         return 100 + (10* (int)Math.pow(level, 2.0));
+    }
+
+    private void processDeath(){
+        if(stats.get(Stat.LIVES) > 0){
+            stats.put(Stat.LIVES, stats.get(Stat.LIVES) - 1);
+            System.out.println("You died!");
+            System.out.println("You have " + stats.get(Stat.LIVES) + " lives remaining.");
+
+            //TODO: Probably give some sort of notification of death/respawn somewhere
+
+
+            stats.put(Stat.HEALTH, getMaxHealth());
+        }
+        else{
+
+        }
     }
 
 

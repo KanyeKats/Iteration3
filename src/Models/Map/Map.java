@@ -3,6 +3,7 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.StatModification;
 import Models.Items.Item;
 
 import Models.Map.MapUtilities.MapUtilities;
@@ -157,6 +158,18 @@ public class Map extends Observable implements Savable {
 
                     // Tell the entity his move has completed!
                     entity.moveComplete();
+
+
+                    // Calculate if there needs to be fall damage
+                    //Currently we only take fall damage if we fall more than 3 tiles
+                    int heightDiff = (int)(entityCurrentPoint.getZ() - targetPoint3D.getZ());
+                    if(heightDiff > 3){
+                        System.out.println("You fell " + heightDiff + " tiles!");
+                        double damage = Math.pow(1.5, heightDiff);
+                        System.out.println("Damage taken: " + (int)damage);
+                        StatModification fallDamageStatMod = new StatModification(Stat.HEALTH, (int)(-damage));
+                        fallDamageStatMod.apply(entity.getStats());
+                    }
 
                     // activate shit on the tile on him
                     targetTile.activateTileObjectsOnEntity(entity);
