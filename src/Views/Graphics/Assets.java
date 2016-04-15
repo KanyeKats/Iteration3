@@ -128,6 +128,9 @@ public class Assets {
         TRAP = trap.crop(0, 0, SPRITE_SIZE, SPRITE_SIZE);
 
         // TODO: Init all the item assets.
+        SpriteSheet bag = new SpriteSheet(ImageLoader.loadImage("./res/items/bag.png"));
+        ITEM_BAG = bag.crop(0, 0, Constants.TILE_WIDTH, Constants.TILE_WIDTH);
+
 
         // TODO: Init all the effect assets.
 
