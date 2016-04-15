@@ -40,11 +40,9 @@ public class TrappedConsequence extends BehaviorConsequence {
     @Override
     public void remove(Entity entity) {
         entity.setCanMove(true);
-        System.out.println("Entity can move? :" + entity.getCanMove());
     }
 
     private void add(Entity entity) {
         entity.setCanMove(false);
-        System.out.println("Entity can move? :" + entity.getCanMove());
     }
 }
