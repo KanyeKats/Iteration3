@@ -160,6 +160,9 @@ public class Entity extends Observable implements Savable {
     // For example, teleporting, falling off a cliff etc
     public final void move(Point3D desiredPoint) {
         // TODO: implement
+        //needs to put itself on tile at p3d
+        map.moveEntity(this, desiredPoint);
+
     }
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
