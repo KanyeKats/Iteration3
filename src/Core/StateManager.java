@@ -7,6 +7,8 @@ import jdk.internal.util.xml.impl.Input;
 
 import java.util.InputMismatchException;
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by johnkaufmann on 3/31/16.
@@ -34,7 +36,19 @@ public class StateManager {
     public void goToPreviousState(){
         if(states.size() > 1){
             states.pop();
-            reActivate(states.peek());
+            if(states.size() > 3) {
+                State newState = states.pop();
+                reActivate(states.peek());
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        setActiveState(newState);
+                    }
+                }, 1000 / Constants.FRAME_RATE);
+            }
+            else
+                reActivate(states.peek());
         }else{
             System.exit(0);
         }

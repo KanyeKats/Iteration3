@@ -2,32 +2,31 @@ package Models.Menu;
 
 import Controllers.GameViewController;
 import Controllers.MenuViewController;
-import Controllers.ViewController;
+import Controllers.NPCShopViewController;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
+import Models.Entities.NPC.AI.Personality;
+import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Smasher;
 import Models.Entities.Occupation.Sneak;
 import Models.Entities.Occupation.Summoner;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
-import Models.Entities.Skills.InfluenceEffect.LinearEffect;
-import Models.Entities.Skills.InfluenceEffect.RadialEffect;
 import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.Stat;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.KeyBindings;
 import Utilities.Savable.GameLoader;
-import Utilities.Savable.GameSaver;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
+import Views.NPCShopView;
 import Views.ReconfigureKeysView;
-import javafx.scene.input.KeyCode;
+import javafx.geometry.Point3D;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -211,6 +210,11 @@ public class Menu extends java.util.Observable{
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
+
+                        // TODO: Remove after testing.
+                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET);
+                        map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
+
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         stateManager.setActiveState(new State(gameViewController, gameView));
@@ -543,6 +547,109 @@ public class Menu extends java.util.Observable{
             });
         }
 
+        return new Menu(options);
+    }
+
+    public static Menu createNPCMenu(StateManager stateManager, Entity avatar, Entity npc) {
+        ArrayList<MenuOption> options = new ArrayList<>();
+
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Talk";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        //TODO: Implement talking
+                        System.out.println("Talk");
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Trade";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory());
+                        NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
+                        stateManager.setActiveState(new State(npcShopViewController, npcShopView));
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Use Item";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        //TODO: Implement using item
+                        System.out.println("Use item");
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Use Skill";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        //TODO: Implement using skill
+                        System.out.println("Use skill");
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
         return new Menu(options);
     }
 

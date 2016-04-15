@@ -38,8 +38,10 @@ public class MapDrawingVisitor  {
     }
 
     public static void accept(HashMap<Point3D, Tile> tile, BufferedImage viewContent, Point3D avatarCenter, int rangeofVisibility){
-            if(tilesOnScreen == null)
-                tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(avatarCenter, tile);
+        boolean justRecentered = false;
+
+        if(tilesOnScreen == null)
+            tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(avatarCenter, tile);
 
         // Set center, height, and width
         if (center == null) setCenter(avatarCenter);
@@ -55,6 +57,7 @@ public class MapDrawingVisitor  {
         // Re-center on avatar if necessary.
         if (distance > 4) {
             setCenter(avatarCenter);
+            justRecentered = true;
             tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(avatarCenter, tile);
         }
 
@@ -123,7 +126,11 @@ public class MapDrawingVisitor  {
             if (currentTile.containsEntity()) {
                 Entity currentEntity = currentTile.getEntity();
                 currentEntity.initPixelLocation(pixelPoint);
-                EntityDrawer.drawEntity(currentEntity, g);
+                if(justRecentered){
+                    currentEntity.setPixelLocation(pixelPoint);
+                }
+                if(tilesinSight.contains(currentTile))
+                    EntityDrawer.drawEntity(currentEntity, g);
             }
         }
         g.dispose();

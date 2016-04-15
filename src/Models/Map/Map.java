@@ -66,6 +66,7 @@ public class Map extends Observable implements Savable {
 
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || updatedDestinationTile==null || destination==source){
+            System.out.println("Movement Failed");
             entity.failedMovement();
             System.out.println("failedmovement");
             return;
@@ -80,8 +81,28 @@ public class Map extends Observable implements Savable {
             return;
         }
 
+        //for the teleport
+        if (MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(source),MapUtilities.to2DPoint(destination)) > 1) {
+            if (!updatedDestinationTile.containsEntity()) {
+                entity.setLocation(destination);
+                entity.setPixelLocation(updatedDestinationTile.getPixelPoint());
+                sourceTile.removeEntity();
+                updatedDestinationTile.insertEntity(entity);
+
+                updatedDestinationTile.activateTileObjectsOnEntity(entity);
+
+                setChanged();
+                notifyObservers();
+            }
+        }
+
         // Get the entites movement speed.
         int movementSpeed = entity.getStats().getStat(Stat.MOVEMENT);
+
+        // If an entities speed is 0, should not move
+        if (movementSpeed == 0) {
+            return;
+        }
 
         // Move him at that rate, upon completion of translation, we will apply items/AoEs/etc on the tile.
         translateEntity(entity, destination, movementSpeed);
@@ -224,6 +245,19 @@ public class Map extends Observable implements Savable {
 
         // Remove the entity at the tile.
         tile.removeEntity();
+
+        // Remove the entity from the set of entities.
+        removeEntityFromSetAtPoint(point);
+    }
+
+    private void removeEntityFromSetAtPoint(Point3D point){
+        for(Iterator<Entity> iterator = entitiesOnMap.iterator(); iterator.hasNext();){
+            Entity entity = iterator.next();
+
+            if(entity.getLocation() == point){
+                iterator.remove(); // By using an iterator, it is safe to remove the element while looping through.
+            }
+        }
     }
 
     public void insertItem(Item item, Point3D point){
@@ -473,5 +507,9 @@ public class Map extends Observable implements Savable {
             System.out.println("Error parsing map again");
             e.printStackTrace();
         }
+    }
+
+    public Set<Entity> getEntitiesOnMap(){
+        return entitiesOnMap;
     }
 }

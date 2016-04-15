@@ -8,13 +8,11 @@ import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
-import Views.GameOverView;
-import Views.PauseMenuView;
-import Views.SkillViewPort;
-import Views.StartMenuView;
+import Views.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.Set;
 
 /**
  * Created by Bradley on 4/7/16.
@@ -24,6 +22,7 @@ public class GameViewController extends ViewController {
     private Entity avatar;
     private Map map;
     private GameViewController controller;
+    private int refreshCounter; // This is done purely for performance enhancments.
 
 
     public GameViewController(StateManager stateManager, Entity avatar, Map map) {
@@ -31,6 +30,7 @@ public class GameViewController extends ViewController {
         this.avatar = avatar;
         this.map = map;
         controller = this;
+        refreshCounter = 0;
     }
 
     @Override
@@ -104,6 +104,36 @@ public class GameViewController extends ViewController {
             @Override
             public String toString(){ return "Skills Menu";}
         });
+        keyBindings.addBinding(KeyEvent.VK_I, new Action() {
+            @Override
+            public void execute() {
+                InventoryView inventoryView = new InventoryView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory());
+                InventoryViewController inventoryViewController = new InventoryViewController(stateManager, inventoryView, avatar);
+                stateManager.setActiveState(new State(inventoryViewController, inventoryView));
+            }
+
+            @Override
+            public String toString(){ return "Inventory View";}
+        });
+
+
+        keyBindings.addBinding(KeyEvent.VK_SPACE, new Action() {
+            @Override
+            public void execute() {
+
+                if(avatar.getTileInFront().containsEntity()) {
+                    Models.Menu.Menu npcMenu = Models.Menu.Menu.createNPCMenu(stateManager, avatar, avatar.getTileInFront().getEntity());
+                    MenuViewController npcMenuController = new MenuViewController(stateManager, npcMenu);
+                    NPCMenuView npcMenuView = new NPCMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcMenu);
+                    stateManager.setActiveState(new State(npcMenuController, npcMenuView));
+                }
+            }
+
+            @Override
+            public String toString(){ return "NPC Menu View";}
+        });
+
+
         keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
             @Override
             public void execute() {
@@ -133,7 +163,15 @@ public class GameViewController extends ViewController {
         if(avatar.getStats().getStat(Stat.LIVES) == 0){
             Models.Menu.Menu gameOverMenu = Models.Menu.Menu.createGameOverMenu(stateManager);
             MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, gameOverMenu);
-            GameOverView gameOverView = new GameOverView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
-            stateManager.setActiveState(new State(skillViewPortMenuController, gameOverView));          }
+            PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
+            stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));          }
+
+        if(refreshCounter % Constants.FRAME_RATE == 0){
+            Set<Entity> entitiesOnMap = map.getEntitiesOnMap();
+            for(Entity entity : entitiesOnMap){
+                entity.update();
+            }
+        }
+        refreshCounter++;
     }
 }

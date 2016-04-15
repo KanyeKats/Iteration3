@@ -6,7 +6,7 @@ import Models.Entities.Occupation.Smasher;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
-import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
 import Models.Items.Takable.Equippable.Boots.Boot;
@@ -14,10 +14,10 @@ import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
 import Models.Items.Takable.Equippable.Helmets.Helmet;
 import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
+import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
-import Utilities.Constants;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
 import Views.Graphics.Assets;
@@ -81,7 +81,7 @@ public class Entity extends Observable implements Savable {
         this.occupation = occupation;
         this.location = location;
         this.stats = new Stats();
-        this.inventory = new Inventory(10);
+        this.inventory = new Inventory(20);
         this.equipment = new Equipment(stats, inventory);
         this.sprite = new BufferedImage(50, 50, BufferedImage.TYPE_INT_RGB);
         this.direction = Direction.SOUTH;
@@ -160,19 +160,24 @@ public class Entity extends Observable implements Savable {
     // For example, teleporting, falling off a cliff etc
     public final void move(Point3D desiredPoint) {
         // TODO: implement
+
         //needs to put itself on tile at p3d
         map.moveEntity(this, desiredPoint);
-
     }
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
-
-    public boolean addItemToInventory(Item item){
+    public boolean addItemToInventory(TakableItem item){
         return inventory.addItem(item);
     }
 
-    public void dropItem(int positionInInventory){
+    public void dropItem(int positionInInventory) {
+        // Remove the item from the inventory
+        TakableItem item = this.inventory.removeItemAtIndex(positionInInventory);
 
+        // Drop it like its hot
+        if (item != null) {
+            map.insertItem(item, location);
+        }
     }
 
     public void useSkill(Skill skill){
@@ -361,7 +366,7 @@ public class Entity extends Observable implements Savable {
         occupation.load(data);
         Stats stats = new Stats();
         stats.load(data);
-        Inventory inventory = new Inventory(10);
+        Inventory inventory = new Inventory(20);
         inventory.load(data);
         Equipment equipment = new Equipment(stats, inventory);
         equipment.load(data);
@@ -370,5 +375,9 @@ public class Entity extends Observable implements Savable {
         Map map = new Map(new HashMap<>());
         map.load(data);
         isVisible = true; // TODO: 4/14/16 read in from the file
+    }
+
+    public void update(){
+        // TODO: Update any effects that have been placed upon this entity (Enchantment/ DamageOverTime/ etc). NOTE: We may do this a different way.
     }
 }

@@ -22,7 +22,7 @@ public abstract class ActiveSkill extends Skill implements Savable{
 
     public void activate(Entity entity){
         if(isCooledDown){
-            if(percentChanceByLevel())
+//            if(percentChanceByLevel())
                 consequence.execute(entity);
         }
         else
