@@ -129,7 +129,8 @@ public class GameViewController extends ViewController {
             public void execute() {
                 if (areaViewport.isMoving()) {
                     areaViewport.setMoving(false);
-                } else {
+                }
+                else {
                     areaViewport.setMoving(true);
                 }
             }

@@ -74,12 +74,6 @@ public class AreaViewport extends View {
     }
 
     public void setMoving(boolean isMoving){
-        if(!isMoving) {
-            renderLocation = avatar.getLocation();
-        }
-        else {
-            renderLocation = camera.getLocation();
-        }
         this.isMoving = isMoving;
     }
 

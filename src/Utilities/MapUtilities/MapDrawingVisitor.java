@@ -52,11 +52,11 @@ public class MapDrawingVisitor  {
         // Get distance between AreaViewPort's current center and the Avatar's location
         int distance = MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(center), MapUtilities.to2DPoint(drawingCenter));
 
-        // Re-center on avatar if necessary.
-        if (distance > 4) {
-            setCenter(drawingCenter);
-            tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
-        }
+            // Re-center on avatar if necessary.
+            if (distance > 4) {
+                setCenter(drawingCenter);
+                tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
+            }
 
         // Set up some useful variables
         int tileWidth = Constants.TILE_WIDTH;
@@ -105,12 +105,12 @@ public class MapDrawingVisitor  {
             pixelY += (currentPoint.getY() - center.getY()) * vertDistanceBtwnAdjTiles;
 
             // Calculate the result of X on the position.
-            pixelY += (currentPoint.getX() - center.getX()) * (vertDistanceBtwnAdjTiles/2);
+            pixelY += (currentPoint.getX() - center.getX()) * (vertDistanceBtwnAdjTiles / 2);
             pixelX += (currentPoint.getX() - center.getX()) * horizDistanceBtwnAdjTiles;
 
             // Adjust the pixel cooredinates to the top left corner
-            pixelX -= tileImageWidth/2;
-            pixelY -= tileImageHeight/2;
+            pixelX -= tileImageWidth / 2;
+            pixelY -= tileImageHeight / 2;
 
             Point pixelPoint = new Point(pixelX, pixelY);
 
@@ -122,8 +122,13 @@ public class MapDrawingVisitor  {
             // If any entity is on the tile, init its pixel location and draw him!
             if (currentTile.containsEntity()) {
                 Entity currentEntity = currentTile.getEntity();
-                currentEntity.initPixelLocation(pixelPoint);
-                EntityDrawer.drawEntity(currentEntity, g);
+                if(!cameraMoving) {
+                    currentEntity.initPixelLocation(pixelPoint);
+                    EntityDrawer.drawEntity(currentEntity, g);
+                }
+                else{
+                    currentEntity.setPixelLocation(pixelPoint);
+                }
             }
         }
         g.dispose();
