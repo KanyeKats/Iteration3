@@ -16,6 +16,7 @@ import java.util.HashMap;
  */
 public class MapNavigationUtilities {
 
+
     //finds tiles adjacent to entity
     public static ArrayList<Tile> findNeighbors(Point3D point, Map map){
         ArrayList<Tile> neighbors = new ArrayList<>();
@@ -27,6 +28,17 @@ public class MapNavigationUtilities {
         neighbors.add(map.getTile(point.add(1,0,0)));
         return neighbors;
 
+    }
+
+    public static Point3D findOpenTile(Entity entity, Map map){
+        Point3D entityPoint = entity.getLocation();
+        for(Direction direction: Direction.values()){
+            Tile tile = map.getTile(direction.getPointAdjacentTo(entityPoint));
+            if(tile !=null && !tile.preventsMovement(entity)){
+                return direction.getPointAdjacentTo(entityPoint);
+            }
+        }
+        return null;
     }
 
     public static ArrayList<ArrayList<Tile>> getRadialTiles(Point3D point, int range, Map map){

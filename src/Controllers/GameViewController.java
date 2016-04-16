@@ -125,6 +125,35 @@ public class GameViewController extends ViewController {
             public String toString(){ return "Move Southeast";}
         });
 
+        keyBindings.addBinding(KeyEvent.VK_T, new Action() {
+            @Override
+            public void execute() {
+                if(areaViewport.isMoving()){
+
+                }
+                else {
+                    avatar.interact();
+                }
+            }
+
+
+
+
+            @Override
+            public String toString(){ return "Interact";}
+        });
+
+        keyBindings.addBinding(KeyEvent.VK_U, new Action() {
+            @Override
+            public void execute() {
+                if(avatar.isMounted()){
+                    avatar.unMountVehicle();
+                }
+            }
+            @Override
+            public String toString(){ return "Interact";}
+        });
+
         keyBindings.addBinding(KeyEvent.VK_Y, new Action() {
             @Override
             public void execute() {
@@ -233,8 +262,8 @@ public class GameViewController extends ViewController {
         if(avatar.getStats().getStat(Stat.LIVES) == 0){
             Models.Menu.Menu gameOverMenu = Models.Menu.Menu.createGameOverMenu(stateManager);
             MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, gameOverMenu);
-            PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
-            stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));          }
+            GameOverView gameOverView = new GameOverView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
+            stateManager.setActiveState(new State(skillViewPortMenuController, gameOverView));          }
 
         if(refreshCounter % Constants.FRAME_RATE == 0){
             Set<Entity> entitiesOnMap = map.getEntitiesOnMap();

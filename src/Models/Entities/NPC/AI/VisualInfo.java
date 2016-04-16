@@ -14,11 +14,13 @@ public class VisualInfo {
     private ArrayList<Entity> entities;
     private ArrayList<Point3D> itemLocations;
     private ArrayList<Point3D> areaEffectLocations;
+    private boolean stillFeared;
 
     public VisualInfo() {
         this.entities = new ArrayList<>();
         this.itemLocations = new ArrayList<>();
         this.areaEffectLocations = new ArrayList<>();
+        this.stillFeared = false;
     }
 
     // Functions to add stuff to the visual info
@@ -44,4 +46,8 @@ public class VisualInfo {
     public ArrayList<Point3D> getAreaEffectLocations() {
         return areaEffectLocations;
     }
+
+    public void setStillFeared(boolean stillFeared) { this.stillFeared = stillFeared; }
+
+    public boolean getStillFeared() { return this.stillFeared; }
 }
