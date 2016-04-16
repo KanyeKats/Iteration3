@@ -4,10 +4,10 @@ from xml.etree.ElementTree import Element, SubElement, Comment, tostring, Elemen
 from xml.etree import ElementTree
 from xml.dom import minidom
 import random
+from item_generator import add_item
 import time
 from shutil import copyfile
 
-# Module Globals:
 
 
 """
@@ -52,9 +52,12 @@ def generate(mapSizeX, mapSizeY, terrainArray, outputFileName, available_aoes):
             for y in range(0, mapSizeY):
                 element = SubElement(root, "tile")
 
-                element.set("x", str(x - mapSizeX/2))
-                element.set("y", str(y - mapSizeY/2))
-                element.set("z", str(z))
+                x_point = x - mapSizeX/2
+                y_point = y - mapSizeY/2
+                z_point = z
+                element.set("x", str(x_point))
+                element.set("y", str(y_point))
+                element.set("z", str(z_point))
                 # Set the terrain
                 terrain = SubElement(element, "terrain")
                 terrainType = terrainArray[x, y, z]
@@ -71,6 +74,12 @@ def generate(mapSizeX, mapSizeY, terrainArray, outputFileName, available_aoes):
                 if spawnThingWithProbabilityOf(2) and z == 0:
                     print 'Generated an item at pt ' + str(x) + ", " + str(y) + ", " + str(z)
                     generateRandomItem(element)
+
+                # Add item to this tile!!!
+                add_item(element, x_point, y_point, z_point)
+
+
+
 
     # Write to the file
     outputFile = open(outputFileName + ".xml", "w")
@@ -106,6 +115,7 @@ def generateRandom3DPoint(x_max, y_max, z_max):
     return random.randint(-x_max/2, x_max/2), random.randint(-y_max/2, y_max/2), random.randint(0, z_max)
 
 
+# TODO: Not really using this anymore
 def generateRandomItem(parentXMLElement):
     # make a list of available item ids we wanna put on the map
     ITEM_IDS = ['10000', '10001']
