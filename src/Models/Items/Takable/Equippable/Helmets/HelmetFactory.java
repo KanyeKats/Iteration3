@@ -5,6 +5,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by sergiopuleri on 4/8/16.
@@ -15,15 +16,15 @@ public enum HelmetFactory {
         public Helmet createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Blue Party Hat", "A rare blue party hat, you must be an OG player", req, 3000);
+            return new Helmet(ImageLoader.loadImage("./res/items/blue_phat.png"), new StatModificationList(buff), "Blue Party Hat", "A rare blue party hat, you must be an OG player", req, 3000);
         }
     },
-    RED_PHAT(3001) {
+    IRON_HELMET(3001) {
         @Override
         public Helmet createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Helmet(Assets.PLACEHOLDER, new StatModificationList(buff), "Red Party Hat", "A rare red party hat, you must be pretty old", req, 3001);
+            return new Helmet(ImageLoader.loadImage("./res/items/iron_helm.png"), new StatModificationList(buff), "Iron Helmet", "A sturdy iron helmet to protect your noggin'", req, 3001);
         }
     },
     PURPLE_PHAT(3002) {

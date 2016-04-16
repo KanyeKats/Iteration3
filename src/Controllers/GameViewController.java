@@ -172,7 +172,18 @@ public class GameViewController extends ViewController {
             }
 
             @Override
-            public String toString(){ return "Inventory View";}
+            public String toString(){ return "Equipment View";}
+        });
+
+        // DEBUG MODE
+        keyBindings.addBinding(KeyEvent.VK_SLASH, new Action() {
+            @Override
+            public void execute() {
+                areaViewport.toggleDebugMode();
+            }
+
+            @Override
+            public String toString(){ return "Debug Mode";}
         });
 
 
