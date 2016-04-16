@@ -6,6 +6,7 @@ import Models.Entities.Skills.ActiveSkills.CommonSkills.BindWounds;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes.Fireball;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Boons.LudaSpeed;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments.Fear;
+import Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments.Sleep;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Bargain;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Observation;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
@@ -49,7 +50,7 @@ public class Summoner extends Occupation {
         activeSkillList.add(new BasicAttack());
         activeSkillList.add(new Fireball());
         activeSkillList.add(new LudaSpeed());
-        activeSkillList.add(new Fear());
+        activeSkillList.add(new Sleep());
 
         return activeSkillList;
     }

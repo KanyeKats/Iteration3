@@ -209,8 +209,8 @@ public class GameViewController extends ViewController {
         if(avatar.getStats().getStat(Stat.LIVES) == 0){
             Models.Menu.Menu gameOverMenu = Models.Menu.Menu.createGameOverMenu(stateManager);
             MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, gameOverMenu);
-            PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
-            stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));          }
+            GameOverView gameOverView = new GameOverView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
+            stateManager.setActiveState(new State(skillViewPortMenuController, gameOverView));          }
 
         if(refreshCounter % Constants.FRAME_RATE == 0){
             Set<Entity> entitiesOnMap = map.getEntitiesOnMap();
