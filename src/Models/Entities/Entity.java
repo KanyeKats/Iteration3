@@ -52,6 +52,7 @@ public class Entity extends Observable implements Savable {
     private boolean canMove;
     private boolean justMoved;
     private boolean enteredNewTile;
+    private boolean tryingNewDirection;
     private Timer movementTimer;
 
     // TODO: Ask about terrain checking... not sure if this is ok
@@ -100,6 +101,7 @@ public class Entity extends Observable implements Savable {
         canMove = true;
         justMoved = false;
         enteredNewTile = false;
+        tryingNewDirection = true;
 
         // TODO: Remove!! Just testing item factory and equipping.
         Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
@@ -125,6 +127,12 @@ public class Entity extends Observable implements Savable {
         if (canMove) {
             // Don't allow the entity to move
             canMove = false;
+
+            // Deals with redrawing when the entity can't move
+            if(this.direction == direction)
+                this.tryingNewDirection = false;
+            else
+                this.tryingNewDirection = true;
 
             // Move the entity
             this.direction = direction;
@@ -153,6 +161,10 @@ public class Entity extends Observable implements Savable {
     }
 
     public final void failedMovement() {
+        if(this.tryingNewDirection == true){
+            setChanged();
+            notifyObservers();
+        }
         this.canMove = true;
         this.justMoved = false;
     }
