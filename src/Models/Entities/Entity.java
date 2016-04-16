@@ -8,6 +8,7 @@ import Models.Entities.Occupation.Smasher;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
+import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
@@ -54,6 +55,8 @@ public class Entity extends Observable implements Savable {
     private boolean enteredNewTile;
     private boolean tryingNewDirection;
     private Timer movementTimer;
+    private boolean isMounted;
+    private Mount mount;
 
     // TODO: Ask about terrain checking... not sure if this is ok
     private ArrayList<Terrain> passableTerrains;
@@ -76,8 +79,8 @@ public class Entity extends Observable implements Savable {
         occupation.initStats(this.stats);
         activeSkillList = occupation.initActiveSkills(stats);
         passiveSkillList = occupation.initPassiveSkills(stats);
-        initImages();
-
+        images = occupation.initImages();
+        this.isMounted = false;
     }
 
     public Entity(Occupation occupation, Point3D location, Map map, Terrain... passableTerrains){
@@ -94,7 +97,8 @@ public class Entity extends Observable implements Savable {
         occupation.initStats(this.stats);
         activeSkillList = occupation.initActiveSkills(stats);
         passiveSkillList = occupation.initPassiveSkills(stats);
-        initImages();
+        images = occupation.initImages();
+        //initImages();
 
         // Set movment variables
         movementTimer = new Timer();
@@ -108,6 +112,7 @@ public class Entity extends Observable implements Savable {
         equip(bluePhat);
         Boot moccassins = BootFactory.bootsFromID(1001);
         equip(moccassins);
+        this.isMounted = false;
 
     }
 
@@ -124,7 +129,11 @@ public class Entity extends Observable implements Savable {
 
     public final void move(Direction direction) {
         // Move with taking movement speed in to account
-        if (canMove) {
+        if(isMounted){
+            mount.move(direction);
+            setLocation(mount.getDirection().getPointAdjacentTo(mount.getLocation()));
+        }
+        else if (canMove) {
             // Don't allow the entity to move
             canMove = false;
 
@@ -196,8 +205,28 @@ public class Entity extends Observable implements Savable {
 
     }
 
-    public void mountVehicle(Mount mount){
+    public int mountVehicle(Mount mount){
+        this.mount= mount;
+        int prevEntityMovement = getStats().getStat(Stat.MOVEMENT);
+        stats.setStat(Stat.MOVEMENT,mount.getStats().getStat(Stat.MOVEMENT));
+        isMounted = true;
+        return prevEntityMovement;
 
+    }
+
+    public void unMountVehicle(){
+        stats.setStat(Stat.MOVEMENT,mount.getEntityPrevspeed());
+        isMounted = false;
+        mount.unMount(this);
+        this.mount = null;
+    }
+
+    public boolean isMounted(){
+        return this.isMounted;
+    }
+
+    public Mount getMount(){
+        return this.mount;
     }
 
     public void die(){
@@ -206,6 +235,18 @@ public class Entity extends Observable implements Savable {
 
     public void revive(){
 
+    }
+
+    //Trying this out -Aidan
+    public void interact(){
+        Entity entity = getTileInFront().getEntity();
+        if(entity != null){
+            entity.interacted(this);
+        }
+    }
+
+    public void interacted(Entity entity){
+        System.out.println("hey dont touch me!");
     }
 
     //Getters and Setters start here
@@ -306,7 +347,6 @@ public class Entity extends Observable implements Savable {
     }
 
     public void initPixelLocation(Point pixelLocation) {
-        System.out.println(justMoved);
         if (this.pixelLocation == null || justMoved) {
             this.pixelLocation = pixelLocation;
         }
@@ -335,17 +375,17 @@ public class Entity extends Observable implements Savable {
         this.passableTerrains = passableTerrains;
     }
 
-    private void initImages(){
-
-        images = new HashMap<>();
-        images.put(Direction.NORTH, Assets.BUG_NORTH);
-        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST);
-        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST);
-        images.put(Direction.SOUTH, Assets.BUG_SOUTH);
-        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST);
-        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST);
-
-    }
+//    private void initImages(){
+//
+//        images = new HashMap<>();
+//        images.put(Direction.NORTH, Assets.BUG_NORTH);
+//        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST);
+//        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST);
+//        images.put(Direction.SOUTH, Assets.BUG_SOUTH);
+//        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST);
+//        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST);
+//
+//    }
 
 //    public int calculateMovementDelay() {
 //        // Calculate the timer delay based off of the "Movement" stat,
@@ -374,6 +414,7 @@ public class Entity extends Observable implements Savable {
         Point3D point = direction.getPointAdjacentTo(location);
         return map.getTile(point);
     }
+
 
     //TODO: Make all the behavior consequences affect the avatar (the entity)
     public void makeSleep(){

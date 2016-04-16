@@ -40,6 +40,11 @@ public class NPC extends Entity {
     public String getDialog() { return brain.getDialog(); }
 
     @Override
+    public void interacted(Entity entity){
+
+    }
+
+    @Override
     public void makeSleep() {
         brain.setIsSleeping(true);
     }

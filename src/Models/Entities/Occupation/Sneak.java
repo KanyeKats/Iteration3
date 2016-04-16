@@ -16,6 +16,11 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Models.Map.Direction;
+import Views.Graphics.Assets;
+
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * Created by Aidan on 4/6/2016.
@@ -56,5 +61,18 @@ public class Sneak extends Occupation {
         return activeSkillList;
     }
 
+    @Override
+    public HashMap<Direction, BufferedImage> initImages(){
+
+        HashMap<Direction, BufferedImage> images = new HashMap<>();
+        images.put(Direction.NORTH, Assets.BUG_NORTH_GREEN);
+        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST_GREEN);
+        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST_GREEN);
+        images.put(Direction.SOUTH, Assets.BUG_SOUTH_GREEN);
+        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST_GREEN);
+        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST_GREEN);
+
+        return images;
+    }
 
 }

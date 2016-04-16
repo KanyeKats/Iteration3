@@ -124,6 +124,35 @@ public class GameViewController extends ViewController {
             public String toString(){ return "Move Southeast";}
         });
 
+        keyBindings.addBinding(KeyEvent.VK_T, new Action() {
+            @Override
+            public void execute() {
+                if(areaViewport.isMoving()){
+
+                }
+                else {
+                    avatar.interact();
+                }
+            }
+
+
+
+
+            @Override
+            public String toString(){ return "Interact";}
+        });
+
+        keyBindings.addBinding(KeyEvent.VK_U, new Action() {
+            @Override
+            public void execute() {
+                if(avatar.isMounted()){
+                    avatar.unMountVehicle();
+                }
+            }
+            @Override
+            public String toString(){ return "Interact";}
+        });
+
         keyBindings.addBinding(KeyEvent.VK_Y, new Action() {
             @Override
             public void execute() {
