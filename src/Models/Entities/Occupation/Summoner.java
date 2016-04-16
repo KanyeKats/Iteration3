@@ -54,4 +54,10 @@ public class Summoner extends Occupation {
         return activeSkillList;
     }
 
+    // Used for displaying the occupation on views such as equipment
+    @Override
+    public String toString() {
+        return "Summoner";
+    }
+
 }

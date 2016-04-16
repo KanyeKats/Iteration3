@@ -3,6 +3,7 @@ package Controllers;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
+import Models.Entities.Equipment;
 import Models.Entities.Stats.Stat;
 import Models.Map.Direction;
 import Models.Map.Map;
@@ -160,6 +161,29 @@ public class GameViewController extends ViewController {
 
             @Override
             public String toString(){ return "Inventory View";}
+        });
+
+        keyBindings.addBinding(KeyEvent.VK_P, new Action() {
+            @Override
+            public void execute() {
+                EquipmentView equipmentView = new EquipmentView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getEquipment(), avatar.getStats(), avatar.getOccupation().toString());
+                EquipmentViewController equipmentViewController = new EquipmentViewController(stateManager, equipmentView, avatar);
+                stateManager.setActiveState(new State(equipmentViewController, equipmentView));
+            }
+
+            @Override
+            public String toString(){ return "Equipment View";}
+        });
+
+        // DEBUG MODE
+        keyBindings.addBinding(KeyEvent.VK_SLASH, new Action() {
+            @Override
+            public void execute() {
+                areaViewport.toggleDebugMode();
+            }
+
+            @Override
+            public String toString(){ return "Debug Mode";}
         });
 
 

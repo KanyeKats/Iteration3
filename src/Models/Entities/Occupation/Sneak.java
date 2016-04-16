@@ -56,5 +56,11 @@ public class Sneak extends Occupation {
         return activeSkillList;
     }
 
+    // Used for displaying the occupation on views such as equipment
+    @Override
+    public String toString() {
+        return "Sneak";
+    }
+
 
 }

@@ -5,6 +5,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by sergiopuleri on 4/8/16.
@@ -15,7 +16,7 @@ public enum ChestFactory {
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Frat Tank", "A sporty tank to show off your gains", req, 2000);
+            return new Chestplate(ImageLoader.loadImage("./res/items/frat_tank.png"), new StatModificationList(buff), "Frat Tank", "A sporty tank to show off your gains", req, 2000);
         }
     },
     SWAMPHACKS_TEE(2001) {
@@ -31,7 +32,7 @@ public enum ChestFactory {
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.", req, 2002);
+            return new Chestplate(ImageLoader.loadImage("./res/items/chain_mail.png"), new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.", req, 2002);
         }
     },
     CHESTPLATE(2003) {
