@@ -5,6 +5,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by sergiopuleri on 4/8/16.
@@ -15,7 +16,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Yoga Pants", "Some comfy, cute yoga pants", req, 5000);
+            return new Legging(ImageLoader.loadImage("./res/items/yogaPants.png"), new StatModificationList(buff), "Yoga Pants", "Some comfy, cute yoga pants", req, 5000);
         }
     },
     BRONZE_PLATE_LEGS(5001) {
@@ -34,12 +35,12 @@ public enum LeggingFactory {
             return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Platelegs", "A pair of iron platelegs", req, 5002);
         }
     },
-    STEEL_PLATE_LEGS(5003) {
+    PETER_PAN_LEGGINGS(5003) {
         @Override
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Platelegs", "A pair of steel platelegs", req, 5003);
+            return new Legging(ImageLoader.loadImage("./res/items/peterpanleggings.png"), new StatModificationList(buff), "Peter Pan Pants", "Cute pants worn by Peter Pan. Will protect you from magic.", req, 5003);
         }
     };
 

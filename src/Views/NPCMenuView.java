@@ -15,7 +15,6 @@ public class NPCMenuView extends MenuView {
     private int optionHeight;
     private Font titleFont;
     private Font optionFont;
-    private int optionVerticalMargin;
     private Color background;
     private Color color1;
     private Color color2;
@@ -38,7 +37,6 @@ public class NPCMenuView extends MenuView {
         optionHeight = height / 25;
         titleFont = new Font("SansSerif", Font.BOLD, width / 12);
         optionFont = new Font("SansSerif", Font.BOLD, width / 86);
-        optionVerticalMargin = (int) (width * 0.15);
         optionVerticalSpacing = optionHeight;
         optionHorizontalSpacing = width/4;
         background = new Color(70, 70, 70);

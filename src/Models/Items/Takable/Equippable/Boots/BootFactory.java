@@ -5,6 +5,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 import java.awt.*;
 
@@ -15,9 +16,12 @@ public enum BootFactory {
     MOCCASINS(1000) {
         @Override
         public Boot createInstance() {
-            StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
+            StatModificationList buffs = new StatModificationList(new StatModification(Stat.ARMOR_MODIFIER, 5),
+                                                                new StatModification(Stat.HARDINESS, 5),
+                                                                new StatModification(Stat.MAX_HEALTH, 20));
+
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Moccasins", "Some comfy moccasins", req, 1000);
+            return new Boot(ImageLoader.loadImage("./res/items/moccassin.png"), buffs, "Moccasins", "Some comfy moccasins", req, 1000);
         }
     },
     IRON(1001) {
@@ -41,7 +45,7 @@ public enum BootFactory {
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Steel Boots", "Some boots made of Steel.", req, 1003);
+            return new Boot(ImageLoader.loadImage("./res/items/steel_toe.png"), new StatModificationList(buff), "Steel Boots", "Some boots made of Steel.", req, 1003);
         }
     };
 

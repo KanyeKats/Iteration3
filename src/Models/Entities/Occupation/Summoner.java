@@ -61,7 +61,7 @@ public class Summoner extends Occupation {
     }
 
     @Override
-    public HashMap<Direction, BufferedImage> initImages(){
+    public HashMap<Direction, BufferedImage> initImages() {
 
         HashMap<Direction, BufferedImage> images = new HashMap<>();
         images.put(Direction.NORTH, Assets.BUG_NORTH_BLUE);
@@ -72,6 +72,11 @@ public class Summoner extends Occupation {
         images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST_BLUE);
 
         return images;
+        // Used for displaying the occupation on views such as equipment
+    }
+    @Override
+    public String toString() {
+        return "Summoner";
     }
 
 }

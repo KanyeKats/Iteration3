@@ -5,6 +5,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by sergiopuleri on 4/8/16.
@@ -15,7 +16,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Air Staff", "A basic staff of air. Makes you do more magic damage", req, 8000);
+            return new Staff(ImageLoader.loadImage("./res/items/airstaff.png"), new StatModificationList(buff), "Air Staff", "A staff of air. Increases your magic damage", req, 8000);
         }
     },
     FIRE_STAFF(8001) {
@@ -23,15 +24,15 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Fire Staff", "A basic staff of fire. Makes you do more magic damage", req, 8001);
+            return new Staff(ImageLoader.loadImage("./res/items/firestaff.png"), new StatModificationList(buff), "Fire Staff", "A staff of fire. Increases your magic damage", req, 8001);
         }
     },
-    MYSTIC_STAFF(8002) {
+    WATER_STAFF(8002) {
         @Override
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Mystic Staff", "A magical, mystic staff", req, 8002);
+            return new Staff(ImageLoader.loadImage("./res/items/waterstaff.png"), new StatModificationList(buff), "Water Staff", "A staff of water. Increases your magic damage", req, 8002);
         }
     },
     LIGHT_STAFF(8003) {

@@ -113,13 +113,20 @@ public class Entity extends Observable implements Savable {
         Boot moccassins = BootFactory.bootsFromID(1001);
         equip(moccassins);
         this.isMounted = false;
+//        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
+//        equip(bluePhat);
+//        Boot moccassins = BootFactory.bootsFromID(1001);
+//        equip(moccassins);
 
     }
 
     public void equip(EquippableItem item){
         // Only equip the item if this instance of entity fufills the stat requirement to equip the item.
         if (item.fufillEquipRequirement(this)) {
-            item.equip(equipment, passiveSkillList);
+            boolean successfullEquip = item.equip(equipment, passiveSkillList);
+            if (successfullEquip) {
+                inventory.removeItem(item);
+            }
         }
     }
 

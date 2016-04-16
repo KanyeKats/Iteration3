@@ -1,8 +1,6 @@
 package Models.Menu;
 
-import Controllers.GameViewController;
-import Controllers.MenuViewController;
-import Controllers.NPCShopViewController;
+import Controllers.*;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
@@ -24,10 +22,7 @@ import Utilities.Constants;
 import Utilities.KeyBindings;
 import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.GameLoader;
-import Views.AvatarCreationMenuView;
-import Views.GameView;
-import Views.NPCShopView;
-import Views.ReconfigureKeysView;
+import Views.*;
 import javafx.geometry.Point3D;
 
 import javax.swing.*;
@@ -573,7 +568,11 @@ public class Menu extends java.util.Observable{
                         System.out.println("Talk");
                         String dialog = ((NPC) npc).getDialog();
                         System.out.println(dialog);
-                        // TODO: Make this appear ain a dialog box.
+
+                        Models.Menu.Menu npcTalkMenu = Models.Menu.Menu.createNPCTalkMenu(stateManager);
+                        MenuViewController npcTalkViewController = new MenuViewController(stateManager, npcTalkMenu);
+                        NPCTalkView npcTalkView = new NPCTalkView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcTalkMenu, dialog);
+                        stateManager.setActiveState(new State(npcTalkViewController, npcTalkView));
                     }
                 });
                 return actions;
@@ -601,7 +600,7 @@ public class Menu extends java.util.Observable{
                             NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
                             stateManager.setActiveState(new State(npcShopViewController, npcShopView));
                         }else{
-                            System.out.println("He doesnt wanna trade with ya!");
+                            System.out.println("He doesn't wanna trade with ya!");
                             // TODO: Make a toast that says this.
                         }
                     }
@@ -626,8 +625,10 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        //TODO: Implement using item
                         System.out.println("Use item");
+                        InventoryView inventoryView = new InventoryView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory());
+                        UseItemOnNPCController useItemOnNPCController = new UseItemOnNPCController(stateManager, inventoryView, avatar, npc);
+                        stateManager.setActiveState(new State(useItemOnNPCController, inventoryView));
                     }
                 });
                 return actions;
@@ -641,7 +642,7 @@ public class Menu extends java.util.Observable{
         options.add(new MenuOption() {
             @Override
             public String getTitle() {
-                return "Use Skill";
+                return "Leave";
             }
 
             @Override
@@ -650,8 +651,36 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        //TODO: Implement using skill
-                        System.out.println("Use skill");
+                        System.out.println("Leave");
+                        stateManager.goToPreviousState();
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        return new Menu(options);
+    }
+
+    public static Menu createNPCTalkMenu(StateManager stateManager){
+        ArrayList<MenuOption> options = new ArrayList<>();
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Back";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        stateManager.goToPreviousState();
                     }
                 });
                 return actions;

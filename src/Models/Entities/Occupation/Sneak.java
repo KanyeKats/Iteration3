@@ -74,5 +74,11 @@ public class Sneak extends Occupation {
 
         return images;
     }
+    // Used for displaying the occupation on views such as equipment
+    @Override
+    public String toString() {
+        return "Sneak";
+    }
+
 
 }

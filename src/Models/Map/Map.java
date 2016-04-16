@@ -337,11 +337,13 @@ public class Map extends Observable implements Savable {
         tile.removeEffect();
     }
 
-//    public void acceptDrawingVisitor(MapDrawingVisitor visitor){
-//        visitor.accept(tiles);
-//    }
-    public void draw(BufferedImage image, Point3D center, Point3D avatarLocation, int rangeofVisibility , boolean cameraMvoing) {
-        MapDrawingVisitor.accept(tiles, image, center, avatarLocation, rangeofVisibility, cameraMvoing);
+    public void draw(BufferedImage image,
+                     Point3D center,
+                     Point3D avatarLocation,
+                     int rangeofVisibility ,
+                     boolean cameraMvoing,
+                     boolean debugMode) {
+        MapDrawingVisitor.accept(tiles, image, center, avatarLocation, rangeofVisibility, cameraMvoing, debugMode);
     }
 
     //// MOVEMENT CHECKERS ////

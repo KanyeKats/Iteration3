@@ -1,29 +1,37 @@
 package Controllers;
 
+/**
+ * Created by sergiopuleri on 4/15/16.
+ */
+
+import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
-import Models.Items.Takable.TakableItem;
-import Models.Menu.Menu;
+import Models.Items.Takable.Equippable.EquippableItem;
 import Utilities.Action;
+import Utilities.Constants;
+import Views.EquipmentView;
 import Views.InventoryView;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+
+
 
 /**
  * Created by sergiopuleri on 4/14/16.
  */
-public class InventoryViewController extends ViewController {
+public class EquipmentViewController extends ViewController {
 
     // References to the inventory view to get selected, set selected, etc.
-    private InventoryView inventoryView;
-    // Needs ref to entity in order to equip / drop items
+    private EquipmentView equipmentView;
+
+    // Needs ref to entity in order to unequip items
     private Entity entity;
 
-    public InventoryViewController(StateManager stateManager, InventoryView inventoryView, Entity entity) {
+    public EquipmentViewController(StateManager stateManager, EquipmentView equipmentView, Entity entity) {
         super(stateManager);
-        this.inventoryView = inventoryView;
+        this.equipmentView = equipmentView;
         this.entity = entity;
     }
 
@@ -34,28 +42,28 @@ public class InventoryViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_UP, new Action() {
             @Override
             public void execute() {
-                inventoryView.previousItem();
-                inventoryView.refresh();
+                equipmentView.previous();
+                equipmentView.refresh();
             }
         });
         keyBindings.addBinding(KeyEvent.VK_DOWN, new Action() {
             @Override
             public void execute() {
-                inventoryView.nextItem();
-                inventoryView.refresh();}
+                equipmentView.next();
+                equipmentView.refresh();}
         });
         keyBindings.addBinding(KeyEvent.VK_LEFT, new Action() {
             @Override
             public void execute() {
-                inventoryView.previousItem();
-                inventoryView.refresh();
+                equipmentView.previous();
+                equipmentView.refresh();
             }
         });
         keyBindings.addBinding(KeyEvent.VK_RIGHT, new Action() {
             @Override
             public void execute() {
-                inventoryView.nextItem();
-                inventoryView.refresh();
+                equipmentView.next();
+                equipmentView.refresh();
             }
         });
 
@@ -63,21 +71,10 @@ public class InventoryViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_ENTER, new Action() {
             @Override
             public void execute() {
-                TakableItem item = inventoryView.getSelectedItem();
+                EquippableItem item = equipmentView.getSelectedItem();
                 if (item != null) {
-                    item.onUse(entity);
-                    System.out.println("Used the item?");
-                    inventoryView.refresh();
-                }
-            }
-        });
-        keyBindings.addBinding(KeyEvent.VK_D, new Action() {
-            @Override
-            public void execute() {
-                TakableItem item = inventoryView.getSelectedItem();
-                if (item != null) {
-                    entity.dropItem(inventoryView.getSelectedIndex());
-                    inventoryView.refresh();
+                    entity.unequip(item);
+                    equipmentView.refresh();
                 }
             }
         });
@@ -90,10 +87,19 @@ public class InventoryViewController extends ViewController {
             }
 
         });
-        keyBindings.addBinding(KeyEvent.VK_I, new Action() {
+        keyBindings.addBinding(KeyEvent.VK_P, new Action() {
             @Override
             public void execute() {
                 stateManager.goToPreviousState();
+            }
+
+        });
+        keyBindings.addBinding(KeyEvent.VK_I, new Action() {
+            @Override
+            public void execute() {
+                InventoryView inventoryView = new InventoryView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, entity.getInventory());
+                InventoryViewController inventoryViewController = new InventoryViewController(stateManager, inventoryView, entity);
+                stateManager.setActiveState(new State(inventoryViewController, inventoryView));
             }
 
         });
@@ -111,6 +117,6 @@ public class InventoryViewController extends ViewController {
 
     @Override
     public void update() {
-
+        // I REPEAT.. NOT NECESSARY FOR THIS VIEW.
     }
 }

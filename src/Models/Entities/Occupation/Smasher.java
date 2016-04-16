@@ -64,4 +64,9 @@ public class Smasher extends Occupation {
         return images;
     }
 
+    // Used for displaying the occupation on views such as equipment
+    @Override
+    public String toString() {
+        return "Smasher";
+    }
 }

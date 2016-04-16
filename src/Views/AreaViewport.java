@@ -20,6 +20,7 @@ public class AreaViewport extends View {
     private Map map;
     private Entity avatar;
     private Boolean isMoving;
+    private boolean debugMode;
     private Point3D renderLocation;
     private Camera camera;
 
@@ -33,6 +34,7 @@ public class AreaViewport extends View {
         avatar.addObserver(this);
         camera.addObserver(this);
         this.isMoving = false;
+        this.debugMode = false;
 
         repaint();
     }
@@ -53,7 +55,7 @@ public class AreaViewport extends View {
         else {
             renderLocation = camera.getLocation();
         }
-        map.draw(viewContent, renderLocation, avatar.getLocation(), avatar.getStats().getStat(Stat.RADIUS_OF_VISIBILITY),isMoving);
+        map.draw(viewContent, renderLocation, avatar.getLocation(), avatar.getStats().getStat(Stat.RADIUS_OF_VISIBILITY),isMoving, debugMode);
         // Notify the observers of this view (GameView) that it changed.
         this.setChanged();
         this.notifyObservers();
@@ -75,6 +77,10 @@ public class AreaViewport extends View {
 
     public void setMoving(boolean isMoving){
         this.isMoving = isMoving;
+    }
+
+    public void toggleDebugMode() {
+        this.debugMode = !this.debugMode;
     }
 
     public boolean isMoving(){

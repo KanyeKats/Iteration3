@@ -239,7 +239,7 @@ public class InventoryView extends View {
 
         // Get ready to draw the instructions
         g.setFont(smallFont);
-        String instructions = "Press [Enter] to equip an item or [d] to drop it.";
+        String instructions = "Press [Enter] to equip an item or [D] to drop it.";
         FontMetrics fm2 = g.getFontMetrics(smallFont);
         Rectangle2D instRect = fm2.getStringBounds(instructions, g);
 
