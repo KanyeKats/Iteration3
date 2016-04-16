@@ -1,21 +1,20 @@
 package Models.Consequences;
 
 import Models.Entities.Entity;
-import Models.Entities.NPC.NPC;
 import javafx.geometry.Point3D;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by josh on 4/6/16.
+ * Created by Aidan on 4/15/2016.
  */
-public class BehaviorConsequence extends Consequence {
+public class SleepConsequence extends Consequence{
 
     private int activeTime;
     private Timer timer = new Timer();
 
-    public BehaviorConsequence(int activeTime){
+    public SleepConsequence(int activeTime){
         this.activeTime = activeTime;
     }
 
@@ -24,6 +23,7 @@ public class BehaviorConsequence extends Consequence {
     //TODO: Reset behavior changes in the timer
     public void execute(Entity entity) {
         //Execute behavior change
+        entity.makeSleep(this);
 
         timer.schedule(new TimerTask() {
             @Override
@@ -47,4 +47,5 @@ public class BehaviorConsequence extends Consequence {
     public Consequence makeRiver(int waterVelocity) {
         return null;
     }
+
 }

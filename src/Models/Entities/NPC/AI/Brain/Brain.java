@@ -12,18 +12,25 @@ public class Brain {
     private VisualCortex visualCortex;
     private FrontalLobe frontalLobe;
     private NPC npc;
+    private Boolean isSleeping;
 
 
     public Brain(Personality personality, NPC npc) {
         this.visualCortex = new VisualCortex();
         this.frontalLobe = new FrontalLobe(personality);
         this.npc = npc;
+        this.isSleeping = false;
     }
 
     public void think(){
+        if(!isSleeping) {
+            VisualInfo visualInfo = visualCortex.look(npc, npc.getMap());
+            frontalLobe.process(visualInfo, npc);
+        }
+    }
 
-        VisualInfo visualInfo = visualCortex.look(npc, npc.getMap());
-        frontalLobe.process(visualInfo, npc);
+    public void sleep(){
+        this.isSleeping = true;
     }
 
     public boolean willTrade(){

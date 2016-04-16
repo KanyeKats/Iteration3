@@ -1,8 +1,6 @@
 package Models.Menu;
 
-import Controllers.GameViewController;
-import Controllers.MenuViewController;
-import Controllers.NPCShopViewController;
+import Controllers.*;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
@@ -21,11 +19,9 @@ import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.KeyBindings;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.GameLoader;
-import Views.AvatarCreationMenuView;
-import Views.GameView;
-import Views.NPCShopView;
-import Views.ReconfigureKeysView;
+import Views.*;
 import javafx.geometry.Point3D;
 
 import javax.swing.*;
@@ -178,8 +174,8 @@ public class Menu extends java.util.Observable{
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
-                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
                         stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
@@ -215,8 +211,8 @@ public class Menu extends java.util.Observable{
                         NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET);
                         map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
 
-                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
                         stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
@@ -246,8 +242,8 @@ public class Menu extends java.util.Observable{
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
-                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
                         stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
@@ -565,8 +561,14 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        //TODO: Implement talking
                         System.out.println("Talk");
+                        String dialog = ((NPC) npc).getDialog();
+                        System.out.println(dialog);
+
+                        Models.Menu.Menu npcTalkMenu = Models.Menu.Menu.createNPCTalkMenu(stateManager);
+                        MenuViewController npcTalkViewController = new MenuViewController(stateManager, npcTalkMenu);
+                        NPCTalkView npcTalkView = new NPCTalkView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcTalkMenu, dialog);
+                        stateManager.setActiveState(new State(npcTalkViewController, npcTalkView));
                     }
                 });
                 return actions;
@@ -589,9 +591,14 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory());
-                        NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
-                        stateManager.setActiveState(new State(npcShopViewController, npcShopView));
+                        if(((NPC)npc).willTrade()){
+                            NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory());
+                            NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
+                            stateManager.setActiveState(new State(npcShopViewController, npcShopView));
+                        }else{
+                            System.out.println("He doesn't wanna trade with ya!");
+                            // TODO: Make a toast that says this.
+                        }
                     }
                 });
                 return actions;
@@ -614,8 +621,10 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        //TODO: Implement using item
                         System.out.println("Use item");
+                        InventoryView inventoryView = new InventoryView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory());
+                        UseItemOnNPCController useItemOnNPCController = new UseItemOnNPCController(stateManager, inventoryView, avatar, npc);
+                        stateManager.setActiveState(new State(useItemOnNPCController, inventoryView));
                     }
                 });
                 return actions;
@@ -629,7 +638,7 @@ public class Menu extends java.util.Observable{
         options.add(new MenuOption() {
             @Override
             public String getTitle() {
-                return "Use Skill";
+                return "Leave";
             }
 
             @Override
@@ -638,8 +647,36 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        //TODO: Implement using skill
-                        System.out.println("Use skill");
+                        System.out.println("Leave");
+                        stateManager.goToPreviousState();
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        return new Menu(options);
+    }
+
+    public static Menu createNPCTalkMenu(StateManager stateManager){
+        ArrayList<MenuOption> options = new ArrayList<>();
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Back";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        stateManager.goToPreviousState();
                     }
                 });
                 return actions;

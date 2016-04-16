@@ -81,28 +81,8 @@ public class Map extends Observable implements Savable {
             return;
         }
 
-        //for the teleport
-        if (MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(source),MapUtilities.to2DPoint(destination)) > 1) {
-            if (!updatedDestinationTile.containsEntity()) {
-                entity.setLocation(destination);
-                entity.setPixelLocation(updatedDestinationTile.getPixelPoint());
-                sourceTile.removeEntity();
-                updatedDestinationTile.insertEntity(entity);
-
-                updatedDestinationTile.activateTileObjectsOnEntity(entity);
-
-                setChanged();
-                notifyObservers();
-            }
-        }
-
         // Get the entites movement speed.
         int movementSpeed = entity.getStats().getStat(Stat.MOVEMENT);
-
-        // If an entities speed is 0, should not move
-        if (movementSpeed == 0) {
-            return;
-        }
 
         // Move him at that rate, upon completion of translation, we will apply items/AoEs/etc on the tile.
         translateEntity(entity, destination, movementSpeed);
@@ -237,6 +217,25 @@ public class Map extends Observable implements Savable {
         entitiesOnMap.add(entity);
     }
 
+    public void moveEntityToNewTileAndRemoveFromOld(Entity entity, Point3D point) {
+        Tile destination = tiles.get(point);
+        Tile current = tiles.get(entity.getLocation());
+
+        current.removeEntity();
+
+        // insert
+        destination.insertEntity(entity);
+
+        entity.setLocation(point);
+        entity.setPixelLocation(destination.getPixelPoint());
+        entity.moveComplete();
+        destination.activateTileObjectsOnEntity(entity);
+
+        setChanged();
+        notifyObservers();
+
+    }
+
     // This should only be used when an Entity is dead.
     public void removeEntity(Point3D point){
 
@@ -317,8 +316,8 @@ public class Map extends Observable implements Savable {
 //    public void acceptDrawingVisitor(MapDrawingVisitor visitor){
 //        visitor.accept(tiles);
 //    }
-    public void draw(BufferedImage image, Point3D center, int rangeofVisibility) {
-        MapDrawingVisitor.accept(tiles, image, center, rangeofVisibility);
+    public void draw(BufferedImage image, Point3D center, Point3D avatarLocation, int rangeofVisibility , boolean cameraMvoing) {
+        MapDrawingVisitor.accept(tiles, image, center, avatarLocation, rangeofVisibility, cameraMvoing);
     }
 
     //// MOVEMENT CHECKERS ////

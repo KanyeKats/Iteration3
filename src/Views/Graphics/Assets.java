@@ -43,6 +43,13 @@ public class Assets {
     public static BufferedImage DEATH;
     public static BufferedImage TELEPORT;
     public static BufferedImage TRAP;
+    public static BufferedImage FLOW_NW;
+    public static BufferedImage FLOW_NE;
+    public static BufferedImage FLOW_SW;
+    public static BufferedImage FLOW_SE;
+    public static BufferedImage FLOW_N;
+    public static BufferedImage FLOW_S;
+
 
 
 
@@ -126,6 +133,24 @@ public class Assets {
 
         SpriteSheet trap = new SpriteSheet(ImageLoader.loadImage("./res/decals/trap-sample.png"));
         TRAP = trap.crop(0, 0, SPRITE_SIZE, SPRITE_SIZE);
+
+        SpriteSheet FLOW_nw = new SpriteSheet(ImageLoader.loadImage("./res/decals/flow_NW.png"));
+        FLOW_NW = FLOW_nw.crop(0, 0, SPRITE_SIZE, SPRITE_SIZE);
+
+        SpriteSheet FLOW_ne = new SpriteSheet(ImageLoader.loadImage("./res/decals/flow_NE.png"));
+        FLOW_NE = FLOW_ne.crop(0, 0, SPRITE_SIZE, SPRITE_SIZE);
+
+        SpriteSheet FLOW_n = new SpriteSheet(ImageLoader.loadImage("./res/decals/flow_N.png"));
+        FLOW_N = FLOW_n.crop(0, 0, SPRITE_SIZE, SPRITE_SIZE);
+
+        SpriteSheet FLOW_sw = new SpriteSheet(ImageLoader.loadImage("./res/decals/flow_SW.png"));
+        FLOW_SW = FLOW_sw.crop(0, 0, SPRITE_SIZE, SPRITE_SIZE);
+
+        SpriteSheet FLOW_se = new SpriteSheet(ImageLoader.loadImage("./res/decals/flow_SE.png"));
+        FLOW_SE= FLOW_se.crop(0, 0, Constants.TILE_WIDTH, Constants.TILE_WIDTH);
+
+        SpriteSheet FLOW_s = new SpriteSheet(ImageLoader.loadImage("./res/decals/flow_S.png"));
+        FLOW_S= FLOW_s.crop(0, 0, SPRITE_SIZE, SPRITE_SIZE);
 
         // TODO: Init all the item assets.
         SpriteSheet bag = new SpriteSheet(ImageLoader.loadImage("./res/items/bag.png"));

@@ -1,5 +1,7 @@
 package Models.Entities;
 
+import Models.Consequences.BehaviorConsequence;
+import Models.Consequences.SleepConsequence;
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
@@ -50,6 +52,7 @@ public class Entity extends Observable implements Savable {
     private boolean canMove;
     private boolean justMoved;
     private boolean enteredNewTile;
+    private boolean tryingNewDirection;
     private Timer movementTimer;
 
     // TODO: Ask about terrain checking... not sure if this is ok
@@ -98,6 +101,7 @@ public class Entity extends Observable implements Savable {
         canMove = true;
         justMoved = false;
         enteredNewTile = false;
+        tryingNewDirection = true;
 
         // TODO: Remove!! Just testing item factory and equipping.
         Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
@@ -123,6 +127,12 @@ public class Entity extends Observable implements Savable {
         if (canMove) {
             // Don't allow the entity to move
             canMove = false;
+
+            // Deals with redrawing when the entity can't move
+            if(this.direction == direction)
+                this.tryingNewDirection = false;
+            else
+                this.tryingNewDirection = true;
 
             // Move the entity
             this.direction = direction;
@@ -151,6 +161,10 @@ public class Entity extends Observable implements Savable {
     }
 
     public final void failedMovement() {
+        if(this.tryingNewDirection == true){
+            setChanged();
+            notifyObservers();
+        }
         this.canMove = true;
         this.justMoved = false;
     }
@@ -161,8 +175,7 @@ public class Entity extends Observable implements Savable {
     public final void move(Point3D desiredPoint) {
         // TODO: implement
 
-        //needs to put itself on tile at p3d
-        map.moveEntity(this, desiredPoint);
+        map.moveEntityToNewTileAndRemoveFromOld(this, desiredPoint);
     }
 
     //Entities arent in charge of adding items to themselves right hmmm or does tile call entity.add(item)?
@@ -216,6 +229,12 @@ public class Entity extends Observable implements Savable {
     public ActiveSkillList getActiveSkillList() {
         return activeSkillList;
     }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public boolean getCanMove() { return this.canMove; }
 
     public void setActiveSkillList(ActiveSkillList activeSkillList) {
         this.activeSkillList = activeSkillList;
@@ -288,11 +307,13 @@ public class Entity extends Observable implements Savable {
     }
 
     public void initPixelLocation(Point pixelLocation) {
-        if (this.pixelLocation == null || justMoved )
+        System.out.println(justMoved);
+        if (this.pixelLocation == null || justMoved) {
             this.pixelLocation = pixelLocation;
-            if (justMoved) {
-                justMoved = false;
-            }
+        }
+        if (justMoved) {
+            justMoved = false;
+        }
     }
 
     public Direction getDirection() {
@@ -353,6 +374,10 @@ public class Entity extends Observable implements Savable {
     public Tile getTileInFront(){
         Point3D point = direction.getPointAdjacentTo(location);
         return map.getTile(point);
+    }
+
+    public void makeSleep(SleepConsequence sleepConsequence){
+
     }
 
     @Override

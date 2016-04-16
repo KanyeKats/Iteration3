@@ -33,13 +33,12 @@ public class MapNavigationUtilities {
 
         double[] point4Dstart = convertAxialtoCuubic(point);
         double[] point4Dend = new double[4];
-
         ArrayList<ArrayList<Tile>> resultTiles = new ArrayList<>();
         for(int x = 0; x <= range; x++){
             ArrayList<Tile> tempTiles = new ArrayList<>();
-            for(int i = -range; i <= range; i++) {
-                for (int j = -range; j <= range; j++) {
-                    for (int k = -range; k <= range; k++) {
+            for(int i = -x; i <= x; i++) {
+                for (int j = -x; j <= x; j++) {
+                    for (int k = -x; k <= x; k++) {
                         point4Dend[0] = point4Dstart[0] - i;
                         point4Dend[1] = point4Dstart[1] - j;
                         point4Dend[2] = point4Dstart[2] - k;
@@ -47,7 +46,7 @@ public class MapNavigationUtilities {
                         if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
                             Point3D newpoint = convertCubictoAxial(point4Dend);
                             Tile tile = map.getTile(newpoint);
-                            if(tile != null) {
+                            if(tile != null && !point.equals(newpoint)) {
                                 tempTiles.add(tile);
                             }
                         }
@@ -75,7 +74,7 @@ public class MapNavigationUtilities {
                     if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
                         Point3D newpoint = convertCubictoAxial(point4Dend);
                         Tile tile = map.getTile(newpoint);
-                        if(tile != null) {
+                        if(tile != null && !point.equals(newpoint)) {
                             resultTiles.add(tile);
                         }
                     }
@@ -247,7 +246,6 @@ public class MapNavigationUtilities {
         //upper half of prism
         for(int i = 0; i <= rangeofColumn; i++){
              tilesInRange.add(getTilesinPlane(point.add(0,0,i),rangeofRadius,map));
-
         }
 
         //lower half of prism
