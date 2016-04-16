@@ -363,8 +363,37 @@ public class Entity extends Observable implements Savable {
         return map.getTile(point);
     }
 
-    public void makeSleep(SleepConsequence sleepConsequence){
+    //TODO: Make all the behavior consequences affect the avatar (the entity)
+    public void makeSleep(){
 
+    }
+
+    public void wakeUp(){
+
+    }
+
+    public void fear(Direction direction){
+
+    }
+
+    public void dontFear(){
+
+    }
+
+    public  HashMap<Direction,BufferedImage>  polymorph(){
+        return null;
+    }
+
+    public void changeBack(HashMap<Direction,BufferedImage> images) {
+
+    }
+
+    public HashMap<Direction,BufferedImage> getImages(){
+        return this.images;
+    }
+
+    public void setImages(HashMap<Direction,BufferedImage> images){
+        this.images = images;
     }
 
     @Override

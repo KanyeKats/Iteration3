@@ -29,12 +29,16 @@ public class Brain {
         }
     }
 
-    public void sleep(){
-        this.isSleeping = true;
+    public void setIsSleeping(boolean isSleeping){
+        this.isSleeping = isSleeping;
     }
 
     public boolean willTrade(){
         return frontalLobe.willTrade();
     }
     public String getDialog() { return frontalLobe.getDialog(); }
+    public FrontalLobe getFrontalLobe(){ return this.frontalLobe; }
+    public VisualInfo getVisualInfo(){
+        return visualCortex.look(npc, npc.getMap());
+    }
 }
