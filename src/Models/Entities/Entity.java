@@ -137,6 +137,7 @@ public class Entity extends Observable implements Savable {
     public final void move(Direction direction) {
         // Move with taking movement speed in to account
         if(isMounted){
+            System.out.println("mount is moving");
             mount.move(direction);
             setLocation(mount.getDirection().getPointAdjacentTo(mount.getLocation()));
         }
