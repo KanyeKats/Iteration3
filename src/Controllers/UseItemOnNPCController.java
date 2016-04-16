@@ -2,29 +2,29 @@ package Controllers;
 
 import Core.StateManager;
 import Models.Entities.Entity;
+import Models.Entities.Stats.Stat;
 import Models.Items.Takable.TakableItem;
-import Models.Menu.Menu;
 import Utilities.Action;
 import Views.InventoryView;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 /**
- * Created by sergiopuleri on 4/14/16.
+ * Created by Josh on 4/16/2016.
  */
-public class InventoryViewController extends ViewController {
+public class UseItemOnNPCController extends InventoryViewController {
 
     // References to the inventory view to get selected, set selected, etc.
     private InventoryView inventoryView;
     // Needs ref to entity in order to equip / drop items
-    private Entity entity;
+    private Entity avatar;
+    private Entity npc;
 
-    public InventoryViewController(StateManager stateManager, InventoryView inventoryView, Entity entity) {
-        super(stateManager);
+    public UseItemOnNPCController(StateManager stateManager, InventoryView inventoryView, Entity avatar, Entity npc) {
+        super(stateManager, inventoryView, avatar);
         this.inventoryView = inventoryView;
-        this.entity = entity;
+        this.avatar = avatar;
+        this.npc = npc;
     }
 
     @Override
@@ -65,19 +65,11 @@ public class InventoryViewController extends ViewController {
             public void execute() {
                 TakableItem item = inventoryView.getSelectedItem();
                 if (item != null) {
-                    item.onUse(entity);
-                    System.out.println("Used the item?");
+                    item.onUse(npc);
+                    avatar.getInventory().removeItem(item);
+                    System.out.println("You used an item on the NPC!");
                     inventoryView.refresh();
-                }
-            }
-        });
-        keyBindings.addBinding(KeyEvent.VK_D, new Action() {
-            @Override
-            public void execute() {
-                TakableItem item = inventoryView.getSelectedItem();
-                if (item != null) {
-                    entity.dropItem(inventoryView.getSelectedIndex());
-                    inventoryView.refresh();
+                    //TODO: Toast that says you used an item
                 }
             }
         });
@@ -99,18 +91,4 @@ public class InventoryViewController extends ViewController {
         });
     }
 
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        // NOT NECESSARY FOR THIS VIEW
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        // NOT NECESSARY FOR THIS VIEW
-    }
-
-    @Override
-    public void update() {
-
-    }
 }

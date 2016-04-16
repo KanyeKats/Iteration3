@@ -1,8 +1,6 @@
 package Models.Menu;
 
-import Controllers.GameViewController;
-import Controllers.MenuViewController;
-import Controllers.NPCShopViewController;
+import Controllers.*;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
@@ -623,8 +621,10 @@ public class Menu extends java.util.Observable{
                 actions.add(new Action() {
                     @Override
                     public void execute() {
-                        //TODO: Implement using item
                         System.out.println("Use item");
+                        InventoryView inventoryView = new InventoryView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory());
+                        UseItemOnNPCController useItemOnNPCController = new UseItemOnNPCController(stateManager, inventoryView, avatar, npc);
+                        stateManager.setActiveState(new State(useItemOnNPCController, inventoryView));
                     }
                 });
                 return actions;
