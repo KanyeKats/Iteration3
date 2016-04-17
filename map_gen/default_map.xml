@@ -20,6 +20,7 @@
     </tile>
     <tile x="-12" y="-6" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DAMAGE" value="9"/>
     </tile>
     <tile x="-12" y="-5" z="0">
         <terrain type="EARTH"/>
@@ -30,11 +31,9 @@
     </tile>
     <tile x="-12" y="-3" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="LEVEL" value="0"/>
     </tile>
     <tile x="-12" y="-2" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TELEPORT" value="2,5,4"/>
     </tile>
     <tile x="-12" y="-1" z="0">
         <terrain type="EARTH"/>
@@ -91,6 +90,7 @@
     </tile>
     <tile x="-11" y="-9" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="LEVEL" value="0"/>
     </tile>
     <tile x="-11" y="-8" z="0">
         <terrain type="EARTH"/>
@@ -100,21 +100,19 @@
     </tile>
     <tile x="-11" y="-6" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="LEVEL" value="0"/>
     </tile>
     <tile x="-11" y="-5" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="-11" y="-4" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TELEPORT" value="3,-12,7"/>
+        <area-effect type="DAMAGE" value="6"/>
     </tile>
     <tile x="-11" y="-3" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="-11" y="-2" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="-11" y="-1" z="0">
         <terrain type="EARTH"/>
@@ -172,6 +170,7 @@
     </tile>
     <tile x="-10" y="-9" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TELEPORT" value="11,8,9"/>
     </tile>
     <tile x="-10" y="-8" z="0">
         <terrain type="EARTH"/>
@@ -187,6 +186,7 @@
     </tile>
     <tile x="-10" y="-4" z="0">
         <terrain type="EARTH"/>
+        <item id="10001"/>
     </tile>
     <tile x="-10" y="-3" z="0">
         <terrain type="EARTH"/>
@@ -199,6 +199,7 @@
     </tile>
     <tile x="-10" y="0" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TRAP" value="5274"/>
     </tile>
     <tile x="-10" y="1" z="0">
         <terrain type="EARTH"/>
@@ -216,14 +217,12 @@
     </tile>
     <tile x="-10" y="5" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="-10" y="6" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="-10" y="7" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="4017"/>
     </tile>
     <tile x="-10" y="8" z="0">
         <terrain type="EARTH"/>
@@ -233,11 +232,9 @@
     </tile>
     <tile x="-10" y="10" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="-10" y="11" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
         <item id="11000"/>
     </tile>
     <tile x="-10" y="12" z="0">
@@ -271,7 +268,6 @@
     </tile>
     <tile x="-9" y="-4" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="HEAL" value="14"/>
     </tile>
     <tile x="-9" y="-3" z="0">
         <terrain type="EARTH"/>
@@ -281,17 +277,18 @@
     </tile>
     <tile x="-9" y="-1" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="HEAL" value="12"/>
     </tile>
     <tile x="-9" y="0" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="-9" y="1" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="LEVEL" value="0"/>
         <area-effect type="RIVER" value="20"/>
     </tile>
     <tile x="-9" y="2" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DAMAGE" value="11"/>
         <area-effect type="RIVER" value="20"/>
     </tile>
     <tile x="-9" y="3" z="0">
@@ -314,6 +311,7 @@
     </tile>
     <tile x="-9" y="9" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="HEAL" value="6"/>
     </tile>
     <tile x="-9" y="10" z="0">
         <terrain type="EARTH"/>
@@ -321,6 +319,7 @@
     </tile>
     <tile x="-9" y="11" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TELEPORT" value="-3,2,3"/>
     </tile>
     <tile x="-9" y="12" z="0">
         <terrain type="EARTH"/>
@@ -349,20 +348,20 @@
     </tile>
     <tile x="-8" y="-5" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="-8" y="-4" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="-8" y="-3" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="LEVEL" value="0"/>
     </tile>
     <tile x="-8" y="-2" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="-8" y="-1" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DEATH" value="0"/>
+        <item id="10000"/>
     </tile>
     <tile x="-8" y="0" z="0">
         <terrain type="EARTH"/>
@@ -380,10 +379,10 @@
     </tile>
     <tile x="-8" y="4" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="HEAL" value="19"/>
     </tile>
     <tile x="-8" y="5" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="HEAL" value="13"/>
     </tile>
     <tile x="-8" y="6" z="0">
         <terrain type="EARTH"/>
@@ -416,7 +415,6 @@
     </tile>
     <tile x="-7" y="-10" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="1292"/>
     </tile>
     <tile x="-7" y="-9" z="0">
         <terrain type="EARTH"/>
@@ -432,7 +430,6 @@
     </tile>
     <tile x="-7" y="-5" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="-7" y="-4" z="0">
         <terrain type="EARTH"/>
@@ -456,7 +453,6 @@
     </tile>
     <tile x="-7" y="2" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="1950"/>
         <area-effect type="RIVER" value="20"/>
     </tile>
     <tile x="-7" y="3" z="0">
@@ -467,7 +463,6 @@
     </tile>
     <tile x="-7" y="5" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="-7" y="6" z="0">
         <terrain type="EARTH"/>
@@ -494,6 +489,7 @@
     </tile>
     <tile x="-6" y="-12" z="0">
         <terrain type="EARTH"/>
+        <item id="10001"/>
     </tile>
     <tile x="-6" y="-11" z="0">
         <terrain type="EARTH"/>
@@ -509,7 +505,6 @@
     </tile>
     <tile x="-6" y="-7" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="-6" y="-6" z="0">
         <terrain type="EARTH"/>
@@ -534,7 +529,6 @@
     </tile>
     <tile x="-6" y="1" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TELEPORT" value="-3,12,6"/>
         <area-effect type="RIVER" value="20"/>
     </tile>
     <tile x="-6" y="2" z="0">
@@ -543,6 +537,7 @@
     </tile>
     <tile x="-6" y="3" z="0">
         <terrain type="EARTH"/>
+        <item id="10001"/>
     </tile>
     <tile x="-6" y="4" z="0">
         <terrain type="EARTH"/>
@@ -552,7 +547,6 @@
     </tile>
     <tile x="-6" y="6" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="5395"/>
     </tile>
     <tile x="-6" y="7" z="0">
         <terrain type="EARTH"/>
@@ -567,7 +561,6 @@
     </tile>
     <tile x="-6" y="10" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="3089"/>
         <item id="11000"/>
     </tile>
     <tile x="-6" y="11" z="0">
@@ -575,6 +568,7 @@
     </tile>
     <tile x="-6" y="12" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="-5" y="-12" z="0">
         <terrain type="EARTH"/>
@@ -614,7 +608,6 @@
     </tile>
     <tile x="-5" y="0" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DAMAGE" value="17"/>
     </tile>
     <tile x="-5" y="1" z="0">
         <terrain type="EARTH"/>
@@ -626,7 +619,6 @@
     </tile>
     <tile x="-5" y="3" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="-5" y="4" z="0">
         <terrain type="EARTH"/>
@@ -677,7 +669,6 @@
     </tile>
     <tile x="-4" y="-6" z="0">
         <terrain type="EARTH"/>
-        <item id="10000"/>
     </tile>
     <tile x="-4" y="-5" z="0">
         <terrain type="EARTH"/>
@@ -690,6 +681,7 @@
     </tile>
     <tile x="-4" y="-2" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DAMAGE" value="3"/>
     </tile>
     <tile x="-4" y="-1" z="0">
         <terrain type="EARTH"/>
@@ -812,6 +804,7 @@
     </tile>
     <tile x="-3" y="11" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="-3" y="12" z="0">
         <terrain type="EARTH"/>
@@ -836,7 +829,6 @@
     </tile>
     <tile x="-2" y="-6" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="HEAL" value="5"/>
     </tile>
     <tile x="-2" y="-5" z="0">
         <terrain type="EARTH"/>
@@ -855,7 +847,6 @@
     </tile>
     <tile x="-2" y="0" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="HEAL" value="12"/>
     </tile>
     <tile x="-2" y="1" z="0">
         <terrain type="EARTH"/>
@@ -863,7 +854,6 @@
     </tile>
     <tile x="-2" y="2" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="2281"/>
         <area-effect type="RIVER" value="20"/>
     </tile>
     <tile x="-2" y="3" z="0">
@@ -880,11 +870,9 @@
     </tile>
     <tile x="-2" y="7" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="-2" y="8" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="-2" y="9" z="0">
         <terrain type="EARTH"/>
@@ -903,7 +891,7 @@
     </tile>
     <tile x="-1" y="-11" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
+        <item id="10000"/>
     </tile>
     <tile x="-1" y="-10" z="0">
         <terrain type="EARTH"/>
@@ -937,12 +925,14 @@
     </tile>
     <tile x="-1" y="0" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DAMAGE" value="18"/>
     </tile>
     <tile x="-1" y="1" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="-1" y="2" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TELEPORT" value="-12,-9,9"/>
         <item id="12001"/>
     </tile>
     <tile x="-1" y="3" z="0">
@@ -950,7 +940,6 @@
     </tile>
     <tile x="-1" y="4" z="0">
         <terrain type="EARTH"/>
-        <item id="10000"/>
     </tile>
     <tile x="-1" y="5" z="0">
         <terrain type="EARTH"/>
@@ -966,7 +955,7 @@
     </tile>
     <tile x="-1" y="9" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DAMAGE" value="3"/>
+        <area-effect type="HEAL" value="15"/>
     </tile>
     <tile x="-1" y="10" z="0">
         <terrain type="EARTH"/>
@@ -1032,7 +1021,6 @@
     </tile>
     <tile x="0" y="5" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DAMAGE" value="7"/>
     </tile>
     <tile x="0" y="6" z="0">
         <terrain type="EARTH"/>
@@ -1042,19 +1030,16 @@
     </tile>
     <tile x="0" y="8" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DAMAGE" value="14"/>
         <item id="8002"/>
     </tile>
     <tile x="0" y="9" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DAMAGE" value="10"/>
     </tile>
     <tile x="0" y="10" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="0" y="11" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="LEVEL" value="0"/>
     </tile>
     <tile x="0" y="12" z="0">
         <terrain type="EARTH"/>
@@ -1067,6 +1052,7 @@
     </tile>
     <tile x="1" y="-10" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="LEVEL" value="0"/>
     </tile>
     <tile x="1" y="-9" z="0">
         <terrain type="EARTH"/>
@@ -1080,7 +1066,6 @@
     </tile>
     <tile x="1" y="-6" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="1" y="-5" z="0">
         <terrain type="EARTH"/>
@@ -1090,6 +1075,7 @@
     </tile>
     <tile x="1" y="-3" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="1" y="-2" z="0">
         <terrain type="EARTH"/>
@@ -1103,6 +1089,7 @@
     </tile>
     <tile x="1" y="1" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TELEPORT" value="2,5,8"/>
         <area-effect type="RIVER" value="20"/>
     </tile>
     <tile x="1" y="2" z="0">
@@ -1120,7 +1107,6 @@
     </tile>
     <tile x="1" y="6" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="5072"/>
     </tile>
     <tile x="1" y="7" z="0">
         <terrain type="EARTH"/>
@@ -1133,7 +1119,6 @@
     </tile>
     <tile x="1" y="10" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="5247"/>
     </tile>
     <tile x="1" y="11" z="0">
         <terrain type="EARTH"/>
@@ -1146,7 +1131,6 @@
     </tile>
     <tile x="2" y="-11" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TELEPORT" value="-2,-12,5"/>
     </tile>
     <tile x="2" y="-10" z="0">
         <terrain type="EARTH"/>
@@ -1156,18 +1140,16 @@
     </tile>
     <tile x="2" y="-8" z="0">
         <terrain type="EARTH"/>
+        <item id="10000"/>
     </tile>
     <tile x="2" y="-7" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="3872"/>
     </tile>
     <tile x="2" y="-6" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="2" y="-5" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="2" y="-4" z="0">
         <terrain type="EARTH"/>
@@ -1180,10 +1162,10 @@
     </tile>
     <tile x="2" y="-1" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="2020"/>
     </tile>
     <tile x="2" y="0" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="HEAL" value="2"/>
     </tile>
     <tile x="2" y="1" z="0">
         <terrain type="EARTH"/>
@@ -1195,6 +1177,7 @@
     </tile>
     <tile x="2" y="3" z="0">
         <terrain type="EARTH"/>
+        <item id="10000"/>
     </tile>
     <tile x="2" y="4" z="0">
         <terrain type="EARTH"/>
@@ -1225,6 +1208,7 @@
     </tile>
     <tile x="3" y="-12" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TELEPORT" value="4,9,8"/>
     </tile>
     <tile x="3" y="-11" z="0">
         <terrain type="EARTH"/>
@@ -1240,7 +1224,6 @@
     </tile>
     <tile x="3" y="-7" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="3" y="-6" z="0">
         <terrain type="EARTH"/>
@@ -1274,6 +1257,7 @@
     </tile>
     <tile x="3" y="3" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TRAP" value="2600"/>
     </tile>
     <tile x="3" y="4" z="0">
         <terrain type="EARTH"/>
@@ -1319,6 +1303,7 @@
     </tile>
     <tile x="4" y="-7" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TRAP" value="4443"/>
     </tile>
     <tile x="4" y="-6" z="0">
         <terrain type="EARTH"/>
@@ -1328,7 +1313,6 @@
     </tile>
     <tile x="4" y="-4" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="4450"/>
         <item id="4001"/>
     </tile>
     <tile x="4" y="-3" z="0">
@@ -1443,12 +1427,9 @@
     </tile>
     <tile x="5" y="7" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DAMAGE" value="9"/>
-        <item id="10001"/>
     </tile>
     <tile x="5" y="8" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="LEVEL" value="0"/>
     </tile>
     <tile x="5" y="9" z="0">
         <terrain type="WATER"/>
@@ -1470,10 +1451,10 @@
     </tile>
     <tile x="6" y="-10" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="DAMAGE" value="3"/>
     </tile>
     <tile x="6" y="-9" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="HEAL" value="11"/>
     </tile>
     <tile x="6" y="-8" z="0">
         <terrain type="EARTH"/>
@@ -1490,18 +1471,21 @@
     </tile>
     <tile x="6" y="-4" z="0">
         <terrain type="EARTH"/>
+        <item id="10001"/>
     </tile>
     <tile x="6" y="-3" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="6" y="-2" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TELEPORT" value="12,-12,8"/>
     </tile>
     <tile x="6" y="-1" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="6" y="0" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="LEVEL" value="0"/>
     </tile>
     <tile x="6" y="1" z="0">
         <terrain type="EARTH"/>
@@ -1522,6 +1506,7 @@
     </tile>
     <tile x="6" y="6" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="TELEPORT" value="-12,-6,0"/>
     </tile>
     <tile x="6" y="7" z="0">
         <terrain type="EARTH"/>
@@ -1540,7 +1525,6 @@
     </tile>
     <tile x="6" y="12" z="0">
         <terrain type="WATER"/>
-        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="7" y="-12" z="0">
         <terrain type="EARTH"/>
@@ -1578,7 +1562,6 @@
     </tile>
     <tile x="7" y="-1" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="HEAL" value="8"/>
     </tile>
     <tile x="7" y="0" z="0">
         <terrain type="EARTH"/>
@@ -1629,6 +1612,7 @@
     </tile>
     <tile x="8" y="-10" z="0">
         <terrain type="EARTH"/>
+        <item id="14000"/>
     </tile>
     <tile x="8" y="-9" z="0">
         <terrain type="EARTH"/>
@@ -1715,14 +1699,12 @@
     </tile>
     <tile x="9" y="-7" z="0">
         <terrain type="EARTH"/>
-        <item id="10000"/>
     </tile>
     <tile x="9" y="-6" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="9" y="-5" z="0">
         <terrain type="EARTH"/>
-        <item id="10001"/>
     </tile>
     <tile x="9" y="-4" z="0">
         <terrain type="EARTH"/>
@@ -1788,7 +1770,6 @@
     </tile>
     <tile x="10" y="-9" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TELEPORT" value="-9,3,7"/>
     </tile>
     <tile x="10" y="-8" z="0">
         <terrain type="EARTH"/>
@@ -1819,6 +1800,7 @@
     </tile>
     <tile x="10" y="1" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DEATH" value="0"/>
         <area-effect type="RIVER" value="20"/>
     </tile>
     <tile x="10" y="2" z="0">
@@ -1848,7 +1830,7 @@
     </tile>
     <tile x="10" y="10" z="0">
         <terrain type="WATER"/>
-        <area-effect type="TRAP" value="4551"/>
+        <area-effect type="DEATH" value="0"/>
     </tile>
     <tile x="10" y="11" z="0">
         <terrain type="WATER"/>
@@ -1870,13 +1852,14 @@
     </tile>
     <tile x="11" y="-8" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="2182"/>
+        <area-effect type="TELEPORT" value="12,-12,3"/>
     </tile>
     <tile x="11" y="-7" z="0">
         <terrain type="EARTH"/>
     </tile>
     <tile x="11" y="-6" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="DAMAGE" value="6"/>
     </tile>
     <tile x="11" y="-5" z="0">
         <terrain type="EARTH"/>
@@ -1895,7 +1878,6 @@
     </tile>
     <tile x="11" y="0" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TELEPORT" value="-7,8,8"/>
     </tile>
     <tile x="11" y="1" z="0">
         <terrain type="EARTH"/>
@@ -1913,10 +1895,11 @@
     </tile>
     <tile x="11" y="5" z="0">
         <terrain type="EARTH"/>
+        <item id="10000"/>
     </tile>
     <tile x="11" y="6" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="TRAP" value="5446"/>
+        <area-effect type="HEAL" value="18"/>
     </tile>
     <tile x="11" y="7" z="0">
         <terrain type="EARTH"/>
@@ -1989,10 +1972,10 @@
     </tile>
     <tile x="12" y="4" z="0">
         <terrain type="EARTH"/>
+        <area-effect type="HEAL" value="12"/>
     </tile>
     <tile x="12" y="5" z="0">
         <terrain type="EARTH"/>
-        <area-effect type="HEAL" value="10"/>
     </tile>
     <tile x="12" y="6" z="0">
         <terrain type="EARTH"/>
@@ -3407,6 +3390,7 @@
     </tile>
     <tile x="6" y="-2" z="1">
         <terrain type="EARTH"/>
+        <item id="14000"/>
     </tile>
     <tile x="6" y="-1" z="1">
         <terrain type="SKY"/>

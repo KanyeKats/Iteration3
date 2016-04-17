@@ -118,7 +118,9 @@ def add_item(parentElement, x, y, z):
     if (x == -1 and y == 2 and z == 0):
         add_door(parentElement)
     if (x == -12 and y == -4 and z == 0):
-        add_cacoon(parentElement)
+            add_cacoon(parentElement)
+    if (x == 8 and y == -10 and z == 0) or (x == 6 and y == -2 and z == 1):
+        add_bug_zapper(parentElement)
 '''
 All functions to add certain items.
 If you wanna add a new item, just follow the other exampls
@@ -263,7 +265,13 @@ def add_door(parentElement):
     item_xml.set("id", "12001")
 
 
+
 def add_cacoon(parentElement):
     # Create the XML object for dave
     item_xml = SubElement(parentElement, "item")
     item_xml.set("id", "14001")
+
+def add_bug_zapper(parentElement):
+    # Create the XML object for dave
+    item_xml = SubElement(parentElement, "item")
+    item_xml.set("id", "14000")

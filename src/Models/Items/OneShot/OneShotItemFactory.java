@@ -14,7 +14,7 @@ public enum OneShotItemFactory {
         @Override
         public OneShotItem createInstance() {
             StatModification buff = new StatModification(Stat.HEALTH, -1000000);
-            return new OneShotItem(Assets.PLACEHOLDER, new StatModificationList(buff), "Bug Zapper", "Extremely poisonous to bugs.", 14000);
+            return new OneShotItem(ImageLoader.loadImage("./res/items/bugzapper.png"), new StatModificationList(buff), "Bug Zapper", "Extremely poisonous to bugs.", 14000);
         }
     },
     CACOON(14001) {
