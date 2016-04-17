@@ -23,7 +23,7 @@ import java.util.Observable;
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Map extends Observable implements Savable {
+public class Map extends Observable implements Savable, Observer {
 
     //// CLASS DECLARATIONS ////
 
@@ -537,6 +537,9 @@ public class Map extends Observable implements Savable {
                 tile.load(tileElement);
 
 
+                // Observe the tile
+                tile.addObserver(this);
+
                 // Check to see if this column has already been started
                 this.tiles.put(new Point3D(x, y, z), tile);
             }
@@ -546,6 +549,17 @@ public class Map extends Observable implements Savable {
         }
     }
 
+    public HashMap<Point3D, Tile> getTiles(){
+        return tiles;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        // Notiy the observers of map
+        setChanged();
+        notifyObservers();
+
+    }
     public Set<Entity> getEntitiesOnMap(){
         return entitiesOnMap;
     }

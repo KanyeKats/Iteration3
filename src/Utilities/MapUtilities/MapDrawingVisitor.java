@@ -6,8 +6,6 @@ import Models.Map.MapUtilities.MapUtilities;
 import Models.Map.Terrain;
 import Models.Map.Tile;
 import Utilities.Constants;
-import Views.Graphics.Assets;
-import Views.MenuView;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
@@ -48,6 +46,8 @@ public class MapDrawingVisitor  {
                               boolean cameraMoving,
                               boolean isDebug) {
 
+        boolean justRecentered = false;
+
         if(tilesOnScreen == null)
             tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
 
@@ -65,6 +65,7 @@ public class MapDrawingVisitor  {
         // Re-center on avatar if necessary.
         if (distance > 4) {
             setCenter(drawingCenter);
+            justRecentered = true;
             tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
         }
 
@@ -100,9 +101,8 @@ public class MapDrawingVisitor  {
                 currentTile.setVisited();
             }
             else{
-                    tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
-                }
-
+                tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
+            }
 
             // Figure out where to put it!
             // X and Y will start at the center of the screen.
@@ -137,16 +137,22 @@ public class MapDrawingVisitor  {
             if (currentTile.containsEntity()) {
                 Entity currentEntity = currentTile.getEntity();
 
+                if(justRecentered){
+                    currentEntity.setPixelLocation(pixelPoint);
+                }
+
                 if(!cameraMoving) {
                     currentEntity.initPixelLocation(pixelPoint);
-                    EntityDrawer.drawEntity(currentEntity, g);
                 }
                 else{
-
                     currentEntity.setPixelLocation(pixelPoint);
+                }
+                if (tilesinSight.contains(currentTile)) {
                     EntityDrawer.drawEntity(currentEntity, g);
                 }
             }
+
+
         }
         g.dispose();
     }

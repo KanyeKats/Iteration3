@@ -3,12 +3,15 @@ package Controllers;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
-import Models.Entities.Equipment;
+import Models.Entities.Skills.ActiveSkills.ActiveSkill;
+import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Stats.Stat;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
+import Views.PauseMenuView;
+import Views.SkillViewPort;
 
 import Views.*;
 
@@ -32,6 +35,7 @@ public class GameViewController extends ViewController {
         super(stateManager);
         this.avatar = avatar;
         this.map = map;
+        initActiveSkillBindings();
         controller = this;
         this.areaViewport = areaViewport;
         refreshCounter = 0;
@@ -269,5 +273,22 @@ public class GameViewController extends ViewController {
             }
         }
         refreshCounter++;
+    }
+
+    private void initActiveSkillBindings(){
+        ActiveSkillList activeSkills = avatar.getActiveSkillList();
+        System.out.println(activeSkills.size());
+        int key = KeyEvent.VK_1;
+        for(int i=0; i<activeSkills.size(); i++){
+            ActiveSkill skill = activeSkills.get(i);
+            keyBindings.addBinding(key, new Action() {
+                @Override
+                public void execute() {
+                    System.out.println("EXECUTING SKILL YO");
+                    skill.activate(avatar);
+                }
+            });
+            key++;
+        }
     }
 }

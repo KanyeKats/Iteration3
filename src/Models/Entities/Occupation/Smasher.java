@@ -2,12 +2,10 @@ package Models.Entities.Occupation;
 
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Bargain;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Observation;
-import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.PassiveSkills.SmasherSkills.BrawlingMastery;
 import Models.Entities.Skills.PassiveSkills.SmasherSkills.OneHandedWeaponMastery;
 import Models.Entities.Skills.PassiveSkills.SmasherSkills.TwoHandedWeaponMastery;
-import Models.Entities.Skills.PassiveSkills.SneakSkills.RangedWeaponMastery;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;

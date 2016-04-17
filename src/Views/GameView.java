@@ -23,6 +23,7 @@ public class GameView extends View {
 
         areaViewport.addObserver(this);
         statusViewport.addObserver(this);
+        map.addObserver(statusViewport);
 //        skillsViewport.addObserver(this);
 
         repaint();
@@ -33,10 +34,6 @@ public class GameView extends View {
 
         // Extract the graphics object from this views content;
         Graphics g = viewContent.getGraphics();
-
-        // Set content changed for the viewports
-        areaViewport.setContentChanged(true);
-        statusViewport.setContentChanged(true);
 
         // Render the viewports onto this view.
         areaViewport.render(g);

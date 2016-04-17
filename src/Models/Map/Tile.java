@@ -5,26 +5,22 @@ import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.AreaEffects.AreaEffectFactory;
 import Models.Map.AreaEffects.RiverAreaEffect;
+import Utilities.MapUtilities.TileDrawingVisitor;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.print.Doc;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import Utilities.MapUtilities.TileDrawingVisitor;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Observable;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Tile implements Savable {
+public class Tile extends Observable implements Savable {
 
     private Terrain terrain;
     private AreaEffect areaEffect;
@@ -36,6 +32,7 @@ public class Tile implements Savable {
     // pixel point used for moving
     private Point pixelPoint;
 
+    // TODO: Remember to notify observers whenever you do something to a tile that modifies how it will be displayed (and youre not going through the map to do it).
     public Tile(Terrain terrain, AreaEffect areaEffect, Entity entity, ArrayList<Item> items, Decal decal, Effect effect){
         this.terrain = terrain;
         this.areaEffect = areaEffect;
@@ -128,9 +125,16 @@ public class Tile implements Savable {
         this.areaEffect = null;
     }
 
-    public void insertEffect(Effect effect){ this.effect = effect; }
+    public void insertEffect(Effect effect){
+        this.effect = effect;
+        setChanged();
+        notifyObservers();
+    }
 
-    public void removeEffect() { this.effect = null; }
+    public void removeEffect() { this.effect = null;
+        setChanged();
+        notifyObservers();
+    }
 
     public Terrain getTerrain() { return this.terrain; }
 

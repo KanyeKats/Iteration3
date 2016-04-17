@@ -7,7 +7,6 @@ import Models.Map.Tile;
 import Utilities.Constants;
 import javafx.geometry.Point3D;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -72,28 +71,8 @@ public class MapNavigationUtilities {
 
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, Map map){
 
-        double[] point4Dstart = convertAxialtoCuubic(point);
-        double[] point4Dend = new double[4];
+        return getTilesinPlane(point, range, map.getTiles());
 
-        ArrayList<Tile> resultTiles = new ArrayList<>();
-        for(int i = -range; i <= range; i++) {
-            for (int j = -range; j <= range; j++) {
-                for (int k = -range; k <= range; k++) {
-                    point4Dend[0] = point4Dstart[0] - i;
-                    point4Dend[1] = point4Dstart[1] - j;
-                    point4Dend[2] = point4Dstart[2] - k;
-                    point4Dend[3] = point.getZ();
-                    if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
-                        Point3D newpoint = convertCubictoAxial(point4Dend);
-                        Tile tile = map.getTile(newpoint);
-                        if(tile != null && !point.equals(newpoint)) {
-                            resultTiles.add(tile);
-                        }
-                    }
-                }
-            }
-        }
-        return resultTiles;
     }
 
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, HashMap<Point3D,Tile> map){
@@ -147,7 +126,7 @@ public class MapNavigationUtilities {
             }
 
             //move to the next radius
-            point = direction.getPointAdjacentTo(point);
+            pt = direction.getPointAdjacentTo(pt);
             resultTiles.add(tempTiles);
         }
         return resultTiles;
@@ -188,7 +167,7 @@ public class MapNavigationUtilities {
             }
 
             //move to the next radius
-            point = direction.getPointAdjacentTo(point);
+            pt = direction.getPointAdjacentTo(pt);
             resultTiles.add(tempTiles);
         }
         return resultTiles;
@@ -325,6 +304,7 @@ public class MapNavigationUtilities {
         return (dx + dy + dz)/2;
     }
 
+
     public static HashMap<Point3D, Tile> getTilesOnScreen(Point3D point, HashMap<Point3D,Tile> map) {
         HashMap<Point3D, Tile> tilesInRange = new HashMap<>();
         int screenWidth = Constants.SCREEN_WIDTH/Constants.TILE_WIDTH/2 + 2;
@@ -342,5 +322,4 @@ public class MapNavigationUtilities {
 
 
     }
-
 }
