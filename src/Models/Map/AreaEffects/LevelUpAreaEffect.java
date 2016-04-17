@@ -30,7 +30,7 @@ public class LevelUpAreaEffect extends AreaEffect {
     @Override
     public void activate(Entity entity) {
         // Create a Stat mod list of one single level up stat mod
-        StatModificationList LevelUpStatMod = new StatModificationList(new StatModification(Stat.LEVEL, 1), new StatModification(Stat.SKILL_POINTS, 1));
+        StatModificationList LevelUpStatMod = new StatModificationList(new StatModification(Stat.EXPERIENCE, 10), new StatModification(Stat.SKILL_POINTS, 1));
 
         // Set this area effects consequence to a new immediate stat consequence
         // Which increase the entity's level by one, using the stat mod we just made

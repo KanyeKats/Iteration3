@@ -2,6 +2,7 @@ package Views;
 
 import Models.Entities.Entity;
 import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.Stats;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -13,12 +14,14 @@ import java.awt.image.BufferedImage;
 public class StatusViewPort extends View {
 
     private Entity avatar;
+    private Stats stats;
     private BufferedImage clear;
 
     public StatusViewPort(int width, int height, Entity avatar) {
         super(width, height);
 
         this.avatar = avatar;
+        this.stats = avatar.getStats();
         clear = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         repaint();
     }
@@ -31,7 +34,9 @@ public class StatusViewPort extends View {
     public void renderStats() {
         Graphics2D g = (Graphics2D) viewContent.getGraphics();
         viewContent.setData(clear.getRaster());
-
+        //aa
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHints(rh);
 
         // Set up some useful variables.
         int marginVertical = 16;
@@ -45,8 +50,8 @@ public class StatusViewPort extends View {
         // DRAW THE HEALTH BAR
 
         // Get the necessary stats
-        int health = avatar.getStats().getStat(Stat.HEALTH);
-        int maxHealth = avatar.getStats().getMaxHealth();
+        int health = stats.getStat(Stat.HEALTH);
+        int maxHealth = stats.getMaxHealth();
 
 
         // Determine how large text is and where to place the Health string
@@ -67,10 +72,6 @@ public class StatusViewPort extends View {
         int healthBarX = healthStringX + (int) healthRect.getWidth();
         int healthBarY = healthStringY - (int) healthRect.getHeight()/2;
 
-        // Draw the outline of the health bar.
-        g.setColor(Color.WHITE);
-        g.drawRoundRect(healthBarX, healthBarY, healthBarWidth, healthBarHeight, borderRadius, borderRadius);
-
         // Determine what fraction of the health bar should be shown.
         double healthFraction = (double) health / (double) maxHealth;
         int healthFillWidth = (int) (healthFraction * healthBarWidth);
@@ -78,6 +79,10 @@ public class StatusViewPort extends View {
         // Fill the health bar
         g.setColor(Color.RED);
         g.fillRoundRect(healthBarX, healthBarY, healthFillWidth, healthBarHeight, borderRadius, borderRadius);
+
+        // Draw the outline of the health bar.
+        g.setColor(Color.WHITE);
+        g.drawRoundRect(healthBarX - 1, healthBarY - 1, healthBarWidth, healthBarHeight, borderRadius, borderRadius);
 
         // Display the fraction of health
         g.setColor(Color.WHITE);
@@ -89,8 +94,8 @@ public class StatusViewPort extends View {
         Rectangle2D healthFractionRect = fm.getStringBounds(healthFractionString, g);
 
         int healthFractionX = healthBarX + healthBarWidth - (int) healthFractionRect.getWidth() + 15;
-        int healthFractionY = healthBarY + healthBarHeight - 4;
-        g.drawString(healthFractionString, healthFractionX, healthFractionY);
+        int healthFractionY = healthBarY + healthBarHeight - 5;
+        g.drawString(healthFractionString, healthFractionX - 17, healthFractionY);
 
 
 
@@ -98,8 +103,8 @@ public class StatusViewPort extends View {
         // DRAW THE MANA BAR
 
         // Get the necessary stats
-        int mana = avatar.getStats().getStat(Stat.MANA);
-        int maxMana = avatar.getStats().getMaxMana();
+        int mana = stats.getStat(Stat.MANA);
+        int maxMana = stats.getMaxMana();
 
 
         // Determine how large text is and where to place the Health string
@@ -120,10 +125,6 @@ public class StatusViewPort extends View {
         int manaBarX = manaStringX + (int) manaRect.getWidth();
         int manaBarY = manaStringY - (int) manaRect.getHeight()/2;
 
-        // Draw the outline of the mana bar.
-        g.setColor(Color.WHITE);
-        g.drawRoundRect(manaBarX, manaBarY, manaBarWidth, manaBarHeight, borderRadius, borderRadius);
-
         // Determine what fraction of the health bar should be shown.
         double manaFraction = (double) mana / (double) maxMana;
         int manaFillWidth = (int) (manaFraction * manaBarWidth);
@@ -132,9 +133,13 @@ public class StatusViewPort extends View {
         g.setColor(Color.BLUE);
         g.fillRoundRect(manaBarX, manaBarY, manaFillWidth, manaBarHeight, borderRadius, borderRadius);
 
+        // Draw the outline of the mana bar.
+        g.setColor(Color.WHITE);
+        g.drawRoundRect(manaBarX - 1, manaBarY - 1, manaBarWidth, manaBarHeight, borderRadius, borderRadius);
+
         // Display the fraction of health
         g.setColor(Color.WHITE);
-        String manaFractionString = "(" + health + "/" + maxHealth + ")";
+        String manaFractionString = "(" + mana + "/" + maxMana + ")";
 
         // Place the font at the right of the bar
         fm = g.getFontMetrics(secondaryFont);
@@ -143,7 +148,7 @@ public class StatusViewPort extends View {
 
         int manaFractionX = manaBarX + manaBarWidth - (int) manaFractionRect.getWidth() + 15;
         int manaFractionY = manaBarY + manaBarHeight - 4;
-        g.drawString(manaFractionString, manaFractionX, manaFractionY);
+        g.drawString(manaFractionString, manaFractionX - 17, manaFractionY);
 
 
 
@@ -154,8 +159,10 @@ public class StatusViewPort extends View {
         // DRAW THE XP BAR
 
         // Get the necessary stats
-        int xp = avatar.getStats().getStat(Stat.EXPERIENCE);
-        int expToLvl = avatar.getStats().getExpRequiredToLevelUp();
+        int xp = stats.getStat(Stat.EXPERIENCE);
+        int expToLvl = stats.getExpRequiredToLevelUp();
+        int expForCurrentLvl = stats.getExpForLevel(stats.getStat(Stat.LEVEL));
+        System.out.println("curr EXP: " + xp + "\nexpToLvl: " + expToLvl + "\nexpForCurLvl: " + expForCurrentLvl);
 
 
         // Determine how large text is and where to place the Health string
@@ -176,17 +183,18 @@ public class StatusViewPort extends View {
         int xpBarX = xpStringX + (int) xpRect.getWidth();
         int xpBarY = xpStringY - (int) xpRect.getHeight()/2;
 
-        // Draw the outline of the xp bar.
-        g.setColor(Color.WHITE);
-        g.drawRoundRect(xpBarX, xpBarY, xpBarWidth, xpBarHeight, borderRadius, borderRadius);
-
         // Determine what fraction of the health bar should be shown.
-        double xpFraction = (double) xp / (double) expToLvl;
+        double xpFraction = (double) (xp - expForCurrentLvl) / (double)(expToLvl - expForCurrentLvl);
+        System.out.println(xpFraction);
         int xpFillWidth = (int) (xpFraction * xpBarWidth);
 
         // Fill the health bar
-        g.setColor(Color.YELLOW);
+        g.setColor(new Color(255,153,0));
         g.fillRoundRect(xpBarX, xpBarY, xpFillWidth, xpBarHeight, borderRadius, borderRadius);
+
+        // Draw the outline of the xp bar.
+        g.setColor(Color.WHITE);
+        g.drawRoundRect(xpBarX - 1, xpBarY - 1, xpBarWidth, xpBarHeight, borderRadius, borderRadius);
 
         // Display the fraction of health
         g.setColor(Color.WHITE);
@@ -198,8 +206,8 @@ public class StatusViewPort extends View {
         Rectangle2D xpFractionRect = fm.getStringBounds(xpFractionString, g);
 
         int xpFractionX = xpBarX + xpBarWidth - (int) xpFractionRect.getWidth() + 15;
-        int xpFractionY = xpBarY + xpBarHeight - 4;
-        g.drawString(xpFractionString, xpFractionX, xpFractionY);
+        int xpFractionY = xpBarY + xpBarHeight - 5;
+        g.drawString(xpFractionString, xpFractionX - 17, xpFractionY);
 
 
         // Draw lives
