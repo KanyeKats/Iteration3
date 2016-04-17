@@ -52,6 +52,7 @@ public class Entity implements Savable {
     private boolean isMounted;
     private boolean isFlyer;
     private Mount mount;
+    private Direction pendingMovement;
 
     // TODO: Ask about terrain checking... not sure if this is ok
     private ArrayList<Terrain> passableTerrains;
@@ -78,6 +79,7 @@ public class Entity implements Savable {
         images = occupation.initImages();
         this.isMounted = false;
         this.isFlyer = isFlyer;
+        this.pendingMovement = null;
     }
 
     public Entity(Occupation occupation, Point3D location, Map map,Boolean isFlyer, Terrain... passableTerrains ){
@@ -95,6 +97,8 @@ public class Entity implements Savable {
         activeSkillList = occupation.initActiveSkills(stats);
         passiveSkillList = occupation.initPassiveSkills(stats);
         images = occupation.initImages();
+        this.pendingMovement = null;
+
         //initImages();
 
         // Set movment variables
@@ -136,12 +140,14 @@ public class Entity implements Savable {
     public final void move(Direction direction) {
         // Move with taking movement speed in to account
         if(isMounted){
+            pendingMovement = null;
             mount.move(direction);
             setLocation(mount.getDirection().getPointAdjacentTo(mount.getLocation()));
         }
         else if (canMove) {
             // Don't allow the entity to move
             canMove = false;
+            pendingMovement = null;
 
             // Deals with redrawing when the entity can't move
             if(this.direction == direction)
@@ -154,6 +160,9 @@ public class Entity implements Savable {
                 this.direction = direction;
             }
             map.moveEntity(this, direction);
+
+        }else{
+            pendingMovement = direction;
         }
     }
     public final void moveComplete() {
@@ -165,6 +174,9 @@ public class Entity implements Savable {
             @Override
             public void run() {
                 Entity.this.canMove = true;
+                if(pendingMovement!=null){
+                    move(pendingMovement);
+                }
 
             }
         }, 300);
