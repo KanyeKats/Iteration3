@@ -16,7 +16,7 @@ public abstract class Enchantment extends ActiveSkill{
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel())
-                effect.run();
+                effect.start();
         }
     }
 

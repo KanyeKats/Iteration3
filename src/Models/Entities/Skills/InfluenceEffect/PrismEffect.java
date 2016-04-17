@@ -1,12 +1,12 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
-import java.awt.Image;
+
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -14,10 +14,9 @@ import java.util.ArrayList;
  */
 public class PrismEffect extends Effect{
     private int range2;
-    public PrismEffect(int range1, int range2, Point3D location, Consequence consequence, Map map) {
-        super(range1, location, consequence, map);
+    public PrismEffect(int range1, int range2, Point3D location, Consequence consequence, Map map, BufferedImage decal) {
+        super(range1, location, consequence, map, decal);
         this.range2 = range2;
-        start();
     }
 
     @Override
@@ -29,9 +28,5 @@ public class PrismEffect extends Effect{
         return range2;
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
 }
 

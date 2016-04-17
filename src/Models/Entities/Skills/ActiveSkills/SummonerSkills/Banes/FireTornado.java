@@ -6,6 +6,9 @@ import Models.Entities.Skills.InfluenceEffect.PrismEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
+import Views.Graphics.Assets;
+
+import java.awt.image.BufferedImage;
 
 /**
  * Created by josh on 4/6/16.
@@ -13,6 +16,7 @@ import Models.Entities.Stats.StatModificationList;
 public class FireTornado extends Bane {
 
     private final int BASE_COOLDOWN_TIME = 20000;       //20 seconds
+    private final BufferedImage decal = Assets.BUG_NORTH; // TODO: Dont use the bug anymore lol
 
 
     public FireTornado(){
@@ -24,8 +28,8 @@ public class FireTornado extends Bane {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                effect = new PrismEffect(BASE_RANGE,BASE_RANGE, entity.getLocation(), consequence, entity.getMap());
-                effect.run();
+                effect = new PrismEffect(BASE_RANGE,BASE_RANGE, entity.getLocation(), consequence, entity.getMap(), decal);
+                effect.start();
                 isCooledDown = false;
                 doTheCoolDown();
             }

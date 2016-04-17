@@ -20,13 +20,13 @@ import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.KeyBindings;
-import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.GameLoader;
+import Views.AvatarCreationMenuView;
+import Views.GameView;
 import Views.*;
 import javafx.geometry.Point3D;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.*;
@@ -202,7 +202,6 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.out.println("Summoner");
-
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};

@@ -100,9 +100,8 @@ public class MapDrawingVisitor  {
                 currentTile.setVisited();
             }
             else{
-                    tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
-                }
-
+                tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
+            }
 
             // Figure out where to put it!
             // X and Y will start at the center of the screen.
@@ -147,6 +146,8 @@ public class MapDrawingVisitor  {
                     EntityDrawer.drawEntity(currentEntity, g);
                 }
             }
+
+
         }
         g.dispose();
     }
