@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  * Created by johnkaufmann on 4/2/16.
- * TODO:
+ *
  */
 public class LinearEffect extends Effect {
     private Direction direction;

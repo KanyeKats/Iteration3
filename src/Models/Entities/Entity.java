@@ -36,7 +36,6 @@ import java.util.*;
  * Created by Bradley on 4/5/2016.
  */
 public class Entity extends Observable implements Savable {
-    //TODO: make occupation
     private Occupation occupation;
     private Stats stats;
     private ActiveSkillList activeSkillList;
@@ -60,9 +59,6 @@ public class Entity extends Observable implements Savable {
 
     // TODO: Ask about terrain checking... not sure if this is ok
     private ArrayList<Terrain> passableTerrains;
-
-
-    // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
     public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map){
 
@@ -179,8 +175,6 @@ public class Entity extends Observable implements Savable {
     // The default will be moving a direction, but sometimes we want to move to a desired point instantly.
     // For example, teleporting, falling off a cliff etc
     public final void move(Point3D desiredPoint) {
-        // TODO: implement
-
         map.moveEntityToNewTileAndRemoveFromOld(this, desiredPoint);
     }
 
