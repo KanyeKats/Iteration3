@@ -67,9 +67,21 @@ public class Stats implements Savable {
         }
         else if (currentValue < 1 && stat != Stat.SKILL_POINTS)
             currentValue = 1;
-
+        else if (stat == Stat.EXPERIENCE) {
+            if (delta + stats.get(Stat.EXPERIENCE) > getExpRequiredToLevelUp()) {
+                stats.put(Stat.LEVEL, stats.get(Stat.LEVEL) + 1);
+                stats.put(Stat.EXP_TO_LEVEL, getExpRequiredToLevelUp());
+            }
+        }
+        else if (stat == Stat.LEVEL) {
+            int lvl = delta + stats.get(Stat.LEVEL);
+            stats.put(Stat.EXPERIENCE, getExpForLevel(lvl) + 1);
+            stats.put(Stat.EXP_TO_LEVEL, getExpForLevel(lvl + 1));
+        }
         // Set the stats new value
         stats.put(stat, currentValue);
+        System.out.println("exp: " + stats.get(Stat.EXPERIENCE) + " exp to lvl: " + getExpRequiredToLevelUp() + " \ncurr Level: " + stats.get(Stat.LEVEL) + " curr Level from func: " + getLvlForExp(stats.get(Stat.EXPERIENCE)));
+
     }
 
     public Integer getStat(Stat type){
@@ -152,6 +164,12 @@ public class Stats implements Savable {
         Integer level = stats.get(Stat.LEVEL);
         // Return computed value
         return 100 + (10* (int)Math.pow(level, 2.0));
+    }
+    private int getExpForLevel(int level) {
+        return 100 + (10* (int)Math.pow(level - 1, 2.0));
+    }
+    private int getLvlForExp(int exp) {
+        return (int) Math.sqrt( (double) (exp - 100)/10 );
     }
 
     private void processDeath(){

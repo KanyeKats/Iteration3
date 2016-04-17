@@ -310,7 +310,7 @@ public class Entity extends Observable implements Savable {
     }
 
     public void initPixelLocation(Point pixelLocation) {
-        System.out.println(justMoved);
+//        System.out.println(justMoved);
         if (this.pixelLocation == null || justMoved) {
             this.pixelLocation = pixelLocation;
         }

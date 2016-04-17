@@ -33,7 +33,6 @@ public class LevelUpAreaEffect extends AreaEffect {
         // Set this area effects consequence to a new immediate stat consequence
         // Which increase the entity's level by one, using the stat mod we just made
         ImmediateStatConsequence consequence = new ImmediateStatConsequence(LevelUpStatMod);
-
         // Level up the entity!
         consequence.execute(entity);
     }
