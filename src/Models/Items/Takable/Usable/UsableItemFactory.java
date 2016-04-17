@@ -1,6 +1,7 @@
 package Models.Items.Takable.Usable;
 
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by rokas on 4/9/16.
@@ -9,7 +10,7 @@ public enum UsableItemFactory {
     KAT_KEY(13000) {
         @Override
         public UsableItem createInstance() {
-            return new UsableItem(Assets.PLACEHOLDER, "Kat Key", "Used to open a Chestbox.", 13000, 20);
+            return new UsableItem(ImageLoader.loadImage("./res/items/KATkey.png"), "Kat Key", "Used to open a door of some sort.", 13000, 20);
         }
     };
 

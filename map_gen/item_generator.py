@@ -72,7 +72,53 @@ def add_item(parentElement, x, y, z):
 
     if (x == -6 and y == 3 and z == 1):
         add_yoga_pants(parentElement)
-
+    if (x == 12 and y == -3 and z == 0):
+        add_health_pot(parentElement)
+    if (x == -9 and y == -8 and z == 0):
+        add_mana_pot(parentElement)
+    if (x == 2 and y == -10 and z == 2):
+        add_health_pot(parentElement)
+    #### Boulders lol.
+    if (x == -8 and y == 9 and z == 0):
+        add_boulder(parentElement)
+    if (x == -6 and y == 9 and z == 0):
+        add_fire_staff(parentElement)
+    if (x == -9 and y == 10 and z == 0):
+        add_boulder(parentElement)
+    if (x == -10 and y == 11 and z == 0):
+        add_boulder(parentElement)
+    if (x == -11 and y == 12 and z == 0):
+        add_boulder(parentElement)
+    if (x == -10 and y == 12 and z == 0):
+        add_boulder(parentElement)
+    if (x == -9 and y == 12 and z == 0):
+        add_boulder(parentElement)
+    if (x == -8 and y == 12 and z == 0):
+        add_boulder(parentElement)
+    if (x == -7 and y == 11 and z == 0):
+        add_boulder(parentElement)
+    if (x == -6 and y == 10 and z == 0):
+        add_boulder(parentElement)
+    if (x == -5 and y == 9 and z == 0):
+        add_boulder(parentElement)
+    if (x == -4 and y == 8 and z == 0):
+        add_boulder(parentElement)
+    if (x == -3 and y == 7 and z == 0):
+        add_boulder(parentElement)
+    if (x == -7 and y == 8 and z == 0):
+        add_boulder(parentElement)
+    if (x == -6 and y == 7 and z == 0):
+        add_boulder(parentElement)
+    if (x == -5 and y == 7 and z == 0):
+        add_boulder(parentElement)
+    if (x == -4 and y == 7 and z == 0):
+        add_boulder(parentElement)
+    if (x == -8 and y == -11 and z == 6):
+        add_kat_key(parentElement)
+    if (x == -1 and y == 2 and z == 0):
+        add_door(parentElement)
+    if (x == -12 and y == -4 and z == 0):
+        add_cacoon(parentElement)
 '''
 All functions to add certain items.
 If you wanna add a new item, just follow the other exampls
@@ -182,3 +228,42 @@ def add_yoga_pants(parentElement):
     # Create the XML object for yoga pants
     item_xml = SubElement(parentElement, "item")
     item_xml.set("id", "5000")
+
+
+def add_health_pot(parentElement):
+    # Create the XML object for health pot
+    item_xml = SubElement(parentElement, "item")
+    item_xml.set("id", "10000")
+
+def add_mana_pot(parentElement):
+    # Create the XML object for mana pot
+    item_xml = SubElement(parentElement, "item")
+    item_xml.set("id", "10001")
+
+### NEWWWWWWWWWW SHIT
+
+def add_boulder(parentElement):
+    # Create the XML object for boulder
+    item_xml = SubElement(parentElement, "item")
+    item_xml.set("id", "11000")
+
+def add_dave(parentElement):
+    # Create the XML object for dave
+    item_xml = SubElement(parentElement, "item")
+    item_xml.set("id", "11001")
+
+def add_kat_key(parentElement):
+    # Create the XML object for dave
+    item_xml = SubElement(parentElement, "item")
+    item_xml.set("id", "13000")
+
+def add_door(parentElement):
+    # Create the XML object for dave
+    item_xml = SubElement(parentElement, "item")
+    item_xml.set("id", "12001")
+
+
+def add_cacoon(parentElement):
+    # Create the XML object for dave
+    item_xml = SubElement(parentElement, "item")
+    item_xml.set("id", "14001")
