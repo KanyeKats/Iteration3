@@ -50,8 +50,8 @@ public class AreaViewport extends View {
         // Draw the map onto the graphics
         if (!isMoving){
             renderLocation = avatar.getLocation();
-            camera.setLocation(avatar.getLocation());
-         }
+            camera.setLocation(renderLocation);
+        }
         else {
             renderLocation = camera.getLocation();
         }

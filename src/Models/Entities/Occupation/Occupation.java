@@ -10,9 +10,14 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Models.Map.Direction;
 import Utilities.Savable.Savable;
+import Views.Graphics.Assets;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * Created by Aidan on 4/6/2016.
@@ -57,5 +62,10 @@ public abstract class Occupation implements Savable {
         this.activeSkillList.load((Element) data.getElementsByTagName("activeSkillList"));
         this.passiveSkillList.load((Element) data.getElementsByTagName("passiveSkillList"));
         this.statModificationList.load((Element) data.getElementsByTagName("statModificationList"));
+    }
+
+    public HashMap<Direction, BufferedImage> initImages(){
+
+        return null;
     }
 }

@@ -9,6 +9,7 @@ import Models.Items.Item;
 import Models.Map.MapUtilities.MapUtilities;
 import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
 import org.w3c.dom.*;
@@ -28,6 +29,7 @@ public class Map extends Observable implements Savable {
 
     private HashMap<Point3D, Tile> tiles;
     private Set<Entity> entitiesOnMap;
+    private ArrayList<Entity> storedEntities = new ArrayList();
     // TODO: Not really a todo but make sure you notify observers when you change something that will affect the visual representation.
 
     // Map will be passed the HashMap that is created by the gameloader after parsing the XML file.
@@ -66,7 +68,6 @@ public class Map extends Observable implements Savable {
 
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || updatedDestinationTile==null || destination==source){
-            System.out.println("Movement Failed");
             entity.failedMovement();
             return;
         }
@@ -247,6 +248,39 @@ public class Map extends Observable implements Savable {
                 iterator.remove(); // By using an iterator, it is safe to remove the element while looping through.
             }
         }
+    }
+
+    //Testing this out
+    public void storeOffMapEntity(Entity storedEntity){
+        Tile tile = tiles.get(storedEntity.getLocation());
+        tile.removeEntity();
+        storedEntities.add(storedEntity);
+        entitiesOnMap.remove(storedEntity);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void addOffMapEntity(Entity storedEntity){
+
+        for(Iterator<Entity> iterator = storedEntities.iterator(); iterator.hasNext();){
+            Entity entity = iterator.next();
+
+            if(entity.equals(storedEntity)){
+                iterator.remove(); // By using an iterator, it is safe to remove the element while looping through.
+            }
+        }
+        Point3D landingPoint = MapNavigationUtilities.findOpenTile(storedEntity,this);
+        System.out.println(landingPoint.toString());
+       if(landingPoint != null) {
+           storedEntity.setLocation(landingPoint);
+           Tile tile = tiles.get(landingPoint);
+           tile.insertEntity(storedEntity);
+           entitiesOnMap.add(storedEntity);
+           storedEntity.setPixelLocation(tile.getPixelPoint());
+           tile.activateTileObjectsOnEntity(storedEntity);
+           setChanged();
+           notifyObservers();
+       }
     }
 
     public void insertItem(Item item, Point3D point){

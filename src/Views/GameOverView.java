@@ -43,23 +43,30 @@ public class GameOverView extends MenuView {
     public void renderBackground() {
 
         // Extract the graphics from the view content
-        Graphics g = viewContent.getGraphics();
-
-        // Draw a black background
-        g.setColor(background);
-        g.fillRect(0, 0, width, height);
-
-        // Draw the title.
-        drawTitle(g);
-        g.dispose();
+//        Graphics g = viewContent.getGraphics();
+//
+//        // Draw a black background
+//        g.setColor(background);
+//        g.fillRect(0, 0, width, height);
+//
+//        // Draw the title.
+//        drawTitle(g);
+//        g.dispose();
     }
 
     @Override
     public void renderOptions() {
 
-        Graphics g = viewContent.getGraphics();
+        Graphics2D g = (Graphics2D)viewContent.getGraphics();
 
-        // Find the starting point.
+        //AA
+        RenderingHints rh = new RenderingHints(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHints(rh);
+
+        drawTitle(g);
+
         if(titleFont==null){
             System.out.println("ITS NULL!");
         }
@@ -93,7 +100,6 @@ public class GameOverView extends MenuView {
             g.setColor(secondaryCOlor);
             g.drawString(option.getTitle(), stringX, stringY);
         }
-
         g.dispose();
     }
 

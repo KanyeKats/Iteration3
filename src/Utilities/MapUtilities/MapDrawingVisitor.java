@@ -136,11 +136,13 @@ public class MapDrawingVisitor  {
             // If any entity is on the tile, init its pixel location and draw him!
             if (currentTile.containsEntity()) {
                 Entity currentEntity = currentTile.getEntity();
+
                 if(!cameraMoving) {
                     currentEntity.initPixelLocation(pixelPoint);
                     EntityDrawer.drawEntity(currentEntity, g);
                 }
                 else{
+
                     currentEntity.setPixelLocation(pixelPoint);
                     EntityDrawer.drawEntity(currentEntity, g);
                 }

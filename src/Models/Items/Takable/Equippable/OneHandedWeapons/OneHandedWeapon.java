@@ -32,6 +32,7 @@ public class OneHandedWeapon extends EquippableItem {
         // Remove old equipment at this slot. Always call this method.
         // If nothing is there, it wont do anything
         equipment.unequipLeftHand();
+        equipment.unequipBothHands();
         equipment.addStatModsOfEquipment(this);
         equipment.setLefthand(this);
         for(int i = 0; i < passiveSkillList.size(); i++) {

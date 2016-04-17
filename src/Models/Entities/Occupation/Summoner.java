@@ -6,6 +6,7 @@ import Models.Entities.Skills.ActiveSkills.CommonSkills.BindWounds;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes.Fireball;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Boons.LudaSpeed;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments.Fear;
+import Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments.Sleep;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Bargain;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Observation;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
@@ -15,6 +16,11 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Models.Map.Direction;
+import Views.Graphics.Assets;
+
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  * Created by Aidan on 4/6/2016.
@@ -49,12 +55,25 @@ public class Summoner extends Occupation {
         activeSkillList.add(new BasicAttack());
         activeSkillList.add(new Fireball());
         activeSkillList.add(new LudaSpeed());
-        activeSkillList.add(new Fear());
+        activeSkillList.add(new Sleep());
 
         return activeSkillList;
     }
 
-    // Used for displaying the occupation on views such as equipment
+    @Override
+    public HashMap<Direction, BufferedImage> initImages() {
+
+        HashMap<Direction, BufferedImage> images = new HashMap<>();
+        images.put(Direction.NORTH, Assets.BUG_NORTH_BLUE);
+        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST_BLUE);
+        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST_BLUE);
+        images.put(Direction.SOUTH, Assets.BUG_SOUTH_BLUE);
+        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST_BLUE);
+        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST_BLUE);
+
+        return images;
+        // Used for displaying the occupation on views such as equipment
+    }
     @Override
     public String toString() {
         return "Summoner";

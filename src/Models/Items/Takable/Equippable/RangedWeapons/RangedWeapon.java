@@ -31,6 +31,8 @@ public class RangedWeapon extends EquippableItem{
         // Remove old equipment at this slot. Always call this method.
         // If nothing is there, it wont do anything
         equipment.unequipBothHands();
+        equipment.unequipLeftHand();
+        equipment.unequipRightHand();
         equipment.addStatModsOfEquipment(this);
         equipment.setBothhands(this);
         for(int i = 0; i < passiveSkillList.size(); i++) {
