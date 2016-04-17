@@ -14,7 +14,6 @@ public class Bargain extends PassiveSkill {
 
     public Bargain(Stats stats){
         this.stats = stats;
-        level = 0;
         statModification = new StatModification(Stat.BARGAIN, level);
         addToStats();
     }
