@@ -135,10 +135,7 @@ public class GameViewController extends ViewController {
                     avatar.interact();
                 }
             }
-
-
-
-
+            
             @Override
             public String toString(){ return "Interact";}
         });
@@ -151,7 +148,7 @@ public class GameViewController extends ViewController {
                 }
             }
             @Override
-            public String toString(){ return "Interact";}
+            public String toString(){ return "Unmount";}
         });
 
         keyBindings.addBinding(KeyEvent.VK_Y, new Action() {
