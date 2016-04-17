@@ -88,7 +88,7 @@ public class Tile implements Savable {
         this.entity = entity;
     }
 
-    public void activateTileObjectsOnEntity(Entity entity) {
+    public boolean activateTileObjectsOnEntity(Entity entity) {
         // Activate items
         for (Iterator<Item> iterator = items.iterator(); iterator.hasNext(); ) {
             Item item = iterator.next();
@@ -98,12 +98,15 @@ public class Tile implements Savable {
             if (removeItem) {
                 iterator.remove();
             }
+            return true;
         }
 
         // Activate AreaEffects
-        if(areaEffect!=null){
+        if(areaEffect!=null) {
             areaEffect.activate(entity);
+            return true;
         }
+        return false;
     }
 
     public void removeEntity(){

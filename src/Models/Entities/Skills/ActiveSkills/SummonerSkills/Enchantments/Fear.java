@@ -1,5 +1,6 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments;
 
+import Models.Consequences.FearConsequence;
 import Models.Entities.Entity;
 import Models.Consequences.BehaviorConsequence;
 import Models.Entities.Skills.InfluenceEffect.LinearEffect;
@@ -15,7 +16,7 @@ public class Fear extends Enchantment {
     //TODO: create the right type of BehaviorConsequence
     public Fear(){
         activeTime = BASE_ACTIVE_TIME;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new FearConsequence(activeTime);
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
@@ -23,6 +24,7 @@ public class Fear extends Enchantment {
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
+                consequence = new FearConsequence(activeTime,entity.getDirection());
                 effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap());
                 effect.run();
                 isCooledDown = false;
@@ -34,7 +36,7 @@ public class Fear extends Enchantment {
     @Override
     public void incrementLevel(){
         ++level;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new FearConsequence(activeTime);
     }
 
     @Override

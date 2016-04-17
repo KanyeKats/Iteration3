@@ -69,19 +69,21 @@ public class Stats implements Savable {
             currentValue = 1;
         else if (stat == Stat.EXPERIENCE) {
             if (delta + stats.get(Stat.EXPERIENCE) > getExpRequiredToLevelUp()) {
-                stats.put(Stat.LEVEL, stats.get(Stat.LEVEL) + 1);
+                stats.put(Stat.LEVEL, getLvlForExp(delta + stats.get(Stat.EXPERIENCE)));
                 stats.put(Stat.EXP_TO_LEVEL, getExpRequiredToLevelUp());
+                stats.put(Stat.HEALTH, getMaxHealth());
+                stats.put(Stat.MANA, getMaxMana());
             }
         }
         else if (stat == Stat.LEVEL) {
             int lvl = delta + stats.get(Stat.LEVEL);
             stats.put(Stat.EXPERIENCE, getExpForLevel(lvl) + 1);
             stats.put(Stat.EXP_TO_LEVEL, getExpForLevel(lvl + 1));
+            stats.put(Stat.HEALTH, getMaxHealth(lvl));
+            stats.put(Stat.MANA, getMaxMana(lvl));
         }
         // Set the stats new value
         stats.put(stat, currentValue);
-        System.out.println("exp: " + stats.get(Stat.EXPERIENCE) + " exp to lvl: " + getExpRequiredToLevelUp() + " \ncurr Level: " + stats.get(Stat.LEVEL) + " curr Level from func: " + getLvlForExp(stats.get(Stat.EXPERIENCE)));
-
     }
 
     public Integer getStat(Stat type){
@@ -165,11 +167,26 @@ public class Stats implements Savable {
         // Return computed value
         return 100 + (10* (int)Math.pow(level, 2.0));
     }
+    //private methods that facilitate updating stats when gaining exp or levels
     private int getExpForLevel(int level) {
         return 100 + (10* (int)Math.pow(level - 1, 2.0));
     }
     private int getLvlForExp(int exp) {
-        return (int) Math.sqrt( (double) (exp - 100)/10 );
+        if (exp < 110) return 1;
+        else return (int)( Math.sqrt( (double) (exp - 100)/10 ) + 1);
+
+    }
+    private int getMaxHealth(int level) {
+        // Get primary stats
+        Integer hardiness = stats.get(Stat.HARDINESS);
+        // Return computed value
+        return hardiness + (10 * level);
+    }
+    private int getMaxMana(int level) {
+        // Get primary stats
+        Integer intellect = stats.get(Stat.INTELLECT);
+        // Return computed value
+        return intellect + (10 * level);
     }
 
     private void processDeath(){

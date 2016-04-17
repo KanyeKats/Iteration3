@@ -23,21 +23,21 @@ public class SleepConsequence extends Consequence{
     //TODO: Reset behavior changes in the timer
     public void execute(Entity entity) {
         //Execute behavior change
-        entity.makeSleep(this);
+        entity.makeSleep();
 
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 //Reset behavior change
                 //prolly should be:
-                //remove(entity)
+                remove(entity);
             }
         }, activeTime);
     }
 
     //TODO: figure out what this needs to do
     public void remove(Entity entity){
-
+        entity.wakeUp();
     }
 
     public Consequence makeTeleport(Point3D endingPoint) {

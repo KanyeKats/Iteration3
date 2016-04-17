@@ -5,6 +5,7 @@ import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
 import Models.Entities.NPC.AI.Personality;
+import Models.Entities.NPC.Mount;
 import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Smasher;
 import Models.Entities.Occupation.Sneak;
@@ -25,9 +26,10 @@ import Views.*;
 import javafx.geometry.Point3D;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by Bradley on 4/4/2016.
@@ -208,8 +210,11 @@ public class Menu extends java.util.Observable{
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
 
                         // TODO: Remove after testing.
+                        //why does the entity need a point for its constructor and the insert entity map takes in the point anyway?
                         NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET);
                         map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
+                        Mount hand = new Mount(new Point3D(2, 0, 0),map,passableTerrains);
+                        map.insertEntity(hand,new Point3D(2,0,0));
 
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
@@ -519,15 +524,23 @@ public class Menu extends java.util.Observable{
                             KeyListener listen = new KeyListener(){
                                 public void keyTyped(KeyEvent e){}
                                 public void keyReleased(KeyEvent e){}
+
+                                //This whole method is nasty...but it works
                                 public void keyPressed(KeyEvent e){
                                     gameViewController.remapKey(i, e.getKeyCode());
                                     System.out.println("New key: " + KeyEvent.getKeyText(e.getKeyCode()));
                                     jf.dispose();
                                     stateManager.goToPreviousState();
-                                    Models.Menu.Menu reconfigureKeysMenu = Models.Menu.Menu.createReconfigureKeysMenu(stateManager, gameViewController);
-                                    MenuViewController reconfigureKeysMenuController = new MenuViewController(stateManager, reconfigureKeysMenu);
-                                    ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
-                                    stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
+                                    java.util.Timer timer = new java.util.Timer();
+                                    timer.schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            Models.Menu.Menu reconfigureKeysMenu = Models.Menu.Menu.createReconfigureKeysMenu(stateManager, gameViewController);
+                                            MenuViewController reconfigureKeysMenuController = new MenuViewController(stateManager, reconfigureKeysMenu);
+                                            ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
+                                            stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
+                                        }
+                                    }, 1000 / Constants.FRAME_RATE);
                                 }
                             };
                             jf.addKeyListener(listen);

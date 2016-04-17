@@ -36,6 +36,11 @@ public abstract class ViewController {
 
     public void remapKey(int oldKey, int newKey){
         KeyBindings newKeys = new KeyBindings();
+        if(keyBindings.getKeys().contains(newKey)){
+            System.out.println("That key is already being used!");
+            //TODO: Toast here
+            return;
+        }
         for(int i : keyBindings.getKeys()) {
             if(i == oldKey) {
                 newKeys.addBinding(newKey, keyBindings.getKeyAction(oldKey));

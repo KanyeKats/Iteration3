@@ -1,5 +1,6 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments;
 
+import Models.Consequences.PolymorphConsequence;
 import Models.Entities.Entity;
 import Models.Consequences.BehaviorConsequence;
 import Models.Entities.Skills.InfluenceEffect.ConicalEffect;
@@ -15,7 +16,7 @@ public class Polymorph extends Enchantment {
     //TODO: create the right type of BehaviorConsequence
     public Polymorph(){
         activeTime = BASE_ACTIVE_TIME;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new PolymorphConsequence(activeTime);
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
@@ -34,7 +35,7 @@ public class Polymorph extends Enchantment {
     @Override
     public void incrementLevel(){
         ++level;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new PolymorphConsequence(activeTime);
     }
 
     @Override

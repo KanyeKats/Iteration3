@@ -7,7 +7,8 @@ public enum Personality {
     SHOP_KEEPER(0, 1, 0, 1, 0, "Welcome to my shop! I'd love to trade with you."),
     FRIENDLY(0, 1, 0.2, 0.5, 0.2, "Welcome friend!"),
     HOSTILE(1, 0, 0, 0.3, 0.0, "There ain't enough room in this town for the both of us."),
-    PET(0, 1, 1, 1, 0, "I used to be an adventurer like you. Then I took an arrow to the knee.");
+    PET(0, 1, 1, 1, 0, "I used to be an adventurer like you. Then I took an arrow to the knee."),
+    MOUNT(0,0,0,0,0,"");
 
     private double attackOnSightProbability;
     private double tradeProbability;

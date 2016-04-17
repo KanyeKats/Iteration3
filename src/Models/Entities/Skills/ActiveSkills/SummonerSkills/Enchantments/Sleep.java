@@ -16,7 +16,7 @@ public class Sleep extends Enchantment {
     //TODO: create the right type of BehaviorConsequence
     public Sleep(){
         activeTime = BASE_ACTIVE_TIME;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new SleepConsequence(activeTime);
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 

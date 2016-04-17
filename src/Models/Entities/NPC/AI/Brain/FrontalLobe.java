@@ -5,6 +5,7 @@ import Models.Entities.NPC.AI.Decision.*;
 import Models.Entities.NPC.AI.Personality;
 import Models.Entities.NPC.AI.VisualInfo;
 import Models.Entities.NPC.NPC;
+import Models.Map.Direction;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class FrontalLobe {
 
     private Personality personality;
     private Decision currentDecision;
+    private boolean isFeared;
+    private boolean isFrog;
 
     public FrontalLobe(Personality personality) {
 
@@ -37,6 +40,7 @@ public class FrontalLobe {
         ArrayList<Point3D> areaEffectLocations = visualInfo.getAreaEffectLocations();
 
         // Arbitrarily, collecting items will take priority.
+        //Being feared will take priority
         if(!itemLocations.isEmpty() && personality.willCollectItem()){
             System.out.println("GET ITEM!");
             currentDecision = new GoToItemDecision(itemLocations.get(0));
@@ -46,11 +50,12 @@ public class FrontalLobe {
             currentDecision = new GoToAreaEffectDecision(areaEffectLocations.get(0));
             currentDecision.executeDecision(npc);
         }else if(!entitiesFound.isEmpty()){
+
             if(personality.willFollow()){
                 System.out.println("FOLLOW!");
                 currentDecision = new FollowDecision(entitiesFound.get(0));
                 currentDecision.executeDecision(npc);
-            }else if(personality.willAttack()){
+            }else if(personality.willAttack() && !isFrog){
                 System.out.println("ATTACK!");
                 currentDecision = new AttackDecision(entitiesFound.get(0));
                 currentDecision.executeDecision(npc);
@@ -62,4 +67,17 @@ public class FrontalLobe {
         return personality.willTrade();
     }
     public String getDialog() { return personality.getDialog(); }
+
+    public void setisFeared(boolean isFeared, Direction direction,NPC npc) {
+        this.isFeared = isFeared;
+        if(isFeared) {
+            currentDecision = new RunAwayDecision(direction);
+            currentDecision.executeDecision(npc);
+        }
+    }
+
+    public void actLikeFrog(boolean isFrog){
+        this.isFrog = isFrog;
+    }
+
 }
