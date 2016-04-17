@@ -216,7 +216,21 @@ public class Stats implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
-        return null;
+        for (java.util.Map.Entry<Stat,Integer> entry: stats.entrySet()) {
+
+            //create tile element
+            Element stat = doc.createElement("stat");
+
+            Stat s = entry.getKey();
+            int val = entry.getValue();
+
+            stat.setAttribute("stat", String.valueOf(s));
+            stat.setAttribute("value", Integer.toString(val));
+
+            parentElement.appendChild(stat);
+        }
+
+        return doc;
     }
 
     @Override

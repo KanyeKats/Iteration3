@@ -2,6 +2,7 @@ package Models.Entities;
 
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Models.Items.Item;
 import Models.Items.Takable.Equippable.Chests.Chestplate;
 import Models.Items.Takable.Equippable.Boots.Boot;
 import Models.Items.Takable.Equippable.EquippableItem;
@@ -241,7 +242,23 @@ public class Equipment implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
-        return null;
+
+        if(head != null)
+            getHead().save(doc, parentElement);
+        if(chest != null)
+            getChest().save(doc, parentElement);
+        if(legs != null)
+            getLegs().save(doc, parentElement);
+        if(boots != null)
+            getBoots().save(doc, parentElement);
+        if(lefthand != null)
+            getLefthand().save(doc, parentElement);
+        if(righthand != null)
+            getRighthand().save(doc, parentElement);
+        if(bothhands != null)
+            getBothhands().save(doc, parentElement);
+
+        return doc;
     }
 
     @Override

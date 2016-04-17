@@ -440,7 +440,84 @@ public class Entity implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
-        return null;
+
+        Element entity = doc.createElement("entity");
+        String locString = Integer.toString((int)getLocation().getX()) + ",";
+        locString += Integer.toString((int)getLocation().getY()) + ",";
+        locString += Integer.toString((int)getLocation().getZ());
+        entity.setAttribute("location", locString);
+        entity.setAttribute("direction", String.valueOf(getDirection()));
+        entity.setAttribute("is-mounted", String.valueOf(isMounted()));
+        parentElement.appendChild(entity);
+
+        //save inventory
+        if(this.inventory != null) {
+            Element inventory = doc.createElement("inventory");
+            inventory.setAttribute("capacity", Integer.toString(this.inventory.getCapacity()));
+            entity.appendChild(inventory);
+
+            this.inventory.save(doc, inventory);
+        }
+
+        //save equipment
+        if(this.equipment != null) {
+            Element equipment = doc.createElement("equipment");
+            entity.appendChild(equipment);
+
+            this.equipment.save(doc, equipment);
+        }
+
+        //save occupation
+        if(this.occupation != null) {
+            Element occupation = doc.createElement("occupation");
+            occupation.setAttribute("value", this.occupation.toString());
+            entity.appendChild(occupation);
+        }
+
+        //save stats
+        if(this.stats != null){
+            Element stats = doc.createElement("stats");
+            entity.appendChild(stats);
+            this.stats.save(doc, stats);
+        }
+
+        //save active skills
+        if(this.activeSkillList != null){
+            Element activeSkillList = doc.createElement("active-skill-list");
+            entity.appendChild(activeSkillList);
+            this.activeSkillList.save(doc,activeSkillList);
+        }
+
+        //save passive skills
+        if(this.passiveSkillList != null){
+            Element passiveSkillList = doc.createElement("passive-skill-list");
+            entity.appendChild(passiveSkillList);
+            this.passiveSkillList.save(doc,passiveSkillList);
+        }
+
+        //save mount
+        if(this.mount != null){
+            Element mount = doc.createElement("mount");
+            mount.setAttribute("prev-speed", Integer.toString(this.mount.getEntityPrevspeed()));
+            entity.appendChild(mount);
+            this.mount.save(doc, mount);
+        }
+
+        //save passable terrains
+        if(this.passableTerrains != null){
+            Element passable = doc.createElement("passable-terrains");
+            entity.appendChild(passable);
+            for(Terrain t : passableTerrains){
+                Element terrain = doc.createElement("terrain");
+                terrain.setAttribute("type", t.name());
+                passable.appendChild(terrain);
+            }
+        }
+
+        //save brain
+
+
+        return doc;
     }
 
     @Override

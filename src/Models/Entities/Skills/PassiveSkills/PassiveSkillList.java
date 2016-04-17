@@ -47,7 +47,15 @@ public class PassiveSkillList implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
-        return null;
+
+        for(PassiveSkill skill : passiveSkillList){
+            Element activeSkill = doc.createElement("passive-skill");
+            activeSkill.setAttribute("type", skill.toString());
+            activeSkill.setAttribute("value", Integer.toString(skill.getLevel()));
+            parentElement.appendChild(activeSkill);
+        }
+
+        return doc;
     }
 
     @Override

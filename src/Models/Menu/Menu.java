@@ -21,6 +21,7 @@ import Utilities.Action;
 import Utilities.Constants;
 import Utilities.KeyBindings;
 import Utilities.Savable.GameLoader;
+import Utilities.Savable.GameSaver;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
 import Views.*;
@@ -334,7 +335,7 @@ public class Menu{
     }
 
     //This method creates a pause menu model
-    public static Menu createPauseMenu(StateManager stateManager, GameViewController gameViewController) {
+    public static Menu createPauseMenu(StateManager stateManager, GameViewController gameViewController, Entity avatar) {
         ArrayList<MenuOption> options = new ArrayList<>();
 
         options.add(new MenuOption() {
@@ -374,6 +375,7 @@ public class Menu{
                     @Override
                     public void execute() {
                         System.out.println("Save Game");
+                        GameSaver.saveMap(avatar.getMap());
 
                         // TODO: Implement this.
                     }

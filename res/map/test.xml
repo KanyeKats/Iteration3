@@ -135,12 +135,14 @@
 </tile>
 <tile x="-7" y="-7" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DEATH" value="0"/>
 </tile>
 <tile x="-7" y="7" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="7" y="-7" z="0">
 <terrain type="EARTH"/>
+<item id="9002"/>
 </tile>
 <tile x="7" y="7" z="0">
 <terrain type="EARTH"/>
@@ -270,6 +272,7 @@
 </tile>
 <tile x="-7" y="-6" z="0">
 <terrain type="EARTH"/>
+<area-effect type="HEAL" value="4"/>
 </tile>
 <tile x="-7" y="6" z="0">
 <terrain type="EARTH"/>
@@ -441,6 +444,7 @@
 </tile>
 <tile x="7" y="-11" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DEATH" value="0"/>
 </tile>
 <tile x="7" y="11" z="0">
 <terrain type="EARTH"/>
@@ -882,6 +886,7 @@
 </tile>
 <tile x="-7" y="3" z="1">
 <terrain type="EARTH"/>
+<item id="9001"/>
 </tile>
 <tile x="7" y="-3" z="1">
 <terrain type="SKY"/>
@@ -1093,25 +1098,25 @@
 <tile x="7" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-7" y="4" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="7" y="-4" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-7" y="-4" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="7" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-7" y="4" z="0">
+<tile x="7" y="-4" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="-7" y="4" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="7" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-7" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="7" y="-4" z="0">
+<tile x="-7" y="4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="7" y="4" z="0">
@@ -1201,10 +1206,10 @@
 <tile x="7" y="5" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="7" y="-2" z="0">
-<terrain type="EARTH"/>
+<tile x="7" y="0" z="2">
+<terrain type="SKY"/>
 </tile>
-<tile x="7" y="-2" z="2">
+<tile x="-7" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-7" y="0" z="0">
@@ -1216,8 +1221,8 @@
 <tile x="-7" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
-<tile x="7" y="0" z="2">
-<terrain type="SKY"/>
+<tile x="7" y="-2" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="7" y="0" z="0">
 <terrain type="EARTH"/>
@@ -1234,7 +1239,7 @@
 <tile x="-7" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-7" y="2" z="2">
+<tile x="7" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-7" y="-2" z="1">
@@ -1294,6 +1299,9 @@
 <tile x="-7" y="-2" z="8">
 <terrain type="SKY"/>
 </tile>
+<tile x="7" y="2" z="8">
+<terrain type="SKY"/>
+</tile>
 <tile x="-7" y="0" z="8">
 <terrain type="SKY"/>
 </tile>
@@ -1304,9 +1312,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="7" y="0" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="7" y="2" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="7" y="0" z="5">
@@ -1330,6 +1335,9 @@
 <tile x="-7" y="-2" z="6">
 <terrain type="SKY"/>
 </tile>
+<tile x="7" y="2" z="6">
+<terrain type="SKY"/>
+</tile>
 <tile x="-7" y="0" z="6">
 <terrain type="SKY"/>
 </tile>
@@ -1340,9 +1348,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="7" y="0" z="6">
-<terrain type="SKY"/>
-</tile>
-<tile x="7" y="2" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-7" y="-2" z="4">
@@ -1366,13 +1371,13 @@
 <tile x="-7" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="7" y="0" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-7" y="2" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="7" y="-2" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="7" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-7" y="-2" z="3">
@@ -1405,26 +1410,28 @@
 <tile x="7" y="1" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="7" y="-1" z="3">
+<tile x="-7" y="1" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-7" y="-1" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-7" y="1" z="3">
+<tile x="7" y="-1" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="7" y="1" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-7" y="1" z="0">
-<terrain type="WATER"/>
+<tile x="7" y="-1" z="0">
+<terrain type="EARTH"/>
+<area-effect type="TELEPORT" value="-5,-3,4"/>
 </tile>
 <tile x="-7" y="-1" z="0">
 <terrain type="EARTH"/>
+<item id="3001"/>
 </tile>
-<tile x="7" y="-1" z="0">
-<terrain type="EARTH"/>
+<tile x="-7" y="1" z="0">
+<terrain type="WATER"/>
 </tile>
 <tile x="7" y="1" z="0">
 <terrain type="WATER"/>
@@ -1795,10 +1802,10 @@
 <tile x="3" y="8" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-8" z="6">
+<tile x="-3" y="8" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="8" z="6">
+<tile x="3" y="-8" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-8" z="7">
@@ -1861,11 +1868,12 @@
 <tile x="3" y="9" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="9" z="2">
+<tile x="3" y="-9" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-9" z="0">
 <terrain type="EARTH"/>
+<area-effect type="LEVEL" value="0"/>
 </tile>
 <tile x="-3" y="9" z="0">
 <terrain type="EARTH"/>
@@ -1879,7 +1887,7 @@
 <tile x="-3" y="-9" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-9" z="2">
+<tile x="-3" y="9" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="9" z="2">
@@ -1969,16 +1977,16 @@
 <tile x="3" y="-10" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="-10" z="3">
-<terrain type="EARTH"/>
-</tile>
-<tile x="3" y="10" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-3" y="10" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="-10" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="-3" y="-10" z="3">
+<terrain type="EARTH"/>
+</tile>
+<tile x="3" y="10" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-10" z="0">
@@ -2101,28 +2109,28 @@
 <tile x="3" y="5" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="-6" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="3" y="6" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-3" y="6" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="-6" z="3">
 <terrain type="SKY"/>
 </tile>
+<tile x="-3" y="-6" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="3" y="6" z="3">
+<terrain type="SKY"/>
+</tile>
 <tile x="-3" y="6" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="6" z="0">
+<tile x="3" y="-6" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-3" y="-6" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="3" y="-6" z="0">
+<tile x="-3" y="6" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="3" y="6" z="0">
@@ -2161,22 +2169,16 @@
 <tile x="3" y="4" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="-4" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="3" y="4" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="-3" y="4" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="-4" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="4" z="6">
+<tile x="-3" y="-4" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-4" z="6">
+<tile x="3" y="4" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-4" z="6">
@@ -2185,16 +2187,22 @@
 <tile x="3" y="4" z="6">
 <terrain type="SKY"/>
 </tile>
+<tile x="3" y="-4" z="6">
+<terrain type="SKY"/>
+</tile>
+<tile x="-3" y="4" z="6">
+<terrain type="SKY"/>
+</tile>
 <tile x="-3" y="-4" z="7">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="4" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="4" z="7">
+<tile x="3" y="-4" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-4" z="7">
+<tile x="-3" y="4" z="7">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-4" z="4">
@@ -2203,10 +2211,10 @@
 <tile x="3" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-4" z="4">
+<tile x="-3" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="4" z="4">
+<tile x="3" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-4" z="5">
@@ -2245,16 +2253,16 @@
 <tile x="3" y="5" z="3">
 <terrain type="WATER"/>
 </tile>
-<tile x="3" y="-5" z="2">
+<tile x="-3" y="5" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="5" z="0">
+<tile x="3" y="-5" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-3" y="-5" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="3" y="-5" z="0">
+<tile x="-3" y="5" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="3" y="5" z="0">
@@ -2263,7 +2271,7 @@
 <tile x="-3" y="-5" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="5" z="2">
+<tile x="3" y="-5" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="5" z="2">
@@ -2437,7 +2445,7 @@
 <tile x="3" y="-6" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-6" z="6">
+<tile x="-3" y="6" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-6" z="6">
@@ -2446,7 +2454,7 @@
 <tile x="3" y="6" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="6" z="6">
+<tile x="3" y="-6" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-6" z="7">
@@ -2461,6 +2469,9 @@
 <tile x="3" y="-6" z="7">
 <terrain type="SKY"/>
 </tile>
+<tile x="3" y="-6" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-3" y="-6" z="4">
 <terrain type="SKY"/>
 </tile>
@@ -2468,9 +2479,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="6" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="3" y="-6" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-6" z="5">
@@ -2677,10 +2685,10 @@
 <tile x="0" y="-1" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="-4" z="6">
+<tile x="4" y="4" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="4" z="6">
+<tile x="-4" y="-4" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-1" z="3">
@@ -2707,43 +2715,88 @@
 <tile x="4" y="-4" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="-1" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="-2" y="-1" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="2" y="1" z="0">
-<terrain type="WATER"/>
-</tile>
-<tile x="0" y="1" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="4" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="-2" y="1" z="0">
-<terrain type="WATER"/>
-</tile>
-<tile x="4" y="4" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="-4" z="4">
+<tile x="2" y="1" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-1" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="4" y="-4" z="4">
+<tile x="2" y="1" z="0">
+<terrain type="WATER"/>
+</tile>
+<tile x="-2" y="-1" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="-2" y="1" z="0">
+<terrain type="WATER"/>
+</tile>
+<tile x="2" y="-1" z="0">
+<terrain type="EARTH"/>
+<area-effect type="DAMAGE" value="11"/>
+<entity direction="SOUTH" is-mounted="false" location="2,-1,0">
+<inventory capacity="20"/>
+<equipment/>
+<occupation value="Smasher"/>
+<stats>
+<stat stat="LEVEL" value="1"/>
+<stat stat="LIVES" value="3"/>
+<stat stat="STRENGTH" value="10"/>
+<stat stat="AGILITY" value="6"/>
+<stat stat="INTELLECT" value="1"/>
+<stat stat="HARDINESS" value="10"/>
+<stat stat="EXPERIENCE" value="1"/>
+<stat stat="MOVEMENT" value="17"/>
+<stat stat="HEALTH" value="20"/>
+<stat stat="MAX_HEALTH" value="0"/>
+<stat stat="MANA" value="11"/>
+<stat stat="MAX_MANA" value="0"/>
+<stat stat="WEAPON_MODIFIER" value="1"/>
+<stat stat="ARMOR_MODIFIER" value="0"/>
+<stat stat="RADIUS_OF_VISIBILITY" value="3"/>
+<stat stat="EXP_TO_LEVEL" value="50"/>
+<stat stat="OFFSENSIVE_RATING" value="0"/>
+<stat stat="DEFENSIVE_RATING" value="0"/>
+<stat stat="ARMOR_RATING" value="0"/>
+<stat stat="SKILL_POINTS" value="0"/>
+<stat stat="TOTAL_WEIGHT" value="0"/>
+<stat stat="BARGAIN" value="1"/>
+<stat stat="OBSERVATION" value="1"/>
+</stats>
+<active-skill-list>
+<active-skill type="Basic Attack" value="1"/>
+<active-skill type="Bind Wounds" value="1"/>
+</active-skill-list>
+<passive-skill-list>
+<passive-skill type="Bargain" value="0"/>
+<passive-skill type="Observation" value="0"/>
+<passive-skill type="Brawling Mastery" value="0"/>
+<passive-skill type="One Handed Weapon Mastery" value="0"/>
+<passive-skill type="Two Handed Weapon Mastery" value="0"/>
+</passive-skill-list>
+<terrain type="EARTH"/>
+<terrain type="WATER"/>
+<brain personality="PET"/>
+</entity>
+</tile>
+<tile x="-4" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="1" z="2">
+<tile x="4" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="1" z="0">
 <terrain type="WATER"/>
 </tile>
 <tile x="-2" y="-1" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="1" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="4" y="-4" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="-4" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="1" z="2">
@@ -2767,22 +2820,19 @@
 <tile x="4" y="4" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="4" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="-4" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-4" y="-4" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="4" z="0">
-<terrain type="EARTH"/>
+<tile x="-4" y="4" z="3">
+<terrain type="SKY"/>
 </tile>
-<tile x="2" y="1" z="1">
+<tile x="4" y="-4" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="1" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="4" z="0">
@@ -2791,13 +2841,26 @@
 <tile x="-4" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="2" y="1" z="1">
+<terrain type="SKY"/>
+</tile>
 <tile x="4" y="-4" z="0">
+<terrain type="EARTH"/>
+<item id="4001"/>
+</tile>
+<tile x="4" y="4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="-1" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="1" z="1">
+<terrain type="SKY"/>
+</tile>
+<tile x="-4" y="4" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="4" y="-4" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-1" z="1">
@@ -2807,15 +2870,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="4" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="1" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="-4" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="4" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-1" z="1">
@@ -2857,6 +2911,9 @@
 <tile x="2" y="1" z="8">
 <terrain type="SKY"/>
 </tile>
+<tile x="0" y="1" z="6">
+<terrain type="SKY"/>
+</tile>
 <tile x="-2" y="-1" z="6">
 <terrain type="SKY"/>
 </tile>
@@ -2864,9 +2921,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-1" z="6">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="1" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-1" z="6">
@@ -2905,6 +2959,9 @@
 <tile x="4" y="4" z="9">
 <terrain type="SKY"/>
 </tile>
+<tile x="2" y="1" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="0" y="1" z="4">
 <terrain type="SKY"/>
 </tile>
@@ -2917,22 +2974,22 @@
 <tile x="0" y="-1" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="-4" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="4" y="4" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="-1" z="4">
+<tile x="-4" y="-4" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="1" z="4">
+<tile x="2" y="-1" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="4" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="-4" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="1" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-1" z="5">
@@ -2944,16 +3001,13 @@
 <tile x="0" y="-1" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="1" z="5">
-<terrain type="SKY"/>
-</tile>
 <tile x="2" y="-1" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="1" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="5" z="2">
+<tile x="4" y="-5" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="-5" z="0">
@@ -2971,7 +3025,7 @@
 <tile x="-4" y="-5" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-5" z="2">
+<tile x="-4" y="5" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="5" z="2">
@@ -3171,6 +3225,7 @@
 </tile>
 <tile x="-9" y="0" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TELEPORT" value="5,-10,1"/>
 </tile>
 <tile x="-9" y="-2" z="0">
 <terrain type="EARTH"/>
@@ -3178,25 +3233,25 @@
 <tile x="-9" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
+<tile x="9" y="-2" z="0">
+<terrain type="EARTH"/>
+</tile>
 <tile x="9" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="9" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="9" y="-2" z="0">
-<terrain type="EARTH"/>
-</tile>
 <tile x="9" y="0" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="9" y="2" z="2">
-<terrain type="SKY"/>
 </tile>
 <tile x="9" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
 <tile x="-9" y="-2" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="9" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-9" y="0" z="2">
@@ -3253,10 +3308,10 @@
 <tile x="4" y="8" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="8" z="0">
+<tile x="-4" y="-8" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-4" y="-8" z="0">
+<tile x="4" y="8" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-4" y="8" z="0">
@@ -3265,40 +3320,41 @@
 <tile x="4" y="-8" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="2" y="-2" z="1">
+<terrain type="EARTH"/>
+<item id="8000"/>
+</tile>
 <tile x="-2" y="-2" z="1">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="0" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="2" z="1">
-<terrain type="SKY"/>
-</tile>
 <tile x="0" y="2" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="-8" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="8" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="2" z="1">
+<tile x="4" y="-8" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="-2" z="1">
-<terrain type="EARTH"/>
+<tile x="-2" y="2" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="0" y="-2" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="4" y="8" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="2" y="0" z="1">
 <terrain type="SKY"/>
 </tile>
+<tile x="2" y="2" z="1">
+<terrain type="SKY"/>
+</tile>
 <tile x="-4" y="-8" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="4" y="8" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="0" z="1">
@@ -3364,13 +3420,13 @@
 <tile x="4" y="6" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="6" z="4">
+<tile x="4" y="-6" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-6" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-6" z="4">
+<tile x="-4" y="6" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="6" z="4">
@@ -3652,19 +3708,19 @@
 <tile x="8" y="11" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="12" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-8" y="12" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="8" y="-12" z="0">
+<tile x="4" y="3" z="1">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-8" y="-12" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="-8" y="12" z="0">
+<terrain type="EARTH"/>
+</tile>
 <tile x="8" y="12" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="8" y="-12" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-4" y="-3" z="1">
@@ -3673,14 +3729,14 @@
 <tile x="-4" y="3" z="1">
 <terrain type="EARTH"/>
 </tile>
+<tile x="-8" y="12" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="8" y="-12" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="-3" z="1">
 <terrain type="SKY"/>
-</tile>
-<tile x="4" y="3" z="1">
-<terrain type="EARTH"/>
 </tile>
 <tile x="-8" y="-12" z="2">
 <terrain type="EARTH"/>
@@ -3700,19 +3756,16 @@
 <tile x="8" y="12" z="1">
 <terrain type="SKY"/>
 </tile>
+<tile x="-8" y="8" z="6">
+<terrain type="SKY"/>
+</tile>
 <tile x="-4" y="2" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="-2" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="0" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="-8" y="8" z="6">
-<terrain type="SKY"/>
-</tile>
-<tile x="8" y="-8" z="6">
+<tile x="-8" y="-8" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="8" y="8" z="6">
@@ -3721,7 +3774,10 @@
 <tile x="4" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="-8" z="6">
+<tile x="-4" y="0" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="8" y="-8" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-2" z="3">
@@ -3742,11 +3798,9 @@
 <tile x="8" y="8" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="-8" z="4">
-<terrain type="SKY"/>
-</tile>
 <tile x="-4" y="0" z="0">
 <terrain type="EARTH"/>
+<item id="2000"/>
 </tile>
 <tile x="-4" y="-2" z="0">
 <terrain type="EARTH"/>
@@ -3754,10 +3808,16 @@
 <tile x="-4" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
+<tile x="8" y="8" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="4" y="-2" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="4" y="0" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-8" y="-8" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="0" z="0">
@@ -3765,9 +3825,6 @@
 </tile>
 <tile x="4" y="2" z="0">
 <terrain type="WATER"/>
-</tile>
-<tile x="-8" y="8" z="4">
-<terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-2" z="2">
 <terrain type="SKY"/>
@@ -3778,13 +3835,13 @@
 <tile x="-4" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
+<tile x="-8" y="8" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="8" y="-8" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-4" y="2" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-8" y="-8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="8" y="8" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="-2" z="2">
@@ -3802,35 +3859,40 @@
 <tile x="8" y="8" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="8" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="8" y="-8" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-8" y="-8" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="8" y="8" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="8" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="-8" y="-8" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="4" y="2" z="1">
+<tile x="-8" y="8" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="8" z="0">
-<terrain type="EARTH"/>
+<tile x="8" y="-8" z="3">
+<terrain type="SKY"/>
 </tile>
 <tile x="8" y="-8" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="-8" y="8" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="8" y="8" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-8" y="-8" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="8" y="8" z="0">
+<terrain type="EARTH"/>
+<item id="10001"/>
+</tile>
 <tile x="-4" y="-2" z="1">
 <terrain type="EARTH"/>
+<item id="8001"/>
+</tile>
+<tile x="4" y="2" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="-4" y="0" z="1">
 <terrain type="SKY"/>
@@ -3851,9 +3913,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-8" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="8" y="8" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-9" z="0">
@@ -3976,10 +4035,13 @@
 <tile x="8" y="8" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="2" z="4">
+<tile x="-8" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="0" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="8" y="8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="8" z="8">
@@ -3988,22 +4050,19 @@
 <tile x="8" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="-8" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="-4" y="-2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
+<tile x="-4" y="2" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="4" y="-2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="0" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="8" y="8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="0" z="5">
@@ -4158,6 +4217,7 @@
 </tile>
 <tile x="-9" y="-1" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DAMAGE" value="12"/>
 </tile>
 <tile x="-9" y="1" z="0">
 <terrain type="WATER"/>
@@ -4288,13 +4348,13 @@
 <tile x="8" y="12" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="3" z="4">
+<tile x="4" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-3" z="4">
+<tile x="-4" y="3" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="3" z="4">
@@ -4324,13 +4384,13 @@
 <tile x="4" y="3" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="3" z="3">
+<tile x="4" y="-3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-3" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-3" z="3">
+<tile x="-4" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="3" z="3">
@@ -4360,7 +4420,7 @@
 <tile x="8" y="12" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-3" z="2">
+<tile x="-4" y="3" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="-3" z="0">
@@ -4371,15 +4431,7 @@
 </tile>
 <tile x="-4" y="3" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="4" y="3" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="-4" y="-3" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="3" z="2">
-<terrain type="SKY"/>
+<area-effect type="TRAP" value="10"/>
 </tile>
 <tile x="-8" y="-12" z="4">
 <terrain type="EARTH"/>
@@ -4387,13 +4439,22 @@
 <tile x="8" y="12" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="3" z="2">
-<terrain type="SKY"/>
+<tile x="4" y="3" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-8" y="12" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="8" y="-12" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="-4" y="-3" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="4" y="-3" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="4" y="3" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-12" z="5">
@@ -4492,13 +4553,13 @@
 <tile x="8" y="5" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="5" z="0">
+<tile x="8" y="-5" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-8" y="-5" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="8" y="-5" z="0">
+<tile x="-8" y="5" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="8" y="5" z="0">
@@ -4600,16 +4661,13 @@
 <tile x="8" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="4" z="2">
-<terrain type="SKY"/>
+<tile x="-8" y="4" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-8" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="8" y="4" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="-8" y="4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="8" y="-4" z="0">
@@ -4621,13 +4679,16 @@
 <tile x="-4" y="1" z="1">
 <terrain type="SKY"/>
 </tile>
+<tile x="-8" y="4" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="8" y="-4" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="4" y="-1" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="1" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="8" y="-4" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-4" z="2">
@@ -4638,6 +4699,7 @@
 </tile>
 <tile x="-8" y="4" z="1">
 <terrain type="EARTH"/>
+<item id="5003"/>
 </tile>
 <tile x="-8" y="-4" z="1">
 <terrain type="SKY"/>
@@ -4648,13 +4710,13 @@
 <tile x="8" y="4" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-4" y="1" z="6">
+<tile x="4" y="-1" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-1" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-1" z="6">
+<tile x="-4" y="1" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="1" z="6">
@@ -4684,13 +4746,13 @@
 <tile x="8" y="4" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="1" z="4">
+<tile x="4" y="-1" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-1" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-1" z="4">
+<tile x="-4" y="1" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="1" z="4">
@@ -4756,17 +4818,18 @@
 <tile x="8" y="-4" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-1" z="2">
+<tile x="-4" y="1" z="2">
 <terrain type="SKY"/>
-</tile>
-<tile x="4" y="-1" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="-4" y="-1" z="0">
-<terrain type="EARTH"/>
 </tile>
 <tile x="-4" y="1" z="0">
 <terrain type="WATER"/>
+</tile>
+<tile x="-4" y="-1" z="0">
+<terrain type="EARTH"/>
+<area-effect type="HEAL" value="8"/>
+</tile>
+<tile x="4" y="-1" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-8" y="-4" z="4">
 <terrain type="SKY"/>
@@ -4774,16 +4837,16 @@
 <tile x="4" y="1" z="0">
 <terrain type="WATER"/>
 </tile>
+<tile x="8" y="-4" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-8" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-1" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="-4" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="1" z="2">
+<tile x="4" y="-1" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="8" y="4" z="4">
@@ -4954,10 +5017,10 @@
 <tile x="8" y="-8" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="-8" z="1">
+<tile x="8" y="8" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="8" z="1">
+<tile x="-8" y="-8" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-6" z="4">
@@ -4996,13 +5059,13 @@
 <tile x="8" y="6" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="-6" z="0">
+<tile x="-8" y="6" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-8" y="-6" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-8" y="6" z="0">
+<tile x="8" y="-6" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="8" y="6" z="0">
@@ -5101,9 +5164,6 @@
 <tile x="-8" y="-2" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="2" z="6">
-<terrain type="SKY"/>
-</tile>
 <tile x="-8" y="0" z="6">
 <terrain type="SKY"/>
 </tile>
@@ -5116,7 +5176,13 @@
 <tile x="8" y="0" z="6">
 <terrain type="SKY"/>
 </tile>
+<tile x="8" y="2" z="6">
+<terrain type="SKY"/>
+</tile>
 <tile x="-8" y="-2" z="7">
+<terrain type="SKY"/>
+</tile>
+<tile x="8" y="2" z="7">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="0" z="7">
@@ -5131,10 +5197,10 @@
 <tile x="8" y="0" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="2" z="7">
+<tile x="-8" y="-2" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="-2" z="4">
+<tile x="8" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="0" z="4">
@@ -5149,12 +5215,6 @@
 <tile x="8" y="0" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="2" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="8" y="0" z="5">
-<terrain type="SKY"/>
-</tile>
 <tile x="-8" y="2" z="5">
 <terrain type="SKY"/>
 </tile>
@@ -5167,10 +5227,16 @@
 <tile x="8" y="-2" z="5">
 <terrain type="SKY"/>
 </tile>
+<tile x="8" y="0" z="5">
+<terrain type="SKY"/>
+</tile>
 <tile x="8" y="2" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="0" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="8" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="2" z="3">
@@ -5179,17 +5245,14 @@
 <tile x="8" y="-2" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="0" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-8" y="-2" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="8" y="2" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="-2" z="0">
-<terrain type="EARTH"/>
+<tile x="8" y="0" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="-8" y="0" z="0">
 <terrain type="EARTH"/>
@@ -5200,14 +5263,11 @@
 <tile x="-8" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
-<tile x="8" y="0" z="2">
-<terrain type="SKY"/>
+<tile x="8" y="-2" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="8" y="0" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="8" y="2" z="2">
-<terrain type="SKY"/>
 </tile>
 <tile x="8" y="2" z="0">
 <terrain type="WATER"/>
@@ -5215,13 +5275,16 @@
 <tile x="-8" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
+<tile x="8" y="2" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="-8" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="2" z="2">
+<tile x="8" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="-2" z="2">
+<tile x="-8" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-2" z="9">
@@ -5260,13 +5323,13 @@
 <tile x="8" y="0" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="3" z="0">
+<tile x="8" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-8" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="8" y="-3" z="0">
+<tile x="-8" y="3" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="8" y="3" z="0">
@@ -5380,13 +5443,13 @@
 <tile x="8" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="-1" z="3">
+<tile x="-8" y="1" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-1" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="1" z="3">
+<tile x="8" y="-1" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="8" y="1" z="3">
@@ -5452,13 +5515,13 @@
 <tile x="8" y="1" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="1" z="6">
+<tile x="8" y="-1" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-1" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="-1" z="6">
+<tile x="-8" y="1" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="8" y="1" z="6">
@@ -5488,13 +5551,13 @@
 <tile x="8" y="1" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="8" y="-1" z="5">
+<tile x="-8" y="1" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="-8" y="-1" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-8" y="1" z="5">
+<tile x="8" y="-1" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="8" y="1" z="5">
@@ -5674,25 +5737,19 @@
 <tile x="11" y="2" z="3">
 <terrain type="SKY"/>
 </tile>
+<tile x="11" y="0" z="0">
+<terrain type="EARTH"/>
+</tile>
 <tile x="-11" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
 <tile x="-11" y="-2" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="11" y="2" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="-11" y="0" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="11" y="0" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="11" y="-2" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="11" y="0" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="11" y="2" z="0">
@@ -5701,7 +5758,13 @@
 <tile x="-11" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
+<tile x="11" y="0" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="-11" y="0" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="11" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-11" y="2" z="2">
@@ -5907,6 +5970,7 @@
 </tile>
 <tile x="5" y="7" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DEATH" value="0"/>
 </tile>
 <tile x="-5" y="-7" z="2">
 <terrain type="SKY"/>
@@ -5932,14 +5996,24 @@
 <tile x="5" y="7" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="-11" y="3" z="0">
-<terrain type="EARTH"/>
+<tile x="-5" y="11" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="-11" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="-11" y="3" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="-11" y="3" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="11" y="-3" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="11" y="-3" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DEATH" value="0"/>
 </tile>
 <tile x="11" y="3" z="0">
 <terrain type="EARTH"/>
@@ -5947,16 +6021,7 @@
 <tile x="-5" y="-11" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="-5" y="11" z="1">
-<terrain type="SKY"/>
-</tile>
 <tile x="5" y="-11" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="-11" y="3" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="11" y="-3" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="11" z="1">
@@ -6124,9 +6189,6 @@
 <tile x="11" y="3" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="-11" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="5" y="-11" z="0">
 <terrain type="EARTH"/>
 </tile>
@@ -6142,6 +6204,9 @@
 <tile x="5" y="11" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="-11" y="3" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="11" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
@@ -6151,7 +6216,7 @@
 <tile x="-5" y="11" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-11" y="3" z="4">
+<tile x="5" y="-11" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="11" z="2">
@@ -6288,6 +6353,7 @@
 </tile>
 <tile x="5" y="-12" z="0">
 <terrain type="EARTH"/>
+<item id="10001"/>
 </tile>
 <tile x="5" y="12" z="0">
 <terrain type="EARTH"/>
@@ -6498,6 +6564,7 @@
 </tile>
 <tile x="-5" y="-10" z="3">
 <terrain type="EARTH"/>
+<item id="6002"/>
 </tile>
 <tile x="-5" y="10" z="3">
 <terrain type="SKY"/>
@@ -6700,13 +6767,13 @@
 <tile x="10" y="12" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-5" y="3" z="4">
+<tile x="5" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-5" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="-3" z="4">
+<tile x="-5" y="3" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="3" z="4">
@@ -6736,13 +6803,13 @@
 <tile x="10" y="12" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-5" y="3" z="3">
+<tile x="5" y="-3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-5" y="-3" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="-3" z="3">
+<tile x="-5" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="3" z="3">
@@ -6760,16 +6827,16 @@
 <tile x="10" y="12" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="10" y="-12" z="4">
+<tile x="-5" y="3" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="-3" z="0">
+<tile x="-5" y="3" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-5" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-5" y="3" z="0">
+<tile x="5" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="10" y="12" z="4">
@@ -6777,14 +6844,15 @@
 </tile>
 <tile x="5" y="3" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TRAP" value="12"/>
 </tile>
 <tile x="-10" y="12" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-5" y="-3" z="2">
+<tile x="10" y="-12" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-5" y="3" z="2">
+<tile x="-5" y="-3" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="-3" z="2">
@@ -6936,6 +7004,7 @@
 </tile>
 <tile x="5" y="-5" z="0">
 <terrain type="EARTH"/>
+<item id="6000"/>
 </tile>
 <tile x="5" y="5" z="0">
 <terrain type="EARTH"/>
@@ -7060,13 +7129,13 @@
 <tile x="5" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-5" y="4" z="0">
+<tile x="5" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-5" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="5" y="-4" z="0">
+<tile x="-5" y="4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="5" y="4" z="0">
@@ -7597,12 +7666,6 @@
 <tile x="10" y="-12" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-10" y="12" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="10" y="-12" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="10" y="12" z="0">
 <terrain type="EARTH"/>
 </tile>
@@ -7611,6 +7674,12 @@
 </tile>
 <tile x="-5" y="3" z="1">
 <terrain type="EARTH"/>
+</tile>
+<tile x="-10" y="12" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="10" y="-12" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="5" y="-3" z="1">
 <terrain type="SKY"/>
@@ -7660,6 +7729,12 @@
 <tile x="10" y="8" z="5">
 <terrain type="SKY"/>
 </tile>
+<tile x="5" y="-2" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="5" y="0" z="3">
+<terrain type="SKY"/>
+</tile>
 <tile x="-5" y="2" z="3">
 <terrain type="SKY"/>
 </tile>
@@ -7672,10 +7747,7 @@
 <tile x="-10" y="8" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="-2" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="5" y="0" z="3">
+<tile x="10" y="-8" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-8" z="6">
@@ -7687,8 +7759,8 @@
 <tile x="5" y="2" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="10" y="-8" z="6">
-<terrain type="SKY"/>
+<tile x="5" y="-2" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-5" y="0" z="0">
 <terrain type="EARTH"/>
@@ -7696,11 +7768,23 @@
 <tile x="-5" y="-2" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="-10" y="8" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-5" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
-<tile x="5" y="-2" z="0">
-<terrain type="EARTH"/>
+<tile x="-10" y="-8" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="10" y="8" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="5" y="-2" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="5" y="0" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="5" y="0" z="0">
 <terrain type="EARTH"/>
@@ -7711,31 +7795,16 @@
 <tile x="5" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
-<tile x="10" y="-8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="-10" y="8" z="4">
-<terrain type="SKY"/>
-</tile>
 <tile x="-5" y="-2" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="5" y="0" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-10" y="-8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="10" y="8" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-5" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-5" y="2" z="2">
+<tile x="10" y="-8" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="-2" z="2">
+<tile x="-5" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="8" z="3">
@@ -7753,17 +7822,20 @@
 <tile x="5" y="0" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="8" z="0">
+<tile x="10" y="-8" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-10" y="-8" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="10" y="-8" z="0">
+<tile x="-10" y="8" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="10" y="8" z="0">
 <terrain type="EARTH"/>
+</tile>
+<tile x="5" y="2" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-8" z="2">
 <terrain type="SKY"/>
@@ -7771,19 +7843,17 @@
 <tile x="10" y="8" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="2" z="1">
-<terrain type="SKY"/>
-</tile>
 <tile x="-5" y="-2" z="1">
 <terrain type="EARTH"/>
+<item id="5000"/>
 </tile>
 <tile x="-5" y="0" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="10" y="-8" z="2">
+<tile x="-10" y="8" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="8" z="2">
+<tile x="10" y="-8" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-5" y="2" z="1">
@@ -7858,9 +7928,6 @@
 <tile x="5" y="2" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="0" z="5">
-<terrain type="SKY"/>
-</tile>
 <tile x="-5" y="2" z="5">
 <terrain type="SKY"/>
 </tile>
@@ -7871,6 +7938,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="-2" z="5">
+<terrain type="SKY"/>
+</tile>
+<tile x="5" y="0" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="2" z="5">
@@ -7918,6 +7988,9 @@
 <tile x="10" y="8" z="9">
 <terrain type="SKY"/>
 </tile>
+<tile x="5" y="0" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-5" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
@@ -7927,25 +8000,22 @@
 <tile x="-5" y="0" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="10" y="-8" z="8">
+<tile x="-10" y="8" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="8" z="8">
+<tile x="10" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="-2" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="0" z="4">
+<tile x="5" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="10" y="8" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="5" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-9" z="6">
@@ -8112,6 +8182,7 @@
 </tile>
 <tile x="1" y="-11" z="0">
 <terrain type="EARTH"/>
+<area-effect type="HEAL" value="13"/>
 </tile>
 <tile x="1" y="11" z="0">
 <terrain type="EARTH"/>
@@ -8673,6 +8744,7 @@
 </tile>
 <tile x="-10" y="5" z="0">
 <terrain type="EARTH"/>
+<area-effect type="LEVEL" value="0"/>
 </tile>
 <tile x="10" y="-5" z="0">
 <terrain type="EARTH"/>
@@ -8800,10 +8872,13 @@
 <tile x="10" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="4" z="0">
-<terrain type="EARTH"/>
+<tile x="5" y="1" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-4" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="-10" y="4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="10" y="-4" z="0">
@@ -8818,16 +8893,13 @@
 <tile x="-5" y="1" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="-1" z="1">
-<terrain type="SKY"/>
-</tile>
 <tile x="-10" y="4" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="10" y="-4" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="5" y="1" z="1">
+<tile x="5" y="-1" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-4" z="2">
@@ -8848,13 +8920,13 @@
 <tile x="10" y="4" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="5" y="-1" z="5">
+<tile x="-5" y="1" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="-5" y="-1" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-5" y="1" z="5">
+<tile x="5" y="-1" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="1" z="5">
@@ -8908,10 +8980,10 @@
 <tile x="5" y="1" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="4" z="8">
+<tile x="10" y="-4" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="10" y="-4" z="8">
+<tile x="-10" y="4" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-4" z="8">
@@ -8965,28 +9037,28 @@
 <tile x="-5" y="-1" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-10" y="4" z="4">
-<terrain type="SKY"/>
-</tile>
 <tile x="-5" y="1" z="0">
 <terrain type="WATER"/>
 </tile>
 <tile x="5" y="1" z="0">
 <terrain type="WATER"/>
 </tile>
+<tile x="10" y="-4" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="-10" y="4" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-5" y="-1" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="5" y="-1" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="10" y="4" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="5" y="-1" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="10" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="5" y="1" z="2">
@@ -9030,6 +9102,7 @@
 </tile>
 <tile x="-1" y="-6" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DEATH" value="0"/>
 </tile>
 <tile x="-1" y="6" z="0">
 <terrain type="EARTH"/>
@@ -9063,6 +9136,7 @@
 </tile>
 <tile x="1" y="6" z="1">
 <terrain type="EARTH"/>
+<item id="4000"/>
 </tile>
 <tile x="-1" y="-6" z="9">
 <terrain type="SKY"/>
@@ -9309,6 +9383,7 @@
 </tile>
 <tile x="-1" y="8" z="0">
 <terrain type="EARTH"/>
+<item id="10000"/>
 </tile>
 <tile x="1" y="-8" z="0">
 <terrain type="EARTH"/>
@@ -9496,16 +9571,16 @@
 <tile x="10" y="0" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="2" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="10" y="-2" z="3">
+<tile x="-10" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="10" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="0" z="3">
+<tile x="-10" y="2" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="10" y="-2" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="-2" z="3">
@@ -9513,6 +9588,9 @@
 </tile>
 <tile x="10" y="2" z="3">
 <terrain type="SKY"/>
+</tile>
+<tile x="10" y="-2" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-10" y="2" z="0">
 <terrain type="WATER"/>
@@ -9522,15 +9600,17 @@
 </tile>
 <tile x="-10" y="0" z="0">
 <terrain type="EARTH"/>
+<area-effect type="LEVEL" value="0"/>
 </tile>
-<tile x="10" y="-2" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="10" y="0" z="0">
-<terrain type="EARTH"/>
+<tile x="10" y="-2" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="10" y="0" z="2">
 <terrain type="SKY"/>
+</tile>
+<tile x="10" y="0" z="0">
+<terrain type="EARTH"/>
+<item id="10000"/>
 </tile>
 <tile x="10" y="2" z="0">
 <terrain type="WATER"/>
@@ -9538,16 +9618,13 @@
 <tile x="-10" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="0" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="10" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="2" z="2">
+<tile x="-10" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="10" y="-2" z="2">
+<tile x="-10" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="-7" z="3">
@@ -9622,22 +9699,22 @@
 <tile x="10" y="2" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="1" y="7" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="1" y="-7" z="1">
+<tile x="-10" y="-2" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="-7" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="10" y="0" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="-1" y="7" z="1">
 <terrain type="SKY"/>
 </tile>
+<tile x="1" y="-7" z="1">
+<terrain type="SKY"/>
+</tile>
 <tile x="-10" y="0" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="1" y="7" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-10" y="2" z="8">
@@ -9646,10 +9723,10 @@
 <tile x="10" y="-2" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-10" y="-2" z="8">
+<tile x="10" y="2" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="10" y="2" z="8">
+<tile x="10" y="0" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="-7" z="7">
@@ -9724,9 +9801,6 @@
 <tile x="1" y="7" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="11" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="-11" z="0">
 <terrain type="EARTH"/>
 </tile>
@@ -9736,25 +9810,10 @@
 <tile x="0" y="-11" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="11" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="9" y="-12" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="-9" y="12" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="0" y="11" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="9" y="12" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="-11" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-9" y="-12" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-11" z="0">
@@ -9762,11 +9821,30 @@
 </tile>
 <tile x="2" y="11" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TELEPORT" value="-6,-12,2"/>
 </tile>
 <tile x="0" y="11" z="2">
 <terrain type="SKY"/>
 </tile>
+<tile x="9" y="-12" z="8">
+<terrain type="SKY"/>
+</tile>
 <tile x="-2" y="-11" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="11" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-9" y="12" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="-2" y="11" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="-11" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-9" y="-12" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-11" z="2">
@@ -9990,11 +10068,21 @@
 </tile>
 <tile x="0" y="12" z="0">
 <terrain type="EARTH"/>
+<item id="10000"/>
 </tile>
 <tile x="-2" y="-12" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="12" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="0" y="-12" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="-2" y="-12" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="12" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="12" z="2">
@@ -10003,20 +10091,8 @@
 <tile x="2" y="-12" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="-12" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="2" y="12" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="12" z="0">
-<terrain type="EARTH"/>
-</tile>
 <tile x="1" y="3" z="1">
 <terrain type="EARTH"/>
-</tile>
-<tile x="0" y="12" z="2">
-<terrain type="SKY"/>
 </tile>
 <tile x="2" y="-12" z="0">
 <terrain type="EARTH"/>
@@ -10024,16 +10100,19 @@
 <tile x="-1" y="-3" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="-12" z="2">
+<tile x="2" y="12" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="12" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="3" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="0" y="-12" z="2">
+<tile x="1" y="-3" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="1" y="-3" z="1">
+<tile x="0" y="-12" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-12" z="1">
@@ -10072,6 +10151,9 @@
 <tile x="2" y="12" z="9">
 <terrain type="SKY"/>
 </tile>
+<tile x="0" y="12" z="8">
+<terrain type="SKY"/>
+</tile>
 <tile x="-1" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
@@ -10096,9 +10178,6 @@
 <tile x="0" y="-12" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="12" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="2" y="-12" z="8">
 <terrain type="SKY"/>
 </tile>
@@ -10114,7 +10193,7 @@
 <tile x="1" y="3" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="12" z="6">
+<tile x="1" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="-3" z="3">
@@ -10124,9 +10203,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="1" y="-3" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="1" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-12" z="6">
@@ -10139,6 +10215,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-12" z="6">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="12" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-12" z="6">
@@ -10171,19 +10250,14 @@
 <tile x="1" y="3" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-2" y="12" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="-12" z="4">
-<terrain type="SKY"/>
-</tile>
 <tile x="1" y="-3" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="2" y="12" z="4">
-<terrain type="SKY"/>
+<item id="10001"/>
 </tile>
 <tile x="-1" y="-3" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="12" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="3" z="2">
@@ -10198,10 +10272,16 @@
 <tile x="1" y="3" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="12" z="4">
+<tile x="-2" y="12" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="-12" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-12" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="12" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-12" z="5">
@@ -10264,10 +10344,7 @@
 <tile x="0" y="-9" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-9" y="10" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="9" y="-10" z="8">
+<tile x="0" y="9" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-9" z="0">
@@ -10276,34 +10353,37 @@
 <tile x="2" y="9" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="0" y="9" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-2" y="-9" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="9" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-2" y="9" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="2" y="-9" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-9" y="-10" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="9" y="10" z="8">
 <terrain type="SKY"/>
 </tile>
+<tile x="-2" y="-9" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="9" y="-10" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="9" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-9" y="10" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="-2" y="9" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-9" y="-10" z="8">
+<terrain type="SKY"/>
+</tile>
 <tile x="0" y="-9" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-9" y="-10" z="5">
+<tile x="-9" y="10" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-9" y="10" z="5">
+<tile x="-9" y="-10" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="9" y="-10" z="5">
@@ -10318,6 +10398,9 @@
 <tile x="-1" y="0" z="9">
 <terrain type="SKY"/>
 </tile>
+<tile x="1" y="2" z="9">
+<terrain type="SKY"/>
+</tile>
 <tile x="-1" y="2" z="9">
 <terrain type="SKY"/>
 </tile>
@@ -10325,9 +10408,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="1" y="0" z="9">
-<terrain type="SKY"/>
-</tile>
-<tile x="1" y="2" z="9">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="-2" z="8">
@@ -10378,19 +10458,16 @@
 <tile x="1" y="2" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="9" z="1">
+<tile x="0" y="9" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-9" z="1">
 <terrain type="SKY"/>
 </tile>
+<tile x="-2" y="9" z="1">
+<terrain type="SKY"/>
+</tile>
 <tile x="0" y="-9" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="9" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="9" y="10" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-9" z="1">
@@ -10400,6 +10477,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="-9" y="-10" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="9" y="10" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-9" y="10" z="4">
@@ -10444,6 +10524,9 @@
 <tile x="2" y="8" z="9">
 <terrain type="SKY"/>
 </tile>
+<tile x="0" y="8" z="8">
+<terrain type="SKY"/>
+</tile>
 <tile x="-1" y="0" z="4">
 <terrain type="SKY"/>
 </tile>
@@ -10460,9 +10543,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="1" y="2" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-8" z="8">
@@ -10690,16 +10770,19 @@
 <tile x="9" y="11" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="10" z="0">
+<tile x="2" y="10" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="-10" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="10" z="0">
-<terrain type="EARTH"/>
+<tile x="-9" y="11" z="8">
+<terrain type="SKY"/>
 </tile>
 <tile x="9" y="-11" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="10" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="10" z="0">
@@ -10707,21 +10790,19 @@
 </tile>
 <tile x="0" y="-10" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TELEPORT" value="11,-13,8"/>
 </tile>
-<tile x="0" y="10" z="2">
+<tile x="2" y="10" z="2">
 <terrain type="SKY"/>
+</tile>
+<tile x="0" y="10" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="2" y="-10" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="-10" z="2">
 <terrain type="EARTH"/>
-</tile>
-<tile x="2" y="10" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-9" y="11" z="8">
-<terrain type="SKY"/>
 </tile>
 <tile x="-2" y="10" z="2">
 <terrain type="SKY"/>
@@ -10771,14 +10852,14 @@
 <tile x="0" y="-10" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="9" y="11" z="4">
-<terrain type="SKY"/>
-</tile>
 <tile x="0" y="10" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-10" z="1">
 <terrain type="EARTH"/>
+</tile>
+<tile x="9" y="11" z="4">
+<terrain type="SKY"/>
 </tile>
 <tile x="2" y="10" z="1">
 <terrain type="SKY"/>
@@ -11142,6 +11223,7 @@
 </tile>
 <tile x="-10" y="-1" z="0">
 <terrain type="EARTH"/>
+<item id="10000"/>
 </tile>
 <tile x="-10" y="1" z="0">
 <terrain type="WATER"/>
@@ -11362,9 +11444,6 @@
 <tile x="2" y="5" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="5" z="5">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="5" z="5">
 <terrain type="SKY"/>
 </tile>
@@ -11374,13 +11453,13 @@
 <tile x="0" y="-5" z="5">
 <terrain type="SKY"/>
 </tile>
+<tile x="0" y="5" z="5">
+<terrain type="SKY"/>
+</tile>
 <tile x="2" y="-5" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="5" z="5">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="5" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="5" z="6">
@@ -11390,6 +11469,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-5" z="6">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="5" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-5" z="6">
@@ -11464,6 +11546,9 @@
 <tile x="2" y="6" z="1">
 <terrain type="EARTH"/>
 </tile>
+<tile x="0" y="6" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-2" y="6" z="4">
 <terrain type="SKY"/>
 </tile>
@@ -11471,9 +11556,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-6" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="6" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-6" z="4">
@@ -11530,17 +11612,18 @@
 <tile x="9" y="7" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="6" z="2">
-<terrain type="SKY"/>
+<tile x="-2" y="-6" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="0" y="6" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="2" y="-6" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-2" y="-6" z="0">
-<terrain type="EARTH"/>
-</tile>
 <tile x="-2" y="6" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DEATH" value="0"/>
 </tile>
 <tile x="2" y="6" z="0">
 <terrain type="EARTH"/>
@@ -11548,19 +11631,19 @@
 <tile x="0" y="-6" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="0" y="6" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="6" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="2" y="-6" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="-6" z="2">
 <terrain type="SKY"/>
 </tile>
+<tile x="0" y="6" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="2" y="6" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-2" y="6" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="-6" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-6" z="2">
@@ -11620,7 +11703,7 @@
 <tile x="2" y="4" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="4" z="8">
+<tile x="0" y="4" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="-1" z="4">
@@ -11638,13 +11721,13 @@
 <tile x="-2" y="-4" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="-4" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="4" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="2" y="4" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="-2" y="4" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="-4" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-4" z="8">
@@ -11674,19 +11757,22 @@
 <tile x="1" y="1" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="1" y="-1" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-1" y="-1" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="-1" y="1" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="1" y="1" z="3">
 <terrain type="SKY"/>
 </tile>
+<tile x="1" y="-1" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="-1" y="1" z="3">
+<terrain type="SKY"/>
+</tile>
 <tile x="-2" y="-4" z="6">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="4" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="4" z="6">
@@ -11696,9 +11782,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="4" z="6">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="4" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-4" z="6">
@@ -11746,22 +11829,35 @@
 <tile x="2" y="4" z="7">
 <terrain type="SKY"/>
 </tile>
+<tile x="1" y="1" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="1" y="1" z="0">
 <terrain type="WATER"/>
 </tile>
 <tile x="-1" y="-1" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="-4" z="4">
-<terrain type="SKY"/>
-</tile>
 <tile x="-1" y="1" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="2" y="4" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="1" y="-1" z="0">
 <terrain type="EARTH"/>
+<item id="1000"/>
 </tile>
 <tile x="-1" y="-1" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="4" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="-2" y="4" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="1" z="2">
@@ -11773,19 +11869,7 @@
 <tile x="1" y="-1" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="1" y="1" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-2" y="4" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="4" z="4">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="-4" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="4" z="5">
@@ -11913,6 +11997,7 @@
 </tile>
 <tile x="-9" y="6" z="1">
 <terrain type="EARTH"/>
+<item id="9000"/>
 </tile>
 <tile x="9" y="-6" z="1">
 <terrain type="SKY"/>
@@ -11938,6 +12023,9 @@
 <tile x="2" y="5" z="4">
 <terrain type="SKY"/>
 </tile>
+<tile x="0" y="5" z="3">
+<terrain type="WATER"/>
+</tile>
 <tile x="-2" y="5" z="3">
 <terrain type="SKY"/>
 </tile>
@@ -11947,14 +12035,14 @@
 <tile x="0" y="-5" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="5" z="3">
-<terrain type="WATER"/>
-</tile>
 <tile x="2" y="-5" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="5" z="3">
 <terrain type="WATER"/>
+</tile>
+<tile x="0" y="5" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="-5" z="0">
 <terrain type="EARTH"/>
@@ -11965,17 +12053,14 @@
 <tile x="0" y="-5" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="0" y="5" z="0">
-<terrain type="EARTH"/>
+<tile x="2" y="5" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="2" y="-5" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="2" y="5" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="2" y="5" z="2">
-<terrain type="SKY"/>
 </tile>
 <tile x="0" y="5" z="2">
 <terrain type="SKY"/>
@@ -11986,10 +12071,10 @@
 <tile x="-2" y="5" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="-5" z="2">
+<tile x="2" y="-5" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="-5" z="2">
+<tile x="0" y="-5" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-9" y="-8" z="6">
@@ -12190,19 +12275,16 @@
 <tile x="9" y="9" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="8" z="1">
+<tile x="-2" y="8" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-8" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="8" z="1">
-<terrain type="SKY"/>
-</tile>
 <tile x="0" y="-8" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="9" y="9" z="4">
+<tile x="0" y="8" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-8" z="1">
@@ -12212,6 +12294,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="-9" y="-9" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="9" y="9" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-9" y="9" z="4">
@@ -12286,13 +12371,13 @@
 <tile x="1" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
+<tile x="2" y="8" z="6">
+<terrain type="SKY"/>
+</tile>
 <tile x="1" y="2" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-8" z="6">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="8" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="8" z="6">
@@ -12346,16 +12431,13 @@
 <tile x="2" y="8" z="7">
 <terrain type="SKY"/>
 </tile>
+<tile x="1" y="2" z="0">
+<terrain type="WATER"/>
+</tile>
 <tile x="1" y="0" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-1" y="-2" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-2" y="-8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="8" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="1" y="2" z="2">
@@ -12364,25 +12446,25 @@
 <tile x="0" y="8" z="4">
 <terrain type="SKY"/>
 </tile>
+<tile x="2" y="8" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-1" y="-2" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="1" y="2" z="0">
-<terrain type="WATER"/>
-</tile>
 <tile x="-2" y="8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="-1" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-1" y="0" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="-1" y="2" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="1" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-1" y="2" z="2">
+<tile x="-1" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-8" z="4">
@@ -12394,11 +12476,14 @@
 <tile x="-1" y="2" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="1" y="-2" z="0">
-<terrain type="EARTH"/>
-</tile>
 <tile x="1" y="0" z="2">
 <terrain type="SKY"/>
+</tile>
+<tile x="-2" y="-8" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="1" y="-2" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="-8" z="5">
 <terrain type="SKY"/>
@@ -12460,32 +12545,19 @@
 <tile x="9" y="9" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-1" y="0" z="1">
-<terrain type="SKY"/>
+<tile x="0" y="8" z="0">
+<terrain type="EARTH"/>
+<item id="8002"/>
 </tile>
 <tile x="-2" y="-8" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="8" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="1" y="2" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="8" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="8" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TRAP" value="12"/>
 </tile>
 <tile x="0" y="-8" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="1" y="0" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="-9" y="9" z="8">
-<terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-8" z="2">
 <terrain type="SKY"/>
@@ -12493,22 +12565,13 @@
 <tile x="2" y="8" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="9" y="-9" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="8" z="0">
+<tile x="2" y="8" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="-8" z="2">
+<tile x="0" y="8" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-9" y="-9" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="9" y="9" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="-2" y="8" z="2">
+<tile x="1" y="2" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-8" z="0">
@@ -12519,6 +12582,30 @@
 </tile>
 <tile x="-1" y="-2" z="1">
 <terrain type="EARTH"/>
+</tile>
+<tile x="-9" y="9" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="9" y="-9" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="1" y="0" z="1">
+<terrain type="SKY"/>
+</tile>
+<tile x="-1" y="0" z="1">
+<terrain type="SKY"/>
+</tile>
+<tile x="9" y="9" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="-2" y="8" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="-8" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-9" y="-9" z="8">
+<terrain type="SKY"/>
 </tile>
 <tile x="-1" y="2" z="1">
 <terrain type="SKY"/>
@@ -12610,9 +12697,6 @@
 <tile x="9" y="7" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="6" z="6">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="6" z="6">
 <terrain type="SKY"/>
 </tile>
@@ -12620,6 +12704,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-6" z="6">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="6" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-6" z="6">
@@ -12808,8 +12895,8 @@
 <tile x="2" y="7" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="7" z="0">
-<terrain type="EARTH"/>
+<tile x="-2" y="7" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-7" z="0">
 <terrain type="EARTH"/>
@@ -12820,8 +12907,8 @@
 <tile x="0" y="-7" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="0" y="7" z="2">
-<terrain type="SKY"/>
+<tile x="0" y="7" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="2" y="-7" z="0">
 <terrain type="EARTH"/>
@@ -12829,31 +12916,25 @@
 <tile x="2" y="7" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="0" y="7" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="-7" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="-2" y="-7" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="7" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="7" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="0" y="-7" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="-7" z="2">
-<terrain type="SKY"/>
+<tile x="9" y="-3" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-9" y="3" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="-9" y="-3" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="9" y="3" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="9" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-9" y="3" z="2">
@@ -12861,6 +12942,13 @@
 </tile>
 <tile x="9" y="-3" z="2">
 <terrain type="SKY"/>
+</tile>
+<tile x="-9" y="-3" z="0">
+<terrain type="EARTH"/>
+<area-effect type="LEVEL" value="0"/>
+</tile>
+<tile x="9" y="3" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-4" y="-11" z="1">
 <terrain type="SKY"/>
@@ -13036,19 +13124,13 @@
 <tile x="9" y="3" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="11" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="11" z="0">
+<tile x="4" y="-11" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-4" y="-11" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="9" y="-3" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="-11" z="0">
+<tile x="-4" y="11" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="9" y="3" z="4">
@@ -13056,14 +13138,21 @@
 </tile>
 <tile x="4" y="11" z="0">
 <terrain type="EARTH"/>
+<area-effect type="LEVEL" value="0"/>
+</tile>
+<tile x="-9" y="3" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="9" y="-3" z="4">
+<terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-11" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-11" z="2">
+<tile x="-4" y="11" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-9" y="3" z="4">
+<tile x="4" y="-11" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="11" z="2">
@@ -13156,29 +13245,30 @@
 <tile x="4" y="11" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="3" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="-2" y="3" z="2">
+<tile x="4" y="-12" z="4">
 <terrain type="SKY"/>
+</tile>
+<tile x="2" y="3" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-2" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="3" z="0">
-<terrain type="EARTH"/>
+<tile x="-4" y="12" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="3" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="-2" y="3" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="0" y="-3" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DAMAGE" value="9"/>
 </tile>
-<tile x="2" y="-3" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="12" z="4">
-<terrain type="SKY"/>
+<tile x="0" y="3" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="2" y="-3" z="0">
 <terrain type="EARTH"/>
@@ -13189,19 +13279,19 @@
 <tile x="2" y="3" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="3" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="12" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="-12" z="4">
+<tile x="-2" y="3" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-3" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-12" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="-3" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="4" y="12" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-12" z="5">
@@ -13228,14 +13318,14 @@
 <tile x="4" y="12" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="3" z="1">
-<terrain type="EARTH"/>
-</tile>
 <tile x="4" y="-12" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-4" y="-12" z="0">
 <terrain type="EARTH"/>
+</tile>
+<tile x="4" y="-12" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="-4" y="12" z="0">
 <terrain type="EARTH"/>
@@ -13249,13 +13339,10 @@
 <tile x="2" y="3" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-4" y="12" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="3" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="4" y="-12" z="2">
+<tile x="-4" y="12" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-3" z="1">
@@ -13266,6 +13353,9 @@
 </tile>
 <tile x="-4" y="-12" z="2">
 <terrain type="SKY"/>
+</tile>
+<tile x="0" y="3" z="1">
+<terrain type="EARTH"/>
 </tile>
 <tile x="2" y="-3" z="1">
 <terrain type="SKY"/>
@@ -13357,10 +13447,10 @@
 <tile x="-2" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-8" z="8">
+<tile x="0" y="-2" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="-2" z="4">
+<tile x="-4" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="8" z="8">
@@ -13369,19 +13459,19 @@
 <tile x="0" y="0" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="2" z="4">
+<tile x="-4" y="8" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="8" z="8">
+<tile x="4" y="-8" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="0" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="2" z="4">
@@ -13414,9 +13504,6 @@
 <tile x="2" y="2" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="-8" z="6">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
@@ -13439,6 +13526,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-2" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="4" y="-8" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="0" z="3">
@@ -13465,19 +13555,10 @@
 <tile x="4" y="8" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="-2" z="0">
-<terrain type="EARTH"/>
-</tile>
 <tile x="2" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
-<tile x="-2" y="0" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-4" y="8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="0" z="0">
+<tile x="-2" y="-2" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="4" y="-8" z="4">
@@ -13486,32 +13567,68 @@
 <tile x="0" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-2" y="-2" z="2">
+<tile x="-4" y="8" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="0" z="2">
+<tile x="0" y="0" z="0">
+<terrain type="EARTH"/>
+<entity direction="SOUTH" is-mounted="false" location="0,0,0">
+<inventory capacity="20"/>
+<equipment/>
+<occupation value="Summoner"/>
+<stats>
+<stat stat="LEVEL" value="1"/>
+<stat stat="LIVES" value="3"/>
+<stat stat="STRENGTH" value="3"/>
+<stat stat="AGILITY" value="5"/>
+<stat stat="INTELLECT" value="10"/>
+<stat stat="HARDINESS" value="4"/>
+<stat stat="EXPERIENCE" value="1"/>
+<stat stat="MOVEMENT" value="17"/>
+<stat stat="HEALTH" value="14"/>
+<stat stat="MAX_HEALTH" value="0"/>
+<stat stat="MANA" value="20"/>
+<stat stat="MAX_MANA" value="0"/>
+<stat stat="WEAPON_MODIFIER" value="1"/>
+<stat stat="ARMOR_MODIFIER" value="0"/>
+<stat stat="RADIUS_OF_VISIBILITY" value="3"/>
+<stat stat="EXP_TO_LEVEL" value="50"/>
+<stat stat="OFFSENSIVE_RATING" value="0"/>
+<stat stat="DEFENSIVE_RATING" value="0"/>
+<stat stat="ARMOR_RATING" value="0"/>
+<stat stat="SKILL_POINTS" value="0"/>
+<stat stat="TOTAL_WEIGHT" value="0"/>
+<stat stat="BARGAIN" value="1"/>
+<stat stat="OBSERVATION" value="1"/>
+</stats>
+<active-skill-list>
+<active-skill type="Basic Attack" value="1"/>
+<active-skill type="Bind Wounds" value="1"/>
+<active-skill type="Fire Blast" value="1"/>
+<active-skill type="Fire Ball" value="1"/>
+<active-skill type="Fire Wave" value="1"/>
+<active-skill type="Lightning Bolt" value="1"/>
+<active-skill type="Luda Speed" value="1"/>
+<active-skill type="Fear" value="1"/>
+<active-skill type="Polymorph" value="1"/>
+<active-skill type="Sleep" value="1"/>
+</active-skill-list>
+<passive-skill-list>
+<passive-skill type="Bargain" value="0"/>
+<passive-skill type="Observation" value="0"/>
+<passive-skill type="Staff Mastery" value="0"/>
+</passive-skill-list>
+<passable-terrains>
+<terrain type="EARTH"/>
+<terrain type="WATER"/>
+</passable-terrains>
+</entity>
+</tile>
+<tile x="-2" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="0" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="-2" y="2" z="0">
-<terrain type="WATER"/>
-</tile>
-<tile x="-4" y="-8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="-2" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="2" y="0" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="-2" z="2">
-<terrain type="SKY"/>
 </tile>
 <tile x="0" y="2" z="0">
 <terrain type="WATER"/>
@@ -13522,14 +13639,72 @@
 <tile x="2" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
+<tile x="4" y="8" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="-2" y="2" z="0">
+<terrain type="WATER"/>
+</tile>
+<tile x="2" y="-2" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="-4" y="-8" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="-2" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="0" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="0" y="-2" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="2" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="2" y="0" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DEATH" value="0"/>
+<entity direction="SOUTH" is-mounted="false" location="2,0,0">
+<inventory capacity="20"/>
+<equipment/>
+<occupation value="Models.Entities.Occupation.Vehicle@15d4089"/>
+<stats>
+<stat stat="LEVEL" value="1"/>
+<stat stat="LIVES" value="3"/>
+<stat stat="STRENGTH" value="0"/>
+<stat stat="AGILITY" value="0"/>
+<stat stat="INTELLECT" value="0"/>
+<stat stat="HARDINESS" value="0"/>
+<stat stat="EXPERIENCE" value="0"/>
+<stat stat="MOVEMENT" value="34"/>
+<stat stat="HEALTH" value="10"/>
+<stat stat="MAX_HEALTH" value="0"/>
+<stat stat="MANA" value="10"/>
+<stat stat="MAX_MANA" value="0"/>
+<stat stat="WEAPON_MODIFIER" value="0"/>
+<stat stat="ARMOR_MODIFIER" value="0"/>
+<stat stat="RADIUS_OF_VISIBILITY" value="3"/>
+<stat stat="EXP_TO_LEVEL" value="50"/>
+<stat stat="OFFSENSIVE_RATING" value="0"/>
+<stat stat="DEFENSIVE_RATING" value="0"/>
+<stat stat="ARMOR_RATING" value="0"/>
+<stat stat="SKILL_POINTS" value="0"/>
+<stat stat="TOTAL_WEIGHT" value="0"/>
+<stat stat="BARGAIN" value="0"/>
+<stat stat="OBSERVATION" value="0"/>
+</stats>
+<terrain type="EARTH"/>
+<terrain type="WATER"/>
+<brain personality="MOUNT"/>
+</entity>
+</tile>
+<tile x="-2" y="-2" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="0" y="0" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="2" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-8" z="5">
 <terrain type="SKY"/>
@@ -13743,6 +13918,7 @@
 </tile>
 <tile x="-4" y="-10" z="0">
 <terrain type="EARTH"/>
+<area-effect type="LEVEL" value="0"/>
 </tile>
 <tile x="-4" y="10" z="0">
 <terrain type="EARTH"/>
@@ -13885,6 +14061,9 @@
 <tile x="9" y="4" z="5">
 <terrain type="SKY"/>
 </tile>
+<tile x="0" y="4" z="3">
+<terrain type="SKY"/>
+</tile>
 <tile x="-2" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
@@ -13892,9 +14071,6 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="0" y="-4" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="-4" z="3">
@@ -13915,14 +14091,17 @@
 <tile x="9" y="5" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="4" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="0" y="4" z="0">
-<terrain type="EARTH"/>
+<tile x="1" y="1" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="-2" y="-4" z="0">
 <terrain type="EARTH"/>
+</tile>
+<tile x="2" y="4" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="0" y="4" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="-2" y="4" z="0">
 <terrain type="EARTH"/>
@@ -13933,31 +14112,28 @@
 <tile x="0" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="2" y="4" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="-2" y="-4" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-1" y="-1" z="1">
+<tile x="2" y="4" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="1" y="1" z="1">
-<terrain type="SKY"/>
+<tile x="0" y="4" z="0">
+<terrain type="EARTH"/>
 </tile>
-<tile x="0" y="4" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-1" y="1" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="-4" z="2">
+<tile x="2" y="-4" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="4" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="-4" z="2">
+<tile x="0" y="-4" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-1" y="-1" z="1">
+<terrain type="SKY"/>
+</tile>
+<tile x="-1" y="1" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="1" y="-1" z="1">
@@ -14074,28 +14250,25 @@
 <tile x="0" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-4" y="-12" z="8">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="12" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="0" y="3" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="4" y="-12" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="12" z="8">
 <terrain type="SKY"/>
 </tile>
+<tile x="4" y="-12" z="8">
+<terrain type="SKY"/>
+</tile>
 <tile x="2" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="2" y="3" z="4">
+<tile x="4" y="12" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="0" y="3" z="5">
+<tile x="-4" y="-12" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="3" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="3" z="5">
@@ -14107,13 +14280,13 @@
 <tile x="0" y="-3" z="5">
 <terrain type="SKY"/>
 </tile>
+<tile x="0" y="3" z="5">
+<terrain type="SKY"/>
+</tile>
 <tile x="2" y="-3" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="2" y="3" z="5">
-<terrain type="SKY"/>
-</tile>
-<tile x="0" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-2" y="3" z="3">
@@ -14128,19 +14301,22 @@
 <tile x="-4" y="-12" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="4" y="12" z="6">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="-3" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="2" y="3" z="3">
+<tile x="0" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="12" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="4" y="-12" z="6">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="-3" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="4" y="12" z="6">
+<terrain type="SKY"/>
+</tile>
+<tile x="2" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-4" y="-12" z="7">
@@ -14359,9 +14535,6 @@
 <tile x="6" y="12" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="12" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="-6" y="12" z="0">
 <terrain type="EARTH"/>
 </tile>
@@ -14373,9 +14546,7 @@
 </tile>
 <tile x="6" y="12" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="6" y="-12" z="2">
-<terrain type="SKY"/>
+<area-effect type="HEAL" value="12"/>
 </tile>
 <tile x="-3" y="-3" z="1">
 <terrain type="SKY"/>
@@ -14388,6 +14559,12 @@
 </tile>
 <tile x="3" y="3" z="1">
 <terrain type="EARTH"/>
+</tile>
+<tile x="-6" y="12" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="6" y="-12" z="2">
+<terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-12" z="2">
 <terrain type="SKY"/>
@@ -14419,7 +14596,7 @@
 <tile x="6" y="8" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-8" z="8">
+<tile x="-6" y="8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="2" z="4">
@@ -14428,10 +14605,10 @@
 <tile x="3" y="0" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="-8" z="8">
+<tile x="6" y="8" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="8" z="8">
+<tile x="-6" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-2" z="4">
@@ -14440,7 +14617,7 @@
 <tile x="-3" y="0" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="8" z="8">
+<tile x="6" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="2" z="4">
@@ -14467,10 +14644,10 @@
 <tile x="3" y="2" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-2" z="3">
+<tile x="-3" y="2" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="2" z="3">
+<tile x="3" y="-2" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="0" z="3">
@@ -14485,10 +14662,10 @@
 <tile x="3" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="8" z="6">
+<tile x="-6" y="-8" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="-8" z="6">
+<tile x="6" y="8" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-2" z="3">
@@ -14509,17 +14686,17 @@
 <tile x="6" y="8" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="-2" z="0">
+<tile x="-3" y="0" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="3" y="2" z="0">
-<terrain type="WATER"/>
-</tile>
-<tile x="-3" y="0" z="0">
+<tile x="-3" y="-2" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-3" y="2" z="0">
 <terrain type="WATER"/>
+</tile>
+<tile x="3" y="-2" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-6" y="-8" z="4">
 <terrain type="SKY"/>
@@ -14527,28 +14704,28 @@
 <tile x="6" y="8" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-2" z="0">
-<terrain type="EARTH"/>
-</tile>
 <tile x="3" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="0" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="3" y="2" z="0">
+<terrain type="WATER"/>
+</tile>
+<tile x="-6" y="8" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-3" y="-2" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="3" y="2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="-8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="3" y="2" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-6" y="8" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="2" z="2">
@@ -14569,16 +14746,16 @@
 <tile x="6" y="8" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="-8" z="3">
-<terrain type="SKY"/>
-</tile>
-<tile x="6" y="8" z="3">
-<terrain type="SKY"/>
-</tile>
 <tile x="-6" y="8" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="-8" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="-6" y="-8" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="6" y="8" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-9" z="3">
@@ -14595,12 +14772,15 @@
 </tile>
 <tile x="-6" y="-9" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TELEPORT" value="-1,7,0"/>
 </tile>
 <tile x="-6" y="9" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TRAP" value="8"/>
 </tile>
 <tile x="6" y="-9" z="0">
 <terrain type="EARTH"/>
+<area-effect type="HEAL" value="6"/>
 </tile>
 <tile x="6" y="9" z="0">
 <terrain type="EARTH"/>
@@ -14635,16 +14815,16 @@
 <tile x="3" y="2" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="0" z="8">
+<tile x="3" y="0" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="0" z="8">
+<tile x="3" y="2" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-2" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="2" z="8">
+<tile x="-3" y="0" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="2" z="8">
@@ -14683,16 +14863,16 @@
 <tile x="6" y="9" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="0" z="7">
+<tile x="3" y="0" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="0" z="7">
+<tile x="3" y="2" z="7">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-2" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="2" z="7">
+<tile x="-3" y="0" z="7">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="2" z="7">
@@ -14821,16 +15001,17 @@
 <tile x="6" y="10" z="1">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-4" z="2">
+<tile x="-3" y="4" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-4" z="0">
+<tile x="-3" y="4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-3" y="-4" z="0">
 <terrain type="EARTH"/>
+<item id="10001"/>
 </tile>
-<tile x="-3" y="4" z="0">
+<tile x="3" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="3" y="4" z="0">
@@ -14839,7 +15020,7 @@
 <tile x="-3" y="-4" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="4" z="2">
+<tile x="3" y="-4" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="4" z="2">
@@ -14929,22 +15110,22 @@
 <tile x="3" y="3" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="12" z="6">
-<terrain type="SKY"/>
-</tile>
 <tile x="3" y="-3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-3" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-12" z="6">
-<terrain type="SKY"/>
-</tile>
 <tile x="-3" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="3" z="3">
+<terrain type="SKY"/>
+</tile>
+<tile x="-6" y="12" z="6">
+<terrain type="SKY"/>
+</tile>
+<tile x="6" y="-12" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-12" z="6">
@@ -14968,29 +15149,30 @@
 <tile x="-3" y="3" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="3" z="0">
+<tile x="3" y="-3" z="0">
 <terrain type="EARTH"/>
+<item id="3000"/>
 </tile>
 <tile x="-3" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-6" y="12" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="6" y="-12" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="3" y="-3" z="0">
+<tile x="-3" y="3" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="-6" y="-12" z="4">
-<terrain type="SKY"/>
 </tile>
 <tile x="6" y="12" z="4">
 <terrain type="SKY"/>
 </tile>
+<tile x="-6" y="-12" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="3" y="3" z="0">
 <terrain type="EARTH"/>
+</tile>
+<tile x="6" y="-12" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="-6" y="12" z="4">
+<terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-3" z="2">
 <terrain type="SKY"/>
@@ -15087,6 +15269,7 @@
 </tile>
 <tile x="6" y="-5" z="0">
 <terrain type="EARTH"/>
+<area-effect type="LEVEL" value="0"/>
 </tile>
 <tile x="-6" y="-5" z="0">
 <terrain type="EARTH"/>
@@ -15096,6 +15279,7 @@
 </tile>
 <tile x="6" y="5" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TRAP" value="4"/>
 </tile>
 <tile x="-6" y="-5" z="2">
 <terrain type="SKY"/>
@@ -15150,6 +15334,7 @@
 </tile>
 <tile x="-6" y="6" z="1">
 <terrain type="EARTH"/>
+<item id="7000"/>
 </tile>
 <tile x="6" y="-6" z="1">
 <terrain type="SKY"/>
@@ -15157,31 +15342,28 @@
 <tile x="6" y="6" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-3" y="-1" z="0">
-<terrain type="EARTH"/>
+<tile x="-6" y="-4" z="4">
+<terrain type="SKY"/>
 </tile>
 <tile x="3" y="1" z="0">
 <terrain type="WATER"/>
 </tile>
-<tile x="-3" y="1" z="0">
-<terrain type="WATER"/>
+<tile x="3" y="-1" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="-3" y="-1" z="0">
+<terrain type="EARTH"/>
 </tile>
 <tile x="-6" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-1" z="0">
-<terrain type="EARTH"/>
+<tile x="-3" y="1" z="0">
+<terrain type="WATER"/>
 </tile>
 <tile x="6" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="-4" z="4">
-<terrain type="SKY"/>
-</tile>
 <tile x="-3" y="-1" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="6" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="1" z="2">
@@ -15191,6 +15373,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="1" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="6" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-4" z="5">
@@ -15217,13 +15402,19 @@
 <tile x="6" y="-4" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-4" z="0">
-<terrain type="EARTH"/>
+<tile x="3" y="1" z="1">
+<terrain type="SKY"/>
+</tile>
+<tile x="-3" y="1" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-6" y="4" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="6" y="-4" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="6" y="4" z="0">
@@ -15232,19 +15423,13 @@
 <tile x="-3" y="-1" z="1">
 <terrain type="SKY"/>
 </tile>
+<tile x="3" y="-1" z="1">
+<terrain type="SKY"/>
+</tile>
 <tile x="-6" y="4" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="-4" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-3" y="1" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="3" y="-1" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="3" y="1" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-4" z="2">
@@ -15349,13 +15534,13 @@
 <tile x="3" y="1" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="-3" y="1" z="3">
+<tile x="3" y="-1" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="-1" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="3" y="-1" z="3">
+<tile x="-3" y="1" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="3" y="1" z="3">
@@ -15487,28 +15672,20 @@
 <tile x="-6" y="-8" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="3" y="2" z="1">
+<terrain type="SKY"/>
+</tile>
 <tile x="-6" y="8" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="6" y="8" z="2">
-<terrain type="SKY"/>
-</tile>
 <tile x="6" y="8" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TRAP" value="2"/>
 </tile>
 <tile x="-3" y="-2" z="1">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-3" y="0" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="-6" y="8" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="6" y="-8" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="3" y="2" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-3" y="2" z="1">
@@ -15517,10 +15694,19 @@
 <tile x="3" y="-2" z="1">
 <terrain type="EARTH"/>
 </tile>
+<tile x="-6" y="8" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="6" y="-8" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="3" y="0" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-8" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="6" y="8" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-8" z="1">
@@ -15597,6 +15783,7 @@
 </tile>
 <tile x="6" y="-6" z="0">
 <terrain type="EARTH"/>
+<item id="2002"/>
 </tile>
 <tile x="-6" y="-6" z="0">
 <terrain type="EARTH"/>
@@ -15870,6 +16057,7 @@
 </tile>
 <tile x="12" y="11" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TRAP" value="5"/>
 </tile>
 <tile x="-12" y="-11" z="2">
 <terrain type="SKY"/>
@@ -15919,6 +16107,9 @@
 <tile x="12" y="11" z="9">
 <terrain type="SKY"/>
 </tile>
+<tile x="-12" y="-8" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="6" y="-2" z="0">
 <terrain type="EARTH"/>
 </tile>
@@ -15930,9 +16121,6 @@
 </tile>
 <tile x="-6" y="2" z="0">
 <terrain type="WATER"/>
-</tile>
-<tile x="6" y="0" z="2">
-<terrain type="SKY"/>
 </tile>
 <tile x="12" y="8" z="4">
 <terrain type="SKY"/>
@@ -15946,19 +16134,19 @@
 <tile x="6" y="2" z="0">
 <terrain type="WATER"/>
 </tile>
-<tile x="-6" y="-2" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="-12" y="-8" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="-6" y="0" z="2">
+<tile x="12" y="-8" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="8" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-8" z="4">
+<tile x="-6" y="-2" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="6" y="0" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-6" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="2" z="2">
@@ -15979,10 +16167,10 @@
 <tile x="12" y="8" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-8" z="3">
+<tile x="-12" y="8" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="8" z="3">
+<tile x="12" y="-8" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-8" z="3">
@@ -15991,16 +16179,20 @@
 <tile x="12" y="8" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-8" z="0">
+<tile x="6" y="-2" z="1">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-12" y="-8" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DEATH" value="0"/>
 </tile>
 <tile x="-12" y="8" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="12" y="8" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="12" y="-8" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-6" y="-2" z="1">
@@ -16020,9 +16212,6 @@
 </tile>
 <tile x="-6" y="2" z="1">
 <terrain type="SKY"/>
-</tile>
-<tile x="6" y="-2" z="1">
-<terrain type="EARTH"/>
 </tile>
 <tile x="6" y="0" z="1">
 <terrain type="SKY"/>
@@ -16129,7 +16318,10 @@
 <tile x="12" y="8" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="2" z="4">
+<tile x="6" y="-2" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="12" y="8" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-2" z="4">
@@ -16138,22 +16330,19 @@
 <tile x="-12" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="8" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="6" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="0" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="8" z="8">
-<terrain type="SKY"/>
-</tile>
 <tile x="12" y="-8" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-2" z="4">
+<tile x="-12" y="8" z="8">
+<terrain type="SKY"/>
+</tile>
+<tile x="-6" y="2" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="0" z="4">
@@ -16189,10 +16378,10 @@
 <tile x="-6" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-8" z="6">
+<tile x="-12" y="8" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="8" z="6">
+<tile x="12" y="-8" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-8" z="6">
@@ -16351,13 +16540,13 @@
 <tile x="6" y="4" z="1">
 <terrain type="EARTH"/>
 </tile>
-<tile x="6" y="-3" z="3">
+<tile x="-6" y="3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-3" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="3" z="3">
+<tile x="6" y="-3" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="3" z="3">
@@ -16387,22 +16576,13 @@
 <tile x="12" y="12" z="7">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-3" z="0">
-<terrain type="EARTH"/>
-</tile>
-<tile x="-6" y="-3" z="0">
+<tile x="6" y="3" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-6" y="3" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="-12" y="-12" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="12" y="12" z="4">
-<terrain type="SKY"/>
-</tile>
-<tile x="6" y="3" z="0">
+<tile x="-6" y="-3" z="0">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-12" y="12" z="4">
@@ -16411,10 +16591,19 @@
 <tile x="12" y="-12" z="4">
 <terrain type="EARTH"/>
 </tile>
+<tile x="6" y="-3" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="12" y="12" z="4">
+<terrain type="SKY"/>
+</tile>
 <tile x="-6" y="-3" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="3" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="-12" y="-12" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="-3" z="2">
@@ -16447,7 +16636,7 @@
 <tile x="12" y="12" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="12" z="0">
+<tile x="6" y="3" z="1">
 <terrain type="EARTH"/>
 </tile>
 <tile x="-12" y="-12" z="0">
@@ -16459,14 +16648,16 @@
 <tile x="12" y="-12" z="0">
 <terrain type="EARTH"/>
 </tile>
+<tile x="12" y="12" z="0">
+<terrain type="EARTH"/>
+</tile>
 <tile x="-6" y="-3" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="3" z="1">
 <terrain type="EARTH"/>
-</tile>
-<tile x="6" y="-3" z="1">
-<terrain type="SKY"/>
+<item id="4002"/>
+<item id="5000"/>
 </tile>
 <tile x="-12" y="12" z="2">
 <terrain type="SKY"/>
@@ -16474,8 +16665,8 @@
 <tile x="12" y="-12" z="2">
 <terrain type="EARTH"/>
 </tile>
-<tile x="6" y="3" z="1">
-<terrain type="EARTH"/>
+<tile x="6" y="-3" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-12" z="2">
 <terrain type="SKY"/>
@@ -16539,17 +16730,18 @@
 </tile>
 <tile x="12" y="-12" z="9">
 <terrain type="EARTH"/>
+<item id="7002"/>
 </tile>
 <tile x="12" y="12" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="3" z="4">
+<tile x="6" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-3" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-3" z="4">
+<tile x="-6" y="3" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="3" z="4">
@@ -16699,8 +16891,8 @@
 <tile x="12" y="5" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-4" z="0">
-<terrain type="EARTH"/>
+<tile x="-6" y="1" z="1">
+<terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-4" z="0">
 <terrain type="EARTH"/>
@@ -16708,19 +16900,19 @@
 <tile x="-12" y="4" z="0">
 <terrain type="EARTH"/>
 </tile>
-<tile x="12" y="4" z="0">
+<tile x="12" y="-4" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="-6" y="-1" z="1">
-<terrain type="SKY"/>
-</tile>
-<tile x="-6" y="1" z="1">
-<terrain type="SKY"/>
 </tile>
 <tile x="-12" y="4" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="12" y="-4" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="12" y="4" z="0">
+<terrain type="EARTH"/>
+</tile>
+<tile x="-6" y="-1" z="1">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="-1" z="1">
@@ -16759,22 +16951,22 @@
 <tile x="12" y="4" z="9">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="1" z="4">
+<tile x="6" y="-1" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-1" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-1" z="4">
+<tile x="-6" y="1" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="1" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-4" z="8">
+<tile x="-12" y="4" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="4" z="8">
+<tile x="12" y="-4" z="8">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-4" z="8">
@@ -16783,13 +16975,13 @@
 <tile x="12" y="4" z="8">
 <terrain type="SKY"/>
 </tile>
-<tile x="-6" y="1" z="5">
+<tile x="6" y="-1" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-1" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-1" z="5">
+<tile x="-6" y="1" z="5">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="1" z="5">
@@ -16807,10 +16999,10 @@
 <tile x="6" y="1" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-4" z="6">
+<tile x="-12" y="4" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="4" z="6">
+<tile x="12" y="-4" z="6">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-4" z="6">
@@ -16840,17 +17032,14 @@
 <tile x="-6" y="1" z="0">
 <terrain type="WATER"/>
 </tile>
-<tile x="12" y="4" z="4">
+<tile x="-12" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="-4" z="4">
+<tile x="12" y="4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="1" z="0">
 <terrain type="WATER"/>
-</tile>
-<tile x="-12" y="4" z="4">
-<terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-1" z="2">
 <terrain type="SKY"/>
@@ -16858,10 +17047,13 @@
 <tile x="-6" y="1" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-4" z="4">
+<tile x="6" y="-1" z="2">
 <terrain type="SKY"/>
 </tile>
-<tile x="6" y="-1" z="2">
+<tile x="-12" y="4" z="4">
+<terrain type="SKY"/>
+</tile>
+<tile x="12" y="-4" z="4">
 <terrain type="SKY"/>
 </tile>
 <tile x="6" y="1" z="2">
@@ -16885,10 +17077,10 @@
 <tile x="12" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="4" z="3">
+<tile x="12" y="-4" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="-4" z="3">
+<tile x="-12" y="4" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-6" y="-1" z="9">
@@ -17245,7 +17437,7 @@
 <tile x="12" y="2" z="5">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="0" z="3">
+<tile x="-12" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="2" z="3">
@@ -17254,7 +17446,7 @@
 <tile x="12" y="-2" z="3">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="0" z="3">
+<tile x="12" y="0" z="3">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-2" z="3">
@@ -17274,18 +17466,12 @@
 </tile>
 <tile x="12" y="-2" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="12" y="0" z="2">
-<terrain type="SKY"/>
-</tile>
-<tile x="12" y="-2" z="2">
-<terrain type="SKY"/>
+<area-effect type="DAMAGE" value="18"/>
+<item id="10000"/>
 </tile>
 <tile x="12" y="0" z="0">
 <terrain type="EARTH"/>
-</tile>
-<tile x="12" y="2" z="2">
-<terrain type="SKY"/>
+<area-effect type="DEATH" value="0"/>
 </tile>
 <tile x="12" y="2" z="0">
 <terrain type="WATER"/>
@@ -17293,10 +17479,19 @@
 <tile x="-12" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
+<tile x="12" y="2" z="2">
+<terrain type="SKY"/>
+</tile>
 <tile x="-12" y="0" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="2" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="12" y="0" z="2">
+<terrain type="SKY"/>
+</tile>
+<tile x="12" y="-2" z="2">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-2" z="9">
@@ -17338,9 +17533,6 @@
 <tile x="-12" y="-2" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="2" z="6">
-<terrain type="SKY"/>
-</tile>
 <tile x="-12" y="0" z="6">
 <terrain type="SKY"/>
 </tile>
@@ -17353,10 +17545,10 @@
 <tile x="12" y="0" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="-12" y="-2" z="7">
+<tile x="12" y="2" z="6">
 <terrain type="SKY"/>
 </tile>
-<tile x="12" y="2" z="7">
+<tile x="-12" y="-2" z="7">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="0" z="7">
@@ -17369,6 +17561,9 @@
 <terrain type="SKY"/>
 </tile>
 <tile x="12" y="0" z="7">
+<terrain type="SKY"/>
+</tile>
+<tile x="12" y="2" z="7">
 <terrain type="SKY"/>
 </tile>
 <tile x="-12" y="-3" z="1">
@@ -17670,6 +17865,7 @@
 </tile>
 <tile x="11" y="8" z="0">
 <terrain type="EARTH"/>
+<item id="10000"/>
 </tile>
 <tile x="-11" y="-8" z="2">
 <terrain type="SKY"/>
@@ -17889,6 +18085,7 @@
 </tile>
 <tile x="-11" y="-7" z="0">
 <terrain type="EARTH"/>
+<item id="10000"/>
 </tile>
 <tile x="-11" y="7" z="0">
 <terrain type="EARTH"/>
@@ -17898,6 +18095,7 @@
 </tile>
 <tile x="11" y="7" z="0">
 <terrain type="EARTH"/>
+<area-effect type="TRAP" value="1"/>
 </tile>
 <tile x="-11" y="-7" z="2">
 <terrain type="SKY"/>
@@ -18534,6 +18732,7 @@
 </tile>
 <tile x="11" y="6" z="0">
 <terrain type="EARTH"/>
+<area-effect type="DAMAGE" value="20"/>
 </tile>
 <tile x="-11" y="-6" z="2">
 <terrain type="SKY"/>

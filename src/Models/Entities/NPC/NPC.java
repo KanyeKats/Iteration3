@@ -12,8 +12,11 @@ import Models.Entities.Stats.Stats;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
+import Utilities.Savable.Savable;
 import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -21,7 +24,7 @@ import java.util.HashMap;
 /**
  * Created by Aidan on 4/6/2016.
  */
-public class NPC extends Entity {
+public class NPC extends Entity implements Savable{
 
     //needs a brain and such
     private Brain brain;
@@ -95,4 +98,90 @@ public class NPC extends Entity {
     }
 
     public boolean willTrade() { return brain.willTrade(); }
+
+    public Document save(Document doc, Element parentElement) {
+
+        Element entity = doc.createElement("entity");
+        String locString = Integer.toString((int)getLocation().getX()) + ",";
+        locString += Integer.toString((int)getLocation().getY()) + ",";
+        locString += Integer.toString((int)getLocation().getZ());
+        entity.setAttribute("location", locString);
+        entity.setAttribute("direction", String.valueOf(getDirection()));
+        entity.setAttribute("is-mounted", String.valueOf(isMounted()));
+        parentElement.appendChild(entity);
+
+        //save inventory
+        if(this.getInventory() != null) {
+            Element inventory = doc.createElement("inventory");
+            inventory.setAttribute("capacity", Integer.toString(this.getInventory().getCapacity()));
+            entity.appendChild(inventory);
+
+            this.getInventory().save(doc, inventory);
+        }
+
+        //save equipment
+        if(this.getEquipment() != null) {
+            Element equipment = doc.createElement("equipment");
+            entity.appendChild(equipment);
+
+            this.getEquipment().save(doc, equipment);
+        }
+
+        //save occupation
+        if(this.getOccupation() != null) {
+            Element occupation = doc.createElement("occupation");
+            occupation.setAttribute("value", this.getOccupation().toString());
+            entity.appendChild(occupation);
+        }
+
+        //save stats
+        if(this.getStats() != null){
+            Element stats = doc.createElement("stats");
+            entity.appendChild(stats);
+            this.getStats().save(doc, stats);
+        }
+
+        //save active skills
+        if(this.getActiveSkillList() != null){
+            Element activeSkillList = doc.createElement("active-skill-list");
+            entity.appendChild(activeSkillList);
+            this.getActiveSkillList().save(doc,activeSkillList);
+        }
+
+        //save passive skills
+        if(this.getPassiveSkillList() != null){
+            Element passiveSkillList = doc.createElement("passive-skill-list");
+            entity.appendChild(passiveSkillList);
+            this.getPassiveSkillList().save(doc,passiveSkillList);
+        }
+
+        //save mount
+        if(this.getMount() != null){
+            Element mount = doc.createElement("mount");
+            mount.setAttribute("prev-speed", Integer.toString(this.getMount().getEntityPrevspeed()));
+            entity.appendChild(mount);
+            this.getMount().save(doc, mount);
+        }
+
+        //save passable terrains
+        if(this.getPassableTerrains() != null){
+            Element passable = doc.createElement("passable-terrains");
+            entity.appendChild(passable);
+            for(Terrain t : getPassableTerrains()){
+                Element terrain = doc.createElement("terrain");
+                terrain.setAttribute("type", t.name());
+                passable.appendChild(terrain);
+            }
+        }
+
+        //save brain
+        if(this.brain != null){
+            Element brain = doc.createElement("brain");
+            brain.setAttribute("personality", String.valueOf(this.brain.getPersonality()));
+            entity.appendChild(brain);
+        }
+
+
+        return doc;
+    }
 }

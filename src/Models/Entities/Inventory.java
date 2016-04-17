@@ -90,7 +90,12 @@ public class Inventory implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
-        return null;
+        //save Items
+        for (Item item : items) {
+            item.save(doc, parentElement);
+        }
+
+        return doc;
     }
 
     // TODO: 4/14/16 does not work..

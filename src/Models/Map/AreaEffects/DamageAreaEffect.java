@@ -8,6 +8,8 @@ import Models.Entities.Stats.StatModificationList;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
 import Views.Graphics.Assets;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.awt.*;
 
@@ -40,6 +42,16 @@ public class DamageAreaEffect extends AreaEffect {
 
         // Execute the consequence
         consequence.execute(entity);
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        Element areaEffect = doc.createElement("area-effect");
+        areaEffect.setAttribute("type", "DAMAGE");
+        areaEffect.setAttribute("value", Integer.toString(damageAmount));
+        parentElement.appendChild(areaEffect);
+
+        return null;
     }
 
 }

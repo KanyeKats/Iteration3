@@ -64,6 +64,10 @@ public abstract class Item implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
+        Element areaEffect = doc.createElement("item");
+        areaEffect.setAttribute("id", Integer.toString(ID));
+        parentElement.appendChild(areaEffect);
+
         return null;
     }
 
