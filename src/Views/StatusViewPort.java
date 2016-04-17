@@ -162,8 +162,6 @@ public class StatusViewPort extends View {
         int xp = stats.getStat(Stat.EXPERIENCE);
         int expToLvl = stats.getExpRequiredToLevelUp();
         int expForCurrentLvl = stats.getExpForLevel(stats.getStat(Stat.LEVEL));
-        System.out.println("curr EXP: " + xp + "\nexpToLvl: " + expToLvl + "\nexpForCurLvl: " + expForCurrentLvl);
-
 
         // Determine how large text is and where to place the Health string
         fm = g.getFontMetrics(primaryFont);
@@ -185,7 +183,6 @@ public class StatusViewPort extends View {
 
         // Determine what fraction of the health bar should be shown.
         double xpFraction = (double) (xp - expForCurrentLvl) / (double)(expToLvl - expForCurrentLvl);
-        System.out.println(xpFraction);
         int xpFillWidth = (int) (xpFraction * xpBarWidth);
 
         // Fill the health bar
