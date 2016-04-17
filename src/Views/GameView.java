@@ -23,6 +23,7 @@ public class GameView extends View {
 
         areaViewport.addObserver(this);
         statusViewport.addObserver(this);
+        map.addObserver(statusViewport);
 //        skillsViewport.addObserver(this);
 
         repaint();
