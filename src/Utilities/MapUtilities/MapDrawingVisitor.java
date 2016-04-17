@@ -137,7 +137,14 @@ public class MapDrawingVisitor  {
             // Set the tiles pixel point (where it is being drawn on the screen)
             currentTile.setPixelPoint(pixelPoint);
 
-            g.drawImage(tileImage, pixelX, pixelY, null);
+            if (currentTile.getTerrain() == Terrain.WATER) {
+                Graphics2D g2 = (Graphics2D)g;
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
+                g2.drawImage(tileImage, pixelX, pixelY, null);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
+            }
+            else
+                g.drawImage(tileImage, pixelX, pixelY, null);
 
             // If any entity is on the tile, init its pixel location and draw him!
             if (currentTile.containsEntity()) {
