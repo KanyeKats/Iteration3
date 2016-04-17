@@ -162,6 +162,7 @@ public class Map extends Observable implements Savable {
                     entity.moveComplete();
 
 
+
                     // Calculate if there needs to be fall damage
                     //Currently we only take fall damage if we fall more than 3 tiles
                     int heightDiff = (int)(entityCurrentPoint.getZ() - targetPoint3D.getZ());
@@ -174,8 +175,10 @@ public class Map extends Observable implements Savable {
                     }
 
                     // activate shit on the tile on him
-                    targetTile.activateTileObjectsOnEntity(entity);
-                    return;
+                    boolean reRender = targetTile.activateTileObjectsOnEntity(entity);
+
+                    if (!reRender) return;
+
                 }
 
                 // Notify observers that the map changes.
