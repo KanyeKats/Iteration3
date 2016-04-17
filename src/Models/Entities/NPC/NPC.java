@@ -26,8 +26,8 @@ public class NPC extends Entity {
     //needs a brain and such
     private Brain brain;
 
-    public NPC(Occupation occupation, Point3D location, Map map, Terrain[]passableTerrain, Personality personality) {
-        super(occupation, location, map, passableTerrain);
+    public NPC(Occupation occupation, Point3D location, Map map, Terrain[]passableTerrain, Personality personality, Boolean isFlyer) {
+        super(occupation, location, map, isFlyer, passableTerrain);
         this.brain = new Brain(personality, this);
     }
 

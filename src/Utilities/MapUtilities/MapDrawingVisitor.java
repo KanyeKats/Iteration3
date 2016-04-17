@@ -3,6 +3,7 @@ package Utilities.MapUtilities;
 import Models.Entities.Entity;
 import Models.Map.MapUtilities.EntityDrawer;
 import Models.Map.MapUtilities.MapUtilities;
+import Models.Map.MapUtilities.ShadowDrawer;
 import Models.Map.Terrain;
 import Models.Map.Tile;
 import Utilities.Constants;
@@ -96,13 +97,20 @@ public class MapDrawingVisitor  {
             Tile currentTile = tile.get(currentPoint);
             // Get the image from this tile.
             Image tileImage;
-            if(tilesinSight.contains(currentTile)) {
+            if(isDebug){
                 tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), true);
                 currentTile.setVisited();
             }
-            else{
-                tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
+            else {
+                if (tilesinSight.contains(currentTile)) {
+                    tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), true);
+                    currentTile.setVisited();
+                } else {
+                    tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
+                }
             }
+
+
 
             // Figure out where to put it!
             // X and Y will start at the center of the screen.
@@ -150,6 +158,10 @@ public class MapDrawingVisitor  {
                 if (tilesinSight.contains(currentTile)) {
                     EntityDrawer.drawEntity(currentEntity, g);
                 }
+            }
+
+            if(MapNavigationUtilities.isEntityaboveTile(currentPoint,tile)){
+                ShadowDrawer.drawShadow(currentTile,g);
             }
         }
         g.dispose();

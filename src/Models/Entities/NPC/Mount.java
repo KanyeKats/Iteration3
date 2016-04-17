@@ -22,8 +22,8 @@ public class Mount extends NPC {
     private Entity driver;
     private int entityPrevspeed;
 
-    public Mount(Point3D location, Map map, Terrain[] passableTerrain) {
-        super(new Vehicle(), location, map, passableTerrain, Personality.MOUNT);
+    public Mount(Point3D location, Map map, Terrain[] passableTerrain, Boolean isFlyer) {
+        super(new Vehicle(), location, map, passableTerrain, Personality.MOUNT, isFlyer);
         setMountImages();
         this.driver = null;
     }
