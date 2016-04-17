@@ -75,6 +75,9 @@ def generate(mapSizeX, mapSizeY, terrainArray, outputFileName, available_aoes):
                     print 'Generated an item at pt ' + str(x) + ", " + str(y) + ", " + str(z)
                     generateRandomItem(element)
 
+                if (y_point == 2 or y_point == 1) and z_point == 0 and x_point != -1:
+                    addRiver(element)
+
                 # Add item to this tile!!!
                 add_item(element, x_point, y_point, z_point)
 
@@ -129,6 +132,12 @@ def generateRandomItem(parentXMLElement):
 
     # Set id attribute
     item_xml.set("id", item)
+
+def addRiver(parentXMLElement):
+    # Create the XML object
+    aoe_xml = SubElement(parentXMLElement, "area-effect")
+    aoe_xml.set("type", 'RIVER')
+    aoe_xml.set("value", str(20))
 
 
 def generateRandomAOE(parentXMLElement, mapSizeX, mapSizeY, mapSizeZ):

@@ -3,6 +3,7 @@ package Models.Items.Interactive;
 import Models.Entities.Requirements.InventoryRequirement;
 import Models.Entities.Requirements.RequirementList;
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by rokas on 4/9/16.
@@ -23,7 +24,7 @@ public enum InteractiveItemFactory {
             InventoryRequirement invReq = new InventoryRequirement(13000);
             RequirementList reqList = new RequirementList();
             reqList.addRequirement(invReq);
-            return new Door(Assets.PLACEHOLDER, reqList, "Door", "A door", 12001);
+            return new Door(ImageLoader.loadImage("./res/items/door.png"), reqList, "Door", "A door", 12001);
         }
     };
 

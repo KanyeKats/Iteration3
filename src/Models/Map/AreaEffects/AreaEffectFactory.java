@@ -1,6 +1,7 @@
 package Models.Map.AreaEffects;
 
 import Models.Map.AreaEffect;
+import Models.Map.Direction;
 import javafx.geometry.Point3D;
 
 /**
@@ -44,6 +45,13 @@ public enum AreaEffectFactory {
             int targetY = Integer.parseInt(pointValue[1]);
             int targetZ = Integer.parseInt(pointValue[2]);
             return new TeleportAreaEffect(new Point3D(targetX, targetY, targetZ));
+        }
+    },
+    RIVER() {
+        @Override
+        public AreaEffect createInstance(String value) {
+            int intValue = Integer.parseInt(value);
+            return new RiverAreaEffect(Direction.SOUTH_EAST, intValue);
         }
     },
     TRAP() {

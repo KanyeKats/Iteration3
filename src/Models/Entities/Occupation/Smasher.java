@@ -32,7 +32,7 @@ public class Smasher extends Occupation {
                 new StatModification(Stat.AGILITY,6),
                 new StatModification(Stat.INTELLECT,0),
                 new StatModification(Stat.HARDINESS,10),
-                new StatModification(Stat.MOVEMENT,17),
+                new StatModification(Stat.MOVEMENT,12),
                 new StatModification(Stat.EXPERIENCE, 0));
     }
 

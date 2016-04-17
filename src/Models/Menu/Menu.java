@@ -238,7 +238,7 @@ public class Menu{
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
-                        Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map,true, passableTerrains); // TOD0: Improve avatar initial placement.
+                        Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map,false, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());

@@ -1,6 +1,7 @@
 package Models.Items.Obstacle;
 
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by rokas on 4/9/16.
@@ -9,13 +10,13 @@ public enum ObstacleFactory {
     BOULDER(11000) {
         @Override
         public Obstacle createInstance() {
-            return new Obstacle(Assets.PLACEHOLDER, "Boulder", "Prevents entity from stepping on this boulder.", 11000);
+            return new Obstacle(ImageLoader.loadImage("./res/items/boulder.png"), "Boulder", "Prevents entity from stepping on this boulder.", 11000);
         }
     },
     DAVE(11001) {
         @Override
         public Obstacle createInstance() {
-            return new Obstacle(Assets.PLACEHOLDER, "Dave", "Prevents entity from stepping on Dave.", 11001);
+            return new Obstacle(ImageLoader.loadImage("./res/items/TheDave.png"), "Dave", "Prevents entity from stepping on Dave.", 11001);
         }
     };
 
