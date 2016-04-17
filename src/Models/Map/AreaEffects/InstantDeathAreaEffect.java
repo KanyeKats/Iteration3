@@ -8,6 +8,8 @@ import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.awt.*;
 
@@ -38,6 +40,16 @@ public class InstantDeathAreaEffect extends AreaEffect {
 
         // Execute the entity... LITERALLY!
         consequence.execute(entity);
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        Element areaEffect = doc.createElement("area-effect");
+        areaEffect.setAttribute("type", "DEATH");
+        areaEffect.setAttribute("value", "0");
+        parentElement.appendChild(areaEffect);
+
+        return null;
     }
 
 }

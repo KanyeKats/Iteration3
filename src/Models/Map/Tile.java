@@ -171,24 +171,18 @@ public class Tile implements Savable {
         parentElement.appendChild(terrain);
 
         //save areaEffect
-//        areaEffect.save(doc, parentElement);
-
-        //save Decal
-//        decal.save(doc, parentElement);
+        if(areaEffect != null)
+            areaEffect.save(doc, parentElement);
 
         //save Items
-//        Element itemsElement = doc.createElement("items");
-//        itemsElement.setAttribute("itemAmt", String.valueOf(items.size()));
-//        for (Item item : items) {
-//            item.save(doc, parentElement);
-//        }
-//        parentElement.appendChild(itemsElement);
+        for (Item item : items) {
+            item.save(doc, parentElement);
+        }
 
         //save Entity
-//        entity.save(doc, parentElement);
-
-        //save effect
-//        effect.save(doc, parentElement);
+        if(this.entity != null) {
+            this.entity.save(doc, parentElement);
+        }
 
         //return the tile element
         return doc;
@@ -222,7 +216,8 @@ public class Tile implements Savable {
 
             // Create instance from AreaEffect factory and assign to this tile
             this.areaEffect = AreaEffectFactory.valueOf(aoeType).createInstance(aoeValue);
-        } else {
+        }
+        else {
             this.areaEffect = null;
         }
 
@@ -251,11 +246,9 @@ public class Tile implements Savable {
 
 
         // TODO: Implement these functions
-        this.decal = null;
         this.entity = null;
-        this.effect = null;
 
-        // Add rivers whereever water is.
+        // Add rivers wherever water is.
         if (terrain == terrain.WATER) {
             this.areaEffect = new RiverAreaEffect(Direction.SOUTH_EAST, 35);
         }

@@ -13,6 +13,7 @@ public class Brain {
     private FrontalLobe frontalLobe;
     private NPC npc;
     private Boolean isSleeping;
+    private Personality personality;
 
 
     public Brain(Personality personality, NPC npc) {
@@ -20,6 +21,7 @@ public class Brain {
         this.frontalLobe = new FrontalLobe(personality);
         this.npc = npc;
         this.isSleeping = false;
+        this.personality = personality;
     }
 
     public void think(){
@@ -41,4 +43,5 @@ public class Brain {
     public VisualInfo getVisualInfo(){
         return visualCortex.look(npc, npc.getMap());
     }
+    public Personality getPersonality(){return personality;}
 }
