@@ -92,6 +92,9 @@ public class Assets {
     public static BufferedImage FIRE;
     public static BufferedImage LIGHTNING;
     public static BufferedImage SPARKS;
+    public static BufferedImage FEAR;
+    public static BufferedImage SLEEP;
+    public static BufferedImage POLYMORPH;
 
     private static final int SPRITE_SIZE = 70;
     private static final int DECAL_SIZE = 30;
@@ -292,6 +295,15 @@ public class Assets {
 
         SpriteSheet sparksSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/sparks.png"));
         SPARKS = sparksSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
+
+        SpriteSheet fearSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/fear.png"));
+        FEAR = fearSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
+
+        SpriteSheet sleepSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/sleep.png"));
+        SLEEP = sleepSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
+
+        SpriteSheet polymorphSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/polymorph.png"));
+        POLYMORPH = polymorphSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
 
         SpriteSheet placeholderSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/placeholder-blk.png"));
         PLACEHOLDER = placeholderSheet.scale(0, 0, DECAL_SIZE, (int)(DECAL_SIZE));

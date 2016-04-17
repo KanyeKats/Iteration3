@@ -1,6 +1,7 @@
 package Models.Entities;
 
 import Models.Entities.NPC.Mount;
+import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
@@ -152,7 +153,13 @@ public class Entity implements Savable {
         this.enteredNewTile = false;
 
         // Allow movement again
-        this.canMove = true;
+        movementTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Entity.this.canMove = true;
+
+            }
+        }, 300);
     }
 
     public final boolean enteredNewTile() {

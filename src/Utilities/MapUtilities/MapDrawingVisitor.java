@@ -46,7 +46,7 @@ public class MapDrawingVisitor  {
                               int rangeofVisibility,
                               boolean cameraMoving,
                               boolean isDebug,
-                              boolean moveInProgress) {
+                              boolean canRecenter) {
 
         boolean justRecentered = false;
 
@@ -65,7 +65,7 @@ public class MapDrawingVisitor  {
         int distance = MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(center), MapUtilities.to2DPoint(drawingCenter));
 
         // Re-center on avatar if necessary.
-        if (distance > 3 && !moveInProgress) {
+        if (distance > 3 && canRecenter) {
             setCenter(drawingCenter);
             justRecentered = true;
             tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
