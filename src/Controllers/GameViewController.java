@@ -237,7 +237,7 @@ public class GameViewController extends ViewController {
         keyBindings.addBinding(KeyEvent.VK_ESCAPE, new Action() {
             @Override
             public void execute() {
-                Models.Menu.Menu pauseMenu = Models.Menu.Menu.createPauseMenu(stateManager, controller);
+                Models.Menu.Menu pauseMenu = Models.Menu.Menu.createPauseMenu(stateManager, controller, avatar);
                 MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, pauseMenu);
                 PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, pauseMenu);
                 stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));
