@@ -8,6 +8,7 @@ import Models.Entities.Inventory;
 import Models.Entities.NPC.AI.Brain.Brain;
 import Models.Entities.NPC.AI.Personality;
 import Models.Entities.Occupation.Occupation;
+import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.Stats;
 import Models.Map.Direction;
 import Models.Map.Map;
@@ -28,6 +29,7 @@ public class NPC extends Entity implements Savable{
 
     //needs a brain and such
     private Brain brain;
+    private boolean isDead;
 
     public NPC(Occupation occupation, Point3D location, Map map, Terrain[]passableTerrain, Personality personality, Boolean isFlyer) {
         super(occupation, location, map, isFlyer, passableTerrain);
@@ -183,5 +185,14 @@ public class NPC extends Entity implements Savable{
 
 
         return doc;
+    }
+
+    public boolean isDead() {
+        return this.getStats().isDead();
+    }
+
+    public void processDeath() {
+        this.move(new Point3D(5,5,0));
+        this.getStats().respawn();
     }
 }
