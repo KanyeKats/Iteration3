@@ -149,7 +149,7 @@ public class Equipment implements Savable {
     }
 
     // Might not be using a "righthand" slot
-    public void unequip(EquippableItem righthand) {
+    public void unequipRightHand() {
         if (this.righthand != null) {
             EquippableItem old = this.righthand;
             removeStatModsOfEquipment(old);

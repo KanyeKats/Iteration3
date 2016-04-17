@@ -107,17 +107,6 @@ public class Entity extends Observable implements Savable {
         enteredNewTile = false;
         tryingNewDirection = true;
 
-        // TODO: Remove!! Just testing item factory and equipping.
-        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
-        equip(bluePhat);
-        Boot moccassins = BootFactory.bootsFromID(1001);
-        equip(moccassins);
-        this.isMounted = false;
-//        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
-//        equip(bluePhat);
-//        Boot moccassins = BootFactory.bootsFromID(1001);
-//        equip(moccassins);
-
     }
 
     public void equip(EquippableItem item){

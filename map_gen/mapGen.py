@@ -105,9 +105,9 @@ def generateRandomHealOrDamageAmount(max_val):
 
 
 def generateRandomTrapTime():
-    # be trapped for a maximum of 12 seconds.
+    # be trapped for a maximum of 5.5 seconds.
     # (completely random amount)
-    return random.randint(1, 12)
+    return random.randint(1000, 5500)
 
 
 def generateRandom3DPoint(x_max, y_max, z_max):
