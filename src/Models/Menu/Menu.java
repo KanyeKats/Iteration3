@@ -267,7 +267,7 @@ public class Menu{
             options.add(new MenuOption() {
                 @Override
                 public String getTitle() {
-                    return passiveSkill.toString() + " - " + passiveSkill.getLevel();
+                    return passiveSkill.toString() + ":  " + passiveSkill.getLevel();
                 }
 
                 @Override
@@ -302,7 +302,7 @@ public class Menu{
             options.add(new MenuOption() {
                 @Override
                 public String getTitle() {
-                    return activeSkill.toString() + " - " + activeSkill.getLevel();
+                    return activeSkill.toString() + ":  " + activeSkill.getLevel();
                 }
 
                 @Override
