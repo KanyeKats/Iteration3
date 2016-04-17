@@ -118,7 +118,6 @@ public class SkillViewPort extends MenuView {
         //Write out how many skill points there are
         g.setColor(color1);
         String skillPointString = "You have " + stats.getStat(Stat.SKILL_POINTS) + " skill points remaining.";
-        System.out.println(skillPointString);
         Rectangle2D stringRect = fm.getStringBounds(skillPointString, g);
         int stringX = width/2 - (int)(stringRect.getWidth() / 2);
         //int stringY = ((i/2)+1) * optionHeight + (int)(stringRect.getHeight() /2) + fm.getAscent() + verticalStart + ((i/2)+1)*optionVerticalSpacing;
