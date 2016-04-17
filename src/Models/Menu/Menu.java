@@ -604,7 +604,7 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         if(((NPC)npc).willTrade()){
-                            NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory());
+                            NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory(), avatar.getStats().getStat(Stat.BARGAIN));
                             NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
                             stateManager.setActiveState(new State(npcShopViewController, npcShopView));
                         }else{

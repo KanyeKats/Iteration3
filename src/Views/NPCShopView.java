@@ -1,6 +1,7 @@
 package Views;
 
 import Models.Entities.Inventory;
+import Models.Entities.Stats.Stat;
 import Models.Items.Takable.TakableItem;
 
 import java.awt.*;
@@ -18,6 +19,7 @@ public class NPCShopView extends View {
     private int selectedItem;
     private int avatarCapacity, npcCapacity, currentCapacity;
     private int avatarPrice, npcPrice;
+    private int bargainLevel;
 
     private final int ITEMS_PER_ROW = 15;
 
@@ -58,7 +60,7 @@ public class NPCShopView extends View {
     private Font largeFont;
     private Font titleFont;
 
-    public NPCShopView(int width, int height, Inventory avatarInventory, Inventory npcInventory) {
+    public NPCShopView(int width, int height, Inventory avatarInventory, Inventory npcInventory, int bargainLevel) {
         super(width, height);
 
         this.selectedItem = 0;
@@ -66,6 +68,7 @@ public class NPCShopView extends View {
         this.avatarInventory = avatarInventory;
         this.avatarCapacity = avatarInventory.getCapacity();
         this.avatarSelectedItems = new ArrayList<>();
+        this.bargainLevel = bargainLevel;
 
         this.npcInventory = npcInventory;
         this.npcCapacity = npcInventory.getCapacity();
@@ -176,6 +179,7 @@ public class NPCShopView extends View {
 
     //TODO: Toast that says something about a failed trade attempt
     public void makeTrade(){
+        npcPrice = (int)(Math.pow(0.98, bargainLevel) * npcPrice);
         System.out.println("Avatar Price: " + avatarPrice);
         System.out.println("NPC Price: " + npcPrice);
         if(avatarSelectedItems.size() == 0 && npcSelectedItems.size() == 0){
