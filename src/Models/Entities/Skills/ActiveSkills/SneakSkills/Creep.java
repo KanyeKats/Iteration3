@@ -10,31 +10,32 @@ import java.util.TimerTask;
  */
 public class Creep extends ActiveSkill {
 
-    public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
+    public final int BASE_COOLDOWN_TIME = 30000;    //30 seconds
     public final int BASE_EFFECT_TIME = 10000;      //10 seconds
     private Entity entity;
+    protected int manaRequired = 0;
+    protected int manaLevelMultiplier = 0;
+    private final int BASE_MANA_REQUIRED = 5;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
+
 
     public Creep(){
         cooldownTime = BASE_COOLDOWN_TIME;
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
-    public void activate(Entity e){
-        if(isCooledDown){
-            if(percentChanceByLevel()){
-                e.setVisible(false);
-                isCooledDown = false;
-                this.entity = e;
+    @Override
+    protected void performSkill(Entity entity) {
+        entity.setVisible(false);
+        this.entity = entity;
 
-                effectTimer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        entity.setVisible(true);
-                        doTheCoolDown();
-                    }
-                }, BASE_EFFECT_TIME);
-
+        effectTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                entity.setVisible(true);
             }
-        }
+        }, BASE_EFFECT_TIME);
     }
 
     @Override

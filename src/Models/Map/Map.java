@@ -274,7 +274,7 @@ public class Map implements Savable {
             }
         }
         Point3D landingPoint = MapNavigationUtilities.findOpenTile(storedEntity,this);
-        System.out.println(landingPoint.toString());
+//        System.out.println(landingPoint.toString());
        if(landingPoint != null) {
            storedEntity.setLocation(landingPoint);
            Tile tile = tiles.get(landingPoint);

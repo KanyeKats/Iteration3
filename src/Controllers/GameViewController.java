@@ -296,8 +296,8 @@ public class GameViewController extends ViewController {
                 entity.update();
             }
             refreshCounter = 0;
-            System.out.println("NO: " + entitiesOnMap.size());
-            System.out.println(avatar.getLocation().toString());
+//            System.out.println("NO: " + entitiesOnMap.size());
+//            System.out.println(avatar.getLocation().toString());
         }
         refreshCounter++;
     }
