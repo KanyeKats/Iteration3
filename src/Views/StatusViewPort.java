@@ -32,6 +32,8 @@ public class StatusViewPort extends View {
         Graphics2D g = (Graphics2D) viewContent.getGraphics();
         viewContent.setData(clear.getRaster());
 
+        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHints(rh);
 
         // Set up some useful variables.
         int marginVertical = 16;
@@ -67,10 +69,6 @@ public class StatusViewPort extends View {
         int healthBarX = healthStringX + (int) healthRect.getWidth();
         int healthBarY = healthStringY - (int) healthRect.getHeight()/2;
 
-        // Draw the outline of the health bar.
-        g.setColor(Color.WHITE);
-        g.drawRoundRect(healthBarX, healthBarY, healthBarWidth, healthBarHeight, borderRadius, borderRadius);
-
         // Determine what fraction of the health bar should be shown.
         double healthFraction = (double) health / (double) maxHealth;
         int healthFillWidth = (int) (healthFraction * healthBarWidth);
@@ -78,6 +76,10 @@ public class StatusViewPort extends View {
         // Fill the health bar
         g.setColor(Color.RED);
         g.fillRoundRect(healthBarX, healthBarY, healthFillWidth, healthBarHeight, borderRadius, borderRadius);
+
+        // Draw the outline of the health bar.
+        g.setColor(Color.WHITE);
+        g.drawRoundRect(healthBarX - 1, healthBarY - 1, healthBarWidth, healthBarHeight, borderRadius, borderRadius);
 
         // Display the fraction of health
         g.setColor(Color.WHITE);
