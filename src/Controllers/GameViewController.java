@@ -129,6 +129,30 @@ public class GameViewController extends ViewController {
             public String toString(){ return "Move Southeast";}
         });
 
+        keyBindings.addBinding(KeyEvent.VK_UP, new Action() {
+            @Override
+            public void execute() {
+
+                avatar.move(Direction.UP);
+
+            }
+
+            @Override
+            public String toString(){ return "Move Up";}
+        });
+
+        keyBindings.addBinding(KeyEvent.VK_DOWN, new Action() {
+            @Override
+            public void execute() {
+
+                avatar.move(Direction.DOWN);
+
+            }
+
+            @Override
+            public String toString(){ return "Move Down";}
+        });
+
         keyBindings.addBinding(KeyEvent.VK_T, new Action() {
             @Override
             public void execute() {
@@ -139,7 +163,7 @@ public class GameViewController extends ViewController {
                     avatar.interact();
                 }
             }
-            
+
             @Override
             public String toString(){ return "Interact";}
         });
@@ -272,6 +296,8 @@ public class GameViewController extends ViewController {
                 entity.update();
             }
             refreshCounter = 0;
+            System.out.println("NO: " + entitiesOnMap.size());
+            System.out.println(avatar.getLocation().toString());
         }
         refreshCounter++;
     }
