@@ -30,6 +30,7 @@ import javafx.geometry.Point3D;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 /**
@@ -574,7 +575,8 @@ public class Menu{
 
                         Models.Menu.Menu npcTalkMenu = Models.Menu.Menu.createNPCTalkMenu(stateManager);
                         MenuViewController npcTalkViewController = new MenuViewController(stateManager, npcTalkMenu);
-                        NPCTalkView npcTalkView = new NPCTalkView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcTalkMenu, dialog);
+                        BufferedImage lastViewContent = stateManager.getCurrentViewContent();
+                        NPCTalkView npcTalkView = new NPCTalkView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcTalkMenu, dialog, lastViewContent);
                         stateManager.setActiveState(new State(npcTalkViewController, npcTalkView));
                     }
                 });

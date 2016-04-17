@@ -3,9 +3,8 @@ package Core;
 import Controllers.MenuViewController;
 import Utilities.Constants;
 import Views.StartMenuView;
-import jdk.internal.util.xml.impl.Input;
 
-import java.util.InputMismatchException;
+import java.awt.image.BufferedImage;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -76,5 +75,9 @@ public class StateManager {
         MenuViewController startMenuController = new MenuViewController(this, startMenu);
         StartMenuView startMenuView = new StartMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, startMenu);
         setActiveState(new State(startMenuController, startMenuView));
+    }
+
+    public BufferedImage getCurrentViewContent(){
+        return display.getCurrentViewContent();
     }
 }
