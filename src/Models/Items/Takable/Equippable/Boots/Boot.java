@@ -13,13 +13,14 @@ import java.awt.*;
  */
 public class Boot extends EquippableItem{
     // We will just be instantiating different "Versions" of this equipment type
-    public Boot(Image image, StatModificationList mods, String name, String description, StatRequirement requirementToEquip , int ID) {
+    public Boot(Image image, StatModificationList mods, String name, String description, StatRequirement requirementToEquip , int ID, int price) {
         this.image = image;
         this.statModificationList = mods;
         this.name = name;
         this.description = description;
         this.requirementToEquip = requirementToEquip;
         this.ID = ID;
+        this.price = price;
     }
 
     @Override

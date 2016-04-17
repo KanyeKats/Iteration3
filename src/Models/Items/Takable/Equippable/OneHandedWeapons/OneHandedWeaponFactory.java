@@ -16,7 +16,7 @@ public enum OneHandedWeaponFactory {
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/bronze_sword.png"), new StatModificationList(buff), "Bronze short sword", "A basic bronze sword", req, 6000);
+            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/bronze_sword.png"), new StatModificationList(buff), "Bronze short sword", "A basic bronze sword", req, 6000, 35);
         }
     },
     IRON_LONG_SWORD(6001) {
@@ -24,7 +24,7 @@ public enum OneHandedWeaponFactory {
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron longsword", "An iron longsword" ,req, 6001);
+            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron longsword", "An iron longsword" ,req, 6001, 45);
         }
     },
     DDS(6002) {
@@ -32,7 +32,8 @@ public enum OneHandedWeaponFactory {
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/dragon_dagger.png"), new StatModificationList(buff), "DDS", "A super poisoned dragon dagger. This weapons special attack is deadly.", req, 6002);
+            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/dragon_dagger.png"), new StatModificationList(buff), "DDS", "A super poisened dragon dagger. This weapons special attack is deadly.", req, 6002, 60);
+
         }
     },
     ABBY_WHIP(6003) {
@@ -40,7 +41,7 @@ public enum OneHandedWeaponFactory {
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Abyssal whip", "A super quick, super strong weapon.", req, 6003);
+            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Abyssal whip", "A super quick, super strong weapon.", req, 6003, 75);
         }
     };
 

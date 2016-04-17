@@ -16,7 +16,7 @@ public enum ChestFactory {
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(ImageLoader.loadImage("./res/items/frat_tank.png"), new StatModificationList(buff), "Frat Tank", "A sporty tank to show off your gains", req, 2000);
+            return new Chestplate(ImageLoader.loadImage("./res/items/frat_tank.png"), new StatModificationList(buff), "Frat Tank", "A sporty tank to show off your gains", req, 2000, 20);
         }
     },
     SWAMPHACKS_TEE(2001) {
@@ -24,7 +24,7 @@ public enum ChestFactory {
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "SwampHacks Tee", "A tee shirt to show off your nerdiness.", req, 2001);
+            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "SwampHacks Tee", "A tee shirt to show off your nerdiness.", req, 2001, 35);
         }
     },
     CHAINMAIL(2002) {
@@ -32,7 +32,7 @@ public enum ChestFactory {
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(ImageLoader.loadImage("./res/items/chain_mail.png"), new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.", req, 2002);
+            return new Chestplate(ImageLoader.loadImage("./res/items/chain_mail.png"), new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.", req, 2002, 50);
         }
     },
     CHESTPLATE(2003) {
@@ -40,7 +40,7 @@ public enum ChestFactory {
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chestplate", "Stronger than chainmail, protects you from greater damage", req, 2003);
+            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chestplate", "Stronger than chainmail, protects you from greater damage", req, 2003, 75);
         }
     };
 

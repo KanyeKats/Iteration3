@@ -21,7 +21,7 @@ public enum BootFactory {
                                                                 new StatModification(Stat.MAX_HEALTH, 20));
 
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(ImageLoader.loadImage("./res/items/moccassin.png"), buffs, "Moccasins", "Some comfy moccasins", req, 1000);
+            return new Boot(ImageLoader.loadImage("./res/items/moccassin.png"), buffs, "Moccasins", "Some comfy moccasins", req, 1000, 15);
         }
     },
     IRON(1001) {
@@ -29,7 +29,7 @@ public enum BootFactory {
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Boots", "Some boots made of Iron.", req, 1001);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Boots", "Some boots made of Iron.", req, 1001, 35);
         }
     },
     BRONZE(1002) {
@@ -37,7 +37,7 @@ public enum BootFactory {
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Boots", "Some boots made of Bronze.", req, 1002);
+            return new Boot(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Boots", "Some boots made of Bronze.", req, 1002, 25);
         }
     },
     STEEL(1003) {
@@ -45,7 +45,7 @@ public enum BootFactory {
         public Boot createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Boot(ImageLoader.loadImage("./res/items/steel_toe.png"), new StatModificationList(buff), "Steel Boots", "Some boots made of Steel.", req, 1003);
+            return new Boot(ImageLoader.loadImage("./res/items/steel_toe.png"), new StatModificationList(buff), "Steel Boots", "Some boots made of Steel.", req, 1003, 50);
         }
     };
 

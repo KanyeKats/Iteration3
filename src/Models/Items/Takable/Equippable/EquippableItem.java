@@ -17,8 +17,6 @@ public abstract class EquippableItem extends TakableItem {
     @Override
     public void onUse(Entity entity) {
         // Equip the item
-        // TODO: Should the entity's equip func should take care of setting statmods? I used to think think so.....
-        // now i think equipment should.
         entity.equip(this);
     }
 

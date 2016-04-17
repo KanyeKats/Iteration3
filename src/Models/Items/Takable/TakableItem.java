@@ -9,6 +9,7 @@ import Models.Items.Item;
  */
 public abstract class TakableItem extends Item {
     protected StatModificationList statModificationList;
+    protected int price;
 
     // Called when this item is "used" on an entity
     // This can be for "using" a consumable item
@@ -29,5 +30,14 @@ public abstract class TakableItem extends Item {
     public boolean onTouch(Entity entity) {
         entity.addItemToInventory(this);
         return true; // Indicate that this item should be removed from the map.
+    }
+
+
+    public int getPrice(){
+        return price;
+    }
+
+    public void setPrice(int p){
+        price = p;
     }
 }

@@ -26,7 +26,6 @@ public class TileDrawingVisitor {
         Graphics g = tileImage.getGraphics();
 
         // Extract the graphics object rom the tile image.
-        // TODO: Draw items and areaEffects and Effects
 
         // Draw the areaEffect
         AreaEffect areaEffect = tile.getAreaEffect();
