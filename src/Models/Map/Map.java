@@ -68,7 +68,6 @@ public class Map implements Savable {
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || updatedDestinationTile==null || destination==source){
             entity.failedMovement();
-            System.out.println("failedmovement");
             return;
         }
 
@@ -274,7 +273,6 @@ public class Map implements Savable {
             }
         }
         Point3D landingPoint = MapNavigationUtilities.findOpenTile(storedEntity,this);
-        System.out.println(landingPoint.toString());
        if(landingPoint != null) {
            storedEntity.setLocation(landingPoint);
            Tile tile = tiles.get(landingPoint);

@@ -21,7 +21,7 @@ public class Polymorph extends Enchantment {
     public Polymorph(){
         activeTime = BASE_ACTIVE_TIME;
         consequence = new PolymorphConsequence(activeTime);
-        cooldownTime = BASE_COOLDOWN_TIME;
+        cooldownTime = 2000;
     }
 
     @Override

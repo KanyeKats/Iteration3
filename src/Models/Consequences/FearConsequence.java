@@ -31,8 +31,6 @@ public class FearConsequence extends Consequence {
         public void execute(Entity entity) {
             //Execute behavior change
             entity.fear(direction);
-
-
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
