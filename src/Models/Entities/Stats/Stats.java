@@ -19,6 +19,7 @@ public class Stats implements Savable {
     // Tbh, it doesn't hold the values. It just calls the function (via the SingleAction interface)
     // to derive and return them!
     EnumMap<Stat, DerivedStatGetter> derived;
+    private boolean isDead;
 
     // Stats values will not be initialized in this constructor
     // They will be initialized in the appropriate Occupation sub class,
@@ -120,6 +121,7 @@ public class Stats implements Savable {
         stats.put(Stat.EXP_TO_LEVEL, 50);
         stats.put(Stat.LIVES, 3);
         stats.put(Stat.RADIUS_OF_VISIBILITY, 3);
+        this.isDead = false;
     }
 
 
@@ -203,8 +205,28 @@ public class Stats implements Savable {
             stats.put(Stat.HEALTH, getMaxHealth());
         }
         else{
-
+            this.isDead = true;
         }
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void respawn() {
+        stats = new EnumMap<Stat, Integer>(Stat.class);
+
+        // Init default values for stats. Mostly 0's.
+        initStats();
+
+        // Construct and Populate the derived stats map
+        derived = new EnumMap<Stat, DerivedStatGetter>(Stat.class);
+        derived.put(Stat.MAX_HEALTH, () -> getMaxHealth());
+        derived.put(Stat.MAX_MANA, () -> getMaxMana());
+        derived.put(Stat.OFFSENSIVE_RATING, () -> getOffensiveRating());
+        derived.put(Stat.DEFENSIVE_RATING, () -> getDefensiveRating());
+        derived.put(Stat.ARMOR_MODIFIER, () -> getArmorRating());
+        derived.put(Stat.EXP_TO_LEVEL, () -> getExpRequiredToLevelUp());
     }
 
 

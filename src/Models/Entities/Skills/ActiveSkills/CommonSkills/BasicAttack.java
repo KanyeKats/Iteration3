@@ -33,11 +33,11 @@ public class BasicAttack extends ActiveSkill {
 
     @Override
     public void activate(Entity entity) {
-        System.out.println("ACTIVATE BASIC ATTACK");
+//        System.out.println("ACTIVATE BASIC ATTACK");
         if(isCooledDown){
-            System.out.println("isCooledDown");
+//            System.out.println("isCooledDown");
             if(percentChanceByLevel()) {
-                System.out.println("All systems go");
+//                System.out.println("All systems go");
                 LinearEffect effect = new LinearEffect(1, entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), Assets.FIRE);
                 effect.start();
                 isCooledDown = false;
