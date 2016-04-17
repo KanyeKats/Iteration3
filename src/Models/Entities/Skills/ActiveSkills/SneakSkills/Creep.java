@@ -13,8 +13,6 @@ public class Creep extends ActiveSkill {
     public final int BASE_COOLDOWN_TIME = 30000;    //30 seconds
     public final int BASE_EFFECT_TIME = 10000;      //10 seconds
     private Entity entity;
-    protected int manaRequired = 0;
-    protected int manaLevelMultiplier = 0;
     private final int BASE_MANA_REQUIRED = 5;
     private final int MANA_LEVEL_MULTIPLIER = 1;
 
@@ -27,6 +25,7 @@ public class Creep extends ActiveSkill {
 
     @Override
     protected void performSkill(Entity entity) {
+        System.out.println("SKILL LVL:" + getLevel());
         entity.setVisible(false);
         this.entity = entity;
 
