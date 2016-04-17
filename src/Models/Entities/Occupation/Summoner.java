@@ -19,6 +19,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Models.Items.Takable.Equippable.WeaponType;
 import Models.Map.Direction;
 import Views.Graphics.Assets;
 
@@ -41,6 +42,11 @@ public class Summoner extends Occupation {
                 new StatModification(Stat.MOVEMENT, 17),
                 new StatModification(Stat.EXPERIENCE, 0));
 
+    }
+
+    @Override
+    protected void initCompatibleWeapons() {
+        this.compatibleWeapons.add(WeaponType.STAFF);
     }
 
     @Override

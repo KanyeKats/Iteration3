@@ -1,6 +1,7 @@
 package Models.Items.Takable.Equippable.TwoHandedWeapon;
 
 import Models.Entities.Equipment;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Skills.PassiveSkills.PassiveSkill;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
@@ -8,6 +9,7 @@ import Models.Entities.Skills.PassiveSkills.PassiveSkillsVisitors.TwoHandedVisit
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModificationList;
 import Models.Items.Takable.Equippable.EquippableItem;
+import Models.Items.Takable.Equippable.WeaponType;
 
 import java.awt.*;
 
@@ -15,13 +17,14 @@ import java.awt.*;
  * Created by sergiopuleri on 4/7/16.
  */
 public class TwoHandedWeapon extends EquippableItem {
+    private WeaponType weaponType = WeaponType.TWOHANDED;
     // We will just be instantiating different "Versions" of this equipment type
-    public TwoHandedWeapon(Image image, StatModificationList mods, String name, String description, StatRequirement requirement, int ID, int price) {
+    public TwoHandedWeapon(Image image, StatModificationList mods, String name, String description, RequirementList requirements, int ID, int price) {
         this.image = image;
         this.statModificationList = mods;
         this.name = name;
         this.description = description;
-        this.requirementToEquip = requirement;
+        this.requirementsToEquip = requirements;
         this.ID = ID;
         this.price = price;
     }

@@ -1,9 +1,12 @@
 package Models.Items.Takable.Equippable.OneHandedWeapons;
 
+import Models.Entities.Requirements.OccupationRequirement;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
+import Models.Items.Takable.Equippable.WeaponType;
 import Views.Graphics.Assets;
 import Views.Graphics.ImageLoader;
 
@@ -15,32 +18,49 @@ public enum OneHandedWeaponFactory {
         @Override
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
-            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/bronze_sword.png"), new StatModificationList(buff), "Bronze short sword", "A basic bronze sword", req, 6000, 35);
+            StatRequirement sReq = new StatRequirement(Stat.STRENGTH, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.ONEHANDED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/bronze_sword.png"), new StatModificationList(buff), "Bronze short sword", "A basic bronze sword", reqs, 6000, 35);
         }
     },
     IRON_LONG_SWORD(6001) {
         @Override
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
-            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron longsword", "An iron longsword" ,req, 6001, 45);
+            StatRequirement sReq = new StatRequirement(Stat.STRENGTH, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.ONEHANDED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron longsword", "An iron longsword" ,reqs, 6001, 45);
         }
     },
     DDS(6002) {
         @Override
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
-            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/dragon_dagger.png"), new StatModificationList(buff), "DDS", "A super poisened dragon dagger. This weapons special attack is deadly.", req, 6002, 60);
+            StatRequirement sReq = new StatRequirement(Stat.STRENGTH, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.ONEHANDED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/dragon_dagger.png"), new StatModificationList(buff), "DDS", "A super poisened dragon dagger. This weapons special attack is deadly.", reqs, 6002, 60);
+
         }
     },
     ABBY_WHIP(6003) {
         @Override
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
-            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Abyssal whip", "A super quick, super strong weapon.", req, 6003, 75);
+            StatRequirement sReq = new StatRequirement(Stat.STRENGTH, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.ONEHANDED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new OneHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Abyssal whip", "A super quick, super strong weapon.", reqs, 6003, 75);
         }
     };
 
