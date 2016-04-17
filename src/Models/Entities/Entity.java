@@ -180,6 +180,7 @@ public class Entity extends Observable implements Savable {
     // For example, teleporting, falling off a cliff etc
     public final void move(Point3D desiredPoint) {
         // TODO: implement
+
         map.moveEntityToNewTileAndRemoveFromOld(this, desiredPoint);
     }
 

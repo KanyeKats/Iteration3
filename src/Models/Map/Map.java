@@ -69,6 +69,16 @@ public class Map extends Observable implements Savable {
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || updatedDestinationTile==null || destination==source){
             entity.failedMovement();
+            System.out.println("failedmovement");
+            return;
+        }
+
+        if (MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(source),MapUtilities.to2DPoint(destination)) > 1) {
+            entity.setLocation(destination);
+            entity.setPixelLocation(updatedDestinationTile.getPixelPoint());
+            updatedDestinationTile.removeEntity();
+            updatedDestinationTile.insertEntity(entity);
+
             return;
         }
 
