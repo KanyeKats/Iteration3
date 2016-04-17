@@ -96,12 +96,17 @@ public class MapDrawingVisitor  {
             Tile currentTile = tile.get(currentPoint);
             // Get the image from this tile.
             Image tileImage;
-            if(tilesinSight.contains(currentTile)) {
+            if(isDebug){
                 tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), true);
                 currentTile.setVisited();
             }
-            else{
-                tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
+            else {
+                if (tilesinSight.contains(currentTile)) {
+                    tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), true);
+                    currentTile.setVisited();
+                } else {
+                    tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
+                }
             }
 
             // Figure out where to put it!

@@ -255,9 +255,9 @@ public class Tile implements Savable {
         this.entity = null;
         this.effect = null;
 
-        // Add rivers whereever water is.
-        if (terrain == terrain.WATER) {
-            this.areaEffect = new RiverAreaEffect(Direction.SOUTH_EAST, 35);
-        }
+//        // Add rivers whereever water is.
+//        if (terrain == terrain.WATER) {
+//            this.areaEffect = new RiverAreaEffect(Direction.SOUTH_EAST, 35);
+//        }
     }
 }
