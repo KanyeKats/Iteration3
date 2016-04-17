@@ -29,14 +29,15 @@ public class Map implements Savable {
     private HashMap<Point3D, Tile> tiles;
     private Set<Entity> entitiesOnMap;
     private ArrayList<Entity> storedEntities = new ArrayList();
-    private boolean moveInProgress;
+//    private boolean moveInProgress;
+    private Stack<Object> movementProcesses; // Keeps track of stuff thats trying to move. This must be empty to recenter!
 
     // Map will be passed the HashMap that is created by the gameloader after parsing the XML file.
     public Map(HashMap<Point3D, Tile> tiles){
         // Init properties
         this.tiles = tiles;
         this.entitiesOnMap = new LinkedHashSet<>();
-        this.moveInProgress = false;
+        this.movementProcesses = new Stack<>();
 
         // Iterate over tile and add each entity to our set of entities.
         for (Tile tile : this.tiles.values()) {
@@ -105,6 +106,13 @@ public class Map implements Savable {
         Point currentPixelLocation = entityCurrentTile.getPixelPoint();
         Point targetPixelLocation = targetTile.getPixelPoint();
 
+        if(targetPixelLocation==null || currentPixelLocation==null){
+            // BreakPOINT
+            System.out.println("NOT A COMMENT");
+            entity.moveComplete();
+            return;
+        }
+
 
         // Get x and y distances from entity's current point to the desired one.
         double dy = targetPixelLocation.getY() - currentPixelLocation.getY();
@@ -172,7 +180,7 @@ public class Map implements Savable {
 
                     // Tell the entity his move has completed!
                     entity.moveComplete();
-                    moveInProgress = false;
+                    movementProcesses.pop();
 
                     // Calculate if there needs to be fall damage
                     //Currently we only take fall damage if we fall more than 3 tiles
@@ -195,7 +203,7 @@ public class Map implements Savable {
         };
 
         // Translate the entity every ms
-        moveInProgress = true;
+        movementProcesses.push(new Object());
         entityMover.scheduleAtFixedRate(translateEntity, 0, 100);
     }
 
@@ -345,7 +353,7 @@ public class Map implements Savable {
                      int rangeofVisibility ,
                      boolean cameraMvoing,
                      boolean debugMode) {
-        MapDrawingVisitor.accept(tiles, image, center, avatarLocation, rangeofVisibility, cameraMvoing, debugMode, moveInProgress);
+        MapDrawingVisitor.accept(tiles, image, center, avatarLocation, rangeofVisibility, cameraMvoing, debugMode, movementProcesses.empty());
     }
 
     //// MOVEMENT CHECKERS ////

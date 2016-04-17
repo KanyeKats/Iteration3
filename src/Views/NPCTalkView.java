@@ -4,11 +4,12 @@ import Models.Menu.MenuOption;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by Josh on 4/16/2016.
  */
-public class NPCTalkView extends MenuView {
+public class NPCTalkView extends SubMenuView {
 
     private final String TITLE = "Talk";
     private int optionWidth;
@@ -29,8 +30,8 @@ public class NPCTalkView extends MenuView {
     private int textYSpacing;
     private String response;
 
-    public NPCTalkView(int width, int height, Models.Menu.Menu menu, String response) {
-        super(width,height,menu);
+    public NPCTalkView(int width, int height, Models.Menu.Menu menu, String response, BufferedImage lastViewContent) {
+        super(width,height,menu,lastViewContent);
 
         yStart = height * 4/5;
         xStart = width * 3/10;
