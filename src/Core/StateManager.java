@@ -1,9 +1,14 @@
 package Core;
 
+import Controllers.MenuViewController;
+import Utilities.Constants;
+import Views.StartMenuView;
 import jdk.internal.util.xml.impl.Input;
 
 import java.util.InputMismatchException;
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by johnkaufmann on 3/31/16.
@@ -28,10 +33,24 @@ public class StateManager {
         states.push(state);
     }
 
+    //Do this weird stuff so that transparent views still work...
+    //Draw the view from two states ago, wait a frame, and then draw the correct (previous) state
     public void goToPreviousState(){
         if(states.size() > 1){
             states.pop();
-            reActivate(states.peek());
+            if(states.size() > 3) {
+                State newState = states.pop();
+                reActivate(states.peek());
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        setActiveState(newState);
+                    }
+                }, 1000 / Constants.FRAME_RATE);
+            }
+            else
+                reActivate(states.peek());
         }else{
             System.exit(0);
         }
@@ -49,5 +68,13 @@ public class StateManager {
     private void reActivate(State state){
         inputDispatcher.setActiveController(state.getViewController());
         display.setActiveView(state.getView());
+    }
+
+    public void startOver(){
+        states.removeAllElements();
+        Models.Menu.Menu startMenu = Models.Menu.Menu.createStartMenu(this);
+        MenuViewController startMenuController = new MenuViewController(this, startMenu);
+        StartMenuView startMenuView = new StartMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, startMenu);
+        setActiveState(new State(startMenuController, startMenuView));
     }
 }

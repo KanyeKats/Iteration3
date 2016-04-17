@@ -1,9 +1,14 @@
 package Views;
 
 import Models.Entities.Entity;
+import Models.Entities.Stats.Stat;
+import Models.Map.Camera;
+import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.MapUtilities.MapDrawingVisitor;
+import javafx.geometry.Point3D;
 
+import javax.xml.stream.Location;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -14,14 +19,22 @@ public class AreaViewport extends View {
 
     private Map map;
     private Entity avatar;
+    private Boolean isMoving;
+    private boolean debugMode;
+    private Point3D renderLocation;
+    private Camera camera;
 
     public AreaViewport(int width, int height, Map map, Entity avatar) {
         super(width, height);
 
         this.map = map;
         this.avatar = avatar;
+        this.camera = new Camera(avatar.getLocation());
         map.addObserver(this);
         avatar.addObserver(this);
+        camera.addObserver(this);
+        this.isMoving = false;
+        this.debugMode = false;
 
         repaint();
     }
@@ -35,8 +48,14 @@ public class AreaViewport extends View {
         renderBackground(g);
 
         // Draw the map onto the graphics
-        map.draw(viewContent, avatar.getLocation());
-
+        if (!isMoving){
+            renderLocation = avatar.getLocation();
+            camera.setLocation(renderLocation);
+        }
+        else {
+            renderLocation = camera.getLocation();
+        }
+        map.draw(viewContent, renderLocation, avatar.getLocation(), avatar.getStats().getStat(Stat.RADIUS_OF_VISIBILITY),isMoving, debugMode);
         // Notify the observers of this view (GameView) that it changed.
         this.setChanged();
         this.notifyObservers();
@@ -49,5 +68,22 @@ public class AreaViewport extends View {
 
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
+    }
+
+    //Moving the Camera
+    public void move(Direction direction){
+        camera.move(direction);
+    }
+
+    public void setMoving(boolean isMoving){
+        this.isMoving = isMoving;
+    }
+
+    public void toggleDebugMode() {
+        this.debugMode = !this.debugMode;
+    }
+
+    public boolean isMoving(){
+        return this.isMoving;
     }
 }

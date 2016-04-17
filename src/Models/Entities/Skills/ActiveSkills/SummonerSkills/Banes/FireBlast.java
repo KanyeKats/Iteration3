@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 public class FireBlast extends Bane {
 
     private final int BASE_COOLDOWN_TIME = 20000;       //20 seconds
-    private final BufferedImage decal = Assets.PLAYER_NORTH; // TODO: Dont use the bug anymore lol
+    private final BufferedImage decal = Assets.FIRE; // TODO: Dont use the bug anymore lol
 
 
 

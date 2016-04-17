@@ -32,7 +32,7 @@ public class DamageAreaEffect extends AreaEffect {
     @Override
     public void activate(Entity entity) {
         // Create a Stat mod list of one damage stat mod
-        StatModification damageMod = new StatModification(Stat.HEALTH, damageAmount);
+        StatModification damageMod = new StatModification(Stat.HEALTH, -damageAmount);
         StatModificationList damageMods = new StatModificationList(damageMod);
 
         // Set this area effects consequence

@@ -1,11 +1,14 @@
 package Models.Menu;
 
-import Controllers.GameViewController;
-import Controllers.MenuViewController;
+import Controllers.*;
 import Core.State;
 import Core.StateManager;
 import Models.Entities.Entity;
+import Models.Entities.NPC.AI.Personality;
+import Models.Entities.NPC.Mount;
+import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Smasher;
+import Models.Entities.Occupation.Sneak;
 import Models.Entities.Occupation.Summoner;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
@@ -16,11 +19,17 @@ import Models.Map.Map;
 import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
+import Utilities.KeyBindings;
 import Utilities.Savable.GameLoader;
 import Views.AvatarCreationMenuView;
 import Views.GameView;
+import Views.*;
+import javafx.geometry.Point3D;
 
-import java.util.ArrayList;
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.*;
 
 /**
  * Created by Bradley on 4/4/2016.
@@ -167,8 +176,8 @@ public class Menu extends java.util.Observable{
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
-                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
                         stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
@@ -198,8 +207,16 @@ public class Menu extends java.util.Observable{
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
-                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map);
+
+                        // TODO: Remove after testing.
+                        //why does the entity need a point for its constructor and the insert entity map takes in the point anyway?
+                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET);
+                        map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
+                        Mount hand = new Mount(new Point3D(2, 0, 0),map,passableTerrains);
+                        map.insertEntity(hand,new Point3D(2,0,0));
+
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
                         stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
@@ -224,6 +241,14 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.out.println("Sneak");
+
+                        Map map = GameLoader.loadMap("./res/map/default_map.xml");
+                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
+                        Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
+                        map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
+                        GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
+                        GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
+                        stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
                 return actions;
@@ -315,9 +340,8 @@ public class Menu extends java.util.Observable{
         return new Menu(options);
     }
 
-
     //This method creates a pause menu model
-    public static Menu createPauseMenu(StateManager stateManager) {
+    public static Menu createPauseMenu(StateManager stateManager, GameViewController gameViewController) {
         ArrayList<MenuOption> options = new ArrayList<>();
 
         options.add(new MenuOption() {
@@ -382,7 +406,10 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.out.println("Change keys");
-                        //TODO:  implement this
+                        Models.Menu.Menu reconfigureKeysMenu = Models.Menu.Menu.createReconfigureKeysMenu(stateManager, gameViewController);
+                        MenuViewController reconfigureKeysMenuController = new MenuViewController(stateManager, reconfigureKeysMenu);
+                        ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
+                        stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
                     }
                 });
                 return actions;
@@ -406,6 +433,262 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.exit(0);
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        return new Menu(options);
+    }
+
+    public static Menu createGameOverMenu(StateManager stateManager) {
+        ArrayList<MenuOption> options = new ArrayList<>();
+
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "New Game?";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("New Game?");
+                        stateManager.startOver();
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Exit Game";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.exit(0);
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        return new Menu(options);
+    }
+
+    public static Menu createReconfigureKeysMenu(StateManager stateManager, GameViewController gameViewController){
+        KeyBindings keyBindings = gameViewController.getKeyBindings();
+        ArrayList<MenuOption> options = new ArrayList<>();
+
+        for(int i : keyBindings.getKeys()){
+            options.add(new MenuOption() {
+                @Override
+                public String getTitle() {
+                    return keyBindings.getKeyAction(i).toString() + ":  " + KeyEvent.getKeyText(i);
+                }
+
+                @Override
+                public ArrayList<Action> getActions() {
+                    ArrayList<Action> actions = new ArrayList<>();
+                    actions.add(new Action() {
+                        @Override
+                        public void execute() {
+                            System.out.println(keyBindings.getKeyAction(i).toString());
+
+                            JFrame jf = new JFrame();
+                            jf.setVisible(true);
+                            KeyListener listen = new KeyListener(){
+                                public void keyTyped(KeyEvent e){}
+                                public void keyReleased(KeyEvent e){}
+
+                                //This whole method is nasty...but it works
+                                public void keyPressed(KeyEvent e){
+                                    gameViewController.remapKey(i, e.getKeyCode());
+                                    System.out.println("New key: " + KeyEvent.getKeyText(e.getKeyCode()));
+                                    jf.dispose();
+                                    stateManager.goToPreviousState();
+                                    java.util.Timer timer = new java.util.Timer();
+                                    timer.schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            Models.Menu.Menu reconfigureKeysMenu = Models.Menu.Menu.createReconfigureKeysMenu(stateManager, gameViewController);
+                                            MenuViewController reconfigureKeysMenuController = new MenuViewController(stateManager, reconfigureKeysMenu);
+                                            ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
+                                            stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
+                                        }
+                                    }, 1000 / Constants.FRAME_RATE);
+                                }
+                            };
+                            jf.addKeyListener(listen);
+                        }
+                    });
+                    return actions;
+                }
+
+                @Override
+                public Object getAttachment() {
+                    return null;
+                }
+            });
+        }
+
+        return new Menu(options);
+    }
+
+    public static Menu createNPCMenu(StateManager stateManager, Entity avatar, Entity npc) {
+        ArrayList<MenuOption> options = new ArrayList<>();
+
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Talk";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Talk");
+                        String dialog = ((NPC) npc).getDialog();
+                        System.out.println(dialog);
+
+                        Models.Menu.Menu npcTalkMenu = Models.Menu.Menu.createNPCTalkMenu(stateManager);
+                        MenuViewController npcTalkViewController = new MenuViewController(stateManager, npcTalkMenu);
+                        NPCTalkView npcTalkView = new NPCTalkView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcTalkMenu, dialog);
+                        stateManager.setActiveState(new State(npcTalkViewController, npcTalkView));
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Trade";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        if(((NPC)npc).willTrade()){
+                            NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory());
+                            NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
+                            stateManager.setActiveState(new State(npcShopViewController, npcShopView));
+                        }else{
+                            System.out.println("He doesn't wanna trade with ya!");
+                            // TODO: Make a toast that says this.
+                        }
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Use Item";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Use item");
+                        InventoryView inventoryView = new InventoryView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory());
+                        UseItemOnNPCController useItemOnNPCController = new UseItemOnNPCController(stateManager, inventoryView, avatar, npc);
+                        stateManager.setActiveState(new State(useItemOnNPCController, inventoryView));
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Leave";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        System.out.println("Leave");
+                        stateManager.goToPreviousState();
+                    }
+                });
+                return actions;
+            }
+
+            @Override
+            public Object getAttachment() {
+                return null;
+            }
+        });
+        return new Menu(options);
+    }
+
+    public static Menu createNPCTalkMenu(StateManager stateManager){
+        ArrayList<MenuOption> options = new ArrayList<>();
+        options.add(new MenuOption() {
+            @Override
+            public String getTitle() {
+                return "Back";
+            }
+
+            @Override
+            public ArrayList<Action> getActions() {
+                ArrayList<Action> actions = new ArrayList<>();
+                actions.add(new Action() {
+                    @Override
+                    public void execute() {
+                        stateManager.goToPreviousState();
                     }
                 });
                 return actions;

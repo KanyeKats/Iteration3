@@ -1,5 +1,6 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments;
 
+import Models.Consequences.SleepConsequence;
 import Models.Entities.Entity;
 import Models.Consequences.BehaviorConsequence;
 import Models.Entities.Skills.InfluenceEffect.RadialEffect;
@@ -20,7 +21,7 @@ public class Sleep extends Enchantment {
     //TODO: create the right type of BehaviorConsequence
     public Sleep(){
         activeTime = BASE_ACTIVE_TIME;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new SleepConsequence(activeTime);
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
@@ -39,7 +40,7 @@ public class Sleep extends Enchantment {
     @Override
     public void incrementLevel(){
         ++level;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new SleepConsequence(activeTime);
     }
 
     @Override

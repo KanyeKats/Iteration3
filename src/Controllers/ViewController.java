@@ -35,8 +35,26 @@ public abstract class ViewController {
     public abstract void update();
 
     public void remapKey(int oldKey, int newKey){
-        keyBindings.addBinding(newKey, keyBindings.getKeyAction(oldKey));
-        keyBindings.removeBinding(oldKey);
+        KeyBindings newKeys = new KeyBindings();
+        if(keyBindings.getKeys().contains(newKey)){
+            System.out.println("That key is already being used!");
+            //TODO: Toast here
+            return;
+        }
+        for(int i : keyBindings.getKeys()) {
+            if(i == oldKey) {
+                newKeys.addBinding(newKey, keyBindings.getKeyAction(oldKey));
+                keyBindings.removeBinding(oldKey);
+            }
+            else{
+                newKeys.addBinding(i, keyBindings.getKeyAction(i));
+            }
+        }
+        keyBindings = newKeys;
+    }
+
+    public KeyBindings getKeyBindings(){
+        return keyBindings;
     }
 
 }

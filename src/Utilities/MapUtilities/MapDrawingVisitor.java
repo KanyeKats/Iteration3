@@ -3,11 +3,15 @@ package Utilities.MapUtilities;
 import Models.Entities.Entity;
 import Models.Map.MapUtilities.EntityDrawer;
 import Models.Map.MapUtilities.MapUtilities;
+import Models.Map.Terrain;
 import Models.Map.Tile;
 import Utilities.Constants;
+import Views.Graphics.Assets;
+import Views.MenuView;
 import javafx.geometry.Point3D;
 
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,11 +20,12 @@ import java.util.PriorityQueue;
 /**
  * Created by Bradley on 4/7/16.
  */
-public class MapDrawingVisitor {
+public class MapDrawingVisitor  {
 
     private static int viewportWidth;
     private static int viewportHeight;
     private static Point3D center;
+    private static HashMap<Point3D, Tile> tilesOnScreen;
 
     public static void setViewportWidth(int w) {
         viewportWidth = w;
@@ -34,10 +39,20 @@ public class MapDrawingVisitor {
         center = c;
     }
 
-    public static void accept(HashMap<Point3D, Tile> tile, BufferedImage viewContent, Point3D avatarCenter){
+    // The master drawer
+    public static void accept(HashMap<Point3D, Tile> tile,
+                              BufferedImage viewContent,
+                              Point3D drawingCenter,
+                              Point3D avatarLocation,
+                              int rangeofVisibility,
+                              boolean cameraMoving,
+                              boolean isDebug) {
+
+        if(tilesOnScreen == null)
+            tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
 
         // Set center, height, and width
-        if (center == null) setCenter(avatarCenter);
+        if (center == null) setCenter(drawingCenter);
         setViewportHeight(viewContent.getHeight());
         setViewportWidth(viewContent.getWidth());
 
@@ -45,11 +60,12 @@ public class MapDrawingVisitor {
         Graphics g = viewContent.getGraphics();
 
         // Get distance between AreaViewPort's current center and the Avatar's location
-        int distance = MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(center), MapUtilities.to2DPoint(avatarCenter));
+        int distance = MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(center), MapUtilities.to2DPoint(drawingCenter));
 
         // Re-center on avatar if necessary.
         if (distance > 4) {
-            setCenter(avatarCenter);
+            setCenter(drawingCenter);
+            tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
         }
 
         // Set up some useful variables
@@ -65,9 +81,11 @@ public class MapDrawingVisitor {
 
         // Put all the points into a priority queue based upon the order in which they should be rendered.
         PriorityQueue<Point3D> priorityQueue = new PriorityQueue<>(new TileComparator());
+        ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(avatarLocation, rangeofVisibility, tile);
 
         for(Point3D point : tile.keySet()){
-            priorityQueue.offer(point);
+            if(tilesOnScreen.containsKey(point))
+                priorityQueue.offer(point);
         }
 
         while(!priorityQueue.isEmpty()){
@@ -75,8 +93,6 @@ public class MapDrawingVisitor {
             Point3D currentPoint = priorityQueue.poll();
             // Get the next tile to be rendered.
             Tile currentTile = tile.get(currentPoint);
-
-            ArrayList<Tile> tilesinSight = MapNavigationUtilities.getTilesinPrism(avatarCenter, 3,Constants.COLUMN_HEIGHT, tile);
             // Get the image from this tile.
             Image tileImage;
             if(tilesinSight.contains(currentTile)) {
@@ -86,6 +102,7 @@ public class MapDrawingVisitor {
             else{
                 tileImage = currentTile.acceptDrawingVisitor(new TileDrawingVisitor(), false);
             }
+
             // Figure out where to put it!
             // X and Y will start at the center of the screen.
             int pixelX = viewportWidth/2;
@@ -98,12 +115,12 @@ public class MapDrawingVisitor {
             pixelY += (currentPoint.getY() - center.getY()) * vertDistanceBtwnAdjTiles;
 
             // Calculate the result of X on the position.
-            pixelY += (currentPoint.getX() - center.getX()) * (vertDistanceBtwnAdjTiles/2);
+            pixelY += (currentPoint.getX() - center.getX()) * (vertDistanceBtwnAdjTiles / 2);
             pixelX += (currentPoint.getX() - center.getX()) * horizDistanceBtwnAdjTiles;
 
             // Adjust the pixel cooredinates to the top left corner
-            pixelX -= tileImageWidth/2;
-            pixelY -= tileImageHeight/2;
+            pixelX -= tileImageWidth / 2;
+            pixelY -= tileImageHeight / 2;
 
             Point pixelPoint = new Point(pixelX, pixelY);
 
@@ -112,15 +129,57 @@ public class MapDrawingVisitor {
 
             g.drawImage(tileImage, pixelX, pixelY, null);
 
+            // Draw debug text if in debug mode
+            if (isDebug) drawDebugText(g, currentTile, currentPoint, pixelX, pixelY);
+
             // If any entity is on the tile, init its pixel location and draw him!
             if (currentTile.containsEntity()) {
                 Entity currentEntity = currentTile.getEntity();
-                currentEntity.initPixelLocation(pixelPoint);
-                EntityDrawer.drawEntity(currentEntity, g);
+
+                if(!cameraMoving) {
+                    currentEntity.initPixelLocation(pixelPoint);
+                    EntityDrawer.drawEntity(currentEntity, g);
+                }
+                else{
+
+                    currentEntity.setPixelLocation(pixelPoint);
+                    EntityDrawer.drawEntity(currentEntity, g);
+                }
             }
 
 
         }
         g.dispose();
+    }
+
+
+    public static void drawDebugText(Graphics gg, Tile tile, Point3D currentPoint, int pixelX, int pixelY) {
+
+        // Only draw if not sky
+        if (tile.getTerrain() != Terrain.SKY) {
+            Graphics2D g = (Graphics2D)gg;
+            RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g.setRenderingHints(rh);
+
+            // For debugging, draw the axial point on the tile
+            String tilePointString = Integer.toString((int) currentPoint.getX()) +
+                    ", " + Integer.toString((int) currentPoint.getY()) +
+                    ", " + Integer.toString((int) currentPoint.getZ());
+
+            // For debugging, draw point
+            Font pointFont = new Font("SansSerif", 1, 8);
+            g.setFont(pointFont);
+            g.setColor(Color.white);
+            FontMetrics fm = g.getFontMetrics(pointFont);
+            Rectangle2D rect = fm.getStringBounds(tilePointString, g);
+            int x =  pixelX + (Constants.TILE_WIDTH - (int)rect.getWidth())/2;
+
+
+            int y = pixelY + (Constants.TILE_HEIGHT - (int)rect.getHeight())/2;
+//            y = pixelY + Constants.TILE_HEIGHT/2;
+
+            g.drawString(tilePointString, x, y );
+        }
+
     }
 }

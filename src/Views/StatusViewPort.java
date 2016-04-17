@@ -11,11 +11,11 @@ import java.awt.image.BufferedImage;
 /**
  * Created by Aidan on 4/12/2016.
  */
-public class StatusViewport extends View {
+public class StatusViewPort extends View {
 
     private Entity avatar;
 
-    public StatusViewport(int width, int height, Entity avatar) {
+    public StatusViewPort(int width, int height, Entity avatar) {
         super(width, height);
 
         this.avatar = avatar;
@@ -35,7 +35,7 @@ public class StatusViewport extends View {
         int y = height * 4/5;
         g.setColor(new Color(70, 70, 70));
         g.fillRect(x, y, width * 4/10, height/5);
-        
+
         Font font = new Font("ROMAN_BASELINE",Font.BOLD,17);
         g.setFont(font);
         g.setColor(Color.WHITE);
@@ -65,8 +65,8 @@ public class StatusViewport extends View {
         g.setColor(Color.BLACK);
         g.drawRect(manaBarx - manaBarwidth/2,manaBary, manaBarwidth,manaBarheight);
         g.setColor(Color.BLUE);
-        g.drawRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (health/maxHealth)),manaBarheight);
-        g.fillRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (health/maxHealth)),manaBarheight);
+        g.drawRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (mana/maxMana)),manaBarheight);
+        g.fillRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (mana/maxMana)),manaBarheight);
 
 
         this.setChanged();

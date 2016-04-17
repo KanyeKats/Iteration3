@@ -3,6 +3,9 @@ package Models.Entities.Skills.ActiveSkills;
 import Models.Entities.Entity;
 import Models.Consequences.Consequence;
 import Models.Entities.Skills.Skill;
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,7 +13,7 @@ import java.util.TimerTask;
 /**
  * Created by josh on 4/6/16.
  */
-public abstract class ActiveSkill extends Skill {
+public abstract class ActiveSkill extends Skill implements Savable{
     protected Consequence consequence;
     protected int cooldownTime;
     protected boolean isCooledDown = true;
@@ -19,7 +22,7 @@ public abstract class ActiveSkill extends Skill {
 
     public void activate(Entity entity){
         if(isCooledDown){
-            if(percentChanceByLevel())
+//            if(percentChanceByLevel())
                 consequence.execute(entity);
         }
         else
@@ -42,5 +45,15 @@ public abstract class ActiveSkill extends Skill {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+        this.consequence.load((Element) data.getElementsByTagName("consequence"));
     }
 }

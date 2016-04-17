@@ -11,11 +11,37 @@ import Models.Items.Takable.Equippable.OneHandedWeapons.OneHandedWeapon;
 import Models.Items.Takable.Equippable.RangedWeapons.RangedWeapon;
 import Models.Items.Takable.Equippable.Staves.Staff;
 import Models.Items.Takable.Equippable.TwoHandedWeapon.TwoHandedWeapon;
+import Utilities.Action;
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.util.HashMap;
 
 /**
  * Created by Aidan on 4/6/2016.
  */
-public class Equipment {
+public class Equipment implements Savable {
+
+    public enum Slot {
+        HEAD("Head"),
+        CHEST("Chest"),
+        LEGS("Legs"),
+        BOOTS("Boots"),
+        LEFT_HAND("Left"),
+        RIGHT_HAND("Right"),
+        BOTH_HANDS("Both");
+
+        private String descriptor;
+
+        Slot(String descriptor) {
+            this.descriptor = descriptor;
+        }
+
+        public String getDescriptor() {
+            return descriptor;
+        }
+    }
 
     // All of the available equip slots.
     // These are the places where you can hold an equippable item
@@ -35,10 +61,31 @@ public class Equipment {
     // Handle to the entity's inventory so we can remove equipment and send it there.
     private Inventory inventory;
 
+    // Get map -> to get an item at slot via an enum identifier
+    private HashMap<Slot, EquipmentGetter> slotGetMap;
+
     // Constructor
     public Equipment(Stats stats, Inventory inventory) {
         this.stats = stats;
         this.inventory = inventory;
+
+        initGetMapping();
+    }
+
+    private void initGetMapping() {
+        this.slotGetMap = new HashMap<>();
+        slotGetMap.put(Slot.HEAD, () -> getHead());
+        slotGetMap.put(Slot.CHEST, () -> getChest());
+        slotGetMap.put(Slot.LEGS, () -> getLegs());
+        slotGetMap.put(Slot.BOOTS, () -> getBoots());
+        slotGetMap.put(Slot.LEFT_HAND, () -> getLefthand());
+        slotGetMap.put(Slot.RIGHT_HAND, () -> getRighthand());
+        slotGetMap.put(Slot.BOTH_HANDS, () -> getBothhands());
+    }
+
+
+    public EquippableItem getItemAtSlot(Slot slot) {
+        return slotGetMap.get(slot).get();
     }
 
 
@@ -102,15 +149,14 @@ public class Equipment {
     }
 
     // Might not be using a "righthand" slot
-//    public void unequip(EquippableItem righthand) {
-//        if (this.righthand != null) {
-//            EquippableItem old = this.righthand;
-//            removeStatModsOfEquipment(old);
-//            inventory.addItem(old);
-//            this.righthand = null;
-//        }
-//    }
-//
+    public void unequipRightHand() {
+        if (this.righthand != null) {
+            EquippableItem old = this.righthand;
+            removeStatModsOfEquipment(old);
+            inventory.addItem(old);
+            this.righthand = null;
+        }
+    }
 
     // GETTERS
     public EquippableItem getHead() {
@@ -193,4 +239,23 @@ public class Equipment {
         else return false;
     }
 
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+        this.head.load((Element) data.getElementsByTagName("head"));
+        this.chest.load((Element) data.getElementsByTagName("chest"));
+        this.legs.load((Element) data.getElementsByTagName("legs"));
+        this.boots.load((Element) data.getElementsByTagName("boots"));
+        this.lefthand.load((Element) data.getElementsByTagName("lefthand"));
+        this.righthand.load((Element) data.getElementsByTagName("righthand"));
+        this.bothhands.load((Element) data.getElementsByTagName("bothhands"));
+    }
+
+    private interface EquipmentGetter {
+        EquippableItem get();
+    }
 }

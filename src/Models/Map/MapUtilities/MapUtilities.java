@@ -1,5 +1,6 @@
 package Models.Map.MapUtilities;
 
+import Models.Map.Direction;
 import Models.Map.Tile;
 import Utilities.Constants;
 import javafx.geometry.Point3D;
@@ -24,6 +25,33 @@ public class MapUtilities {
         double distance = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 
         return (int)distance;
+    }
+
+    public static int distanceBetweenPoints(Point3D pointA, Point3D pointB){
+        // Convert the points to 2d
+        Point a2D = to2DPoint(pointA);
+        Point b2D = to2DPoint(pointB);
+
+        return distanceBetweenPoints(a2D, b2D);
+    }
+
+    public static Direction closestDirectionBetweenAandB(Point3D pointA, Point3D pointB){
+
+        // Init the distance to be super super super super super far.
+        Integer distance = Integer.MAX_VALUE;
+        Direction bestDirection = Direction.NORTH; // If no one is better, just go north. They need help at the wall.
+
+        for(Direction direction : Direction.values()){
+
+            Point3D pointInDirection = direction.getPointAdjacentTo(pointA);
+            Integer currentDistance = distanceBetweenPoints(pointInDirection, pointB);
+
+            if(currentDistance < distance){
+                distance = currentDistance;
+                bestDirection = direction;
+            }
+        }
+        return bestDirection;
     }
 
     public static Point to2DPoint(Point3D point) {

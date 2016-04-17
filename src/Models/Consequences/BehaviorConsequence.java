@@ -1,6 +1,7 @@
 package Models.Consequences;
 
 import Models.Entities.Entity;
+import Models.Entities.NPC.NPC;
 import javafx.geometry.Point3D;
 
 import java.util.Timer;
@@ -28,6 +29,8 @@ public class BehaviorConsequence extends Consequence {
             @Override
             public void run() {
                 //Reset behavior change
+                //prolly should be:
+                //remove(entity)
             }
         }, activeTime);
     }

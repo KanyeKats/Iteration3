@@ -1,12 +1,16 @@
 package Models.Entities.Stats;
 
+import Utilities.Savable.Savable;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.util.Arrays;
 import java.util.EnumMap;
 
 /**
  * Created by sergiopuleri on 4/7/16.
  */
-public class Stats {
+public class Stats implements Savable {
 
     // The container that holds all of the current numerical values for stats.
     EnumMap<Stat, Integer> stats;
@@ -47,8 +51,37 @@ public class Stats {
         // Else, it will return the same value we passed in
         currentValue = stat.checkLevelCap(currentValue);
 
-        if (currentValue < 1 && stat != Stat.SKILL_POINTS) currentValue = 1;
-
+        if(stat == Stat.HEALTH) {
+            if (currentValue > getMaxHealth())
+                currentValue = getMaxHealth();
+            else if (currentValue <= 0) {
+                processDeath();
+                return;
+            }
+        }
+        else if(stat == Stat.MANA) {
+            if(currentValue > getMaxMana())
+                currentValue = getMaxMana();
+            else if(currentValue <= 0)
+                currentValue = 0;
+        }
+        else if (currentValue < 1 && stat != Stat.SKILL_POINTS)
+            currentValue = 1;
+        else if (stat == Stat.EXPERIENCE) {
+            if (delta + stats.get(Stat.EXPERIENCE) > getExpRequiredToLevelUp()) {
+                stats.put(Stat.LEVEL, getLvlForExp(delta + stats.get(Stat.EXPERIENCE)));
+                stats.put(Stat.EXP_TO_LEVEL, getExpRequiredToLevelUp());
+                stats.put(Stat.HEALTH, getMaxHealth());
+                stats.put(Stat.MANA, getMaxMana());
+            }
+        }
+        else if (stat == Stat.LEVEL) {
+            int lvl = delta + stats.get(Stat.LEVEL);
+            stats.put(Stat.EXPERIENCE, getExpForLevel(lvl) + 1);
+            stats.put(Stat.EXP_TO_LEVEL, getExpForLevel(lvl + 1));
+            stats.put(Stat.HEALTH, getMaxHealth(lvl));
+            stats.put(Stat.MANA, getMaxMana(lvl));
+        }
         // Set the stats new value
         stats.put(stat, currentValue);
     }
@@ -86,7 +119,7 @@ public class Stats {
         stats.put(Stat.LEVEL,1 );
         stats.put(Stat.EXP_TO_LEVEL, 50);
         stats.put(Stat.LIVES, 3);
-        stats.put(Stat.RADIUS_OF_VISIBILITY, 10);
+        stats.put(Stat.RADIUS_OF_VISIBILITY, 3);
     }
 
 
@@ -134,6 +167,43 @@ public class Stats {
         // Return computed value
         return 100 + (10* (int)Math.pow(level, 2.0));
     }
+    //private methods that facilitate updating stats when gaining exp or levels
+    private int getExpForLevel(int level) {
+        return 100 + (10* (int)Math.pow(level - 1, 2.0));
+    }
+    private int getLvlForExp(int exp) {
+        if (exp < 110) return 1;
+        else return (int)( Math.sqrt( (double) (exp - 100)/10 ) + 1);
+
+    }
+    private int getMaxHealth(int level) {
+        // Get primary stats
+        Integer hardiness = stats.get(Stat.HARDINESS);
+        // Return computed value
+        return hardiness + (10 * level);
+    }
+    private int getMaxMana(int level) {
+        // Get primary stats
+        Integer intellect = stats.get(Stat.INTELLECT);
+        // Return computed value
+        return intellect + (10 * level);
+    }
+
+    private void processDeath(){
+        if(stats.get(Stat.LIVES) > 0){
+            stats.put(Stat.LIVES, stats.get(Stat.LIVES) - 1);
+            System.out.println("You died!");
+            System.out.println("You have " + stats.get(Stat.LIVES) + " lives remaining.");
+
+            //TODO: Probably give some sort of notification of death/respawn somewhere
+
+
+            stats.put(Stat.HEALTH, getMaxHealth());
+        }
+        else{
+
+        }
+    }
 
 
     // Made this so we can basically put in a stat type enum value and call a function
@@ -142,5 +212,15 @@ public class Stats {
     // http://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html
     private interface DerivedStatGetter {
         int value();
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        return null;
+    }
+
+    @Override
+    public void load(Element data) {
+
     }
 }

@@ -1,7 +1,7 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Enchantments;
 
+import Models.Consequences.PolymorphConsequence;
 import Models.Entities.Entity;
-import Models.Consequences.BehaviorConsequence;
 import Models.Entities.Skills.InfluenceEffect.ConicalEffect;
 import Views.Graphics.Assets;
 
@@ -14,13 +14,13 @@ public class Polymorph extends Enchantment {
 
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
     public final int BASE_ACTIVE_TIME = 10000;    //10 seconds
-    private final BufferedImage decal = Assets.PLAYER_NORTH; // TODO: Dont use the bug anymore lol
+    private final BufferedImage decal = Assets.FULLFOG; // TODO: Dont use the bug anymore lol
 
 
     //TODO: create the right type of BehaviorConsequence
     public Polymorph(){
         activeTime = BASE_ACTIVE_TIME;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new PolymorphConsequence(activeTime);
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
@@ -39,7 +39,7 @@ public class Polymorph extends Enchantment {
     @Override
     public void incrementLevel(){
         ++level;
-        consequence = new BehaviorConsequence(activeTime);
+        consequence = new PolymorphConsequence(activeTime);
     }
 
     @Override

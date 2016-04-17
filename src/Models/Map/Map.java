@@ -3,11 +3,13 @@ package Models.Map;
 import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.StatModification;
 import Models.Items.Item;
 
 import Models.Map.MapUtilities.MapUtilities;
 import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
+import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
 import org.w3c.dom.*;
@@ -27,6 +29,7 @@ public class Map extends Observable implements Savable, Observer {
 
     private HashMap<Point3D, Tile> tiles;
     private Set<Entity> entitiesOnMap;
+    private ArrayList<Entity> storedEntities = new ArrayList();
     // TODO: Not really a todo but make sure you notify observers when you change something that will affect the visual representation.
 
     // Map will be passed the HashMap that is created by the gameloader after parsing the XML file.
@@ -66,6 +69,16 @@ public class Map extends Observable implements Savable, Observer {
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || updatedDestinationTile==null || destination==source){
             entity.failedMovement();
+            System.out.println("failedmovement");
+            return;
+        }
+
+        if (MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(source),MapUtilities.to2DPoint(destination)) > 1) {
+            entity.setLocation(destination);
+            entity.setPixelLocation(updatedDestinationTile.getPixelPoint());
+            updatedDestinationTile.removeEntity();
+            updatedDestinationTile.insertEntity(entity);
+
             return;
         }
 
@@ -158,9 +171,24 @@ public class Map extends Observable implements Savable, Observer {
                     // Tell the entity his move has completed!
                     entity.moveComplete();
 
+
+
+                    // Calculate if there needs to be fall damage
+                    //Currently we only take fall damage if we fall more than 3 tiles
+                    int heightDiff = (int)(entityCurrentPoint.getZ() - targetPoint3D.getZ());
+                    if(heightDiff > 3){
+                        System.out.println("You fell " + heightDiff + " tiles!");
+                        double damage = Math.pow(1.5, heightDiff);
+                        System.out.println("Damage taken: " + (int)damage);
+                        StatModification fallDamageStatMod = new StatModification(Stat.HEALTH, (int)(-damage));
+                        fallDamageStatMod.apply(entity.getStats());
+                    }
+
                     // activate shit on the tile on him
-                    targetTile.activateTileObjectsOnEntity(entity);
-                    return;
+                    boolean reRender = targetTile.activateTileObjectsOnEntity(entity);
+
+                    if (!reRender) return;
+
                 }
 
                 // Notify observers that the map changes.
@@ -193,6 +221,25 @@ public class Map extends Observable implements Savable, Observer {
         entitiesOnMap.add(entity);
     }
 
+    public void moveEntityToNewTileAndRemoveFromOld(Entity entity, Point3D point) {
+        Tile destination = tiles.get(point);
+        Tile current = tiles.get(entity.getLocation());
+
+        current.removeEntity();
+
+        // insert
+        destination.insertEntity(entity);
+
+        entity.setLocation(point);
+        entity.setPixelLocation(destination.getPixelPoint());
+        entity.moveComplete();
+        destination.activateTileObjectsOnEntity(entity);
+
+        setChanged();
+        notifyObservers();
+
+    }
+
     // This should only be used when an Entity is dead.
     public void removeEntity(Point3D point){
 
@@ -201,6 +248,52 @@ public class Map extends Observable implements Savable, Observer {
 
         // Remove the entity at the tile.
         tile.removeEntity();
+
+        // Remove the entity from the set of entities.
+        removeEntityFromSetAtPoint(point);
+    }
+
+    private void removeEntityFromSetAtPoint(Point3D point){
+        for(Iterator<Entity> iterator = entitiesOnMap.iterator(); iterator.hasNext();){
+            Entity entity = iterator.next();
+
+            if(entity.getLocation() == point){
+                iterator.remove(); // By using an iterator, it is safe to remove the element while looping through.
+            }
+        }
+    }
+
+    //Testing this out
+    public void storeOffMapEntity(Entity storedEntity){
+        Tile tile = tiles.get(storedEntity.getLocation());
+        tile.removeEntity();
+        storedEntities.add(storedEntity);
+        entitiesOnMap.remove(storedEntity);
+        setChanged();
+        notifyObservers();
+    }
+
+    public void addOffMapEntity(Entity storedEntity){
+
+        for(Iterator<Entity> iterator = storedEntities.iterator(); iterator.hasNext();){
+            Entity entity = iterator.next();
+
+            if(entity.equals(storedEntity)){
+                iterator.remove(); // By using an iterator, it is safe to remove the element while looping through.
+            }
+        }
+        Point3D landingPoint = MapNavigationUtilities.findOpenTile(storedEntity,this);
+        System.out.println(landingPoint.toString());
+       if(landingPoint != null) {
+           storedEntity.setLocation(landingPoint);
+           Tile tile = tiles.get(landingPoint);
+           tile.insertEntity(storedEntity);
+           entitiesOnMap.add(storedEntity);
+           storedEntity.setPixelLocation(tile.getPixelPoint());
+           tile.activateTileObjectsOnEntity(storedEntity);
+           setChanged();
+           notifyObservers();
+       }
     }
 
     public void insertItem(Item item, Point3D point){
@@ -257,11 +350,13 @@ public class Map extends Observable implements Savable, Observer {
         tile.removeEffect();
     }
 
-//    public void acceptDrawingVisitor(MapDrawingVisitor visitor){
-//        visitor.accept(tiles);
-//    }
-    public void draw(BufferedImage image, Point3D center) {
-        MapDrawingVisitor.accept(tiles, image, center);
+    public void draw(BufferedImage image,
+                     Point3D center,
+                     Point3D avatarLocation,
+                     int rangeofVisibility ,
+                     boolean cameraMvoing,
+                     boolean debugMode) {
+        MapDrawingVisitor.accept(tiles, image, center, avatarLocation, rangeofVisibility, cameraMvoing, debugMode);
     }
 
     //// MOVEMENT CHECKERS ////
@@ -464,5 +559,9 @@ public class Map extends Observable implements Savable, Observer {
         // Notiy the observers of map
         setChanged();
         notifyObservers();
+
+    }
+    public Set<Entity> getEntitiesOnMap(){
+        return entitiesOnMap;
     }
 }

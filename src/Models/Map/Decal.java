@@ -37,7 +37,7 @@ public class Decal implements Savable {
 
     private Image decalImage;
 
-    private Decal(Image decalImage) {
+    public Decal(Image decalImage) {
         this.decalImage = decalImage;
     }
 
