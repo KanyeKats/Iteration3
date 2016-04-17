@@ -168,8 +168,10 @@ public class Stats implements Savable {
         return 100 + (10* (int)Math.pow(level, 2.0));
     }
     //private methods that facilitate updating stats when gaining exp or levels
-    private int getExpForLevel(int level) {
-        return 100 + (10* (int)Math.pow(level - 1, 2.0));
+    public int getExpForLevel(int level) {
+        if (level == 1) {
+            return 1;
+        } else return 100 + (10* (int)Math.pow(level - 1, 2.0));
     }
     private int getLvlForExp(int exp) {
         if (exp < 110) return 1;

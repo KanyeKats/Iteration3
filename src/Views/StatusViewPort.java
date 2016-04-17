@@ -2,6 +2,7 @@ package Views;
 
 import Models.Entities.Entity;
 import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.Stats;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -13,12 +14,14 @@ import java.awt.image.BufferedImage;
 public class StatusViewPort extends View {
 
     private Entity avatar;
+    private Stats stats;
     private BufferedImage clear;
 
     public StatusViewPort(int width, int height, Entity avatar) {
         super(width, height);
 
         this.avatar = avatar;
+        this.stats = avatar.getStats();
         clear = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         repaint();
     }
@@ -47,8 +50,8 @@ public class StatusViewPort extends View {
         // DRAW THE HEALTH BAR
 
         // Get the necessary stats
-        int health = avatar.getStats().getStat(Stat.HEALTH);
-        int maxHealth = avatar.getStats().getMaxHealth();
+        int health = stats.getStat(Stat.HEALTH);
+        int maxHealth = stats.getMaxHealth();
 
 
         // Determine how large text is and where to place the Health string
@@ -100,8 +103,8 @@ public class StatusViewPort extends View {
         // DRAW THE MANA BAR
 
         // Get the necessary stats
-        int mana = avatar.getStats().getStat(Stat.MANA);
-        int maxMana = avatar.getStats().getMaxMana();
+        int mana = stats.getStat(Stat.MANA);
+        int maxMana = stats.getMaxMana();
 
 
         // Determine how large text is and where to place the Health string
@@ -156,8 +159,10 @@ public class StatusViewPort extends View {
         // DRAW THE XP BAR
 
         // Get the necessary stats
-        int xp = avatar.getStats().getStat(Stat.EXPERIENCE);
-        int expToLvl = avatar.getStats().getExpRequiredToLevelUp();
+        int xp = stats.getStat(Stat.EXPERIENCE);
+        int expToLvl = stats.getExpRequiredToLevelUp();
+        int expForCurrentLvl = stats.getExpForLevel(stats.getStat(Stat.LEVEL));
+        System.out.println("curr EXP: " + xp + "\nexpToLvl: " + expToLvl + "\nexpForCurLvl: " + expForCurrentLvl);
 
 
         // Determine how large text is and where to place the Health string
@@ -179,11 +184,12 @@ public class StatusViewPort extends View {
         int xpBarY = xpStringY - (int) xpRect.getHeight()/2;
 
         // Determine what fraction of the health bar should be shown.
-        double xpFraction = (double) xp / (double) expToLvl;
+        double xpFraction = (double) (xp - expForCurrentLvl) / (double)(expToLvl - expForCurrentLvl);
+        System.out.println(xpFraction);
         int xpFillWidth = (int) (xpFraction * xpBarWidth);
 
         // Fill the health bar
-        g.setColor(Color.YELLOW);
+        g.setColor(new Color(255,153,0));
         g.fillRoundRect(xpBarX, xpBarY, xpFillWidth, xpBarHeight, borderRadius, borderRadius);
 
         // Draw the outline of the xp bar.
@@ -200,8 +206,8 @@ public class StatusViewPort extends View {
         Rectangle2D xpFractionRect = fm.getStringBounds(xpFractionString, g);
 
         int xpFractionX = xpBarX + xpBarWidth - (int) xpFractionRect.getWidth() + 15;
-        int xpFractionY = xpBarY + xpBarHeight - 4;
-        g.drawString(xpFractionString, xpFractionX, xpFractionY);
+        int xpFractionY = xpBarY + xpBarHeight - 5;
+        g.drawString(xpFractionString, xpFractionX - 17, xpFractionY);
 
 
         // Draw lives
