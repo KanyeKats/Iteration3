@@ -5,11 +5,12 @@ import Models.Menu.MenuOption;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
 /**
  * Created by rokas on 4/13/16.
  */
-public class PauseMenuView extends MenuView {
+public class PauseMenuView extends SubMenuView {
 
     private final String TITLE = "Pause";
     private int optionWidth;
@@ -23,8 +24,8 @@ public class PauseMenuView extends MenuView {
     private int borderRadius;
     private int optionVerticalSpacing;
 
-    public PauseMenuView(int width, int height, Menu menu) {
-        super(width,height,menu);
+    public PauseMenuView(int width, int height, Menu menu, BufferedImage lastViewContent) {
+        super(width,height,menu, lastViewContent);
 
         optionWidth = width / 6;
         optionHeight = height / 25;

@@ -28,4 +28,8 @@ public abstract class View{
         g.drawImage(viewContent, 0, 0, width, height, null);
     }
 
+    public BufferedImage getViewContent(){
+        return viewContent;
+    }
+
 }

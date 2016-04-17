@@ -161,7 +161,13 @@ public class Entity implements Savable {
         this.enteredNewTile = false;
 
         // Allow movement again
-        this.canMove = true;
+        movementTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Entity.this.canMove = true;
+
+            }
+        }, 300);
     }
 
     public final boolean enteredNewTile() {
