@@ -8,7 +8,6 @@ import Models.Map.Tile;
 import Utilities.Constants;
 import javafx.geometry.Point3D;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -98,7 +97,7 @@ public class MapNavigationUtilities {
                     if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
                         Point3D newpoint = convertCubictoAxial(point4Dend);
                         Tile tile = map.getTile(newpoint);
-                        if(tile != null && !point.equals(newpoint)) {
+                        if(tile != null && !newpoint.equals(point)) {
                             resultTiles.add(tile);
                         }
                     }
@@ -106,6 +105,7 @@ public class MapNavigationUtilities {
             }
         }
         return resultTiles;
+
     }
 
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, HashMap<Point3D,Tile> map){
@@ -159,7 +159,7 @@ public class MapNavigationUtilities {
             }
 
             //move to the next radius
-            point = direction.getPointAdjacentTo(point);
+            pt = direction.getPointAdjacentTo(pt);
             resultTiles.add(tempTiles);
         }
         return resultTiles;
@@ -200,7 +200,7 @@ public class MapNavigationUtilities {
             }
 
             //move to the next radius
-            point = direction.getPointAdjacentTo(point);
+            pt = direction.getPointAdjacentTo(pt);
             resultTiles.add(tempTiles);
         }
         return resultTiles;
@@ -259,7 +259,7 @@ public class MapNavigationUtilities {
 
     //rotate the enum given an integer
     private static Direction rotateEnum(int i, Direction direction) {
-        Direction d = direction.values()[(direction.ordinal() + i) % 5];
+        Direction d = direction.values()[(direction.ordinal() + i) % Direction.values().length];
         return d;
     }
 
@@ -337,6 +337,7 @@ public class MapNavigationUtilities {
         return (dx + dy + dz)/2;
     }
 
+
     public static HashMap<Point3D, Tile> getTilesOnScreen(Point3D point, HashMap<Point3D,Tile> map) {
         HashMap<Point3D, Tile> tilesInRange = new HashMap<>();
         int screenWidth = Constants.SCREEN_WIDTH/Constants.TILE_WIDTH/2 + 2;
@@ -354,5 +355,4 @@ public class MapNavigationUtilities {
 
 
     }
-
 }

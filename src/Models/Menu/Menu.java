@@ -20,20 +20,21 @@ import Models.Map.Terrain;
 import Utilities.Action;
 import Utilities.Constants;
 import Utilities.KeyBindings;
-import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.GameLoader;
+import Views.AvatarCreationMenuView;
+import Views.GameView;
 import Views.*;
 import javafx.geometry.Point3D;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by Bradley on 4/4/2016.
  */
-public class Menu extends java.util.Observable{
+public class Menu{
 
     private ArrayList<MenuOption> menuOptions;
     private int selectedIndex;
@@ -55,21 +56,14 @@ public class Menu extends java.util.Observable{
         return menuOptions.get(selectedIndex).getActions();
     }
 
-    public void refresh(){
-        setChanged();
-        notifyObservers();
-    }
-
     public void nextOption(){
         selectedIndex++;
         selectedIndex = (selectedIndex < menuOptions.size()) ? selectedIndex : 0; // This one's for you Josh :)
-        refresh();
     }
 
     public void previousOption(){
         selectedIndex--;
         selectedIndex = (selectedIndex >=0 ) ? selectedIndex : menuOptions.size() - 1;
-        refresh();
     }
 
     // Factory methods.
@@ -201,7 +195,6 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         System.out.println("Summoner");
-
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER,Terrain.SKY};
@@ -523,15 +516,23 @@ public class Menu extends java.util.Observable{
                             KeyListener listen = new KeyListener(){
                                 public void keyTyped(KeyEvent e){}
                                 public void keyReleased(KeyEvent e){}
+
+                                //This whole method is nasty...but it works
                                 public void keyPressed(KeyEvent e){
                                     gameViewController.remapKey(i, e.getKeyCode());
                                     System.out.println("New key: " + KeyEvent.getKeyText(e.getKeyCode()));
                                     jf.dispose();
                                     stateManager.goToPreviousState();
-                                    Models.Menu.Menu reconfigureKeysMenu = Models.Menu.Menu.createReconfigureKeysMenu(stateManager, gameViewController);
-                                    MenuViewController reconfigureKeysMenuController = new MenuViewController(stateManager, reconfigureKeysMenu);
-                                    ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
-                                    stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
+                                    java.util.Timer timer = new java.util.Timer();
+                                    timer.schedule(new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            Models.Menu.Menu reconfigureKeysMenu = Models.Menu.Menu.createReconfigureKeysMenu(stateManager, gameViewController);
+                                            MenuViewController reconfigureKeysMenuController = new MenuViewController(stateManager, reconfigureKeysMenu);
+                                            ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
+                                            stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
+                                        }
+                                    }, 1000 / Constants.FRAME_RATE);
                                 }
                             };
                             jf.addKeyListener(listen);
@@ -596,7 +597,7 @@ public class Menu extends java.util.Observable{
                     @Override
                     public void execute() {
                         if(((NPC)npc).willTrade()){
-                            NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory());
+                            NPCShopView npcShopView = new NPCShopView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar.getInventory(), npc.getInventory(), avatar.getStats().getStat(Stat.BARGAIN));
                             NPCShopViewController npcShopViewController = new NPCShopViewController(stateManager, npcShopView);
                             stateManager.setActiveState(new State(npcShopViewController, npcShopView));
                         }else{

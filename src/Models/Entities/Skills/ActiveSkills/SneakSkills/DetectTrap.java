@@ -20,7 +20,6 @@ public class DetectTrap extends ActiveSkill {
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
-    //TODO: Implement checking the map and making trap visible if there is one
     public void activate(Entity entity){
 
 

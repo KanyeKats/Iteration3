@@ -1,7 +1,7 @@
 package Models.Entities.Skills.InfluenceEffect;
 
-import Models.Entities.Entity;
 import Models.Consequences.Consequence;
+import Models.Entities.Entity;
 import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
@@ -9,7 +9,8 @@ import javafx.geometry.Point3D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import java.awt.Image;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -20,16 +21,17 @@ public abstract class Effect implements Runnable, Savable {
     private Point3D location;
     private Consequence consequence;
     private Map map;
+    private BufferedImage decal;
 
-    public Effect(int range, Point3D location, Consequence consequence, Map map) {
+    public Effect(int range, Point3D location, Consequence consequence, Map map, BufferedImage decal) {
         this.range = range;
         this.location = location;
         this.consequence = consequence;
         this.map = map;
-        start();
+        this.decal = decal;
     }
 
-    protected void start() {
+    public void start() {
         //starts a thread that moves this effect throughout the map
         new Thread(this).start();
     }
@@ -64,10 +66,12 @@ public abstract class Effect implements Runnable, Savable {
             traverseThroughTiles(affectedTiles.get(i));
 
             try {
-                Thread.sleep( (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
+            removeDecals(affectedTiles.get(i));
         }
     }
 
@@ -80,6 +84,14 @@ public abstract class Effect implements Runnable, Savable {
             if (hasEntity(entity)) {
                 dealConsequence(entity);
             }
+            tile.insertEffect(this); // Insert the effect so it can be drawn.
+        }
+    }
+
+    // Removes all the decals
+    protected void removeDecals(ArrayList<Tile> tiles){
+        for (Tile tile : tiles) {
+            tile.removeEffect();
         }
     }
 
@@ -94,7 +106,9 @@ public abstract class Effect implements Runnable, Savable {
         consequence.execute(entity);
     }
 
-    public abstract Image getImage();
+    public Image getImage(){
+        return decal;
+    }
 
     public int getRange() {
         return range;

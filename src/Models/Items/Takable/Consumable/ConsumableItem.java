@@ -12,12 +12,13 @@ import java.awt.*;
 public class ConsumableItem extends TakableItem {
 
     //Constructor takes in a StatModificationList
-    public ConsumableItem(Image image, StatModificationList statModList, String name, String desc, int ID) {
+    public ConsumableItem(Image image, StatModificationList statModList, String name, String desc, int ID, int price) {
         this.statModificationList = statModList;
         this.image = image;
         this.name = name;
         this.description = desc;
         this.ID = ID;
+        this.price = price;
     }
 
     //On use, this method removes the item from inventory, and applies the statmodlist

@@ -21,10 +21,6 @@ public class GameView extends View {
         this.statusViewport = new StatusViewPort(width, height, entity);
 //        this.skillsViewport = new SkillsViewport(entity.getSkillList());
 
-        areaViewport.addObserver(this);
-        statusViewport.addObserver(this);
-//        skillsViewport.addObserver(this);
-
         repaint();
     }
 
@@ -33,10 +29,6 @@ public class GameView extends View {
 
         // Extract the graphics object from this views content;
         Graphics g = viewContent.getGraphics();
-
-        // Set content changed for the viewports
-        areaViewport.setContentChanged(true);
-        statusViewport.setContentChanged(true);
 
         // Render the viewports onto this view.
         areaViewport.render(g);

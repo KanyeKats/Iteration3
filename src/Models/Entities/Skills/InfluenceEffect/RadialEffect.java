@@ -1,12 +1,12 @@
 package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
-import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
-import java.awt.Image;
+
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
@@ -15,10 +15,9 @@ import java.util.ArrayList;
  */
 public class RadialEffect extends Effect {
 
-    public RadialEffect(int range, Point3D location, Consequence consequence, Map map) {
+    public RadialEffect(int range, Point3D location, Consequence consequence, Map map, BufferedImage decal) {
 
-        super(range, location, consequence, map);
-        start();
+        super(range, location, consequence, map, decal);
     }
 
     @Override
@@ -26,8 +25,4 @@ public class RadialEffect extends Effect {
         return MapNavigationUtilities.getRadialTiles(getLocation(), getRange(), getMap());
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
 }

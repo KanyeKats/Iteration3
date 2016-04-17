@@ -1,7 +1,5 @@
 package Models.Entities;
 
-import Models.Consequences.BehaviorConsequence;
-import Models.Consequences.SleepConsequence;
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
@@ -9,9 +7,7 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.Stat;
-import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.Stats;
-import Models.Items.Item;
 import Models.Items.Takable.Equippable.Boots.Boot;
 import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
@@ -23,7 +19,6 @@ import Models.Map.Map;
 import Models.Map.Terrain;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
-import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,8 +30,7 @@ import java.util.*;
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Entity extends Observable implements Savable {
-    //TODO: make occupation
+public class Entity implements Savable {
     private Occupation occupation;
     private Stats stats;
     private ActiveSkillList activeSkillList;
@@ -66,6 +60,7 @@ public class Entity extends Observable implements Savable {
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
     public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map, Boolean isFlyer){
+
 
         // TODO: Make sure that instantiating an entity with existing inventorys and equipment, make sure that the Equipemnt has a correct reference to the inventory.
         this.occupation = occupation;
@@ -121,6 +116,7 @@ public class Entity extends Observable implements Savable {
 //        Boot moccassins = BootFactory.bootsFromID(1001);
 //        equip(moccassins);
 
+
     }
 
     public void equip(EquippableItem item){
@@ -164,10 +160,6 @@ public class Entity extends Observable implements Savable {
         this.justMoved = true;
         this.enteredNewTile = false;
 
-        // Notify observers that the map changes
-        setChanged();
-        notifyObservers();
-
         // Allow movement again
         this.canMove = true;
     }
@@ -181,10 +173,6 @@ public class Entity extends Observable implements Savable {
     }
 
     public final void failedMovement() {
-        if(this.tryingNewDirection == true){
-            setChanged();
-            notifyObservers();
-        }
         this.canMove = true;
         this.justMoved = false;
     }
@@ -193,7 +181,6 @@ public class Entity extends Observable implements Savable {
     // The default will be moving a direction, but sometimes we want to move to a desired point instantly.
     // For example, teleporting, falling off a cliff etc
     public final void move(Point3D desiredPoint) {
-        // TODO: implement
         map.moveEntityToNewTileAndRemoveFromOld(this, desiredPoint);
     }
 

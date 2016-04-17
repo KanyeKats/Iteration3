@@ -24,6 +24,7 @@ public class SkillViewPort extends MenuView {
     private Color color2;
     private int borderRadius;
     private int optionVerticalSpacing;
+    private int optionHorizontalSpacing;
     private Stats stats;
 
     public SkillViewPort(int width, int height, Menu menu, Stats stats) {
@@ -36,6 +37,7 @@ public class SkillViewPort extends MenuView {
         optionFont = new Font("SansSerif", Font.BOLD, width / 86);
         optionVerticalMargin = (int) (width * 0.15);
         optionVerticalSpacing = 10;
+        optionHorizontalSpacing = width/4;
         background = Color.black;
         color2 = Color.gray;
         color1 = Color.white;
@@ -91,11 +93,20 @@ public class SkillViewPort extends MenuView {
             // Determine the dimensions of the box.
             Rectangle2D optionRect = fm.getStringBounds(option.getTitle(), g);
 
-            int boxX = width/2 - optionWidth/2;
-            int boxY = optionHeight * i + verticalStart + i* optionVerticalSpacing;
+            int optionsPerColumn = (int)Math.ceil(menu.getMenuOptions().size() / 2);
 
-            int stringX = width/2 - (int)(optionRect.getWidth() / 2);
-            int stringY = i * optionHeight + (int)(optionRect.getHeight() /2) + fm.getAscent() + verticalStart + i*optionVerticalSpacing;
+            int boxX = width*3/8 - optionWidth/2 + i / optionsPerColumn * optionHorizontalSpacing;
+            int boxY = optionHeight * (i%optionsPerColumn) + verticalStart + (i%optionsPerColumn)* optionVerticalSpacing;
+
+            int stringX = width*3/8 - (int)(optionRect.getWidth() / 2) + i / optionsPerColumn * optionHorizontalSpacing;
+            int stringY = (i%optionsPerColumn) * optionHeight + (int)(optionRect.getHeight() /2) + fm.getAscent() + verticalStart + (i%optionsPerColumn)*optionVerticalSpacing;
+
+            if(menu.getMenuOptions().size()%2 != 0 && i == menu.getMenuOptions().size()-1){
+                boxX = width*3/8 - optionWidth/2 + optionHorizontalSpacing;
+                boxY = optionHeight * (((i-1)%optionsPerColumn)+1) + verticalStart + (((i-1)%optionsPerColumn) + 1)* optionVerticalSpacing;
+                stringX = width*3/8 - (int)(optionRect.getWidth() / 2) + optionHorizontalSpacing;
+                stringY = (((i-1)%optionsPerColumn) + 1) * optionHeight + (int)(optionRect.getHeight() /2) + fm.getAscent() + verticalStart + (((i-1)%optionsPerColumn) + 1)*optionVerticalSpacing;
+            }
 
             // draw the option.
             g.setColor(primaryColor);
@@ -105,10 +116,12 @@ public class SkillViewPort extends MenuView {
         }
 
         //Write out how many skill points there are
+        g.setColor(color1);
         String skillPointString = "You have " + stats.getStat(Stat.SKILL_POINTS) + " skill points remaining.";
         Rectangle2D stringRect = fm.getStringBounds(skillPointString, g);
         int stringX = width/2 - (int)(stringRect.getWidth() / 2);
-        int stringY = (i+1) * optionHeight + (int)(stringRect.getHeight() /2) + fm.getAscent() + verticalStart + (i+1)*optionVerticalSpacing;
+        //int stringY = ((i/2)+1) * optionHeight + (int)(stringRect.getHeight() /2) + fm.getAscent() + verticalStart + ((i/2)+1)*optionVerticalSpacing;
+        int stringY = height - 100;
         g.drawString(skillPointString, stringX, stringY);
 
         g.dispose();

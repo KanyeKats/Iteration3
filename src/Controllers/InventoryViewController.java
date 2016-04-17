@@ -66,7 +66,6 @@ public class InventoryViewController extends ViewController {
                 TakableItem item = inventoryView.getSelectedItem();
                 if (item != null) {
                     item.onUse(entity);
-                    System.out.println("Used the item?");
                     inventoryView.refresh();
                 }
             }

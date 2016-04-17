@@ -1,5 +1,6 @@
 package Models.Items.Takable.Equippable.Chests;
 
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
@@ -15,32 +16,40 @@ public enum ChestFactory {
         @Override
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
-            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(ImageLoader.loadImage("./res/items/frat_tank.png"), new StatModificationList(buff), "Frat Tank", "A sporty tank to show off your gains", req, 2000);
+            StatRequirement sReq = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            return new Chestplate(ImageLoader.loadImage("./res/items/frat_tank.png"), new StatModificationList(buff), "Frat Tank", "A sporty tank to show off your gains", reqs, 2000, 20);
         }
     },
     SWAMPHACKS_TEE(2001) {
         @Override
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
-            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "SwampHacks Tee", "A tee shirt to show off your nerdiness.", req, 2001);
+            StatRequirement sReq = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "SwampHacks Tee", "A tee shirt to show off your nerdiness.", reqs, 2001, 35);
         }
     },
     CHAINMAIL(2002) {
         @Override
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
-            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(ImageLoader.loadImage("./res/items/chain_mail.png"), new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.", req, 2002);
+            StatRequirement sReq = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            return new Chestplate(ImageLoader.loadImage("./res/items/chain_mail.png"), new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.", reqs, 2002, 50);
         }
     },
     CHESTPLATE(2003) {
         @Override
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
-            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chestplate", "Stronger than chainmail, protects you from greater damage", req, 2003);
+            StatRequirement sReq = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            return new Chestplate(Assets.PLACEHOLDER, new StatModificationList(buff), "Chestplate", "Stronger than chainmail, protects you from greater damage", reqs, 2003, 75);
         }
     };
 

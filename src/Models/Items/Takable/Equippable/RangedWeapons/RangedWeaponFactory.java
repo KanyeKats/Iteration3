@@ -1,9 +1,12 @@
 package Models.Items.Takable.Equippable.RangedWeapons;
 
+import Models.Entities.Requirements.OccupationRequirement;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
+import Models.Items.Takable.Equippable.WeaponType;
 import Views.Graphics.Assets;
 import Views.Graphics.ImageLoader;
 
@@ -15,32 +18,48 @@ public enum RangedWeaponFactory {
         @Override
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
-            StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(ImageLoader.loadImage("./res/items/throwing_knives.png"), new StatModificationList(buff), "Steel throwing knives", "Some sharp, steel throwing knives", req, 9000);
+            StatRequirement sReq = new StatRequirement(Stat.AGILITY, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.RANGED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new RangedWeapon(ImageLoader.loadImage("./res/items/throwing_knives.png"), new StatModificationList(buff), "Steel throwing knives", "Some sharp, steel throwing knives", reqs, 9000, 35);
         }
     },
     NINJA_STARS(9001) {
         @Override
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
-            StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(ImageLoader.loadImage("./res/items/ninja_stars.png"), new StatModificationList(buff), "Ninja Throwing Stars", "Sharp, quick ninja throwing stars", req, 9001);
+            StatRequirement sReq = new StatRequirement(Stat.AGILITY, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.RANGED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new RangedWeapon(ImageLoader.loadImage("./res/items/ninja_stars.png"), new StatModificationList(buff), "Ninja Throwing Stars", "Sharp, quick ninja throwing stars", reqs, 9001, 45);
         }
     },
     CROSSBOW(9002) {
         @Override
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
-            StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(ImageLoader.loadImage("./res/items/crossbow.png"), new StatModificationList(buff), "Crossbow", "A heavy hitting crossbow", req, 9002);
+            StatRequirement sReq = new StatRequirement(Stat.AGILITY, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.RANGED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new RangedWeapon(ImageLoader.loadImage("./res/items/crossbow.png"), new StatModificationList(buff), "Crossbow", "A heavy hitting crossbow", reqs, 9002, 60);
         }
     },
     DARK_BOW(9003) {
         @Override
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
-            StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Darkbow", "An insanely powerful, dark compound bow.", req, 9003);
+            StatRequirement sReq = new StatRequirement(Stat.AGILITY, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.RANGED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Darkbow", "An insanely powerful, dark compound bow.", reqs, 9003, 75);
         }
     };
 

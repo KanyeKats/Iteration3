@@ -34,7 +34,6 @@ public abstract class Item implements Savable {
     protected String name;
     protected String description;
 
-    // TODO: all items will have an image to represent itself, right..? dunno if we have a certain asset class for that?
     // Using built in Image class for now....
     protected Image image;
 

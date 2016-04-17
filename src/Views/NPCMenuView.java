@@ -95,13 +95,13 @@ public class NPCMenuView extends MenuView {
             // Determine the dimensions of the box.
             Rectangle2D optionRect = fm.getStringBounds(option.getTitle(), g);
 
-            int leftMenuOptions = (int)Math.ceil(menu.getMenuOptions().size() / 2);
+            int optionsPerColumn = (int)Math.ceil(menu.getMenuOptions().size() / 2);
 
-            int boxX = width*3/8 - optionWidth/2 + i / leftMenuOptions * optionHorizontalSpacing;
-            int boxY = optionHeight * (i%leftMenuOptions) + verticalStart + (i%leftMenuOptions)* optionVerticalSpacing;
+            int boxX = width*3/8 - optionWidth/2 + i / optionsPerColumn * optionHorizontalSpacing;
+            int boxY = optionHeight * (i%optionsPerColumn) + verticalStart + (i%optionsPerColumn)* optionVerticalSpacing;
 
-            int stringX = width*3/8 - (int)(optionRect.getWidth() / 2) + i / leftMenuOptions * optionHorizontalSpacing;
-            int stringY = (i%leftMenuOptions) * optionHeight + (int)(optionRect.getHeight() /2) + fm.getAscent() + verticalStart + (i%leftMenuOptions)*optionVerticalSpacing;
+            int stringX = width*3/8 - (int)(optionRect.getWidth() / 2) + i / optionsPerColumn * optionHorizontalSpacing;
+            int stringY = (i%optionsPerColumn) * optionHeight + (int)(optionRect.getHeight() /2) + fm.getAscent() + verticalStart + (i%optionsPerColumn)*optionVerticalSpacing;
 
             // draw the option.
             g.setColor(primaryColor);

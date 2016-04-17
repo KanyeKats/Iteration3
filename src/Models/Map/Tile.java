@@ -5,17 +5,12 @@ import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.AreaEffects.AreaEffectFactory;
 import Models.Map.AreaEffects.RiverAreaEffect;
+import Utilities.MapUtilities.TileDrawingVisitor;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import javax.print.Doc;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import Utilities.MapUtilities.TileDrawingVisitor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -33,10 +28,10 @@ public class Tile implements Savable {
     private ArrayList<Item> items;
     private Effect effect;
     private Boolean visited;
-    // TODO: User visitor pattern to construct tile image?
     // pixel point used for moving
     private Point pixelPoint;
 
+    // TODO: Remember to notify observers whenever you do something to a tile that modifies how it will be displayed (and youre not going through the map to do it).
     public Tile(Terrain terrain, AreaEffect areaEffect, Entity entity, ArrayList<Item> items, Decal decal, Effect effect){
         this.terrain = terrain;
         this.areaEffect = areaEffect;
@@ -88,7 +83,7 @@ public class Tile implements Savable {
         this.entity = entity;
     }
 
-    public void activateTileObjectsOnEntity(Entity entity) {
+    public boolean activateTileObjectsOnEntity(Entity entity) {
         // Activate items
         for (Iterator<Item> iterator = items.iterator(); iterator.hasNext(); ) {
             Item item = iterator.next();
@@ -98,12 +93,15 @@ public class Tile implements Savable {
             if (removeItem) {
                 iterator.remove();
             }
+            return true;
         }
 
         // Activate AreaEffects
-        if(areaEffect!=null){
+        if(areaEffect!=null) {
             areaEffect.activate(entity);
+            return true;
         }
+        return false;
     }
 
     public void removeEntity(){
@@ -126,9 +124,12 @@ public class Tile implements Savable {
         this.areaEffect = null;
     }
 
-    public void insertEffect(Effect effect){ this.effect = effect; }
+    public void insertEffect(Effect effect){
+        this.effect = effect;
+    }
 
-    public void removeEffect() { this.effect = null; }
+    public void removeEffect() { this.effect = null;
+    }
 
     public Terrain getTerrain() { return this.terrain; }
 

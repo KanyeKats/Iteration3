@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 /**
  * Created by johnkaufmann on 4/7/16.
- * TODO:
+ *
  */
 public class RiverAreaEffect extends AreaEffect {
     // Instance variables

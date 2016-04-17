@@ -1,6 +1,7 @@
 package Models.Items.Takable.Equippable.Helmets;
 
 import Models.Entities.Equipment;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.StatModificationList;
@@ -13,13 +14,14 @@ import java.awt.*;
  */
 public class Helmet extends EquippableItem {
     // We will just be instantiating different "Versions" of helmets
-    public Helmet(Image image, StatModificationList mods, String name, String description, StatRequirement requirement, int ID) {
+    public Helmet(Image image, StatModificationList mods, String name, String description, RequirementList requirements, int ID, int price) {
         this.image = image;
         this.statModificationList = mods;
         this.name = name;
         this.description = description;
-        this.requirementToEquip = requirement;
+        this.requirementsToEquip = requirements;
         this.ID = ID;
+        this.price = price;
     }
 
     @Override

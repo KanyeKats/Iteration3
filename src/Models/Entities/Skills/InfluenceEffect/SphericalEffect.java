@@ -6,7 +6,7 @@ import Models.Map.Tile;
 import Utilities.MapUtilities.MapNavigationUtilities;
 import javafx.geometry.Point3D;
 
-import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
@@ -14,9 +14,8 @@ import java.util.ArrayList;
  */
 public class SphericalEffect extends Effect {
 
-    public SphericalEffect(int range, Point3D location, Consequence consequence, Map map){
-        super(range,location,consequence,map);
-        start();
+    public SphericalEffect(int range, Point3D location, Consequence consequence, Map map, BufferedImage decal){
+        super(range,location,consequence,map, decal);
     }
 
     @Override
@@ -24,8 +23,4 @@ public class SphericalEffect extends Effect {
         return MapNavigationUtilities.getTilesinSphere(getLocation(), getRange(), getMap());
     }
 
-    @Override
-    public Image getImage() {
-        return null;
-    }
 }

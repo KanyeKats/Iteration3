@@ -358,6 +358,7 @@ public class EquipmentView extends View {
 
             if (colCount == 1) {
                 x = xSecondCol;
+                colCount+=2;
             }
             else if (colCount % 3 == 1) {
                 x = xFirstCol;
@@ -451,14 +452,33 @@ public class EquipmentView extends View {
             StatModificationList statMods = currentItem.getStatModificationList();
 
             // Set font for description
-            g.setFont(littleFont);
-            fm = g.getFontMetrics(littleFont);
+            g.setFont(miniFontSansSerif);
+            fm = g.getFontMetrics(miniFontSansSerif);
 
             int textX = infoPaneStartX + horizontalPaneMargin*2;
             int textY = titleY + (int) rect.getHeight() + fm.getAscent();
             rect = fm.getStringBounds(text, g);
 
-            g.drawString(text, textX, textY);
+            // Split the string into multiple liens if it's too long
+            String[] splitResponse = text.split(" ");
+            int length = 0;
+
+            String responseLine = "";
+            for(String str : splitResponse){
+                str += " ";
+                rect = fm.getStringBounds(str, g);
+                if(length + (int)rect.getWidth() < statsPaneWidth - 20){
+                    responseLine += str;
+                    length += (int)rect.getWidth();
+                }
+                else{
+                    g.drawString(responseLine, textX, textY);
+                    responseLine = str;
+                    length = str.length();
+                    textY += 15;
+                }
+            }
+            g.drawString(responseLine, textX, textY);
 
             // Now draw statmods
             g.setFont(littleFontSansSerif);

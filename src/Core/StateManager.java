@@ -33,6 +33,8 @@ public class StateManager {
         states.push(state);
     }
 
+    //Do this weird stuff so that transparent views still work...
+    //Draw the view from two states ago, wait a frame, and then draw the correct (previous) state
     public void goToPreviousState(){
         if(states.size() > 1){
             states.pop();

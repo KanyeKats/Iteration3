@@ -1,6 +1,7 @@
 package Models.Items.Takable.Equippable.Gauntlets;
 
 import Models.Entities.Equipment;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillsVisitors.BrawlingVisitor;
@@ -15,13 +16,14 @@ import java.awt.*;
  */
 public class Guantlets extends EquippableItem {
     // We will just be instantiating different "Versions" of this equipment type
-    public Guantlets(Image image, StatModificationList mods, String name, String description, StatRequirement requirement, int ID) {
+    public Guantlets(Image image, StatModificationList mods, String name, String description, RequirementList requirements, int ID, int price) {
         this.image = image;
         this.statModificationList = mods;
         this.name = name;
         this.description = description;
-        this.requirementToEquip = requirement;
+        this.requirementsToEquip = requirements;
         this.ID = ID;
+        this.price = price;
     }
 
     @Override
@@ -31,6 +33,8 @@ public class Guantlets extends EquippableItem {
         // Remove old equipment at this slot. Always call this method.
         // If nothing is there, it wont do anything
         equipment.unequipBothHands();
+        equipment.unequipLeftHand();
+        equipment.unequipRightHand();
         equipment.addStatModsOfEquipment(this);
         equipment.setBothhands(this);
         for(int i = 0; i < passiveSkillList.size(); i++) {

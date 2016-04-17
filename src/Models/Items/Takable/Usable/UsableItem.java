@@ -10,11 +10,12 @@ import java.awt.*;
  */
 public class UsableItem extends TakableItem {
 
-    public UsableItem(Image image,String name, String desc, int ID) {
+    public UsableItem(Image image,String name, String desc, int ID, int price) {
         this.image = image;
         this.name = name;
         this.description = desc;
         this.ID = ID;
+        this.price = price;
     }
 
     @Override

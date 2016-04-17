@@ -10,6 +10,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Models.Items.Takable.Equippable.WeaponType;
 import Models.Map.Direction;
 import Utilities.Savable.Savable;
 import Views.Graphics.Assets;
@@ -17,6 +18,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -26,13 +28,15 @@ public abstract class Occupation implements Savable {
     protected ActiveSkillList activeSkillList;
     protected PassiveSkillList passiveSkillList;
     protected StatModificationList statModificationList;
+    protected ArrayList<WeaponType> compatibleWeapons;
 
     Occupation(){
 
         this.activeSkillList = new ActiveSkillList();
         this.passiveSkillList = new PassiveSkillList();
         this.statModificationList = new StatModificationList();
-
+        this.compatibleWeapons = new ArrayList<>();
+        initCompatibleWeapons();
     }
 
     public void initStats(Stats stats){
@@ -41,6 +45,21 @@ public abstract class Occupation implements Savable {
         stats.setStat(Stat.HEALTH, stats.getMaxHealth());
         stats.setStat(Stat.MANA,stats.getMaxMana());
 
+    }
+
+    protected void initCompatibleWeapons() {
+        this.compatibleWeapons.add(WeaponType.BRAWLING);
+        this.compatibleWeapons.add(WeaponType.ONEHANDED);
+        this.compatibleWeapons.add(WeaponType.TWOHANDED);
+        this.compatibleWeapons.add(WeaponType.RANGED);
+        this.compatibleWeapons.add(WeaponType.STAFF);
+    }
+
+    public boolean compatibleWeapon(WeaponType weaponType) {
+        for (WeaponType wt : compatibleWeapons) {
+            if ( wt == weaponType ) return true;
+        }
+        return false;
     }
 
     public ActiveSkillList initActiveSkills(Stats stats){

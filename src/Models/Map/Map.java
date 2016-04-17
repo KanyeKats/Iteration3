@@ -5,32 +5,30 @@ import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Items.Item;
-
 import Models.Map.MapUtilities.MapUtilities;
-import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
+import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Map extends Observable implements Savable {
+public class Map implements Savable {
 
     //// CLASS DECLARATIONS ////
 
     private HashMap<Point3D, Tile> tiles;
     private Set<Entity> entitiesOnMap;
     private ArrayList<Entity> storedEntities = new ArrayList();
-    // TODO: Not really a todo but make sure you notify observers when you change something that will affect the visual representation.
 
     // Map will be passed the HashMap that is created by the gameloader after parsing the XML file.
     public Map(HashMap<Point3D, Tile> tiles){
@@ -51,7 +49,7 @@ public class Map extends Observable implements Savable {
     // The following things are being taken into consideration for movement:
     // If the height difference of desired tile is too tall, prevent movement,
     // If within one height difference allow movement, if there is a cliff, drop entity
-    // to the bottom of the cliff. TODO: will need to check if we dropped off a cliff + deal damage.
+    // to the bottom of the cliff.
     // Next, we check for an item (obstacle/interactive) or entity which will block movement.
     // Finally, we check the terrain type of the updated destination
     public void moveEntity(Entity entity, Point3D destination) {
@@ -68,6 +66,16 @@ public class Map extends Observable implements Savable {
         // Check if the tiles are in bounds of the map.
         if(sourceTile==null || updatedDestinationTile==null || destination==source){
             entity.failedMovement();
+            System.out.println("failedmovement");
+            return;
+        }
+
+        if (MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(source),MapUtilities.to2DPoint(destination)) > 1) {
+            entity.setLocation(destination);
+            entity.setPixelLocation(updatedDestinationTile.getPixelPoint());
+            updatedDestinationTile.removeEntity();
+            updatedDestinationTile.insertEntity(entity);
+
             return;
         }
 
@@ -163,6 +171,7 @@ public class Map extends Observable implements Savable {
                     entity.moveComplete();
 
 
+
                     // Calculate if there needs to be fall damage
                     //Currently we only take fall damage if we fall more than 3 tiles
                     int heightDiff = (int)(entityCurrentPoint.getZ() - targetPoint3D.getZ());
@@ -175,20 +184,16 @@ public class Map extends Observable implements Savable {
                     }
 
                     // activate shit on the tile on him
-                    targetTile.activateTileObjectsOnEntity(entity);
-                    return;
-                }
+                    boolean reRender = targetTile.activateTileObjectsOnEntity(entity);
 
-                // Notify observers that the map changes.
-                // --> Re-render Area Viewport.
-                // --> Re-render moved entity.
-                setChanged();
-                notifyObservers();
+                    if (!reRender) return;
+
+                }
             }
         };
 
         // Translate the entity every ms
-        entityMover.scheduleAtFixedRate(translateEntity, 0, 1);
+        entityMover.scheduleAtFixedRate(translateEntity, 0, 100);
     }
 
 
@@ -223,9 +228,6 @@ public class Map extends Observable implements Savable {
         entity.moveComplete();
         destination.activateTileObjectsOnEntity(entity);
 
-        setChanged();
-        notifyObservers();
-
     }
 
     // This should only be used when an Entity is dead.
@@ -257,8 +259,6 @@ public class Map extends Observable implements Savable {
         tile.removeEntity();
         storedEntities.add(storedEntity);
         entitiesOnMap.remove(storedEntity);
-        setChanged();
-        notifyObservers();
     }
 
     public void addOffMapEntity(Entity storedEntity){
@@ -279,8 +279,6 @@ public class Map extends Observable implements Savable {
            entitiesOnMap.add(storedEntity);
            storedEntity.setPixelLocation(tile.getPixelPoint());
            tile.activateTileObjectsOnEntity(storedEntity);
-           setChanged();
-           notifyObservers();
        }
     }
 
@@ -539,6 +537,10 @@ public class Map extends Observable implements Savable {
             System.out.println("Error parsing map again");
             e.printStackTrace();
         }
+    }
+
+    public HashMap<Point3D, Tile> getTiles(){
+        return tiles;
     }
 
     public Set<Entity> getEntitiesOnMap(){
