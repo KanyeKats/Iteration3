@@ -226,7 +226,7 @@ public class MapNavigationUtilities {
 
     //rotate the enum given an integer
     private static Direction rotateEnum(int i, Direction direction) {
-        Direction d = direction.values()[(direction.ordinal() + i) % 5];
+        Direction d = direction.values()[(direction.ordinal() + i) % Direction.values().length];
         return d;
     }
 
