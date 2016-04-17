@@ -1,9 +1,12 @@
 package Models.Items.Takable.Equippable.TwoHandedWeapon;
 
+import Models.Entities.Requirements.OccupationRequirement;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
+import Models.Items.Takable.Equippable.WeaponType;
 import Views.Graphics.Assets;
 import Views.Graphics.ImageLoader;
 
@@ -15,32 +18,48 @@ public enum TwoHandedWeaponFactory {
         @Override
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
-            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new TwoHandedWeapon(ImageLoader.loadImage("./res/items/twoHandedAxe.png"), new StatModificationList(buff), "Two Handed Axe", "A basic two-handed axe; stronger, but slower than its one-handed counterpart.", req, 7000, 40);
+            StatRequirement sReq = new StatRequirement(Stat.STRENGTH, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.TWOHANDED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new TwoHandedWeapon(ImageLoader.loadImage("./res/items/twoHandedAxe.png"), new StatModificationList(buff), "Two Handed Axe", "A basic two-handed axe; stronger, but slower than its one-handed counterpart.", reqs, 7000, 40);
         }
     },
     IRON_2H(7001) {
         @Override
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
-            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron 2H", "A basic two-handed iron sword; stronger, but slower than its one-handed counterpart.", req, 7001, 60);
+            StatRequirement sReq = new StatRequirement(Stat.STRENGTH, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.TWOHANDED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron 2H", "A basic two-handed iron sword; stronger, but slower than its one-handed counterpart.", reqs, 7001, 60);
         }
     },
     DRAGON_2H(7002) {
         @Override
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
-            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new TwoHandedWeapon(ImageLoader.loadImage("./res/items/dragon_sword.png"), new StatModificationList(buff), "Dragon 2H", "A heavy hitting dragon two-handed sword", req, 7002, 80);
+            StatRequirement sReq = new StatRequirement(Stat.STRENGTH, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.TWOHANDED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new TwoHandedWeapon(ImageLoader.loadImage("./res/items/dragon_sword.png"), new StatModificationList(buff), "Dragon 2H", "A heavy hitting dragon two-handed sword", reqs, 7002, 80);
         }
     },
     GODSWORD(7003) {
         @Override
         public TwoHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
-            StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Armadyl Godsword", "An insanely powerful sword. Beware.", req, 7003, 100);
+            StatRequirement sReq = new StatRequirement(Stat.STRENGTH, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.TWOHANDED);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new TwoHandedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Armadyl Godsword", "An insanely powerful sword. Beware.", reqs, 7003, 100);
         }
     };
 

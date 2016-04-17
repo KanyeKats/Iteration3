@@ -29,6 +29,7 @@ public class Vehicle extends Occupation {
         this.statModificationList = new StatModificationList(new StatModification(Stat.MOVEMENT, 34));
     }
 
+
     @Override
     public PassiveSkillList initPassiveSkills(Stats stats){
         return null;

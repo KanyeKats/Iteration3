@@ -1,12 +1,14 @@
 package Models.Items.Takable.Equippable.RangedWeapons;
 
 import Models.Entities.Equipment;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillsVisitors.RangedWeaponVisitor;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillsVisitors.TwoHandedVisitor;
 import Models.Entities.Stats.StatModificationList;
 import Models.Items.Takable.Equippable.EquippableItem;
+import Models.Items.Takable.Equippable.WeaponType;
 
 import java.awt.*;
 
@@ -14,13 +16,14 @@ import java.awt.*;
  * Created by sergiopuleri on 4/7/16.
  */
 public class RangedWeapon extends EquippableItem{
+    private WeaponType weaponType = WeaponType.RANGED;
     // We will just be instantiating different "Versions" of this equipment type
-    public RangedWeapon(Image image, StatModificationList mods, String name, String description, StatRequirement requirement, int ID, int price) {
+    public RangedWeapon(Image image, StatModificationList mods, String name, String description, RequirementList requirements, int ID, int price) {
         this.image = image;
         this.statModificationList = mods;
         this.name = name;
         this.description = description;
-        this.requirementToEquip = requirement;
+        this.requirementsToEquip = requirements;
         this.ID = ID;
         this.price = price;
     }

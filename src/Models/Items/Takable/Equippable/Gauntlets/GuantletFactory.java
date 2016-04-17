@@ -1,9 +1,12 @@
 package Models.Items.Takable.Equippable.Gauntlets;
 
+import Models.Entities.Requirements.OccupationRequirement;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
+import Models.Items.Takable.Equippable.WeaponType;
 import Views.Graphics.Assets;
 import Views.Graphics.ImageLoader;
 
@@ -15,32 +18,48 @@ public enum GuantletFactory {
         @Override
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
-            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Guantlets(ImageLoader.loadImage("./res/items/wooden_gauntlets.png"), new StatModificationList(buff), "Wooden Guantlets", "A pair of wooden guantlets", req, 4000, 20);
+            StatRequirement sReq = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.BRAWLING);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new Guantlets(ImageLoader.loadImage("./res/items/wooden_gauntlets.png"), new StatModificationList(buff), "Wooden Guantlets", "A pair of wooden guantlets", reqs, 4000, 20);
         }
     },
     BRASS_KNUCKLES(4001) {
         @Override
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
-            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Guantlets(ImageLoader.loadImage("./res/items/brass_knuckles.png"), new StatModificationList(buff), "Brass Knuckles", "A pair of dangerous brass knuckles", req, 4001, 30);
+            StatRequirement sReq = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.BRAWLING);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new Guantlets(ImageLoader.loadImage("./res/items/brass_knuckles.png"), new StatModificationList(buff), "Brass Knuckles", "A pair of dangerous brass knuckles", reqs, 4001, 30);
         }
     },
     JACKSON_GLOVES(4002) {
         @Override
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
-            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Guantlets(ImageLoader.loadImage("./res/items/jacksonglove.png"), new StatModificationList(buff), "Jackson Gloves", "A single white glove", req, 4002, 40);
+            StatRequirement sReq = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.BRAWLING);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new Guantlets(ImageLoader.loadImage("./res/items/jacksonglove.png"), new StatModificationList(buff), "Jackson Gloves", "A single white glove", reqs, 4002, 40);
         }
     },
     BLADE_FIST(4003) {
         @Override
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
-            StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Blade Fists", "You'll have some sharp fists with these!", req, 4003, 50);
+            StatRequirement sReq = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
+            OccupationRequirement oReq = new OccupationRequirement(WeaponType.BRAWLING);
+            RequirementList reqs = new RequirementList();
+            reqs.addRequirement(sReq);
+            reqs.addRequirement(oReq);
+            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Blade Fists", "You'll have some sharp fists with these!", reqs, 4003, 50);
         }
     };
 

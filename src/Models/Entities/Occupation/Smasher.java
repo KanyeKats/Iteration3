@@ -12,6 +12,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Models.Items.Takable.Equippable.WeaponType;
 import Models.Map.Direction;
 import Views.Graphics.Assets;
 
@@ -35,9 +36,13 @@ public class Smasher extends Occupation {
                 new StatModification(Stat.HARDINESS,10),
                 new StatModification(Stat.MOVEMENT,17),
                 new StatModification(Stat.EXPERIENCE, 0));
+    }
 
-
-
+    @Override
+    protected void initCompatibleWeapons() {
+        this.compatibleWeapons.add(WeaponType.BRAWLING);
+        this.compatibleWeapons.add(WeaponType.ONEHANDED);
+        this.compatibleWeapons.add(WeaponType.TWOHANDED);
     }
 
     @Override

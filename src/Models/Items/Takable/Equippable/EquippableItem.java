@@ -2,6 +2,7 @@ package Models.Items.Takable.Equippable;
 
 import Models.Entities.Entity;
 import Models.Entities.Equipment;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.Stats;
@@ -12,7 +13,7 @@ import Models.Items.Takable.TakableItem;
  */
 public abstract class EquippableItem extends TakableItem {
 
-    protected StatRequirement requirementToEquip;
+    protected RequirementList requirementsToEquip;
 
     @Override
     public void onUse(Entity entity) {
@@ -27,7 +28,7 @@ public abstract class EquippableItem extends TakableItem {
     public abstract EquippableItem unequip(Equipment equipment);
 
     public final boolean fufillEquipRequirement(Entity entity) {
-        return requirementToEquip.isFullfilled(entity);
+        return requirementsToEquip.allAreFullfilled(entity);
     }
 
 

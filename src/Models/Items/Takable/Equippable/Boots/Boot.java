@@ -1,6 +1,7 @@
 package Models.Items.Takable.Equippable.Boots;
 
 import Models.Entities.Equipment;
+import Models.Entities.Requirements.RequirementList;
 import Models.Entities.Requirements.StatRequirement;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.StatModificationList;
@@ -13,12 +14,12 @@ import java.awt.*;
  */
 public class Boot extends EquippableItem{
     // We will just be instantiating different "Versions" of this equipment type
-    public Boot(Image image, StatModificationList mods, String name, String description, StatRequirement requirementToEquip , int ID, int price) {
+    public Boot(Image image, StatModificationList mods, String name, String description, RequirementList requirementToEquip , int ID, int price) {
         this.image = image;
         this.statModificationList = mods;
         this.name = name;
         this.description = description;
-        this.requirementToEquip = requirementToEquip;
+        this.requirementsToEquip = requirementToEquip;
         this.ID = ID;
         this.price = price;
     }
@@ -26,7 +27,6 @@ public class Boot extends EquippableItem{
     @Override
     public boolean equip(Equipment equipment, PassiveSkillList passiveSkillList) {
         // If pass an equipment condition do the following...
-
         // Remove old equipment at this slot. Always call this method.
         // If nothing is there, it wont do anything
         equipment.unequipBoots();
