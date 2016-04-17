@@ -17,6 +17,7 @@ public class NPCShopView extends View {
     private ArrayList<TakableItem> avatarSelectedItems, npcSelectedItems, currentSelectedItems;
     private int selectedItem;
     private int avatarCapacity, npcCapacity, currentCapacity;
+    private int avatarPrice, npcPrice;
 
     private final int ITEMS_PER_ROW = 15;
 
@@ -51,12 +52,8 @@ public class NPCShopView extends View {
     private int infoViewWidth;
     private int infoViewHeight;
 
-    private int infoXMargin;
     private int infoYMargin;
-    private int infoElementHeight;
-    private int infoDescriptionWidth;
 
-    private Font font;
     private Font smallFont;
     private Font largeFont;
     private Font titleFont;
@@ -78,8 +75,10 @@ public class NPCShopView extends View {
         this.currentCapacity = avatarCapacity;
         this.currentSelectedItems = avatarSelectedItems;
 
+        this.avatarPrice = 0;
+        this.npcPrice = 0;
 
-        font = new Font("Courier New", 1, width / 50);
+
         smallFont = new Font("Courier New", 1, width / 67);
         largeFont = new Font("Courier New", 1, width / 30);
         titleFont = new Font("Courier New", 1, width / 22);
@@ -104,7 +103,6 @@ public class NPCShopView extends View {
         npcItemViewYStart = inventoryViewYStart;
         avatarItemViewYStart = inventoryViewYStart + inventoryViewHeight*5/8;
         itemViewWidth = inventoryViewWidth;
-//        itemViewHeight = (int) (inventoryViewHeight * 0.7);
         itemViewHeight = inventoryViewHeight;
 
         itemMargin = width / 80;
@@ -117,10 +115,7 @@ public class NPCShopView extends View {
         infoViewWidth = inventoryViewWidth;
         infoViewHeight = inventoryViewHeight - itemViewHeight;
 
-        infoXMargin = width / 30;
         infoYMargin = (int) (infoViewHeight * 0.2);
-        infoElementHeight = infoViewHeight - infoYMargin * 2;
-        infoDescriptionWidth = infoViewWidth - 2 * infoElementHeight - 4 * infoXMargin;
 
         repaint();
     }
@@ -145,10 +140,20 @@ public class NPCShopView extends View {
         TakableItem item = null;
         if(selectedItem < currentInventory.getCurrentSize()){
             item = currentInventory.getItems().get(selectedItem);
-            if(currentSelectedItems.contains(item))
+            if(currentSelectedItems.contains(item)) {
                 currentSelectedItems.remove(item);
-            else
+                if(currentInventory == avatarInventory)
+                    avatarPrice -= item.getPrice();
+                else
+                    npcPrice -= item.getPrice();
+            }
+            else {
                 currentSelectedItems.add(item);
+                if(currentInventory == avatarInventory)
+                    avatarPrice += item.getPrice();
+                else
+                    npcPrice += item.getPrice();
+            }
         }
         refresh();
     }
@@ -169,13 +174,14 @@ public class NPCShopView extends View {
         refresh();
     }
 
-    //TODO: better way to compare items?
     //TODO: Toast that says something about a failed trade attempt
     public void makeTrade(){
+        System.out.println("Avatar Price: " + avatarPrice);
+        System.out.println("NPC Price: " + npcPrice);
         if(avatarSelectedItems.size() == 0 && npcSelectedItems.size() == 0){
             System.out.println("No items selected!");
         }
-        else if(avatarSelectedItems.size() >= npcSelectedItems.size()){
+        else if(avatarPrice >= npcPrice){
             if(avatarInventory.size() + npcSelectedItems.size() > avatarInventory.getCapacity()){
                 System.out.println("Not enough inventory capacity!");
                 System.out.println("Trade unsuccessful");
@@ -195,6 +201,8 @@ public class NPCShopView extends View {
                 }
                 npcSelectedItems.clear();
                 avatarSelectedItems.clear();
+                avatarPrice = 0;
+                npcPrice = 0;
                 System.out.println("Trade successful!");
             }
         }
@@ -249,7 +257,7 @@ public class NPCShopView extends View {
         int ypos = itemMargin + itemViewYStart;
 
         for (int i = 0; i < capacity; i++) {
-            // Get the item (could be null if dont have an item at that slot
+            // Get the item (could be null if don't have an item at that slot
             // Which is OK. paintIcon checks this
             TakableItem item = null;
             if (i < size) {
@@ -271,6 +279,17 @@ public class NPCShopView extends View {
 
             // Draw it
             paintIcon(g, xpos, ypos, item, false);
+
+            // Draw the price
+            if(item != null) {
+                String price = Integer.toString(item.getPrice());
+                g.setColor(Color.black);
+                Font priceFont = new Font("Courier New", Font.BOLD, width / 67);
+                g.setFont(priceFont);
+                FontMetrics fm2 = g.getFontMetrics(priceFont);
+                Rectangle2D priceRect = fm2.getStringBounds(price, g);
+                g.drawString(price, xpos, ypos + (int) priceRect.getHeight()*3/5);
+            }
 
             //increment for next paint
             if ((i + 1) % ITEMS_PER_ROW == 0) {

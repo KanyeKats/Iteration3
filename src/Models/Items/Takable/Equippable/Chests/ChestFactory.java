@@ -32,7 +32,7 @@ public enum ChestFactory {
         public Chestplate createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Chestplate(ImageLoader.loadImage("./res/items/chain_mail.png"), new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage.", req, 2002, 50);
+            return new Chestplate(ImageLoader.loadImage("./res/items/chain_mail.png"), new StatModificationList(buff), "Chainmail", "A sturdy chainmail to protect you from damage. It also really helps protect you from dangerous arrows.", req, 2002, 50);
         }
     },
     CHESTPLATE(2003) {

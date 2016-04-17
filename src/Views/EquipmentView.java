@@ -459,25 +459,26 @@ public class EquipmentView extends View {
             int textY = titleY + (int) rect.getHeight() + fm.getAscent();
             rect = fm.getStringBounds(text, g);
 
-            // If too long, wrap the text
-            if (text.length() >= 40) {
-                // split at 40
-                String substring1 = text.substring(0, 41);
-                String substring2 = text.substring(41);
-                rect = fm.getStringBounds(substring1, g);
+            // Split the string into multiple liens if it's too long
+            String[] splitResponse = text.split(" ");
+            int length = 0;
 
-                // Draw first one
-                g.drawString(substring1, textX, textY);
-                textY = textY + (int) rect.getHeight();
-
-                // Draw second
-                g.drawString(substring2, textX, textY);
-                rect = fm.getStringBounds(substring2, g);
-            } else {
-                g.drawString(text, textX, textY);
+            String responseLine = "";
+            for(String str : splitResponse){
+                str += " ";
+                rect = fm.getStringBounds(str, g);
+                if(length + (int)rect.getWidth() < statsPaneWidth - 20){
+                    responseLine += str;
+                    length += (int)rect.getWidth();
+                }
+                else{
+                    g.drawString(responseLine, textX, textY);
+                    responseLine = str;
+                    length = str.length();
+                    textY += 15;
+                }
             }
-
-
+            g.drawString(responseLine, textX, textY);
 
             // Now draw statmods
             g.setFont(littleFontSansSerif);
