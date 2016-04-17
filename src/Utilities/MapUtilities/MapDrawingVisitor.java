@@ -151,8 +151,6 @@ public class MapDrawingVisitor  {
                     EntityDrawer.drawEntity(currentEntity, g);
                 }
             }
-
-
         }
         g.dispose();
     }

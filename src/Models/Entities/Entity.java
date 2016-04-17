@@ -1,7 +1,5 @@
 package Models.Entities;
 
-import Models.Consequences.BehaviorConsequence;
-import Models.Consequences.SleepConsequence;
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
@@ -9,21 +7,14 @@ import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.Stat;
-import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.Stats;
-import Models.Items.Item;
-import Models.Items.Takable.Equippable.Boots.Boot;
-import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
-import Models.Items.Takable.Equippable.Helmets.Helmet;
-import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
 import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
-import Views.Graphics.Assets;
 import javafx.geometry.Point3D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -35,7 +26,7 @@ import java.util.*;
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Entity extends Observable implements Savable {
+public class Entity implements Savable {
     private Occupation occupation;
     private Stats stats;
     private ActiveSkillList activeSkillList;
@@ -146,10 +137,6 @@ public class Entity extends Observable implements Savable {
         this.justMoved = true;
         this.enteredNewTile = false;
 
-        // Notify observers that the map changes
-        setChanged();
-        notifyObservers();
-
         // Allow movement again
         this.canMove = true;
     }
@@ -163,10 +150,6 @@ public class Entity extends Observable implements Savable {
     }
 
     public final void failedMovement() {
-        if(this.tryingNewDirection == true){
-            setChanged();
-            notifyObservers();
-        }
         this.canMove = true;
         this.justMoved = false;
     }

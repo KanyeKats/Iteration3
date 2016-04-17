@@ -2,11 +2,8 @@ package Views;
 
 import Models.Entities.Entity;
 import Models.Entities.Stats.Stat;
-import Utilities.Constants;
-import Views.View;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by Aidan on 4/12/2016.
@@ -19,7 +16,6 @@ public class StatusViewPort extends View {
         super(width, height);
 
         this.avatar = avatar;
-        avatar.addObserver(this);
         repaint();
     }
 
@@ -67,10 +63,6 @@ public class StatusViewPort extends View {
         g.setColor(Color.BLUE);
         g.drawRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (mana/maxMana)),manaBarheight);
         g.fillRect(manaBarx - manaBarwidth/2,manaBary, (int)(manaBarwidth * (mana/maxMana)),manaBarheight);
-
-
-        this.setChanged();
-        this.notifyObservers();
 
         g.dispose();
     }

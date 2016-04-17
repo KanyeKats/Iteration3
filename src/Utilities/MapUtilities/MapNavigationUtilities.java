@@ -71,7 +71,28 @@ public class MapNavigationUtilities {
 
     public static ArrayList<Tile> getTilesinPlane(Point3D point, int range, Map map){
 
-        return getTilesinPlane(point, range, map.getTiles());
+        double[] point4Dstart = convertAxialtoCuubic(point);
+        double[] point4Dend = new double[4];
+
+        ArrayList<Tile> resultTiles = new ArrayList<>();
+        for(int i = -range; i <= range; i++) {
+            for (int j = -range; j <= range; j++) {
+                for (int k = -range; k <= range; k++) {
+                    point4Dend[0] = point4Dstart[0] - i;
+                    point4Dend[1] = point4Dstart[1] - j;
+                    point4Dend[2] = point4Dstart[2] - k;
+                    point4Dend[3] = point.getZ();
+                    if((point4Dend[0] + point4Dend[1] + point4Dend[2]) == 0){
+                        Point3D newpoint = convertCubictoAxial(point4Dend);
+                        Tile tile = map.getTile(newpoint);
+                        if(tile != null && !newpoint.equals(point)) {
+                            resultTiles.add(tile);
+                        }
+                    }
+                }
+            }
+        }
+        return resultTiles;
 
     }
 
@@ -226,7 +247,7 @@ public class MapNavigationUtilities {
 
     //rotate the enum given an integer
     private static Direction rotateEnum(int i, Direction direction) {
-        Direction d = direction.values()[(direction.ordinal() + i) % 5];
+        Direction d = direction.values()[(direction.ordinal() + i) % Direction.values().length];
         return d;
     }
 

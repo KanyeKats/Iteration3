@@ -266,11 +266,12 @@ public class GameViewController extends ViewController {
             GameOverView gameOverView = new GameOverView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, gameOverMenu);
             stateManager.setActiveState(new State(skillViewPortMenuController, gameOverView));          }
 
-        if(refreshCounter % Constants.FRAME_RATE == 0){
+        if(refreshCounter % Constants.FRAME_RATE/4 == 0){
             Set<Entity> entitiesOnMap = map.getEntitiesOnMap();
             for(Entity entity : entitiesOnMap){
                 entity.update();
             }
+            refreshCounter = 0;
         }
         refreshCounter++;
     }

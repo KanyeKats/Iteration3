@@ -5,12 +5,9 @@ import Models.Entities.Stats.Stat;
 import Models.Map.Camera;
 import Models.Map.Direction;
 import Models.Map.Map;
-import Utilities.MapUtilities.MapDrawingVisitor;
 import javafx.geometry.Point3D;
 
-import javax.xml.stream.Location;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by Bradley on 4/7/16.
@@ -30,9 +27,6 @@ public class AreaViewport extends View {
         this.map = map;
         this.avatar = avatar;
         this.camera = new Camera(avatar.getLocation());
-        map.addObserver(this);
-        avatar.addObserver(this);
-        camera.addObserver(this);
         this.isMoving = false;
         this.debugMode = false;
 
@@ -56,12 +50,7 @@ public class AreaViewport extends View {
             renderLocation = camera.getLocation();
         }
         map.draw(viewContent, renderLocation, avatar.getLocation(), avatar.getStats().getStat(Stat.RADIUS_OF_VISIBILITY),isMoving, debugMode);
-        // Notify the observers of this view (GameView) that it changed.
-        this.setChanged();
-        this.notifyObservers();
 
-        // Cleanup
-        //g.dispose();
     }
 
     private void renderBackground(Graphics g){
