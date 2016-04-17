@@ -1,5 +1,6 @@
 package Views.Graphics;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -13,7 +14,12 @@ public class SpriteSheet {
         this.sheet = sheet;
     }
 
-    public BufferedImage crop(int x, int y, int width, int height) {
-        return sheet.getSubimage(x, y, width, height);
+    public BufferedImage scale(int x, int y, int width, int height) {
+        BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics g = resizedImage.getGraphics();
+        g.drawImage(sheet, 0, 0, width, height, null);
+        g.dispose();
+
+        return resizedImage;
     }
 }

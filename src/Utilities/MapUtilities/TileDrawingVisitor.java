@@ -21,6 +21,9 @@ public class TileDrawingVisitor {
 
         // Create the terrain tile image
         BufferedImage tileImage = ImageLoader.copyImage(tile.getTerrain().getImage(isInSight, tile.wasVisited()));
+        if(tileImage == null){
+            return null;
+        }
         Graphics g = tileImage.getGraphics();
 
         // Extract the graphics object rom the tile image.
