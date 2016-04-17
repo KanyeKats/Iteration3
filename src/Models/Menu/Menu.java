@@ -167,7 +167,7 @@ public class Menu{
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
-                        Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
+                        Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, false, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
@@ -197,15 +197,15 @@ public class Menu{
                         System.out.println("Summoner");
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
-                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
-                        Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
+                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER,Terrain.SKY};
+                        Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map,true, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
 
                         // TODO: Remove after testing.
                         //why does the entity need a point for its constructor and the insert entity map takes in the point anyway?
-                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET);
+                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET, false);
                         map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
-                        Mount hand = new Mount(new Point3D(2, 0, 0),map,passableTerrains);
+                        Mount hand = new Mount(new Point3D(2, 0, 0),map,passableTerrains, false);
                         map.insertEntity(hand,new Point3D(2,0,0));
 
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
@@ -237,7 +237,7 @@ public class Menu{
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
-                        Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map, passableTerrains); // TOD0: Improve avatar initial placement.
+                        Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map,true, passableTerrains); // TOD0: Improve avatar initial placement.
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());

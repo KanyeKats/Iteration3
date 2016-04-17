@@ -58,7 +58,6 @@ public class Map implements Savable {
         // Get the source tile.
         Point3D source = entity.getLocation();
         Tile sourceTile = tiles.get(source);
-
         // Update the destination point
         // This method will return the appropriate destination tile by checking all movement related factors.
         // See its comments for more info
@@ -106,6 +105,7 @@ public class Map implements Savable {
         Point currentPixelLocation = entityCurrentTile.getPixelPoint();
         Point targetPixelLocation = targetTile.getPixelPoint();
 
+
         // Get x and y distances from entity's current point to the desired one.
         double dy = targetPixelLocation.getY() - currentPixelLocation.getY();
         double dx = targetPixelLocation.getX() - currentPixelLocation.getX();
@@ -126,6 +126,7 @@ public class Map implements Savable {
             yRate = (int)(yRate*(0.70));
         }
         final int theYRate = yRate;
+
 
         // Create Timer and Periodic Timer Task and run it
         Timer entityMover = new Timer();
@@ -363,7 +364,8 @@ public class Map implements Savable {
 
         // First, update the destination point based off of height differences
         // i.e: Too tall, fall off cliff, climb up 1 step, or move to a tile at the same height.
-        Point3D updatedDestinationPointBasedOffHeight = updateDestinationPointBasedOnHeight(originalDestinationPoint, entityCurrentLocation);
+        //if you are a flyer you can disregard the updateDestinationPointBasedOnHeight method
+        Point3D updatedDestinationPointBasedOffHeight = updateDestinationPointBasedOnHeight(originalDestinationPoint, entityCurrentLocation, entity);
 
         // Get the updated destination tile
         Tile updatedDestinationTileBasedOffHeight = tiles.get(updatedDestinationPointBasedOffHeight);
@@ -386,7 +388,7 @@ public class Map implements Savable {
         }
     }
 
-    private Point3D updateDestinationPointBasedOnHeight(Point3D originalDestinationPoint, Point3D entityCurrentLocation) {
+    private Point3D updateDestinationPointBasedOnHeight(Point3D originalDestinationPoint, Point3D entityCurrentLocation, Entity entity) {
         // Compare height of dest. point, with entity's current height
         int tolerance = 1;
         int entityCurrentZ = (int)entityCurrentLocation.getZ();
@@ -401,13 +403,18 @@ public class Map implements Savable {
 //        System.out.println(destinationMaxZHeight);
 
         // The column is too tall, block movement
-        if (destinationMaxZHeight > entityCurrentZ + tolerance) {
+        Tile oneAbove = getTile(originalDestinationPoint.add(0,0,1));
+        if (destinationMaxZHeight > entityCurrentZ + tolerance && !entity.isFlyer()) {
             return entityCurrentLocation;
         }
         // If destination max Z is greater than entity's current z by one. we can move up one.
         // OR, if destination max Z is below entity's current Z: we are at a cliff.... need to drop down!!
-        else if (destinationMaxZHeight - entityCurrentZ == tolerance || entityCurrentZ - destinationMaxZHeight > 0){
+        else if (destinationMaxZHeight - entityCurrentZ == tolerance || entityCurrentZ - destinationMaxZHeight > 0 && !entity.isFlyer()){
             return new Point3D(destinationPointX, destinationPointY, destinationMaxZHeight);
+        }
+
+        else if(oneAbove!= null && oneAbove.getTerrain() == Terrain.EARTH){
+           return entityCurrentLocation;
         }
         // Else, If on the same height level, allow normal movement
         // ^ entityCurrentZ == destinationMaxZHeight ^
