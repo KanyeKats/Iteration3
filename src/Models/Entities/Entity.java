@@ -392,8 +392,7 @@ public class Entity implements Savable {
 //    }
 
     public Image getImage(){
-
-        return isVisible ? images.get(direction) : null;
+        return images.get(direction);
     }
 
     //TODO: Will need to cover a +/- 1 in height eventually

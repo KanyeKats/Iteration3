@@ -16,11 +16,18 @@ public class EntityDrawer {
         if(entity!=null && entity.getImage()!=null){
             int x = (int)entity.getPixelLocation().getX();
             int y = (int)entity.getPixelLocation().getY();
-            drawComponent(entity.getImage(), g, x , y);
+            Graphics2D g2 = (Graphics2D)g;
+
+            if (!entity.isVisible()) {
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
+            }
+            drawComponent(entity.getImage(), g2, x , y);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
+
         }
     }
 
-    public static void drawComponent(Image image, Graphics g, int x, int y){
+    public static void drawComponent(Image image, Graphics2D g, int x, int y){
 
         int finalx = x + (Constants.TILE_WIDTH -  image.getWidth(null)) / 2;
         int finaly = y + (Constants.TILE_HEIGHT - image.getHeight(null)) / 2;
