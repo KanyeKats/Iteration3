@@ -51,8 +51,6 @@ public class Sneak extends Occupation {
     @Override
     public ActiveSkillList initActiveSkills(Stats stats){
         super.initActiveSkills(stats);
-        activeSkillList.add(new BindWounds());
-        activeSkillList.add(new BasicAttack());
         activeSkillList.add(new Creep());
         activeSkillList.add(new DetectTrap());
         activeSkillList.add(new PickPocket());

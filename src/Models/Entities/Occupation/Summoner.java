@@ -54,8 +54,6 @@ public class Summoner extends Occupation {
     @Override
     public ActiveSkillList initActiveSkills(Stats stats){
         super.initActiveSkills(stats);
-        activeSkillList.add(new BindWounds());
-        activeSkillList.add(new BasicAttack());
         activeSkillList.add(new FireBlast());
         activeSkillList.add(new Fireball());
         activeSkillList.add(new FireWave());
