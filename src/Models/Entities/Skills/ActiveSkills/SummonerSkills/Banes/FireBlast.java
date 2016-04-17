@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
  */
 public class FireBlast extends Bane {
 
-    private final int BASE_COOLDOWN_TIME = 20000;       //20 seconds
+    private final int BASE_COOLDOWN_TIME = 1000;       //20 seconds
     private final BufferedImage decal = Assets.FIRE; // TODO: Dont use the bug anymore lol
 
 
@@ -31,6 +31,7 @@ public class FireBlast extends Bane {
             if(percentChanceByLevel()) {
                 //effect = new AngularEffect();
                 effect = new AngularEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
+                System.out.println("FireBlast");
                 effect.start();
                 isCooledDown = false;
                 doTheCoolDown();

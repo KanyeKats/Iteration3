@@ -21,11 +21,6 @@ public class GameView extends View {
         this.statusViewport = new StatusViewPort(width, height, entity);
 //        this.skillsViewport = new SkillsViewport(entity.getSkillList());
 
-        areaViewport.addObserver(this);
-        statusViewport.addObserver(this);
-        map.addObserver(statusViewport);
-//        skillsViewport.addObserver(this);
-
         repaint();
     }
 

@@ -15,12 +15,11 @@ import org.w3c.dom.NodeList;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Observable;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Tile extends Observable implements Savable {
+public class Tile implements Savable {
 
     private Terrain terrain;
     private AreaEffect areaEffect;
@@ -127,13 +126,9 @@ public class Tile extends Observable implements Savable {
 
     public void insertEffect(Effect effect){
         this.effect = effect;
-        setChanged();
-        notifyObservers();
     }
 
     public void removeEffect() { this.effect = null;
-        setChanged();
-        notifyObservers();
     }
 
     public Terrain getTerrain() { return this.terrain; }

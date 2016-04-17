@@ -15,7 +15,6 @@ public abstract class MenuView extends View{
     public MenuView(int width, int height, Menu menu) {
         super(width, height);
         this.menu = menu;
-        menu.addObserver(this);
     }
 
     @Override

@@ -34,7 +34,7 @@ import java.util.*;
 /**
  * Created by Bradley on 4/4/2016.
  */
-public class Menu extends java.util.Observable{
+public class Menu{
 
     private ArrayList<MenuOption> menuOptions;
     private int selectedIndex;
@@ -56,21 +56,14 @@ public class Menu extends java.util.Observable{
         return menuOptions.get(selectedIndex).getActions();
     }
 
-    public void refresh(){
-        setChanged();
-        notifyObservers();
-    }
-
     public void nextOption(){
         selectedIndex++;
         selectedIndex = (selectedIndex < menuOptions.size()) ? selectedIndex : 0; // This one's for you Josh :)
-        refresh();
     }
 
     public void previousOption(){
         selectedIndex--;
         selectedIndex = (selectedIndex >=0 ) ? selectedIndex : menuOptions.size() - 1;
-        refresh();
     }
 
     // Factory methods.

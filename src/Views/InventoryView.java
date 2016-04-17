@@ -1,18 +1,10 @@
 package Views;
 
-import Controllers.MenuViewController;
 import Models.Entities.Inventory;
-import Models.Entities.Stats.Stat;
-import Models.Entities.Stats.Stats;
 import Models.Items.Takable.TakableItem;
-import Models.Menu.Menu;
-import Models.Menu.MenuOption;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Observable;
 
 /**
  * Created by sergiopuleri on 4/14/16.

@@ -8,13 +8,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Random;
 
 /**
  * Created by Aidan on 4/6/2016.
  */
-public class Inventory extends Observable implements Savable {
+public class Inventory implements Savable {
     private ArrayList<TakableItem> items;
     private int capacity;
 
@@ -30,10 +29,6 @@ public class Inventory extends Observable implements Savable {
         // Add it
         items.add(item);
 
-        // Notify observers (inventory view)
-        setChanged();
-        notifyObservers();
-
         return true;
     }
 
@@ -41,16 +36,10 @@ public class Inventory extends Observable implements Savable {
         if ( items.contains(item) ) {
             items.remove(item);
         }
-        // Notify observers (inventory view)
-        setChanged();
-        notifyObservers();
     }
 
     public TakableItem removeItemAtIndex(int index) {
         if(index > -1 && index < size()) {
-            // Notify observers (inventory view)
-            setChanged();
-            notifyObservers();
 
             // Remove nd return it
             return this.items.remove(index);

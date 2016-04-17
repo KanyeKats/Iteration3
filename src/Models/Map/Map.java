@@ -5,25 +5,24 @@ import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Items.Item;
-
 import Models.Map.MapUtilities.MapUtilities;
-import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.Constants;
+import Utilities.MapUtilities.MapDrawingVisitor;
 import Utilities.MapUtilities.MapNavigationUtilities;
 import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
 
 /**
  * Created by Bradley on 4/5/2016.
  */
-public class Map extends Observable implements Savable, Observer {
+public class Map implements Savable {
 
     //// CLASS DECLARATIONS ////
 
@@ -189,17 +188,11 @@ public class Map extends Observable implements Savable, Observer {
                     if (!reRender) return;
 
                 }
-
-                // Notify observers that the map changes.
-                // --> Re-render Area Viewport.
-                // --> Re-render moved entity.
-                setChanged();
-                notifyObservers();
             }
         };
 
         // Translate the entity every ms
-        entityMover.scheduleAtFixedRate(translateEntity, 0, 1);
+        entityMover.scheduleAtFixedRate(translateEntity, 0, 100);
     }
 
 
@@ -234,9 +227,6 @@ public class Map extends Observable implements Savable, Observer {
         entity.moveComplete();
         destination.activateTileObjectsOnEntity(entity);
 
-        setChanged();
-        notifyObservers();
-
     }
 
     // This should only be used when an Entity is dead.
@@ -268,8 +258,6 @@ public class Map extends Observable implements Savable, Observer {
         tile.removeEntity();
         storedEntities.add(storedEntity);
         entitiesOnMap.remove(storedEntity);
-        setChanged();
-        notifyObservers();
     }
 
     public void addOffMapEntity(Entity storedEntity){
@@ -290,8 +278,6 @@ public class Map extends Observable implements Savable, Observer {
            entitiesOnMap.add(storedEntity);
            storedEntity.setPixelLocation(tile.getPixelPoint());
            tile.activateTileObjectsOnEntity(storedEntity);
-           setChanged();
-           notifyObservers();
        }
     }
 
@@ -537,9 +523,6 @@ public class Map extends Observable implements Savable, Observer {
                 tile.load(tileElement);
 
 
-                // Observe the tile
-                tile.addObserver(this);
-
                 // Check to see if this column has already been started
                 this.tiles.put(new Point3D(x, y, z), tile);
             }
@@ -553,13 +536,6 @@ public class Map extends Observable implements Savable, Observer {
         return tiles;
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        // Notiy the observers of map
-        setChanged();
-        notifyObservers();
-
-    }
     public Set<Entity> getEntitiesOnMap(){
         return entitiesOnMap;
     }
