@@ -35,6 +35,7 @@ public abstract class Effect implements Runnable, Savable {
     public void start() {
         //starts a thread that moves this effect throughout the map
         new Thread(this).start();
+
     }
 
     @Override
@@ -58,7 +59,6 @@ public abstract class Effect implements Runnable, Savable {
 
             if (lastFpsTime >= 1000000000)
             {
-                System.out.println("(FPS: "+fps+")");
                 lastFpsTime = 0;
                 fps = 0;
             }

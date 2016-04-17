@@ -296,8 +296,7 @@ public class GameViewController extends ViewController {
                 entity.update();
             }
             refreshCounter = 0;
-            System.out.println("NO: " + entitiesOnMap.size());
-            System.out.println(avatar.getLocation().toString());
+
         }
         refreshCounter++;
     }
@@ -311,7 +310,6 @@ public class GameViewController extends ViewController {
             keyBindings.addBinding(key, new Action() {
                 @Override
                 public void execute() {
-                    System.out.println("EXECUTING SKILL YO");
                     skill.activate(avatar);
                 }
 

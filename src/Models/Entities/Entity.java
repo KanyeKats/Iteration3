@@ -1,6 +1,7 @@
 package Models.Entities;
 
 import Models.Entities.NPC.Mount;
+import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
