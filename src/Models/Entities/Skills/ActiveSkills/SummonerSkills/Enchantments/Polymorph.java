@@ -14,7 +14,7 @@ public class Polymorph extends Enchantment {
 
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
     public final int BASE_ACTIVE_TIME = 10000;    //10 seconds
-    private final BufferedImage decal = Assets.FULLFOG; // TODO: Dont use the bug anymore lol
+    private final BufferedImage decal = Assets.POLYMORPH; // TODO: Dont use the bug anymore lol
 
 
     //TODO: create the right type of BehaviorConsequence
