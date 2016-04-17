@@ -168,7 +168,7 @@ public class Assets {
         SpriteSheet bugNWBlue = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugleftupblue.png"));
         BUG_NORTH_WEST_BLUE = bugNWBlue.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
-        SpriteSheet bugNGreen = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugbackgreen.png"));
+        SpriteSheet bugNGreen = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugbackGreen.png"));
         BUG_NORTH_GREEN = bugNGreen.crop(0, 0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
         SpriteSheet bugNEGreen = new SpriteSheet(ImageLoader.loadImage("./res/bugs/LAdybugrihgtupgreen.png"));
@@ -201,7 +201,7 @@ public class Assets {
         SpriteSheet beeSW = new SpriteSheet(ImageLoader.loadImage("./res/bugs/Beesouthleft.png"));
         BEE_SOUTH_WEST = beeSW.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
-        SpriteSheet beeNW = new SpriteSheet(ImageLoader.loadImage("./res/bugs/BeeNorthleft.png"));
+        SpriteSheet beeNW = new SpriteSheet(ImageLoader.loadImage("./res/bugs/BeeNorthLeft.png"));
         BEE_NORTH_WEST = beeNW.crop(0, 0, Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT * 1.25));
 
         SpriteSheet frogN = new SpriteSheet(ImageLoader.loadImage("./res/bugs/frogNorth.png"));
