@@ -13,7 +13,6 @@ public class BrawlingMastery extends PassiveSkill {
 
     public BrawlingMastery(Stats stats){
         this.stats = stats;
-        level = 0;
         statModification = new StatModification(Stat.WEAPON_MODIFIER, level);
         addToStats();
     }

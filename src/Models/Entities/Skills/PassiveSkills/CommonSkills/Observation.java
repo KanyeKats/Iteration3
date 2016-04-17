@@ -12,7 +12,6 @@ import Models.Entities.Stats.Stats;
 public class Observation extends PassiveSkill{
 
     public Observation(Stats stats){
-        level = 0;
         this.stats = stats;
         statModification = new StatModification(Stat.OBSERVATION, level);
         addToStats();

@@ -47,7 +47,15 @@ public class ActiveSkillList implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
-        return null;
+
+        for(ActiveSkill skill : activeSkillList){
+            Element activeSkill = doc.createElement("active-skill");
+            activeSkill.setAttribute("type", skill.toString());
+            activeSkill.setAttribute("value", Integer.toString(skill.getLevel()));
+            parentElement.appendChild(activeSkill);
+        }
+
+        return doc;
     }
 
     @Override

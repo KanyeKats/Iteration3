@@ -19,6 +19,7 @@ public class Stats implements Savable {
     // Tbh, it doesn't hold the values. It just calls the function (via the SingleAction interface)
     // to derive and return them!
     EnumMap<Stat, DerivedStatGetter> derived;
+    private boolean isDead;
 
     // Stats values will not be initialized in this constructor
     // They will be initialized in the appropriate Occupation sub class,
@@ -120,6 +121,7 @@ public class Stats implements Savable {
         stats.put(Stat.EXP_TO_LEVEL, 50);
         stats.put(Stat.LIVES, 3);
         stats.put(Stat.RADIUS_OF_VISIBILITY, 3);
+        this.isDead = false;
     }
 
 
@@ -168,8 +170,10 @@ public class Stats implements Savable {
         return 100 + (10* (int)Math.pow(level, 2.0));
     }
     //private methods that facilitate updating stats when gaining exp or levels
-    private int getExpForLevel(int level) {
-        return 100 + (10* (int)Math.pow(level - 1, 2.0));
+    public int getExpForLevel(int level) {
+        if (level == 1) {
+            return 1;
+        } else return 100 + (10* (int)Math.pow(level - 1, 2.0));
     }
     private int getLvlForExp(int exp) {
         if (exp < 110) return 1;
@@ -201,8 +205,28 @@ public class Stats implements Savable {
             stats.put(Stat.HEALTH, getMaxHealth());
         }
         else{
-
+            this.isDead = true;
         }
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void respawn() {
+        stats = new EnumMap<Stat, Integer>(Stat.class);
+
+        // Init default values for stats. Mostly 0's.
+        initStats();
+
+        // Construct and Populate the derived stats map
+        derived = new EnumMap<Stat, DerivedStatGetter>(Stat.class);
+        derived.put(Stat.MAX_HEALTH, () -> getMaxHealth());
+        derived.put(Stat.MAX_MANA, () -> getMaxMana());
+        derived.put(Stat.OFFSENSIVE_RATING, () -> getOffensiveRating());
+        derived.put(Stat.DEFENSIVE_RATING, () -> getDefensiveRating());
+        derived.put(Stat.ARMOR_MODIFIER, () -> getArmorRating());
+        derived.put(Stat.EXP_TO_LEVEL, () -> getExpRequiredToLevelUp());
     }
 
 
@@ -216,7 +240,21 @@ public class Stats implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
-        return null;
+        for (java.util.Map.Entry<Stat,Integer> entry: stats.entrySet()) {
+
+            //create tile element
+            Element stat = doc.createElement("stat");
+
+            Stat s = entry.getKey();
+            int val = entry.getValue();
+
+            stat.setAttribute("stat", String.valueOf(s));
+            stat.setAttribute("value", Integer.toString(val));
+
+            parentElement.appendChild(stat);
+        }
+
+        return doc;
     }
 
     @Override

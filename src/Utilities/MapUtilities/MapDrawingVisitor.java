@@ -3,6 +3,7 @@ package Utilities.MapUtilities;
 import Models.Entities.Entity;
 import Models.Map.MapUtilities.EntityDrawer;
 import Models.Map.MapUtilities.MapUtilities;
+import Models.Map.MapUtilities.ShadowDrawer;
 import Models.Map.Terrain;
 import Models.Map.Tile;
 import Utilities.Constants;
@@ -44,7 +45,8 @@ public class MapDrawingVisitor  {
                               Point3D avatarLocation,
                               int rangeofVisibility,
                               boolean cameraMoving,
-                              boolean isDebug) {
+                              boolean isDebug,
+                              boolean moveInProgress) {
 
         boolean justRecentered = false;
 
@@ -63,7 +65,7 @@ public class MapDrawingVisitor  {
         int distance = MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(center), MapUtilities.to2DPoint(drawingCenter));
 
         // Re-center on avatar if necessary.
-        if (distance > 4) {
+        if (distance > 3 && !moveInProgress) {
             setCenter(drawingCenter);
             justRecentered = true;
             tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
@@ -109,6 +111,8 @@ public class MapDrawingVisitor  {
                 }
             }
 
+
+
             // Figure out where to put it!
             // X and Y will start at the center of the screen.
             int pixelX = viewportWidth/2;
@@ -135,9 +139,6 @@ public class MapDrawingVisitor  {
 
             g.drawImage(tileImage, pixelX, pixelY, null);
 
-            // Draw debug text if in debug mode
-            if (isDebug) drawDebugText(g, currentTile, currentPoint, pixelX, pixelY);
-
             // If any entity is on the tile, init its pixel location and draw him!
             if (currentTile.containsEntity()) {
                 Entity currentEntity = currentTile.getEntity();
@@ -156,6 +157,13 @@ public class MapDrawingVisitor  {
                     EntityDrawer.drawEntity(currentEntity, g);
                 }
             }
+
+            if(MapNavigationUtilities.isEntityaboveTile(currentPoint,tile)){
+                ShadowDrawer.drawShadow(currentTile,g);
+            }
+
+            // Draw debug text if in debug mode
+            if (isDebug) drawDebugText(g, currentTile, currentPoint, pixelX, pixelY);
         }
         g.dispose();
     }
@@ -172,7 +180,7 @@ public class MapDrawingVisitor  {
             // For debugging, draw the axial point on the tile
             String tilePointString = Integer.toString((int) currentPoint.getX()) +
                     ", " + Integer.toString((int) currentPoint.getY()) +
-                    ", " + Integer.toString((int) currentPoint.getZ());
+                    ", " + Integer.toString((int) currentPoint.getZ()) + " : " + (tile.getEntity()!=null);
 
             // For debugging, draw point
             Font pointFont = new Font("SansSerif", 1, 8);

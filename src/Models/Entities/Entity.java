@@ -8,7 +8,11 @@ import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.Stats;
+import Models.Items.Takable.Equippable.Boots.Boot;
+import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
+import Models.Items.Takable.Equippable.Helmets.Helmet;
+import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
 import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
@@ -46,12 +50,17 @@ public class Entity implements Savable {
     private boolean tryingNewDirection;
     private Timer movementTimer;
     private boolean isMounted;
+    private boolean isFlyer;
     private Mount mount;
 
     // TODO: Ask about terrain checking... not sure if this is ok
     private ArrayList<Terrain> passableTerrains;
 
-    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map){
+
+    // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
+
+    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map, Boolean isFlyer){
+
 
         // TODO: Make sure that instantiating an entity with existing inventorys and equipment, make sure that the Equipemnt has a correct reference to the inventory.
         this.occupation = occupation;
@@ -68,9 +77,10 @@ public class Entity implements Savable {
         passiveSkillList = occupation.initPassiveSkills(stats);
         images = occupation.initImages();
         this.isMounted = false;
+        this.isFlyer = isFlyer;
     }
 
-    public Entity(Occupation occupation, Point3D location, Map map, Terrain... passableTerrains){
+    public Entity(Occupation occupation, Point3D location, Map map,Boolean isFlyer, Terrain... passableTerrains ){
         this.occupation = occupation;
         this.location = location;
         this.stats = new Stats();
@@ -94,6 +104,19 @@ public class Entity implements Savable {
         enteredNewTile = false;
         tryingNewDirection = true;
 
+        // TODO: Remove!! Just testing item factory and equipping.
+        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
+        equip(bluePhat);
+        Boot moccassins = BootFactory.bootsFromID(1001);
+        equip(moccassins);
+        this.isMounted = false;
+        this.isFlyer = isFlyer;
+//        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
+//        equip(bluePhat);
+//        Boot moccassins = BootFactory.bootsFromID(1001);
+//        equip(moccassins);
+
+
     }
 
     public void equip(EquippableItem item){
@@ -113,7 +136,6 @@ public class Entity implements Savable {
     public final void move(Direction direction) {
         // Move with taking movement speed in to account
         if(isMounted){
-            System.out.println("mount is moving");
             mount.move(direction);
             setLocation(mount.getDirection().getPointAdjacentTo(mount.getLocation()));
         }
@@ -128,10 +150,11 @@ public class Entity implements Savable {
                 this.tryingNewDirection = true;
 
             // Move the entity
-            this.direction = direction;
+            if(direction != Direction.UP && direction != Direction.DOWN){
+                this.direction = direction;
+            }
             map.moveEntity(this, direction);
         }
-
     }
     public final void moveComplete() {
         this.justMoved = true;
@@ -350,17 +373,6 @@ public class Entity implements Savable {
         this.passableTerrains = passableTerrains;
     }
 
-//    private void initImages(){
-//
-//        images = new HashMap<>();
-//        images.put(Direction.NORTH, Assets.BUG_NORTH);
-//        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST);
-//        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST);
-//        images.put(Direction.SOUTH, Assets.BUG_SOUTH);
-//        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST);
-//        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST);
-//
-//    }
 
 //    public int calculateMovementDelay() {
 //        // Calculate the timer delay based off of the "Movement" stat,
@@ -416,6 +428,8 @@ public class Entity implements Savable {
 
     }
 
+    public boolean isFlyer(){ return this.isFlyer; }
+
     public HashMap<Direction,BufferedImage> getImages(){
         return this.images;
     }
@@ -426,7 +440,84 @@ public class Entity implements Savable {
 
     @Override
     public Document save(Document doc, Element parentElement) {
-        return null;
+
+        Element entity = doc.createElement("entity");
+        String locString = Integer.toString((int)getLocation().getX()) + ",";
+        locString += Integer.toString((int)getLocation().getY()) + ",";
+        locString += Integer.toString((int)getLocation().getZ());
+        entity.setAttribute("location", locString);
+        entity.setAttribute("direction", String.valueOf(getDirection()));
+        entity.setAttribute("is-mounted", String.valueOf(isMounted()));
+        parentElement.appendChild(entity);
+
+        //save inventory
+        if(this.inventory != null) {
+            Element inventory = doc.createElement("inventory");
+            inventory.setAttribute("capacity", Integer.toString(this.inventory.getCapacity()));
+            entity.appendChild(inventory);
+
+            this.inventory.save(doc, inventory);
+        }
+
+        //save equipment
+        if(this.equipment != null) {
+            Element equipment = doc.createElement("equipment");
+            entity.appendChild(equipment);
+
+            this.equipment.save(doc, equipment);
+        }
+
+        //save occupation
+        if(this.occupation != null) {
+            Element occupation = doc.createElement("occupation");
+            occupation.setAttribute("value", this.occupation.toString());
+            entity.appendChild(occupation);
+        }
+
+        //save stats
+        if(this.stats != null){
+            Element stats = doc.createElement("stats");
+            entity.appendChild(stats);
+            this.stats.save(doc, stats);
+        }
+
+        //save active skills
+        if(this.activeSkillList != null){
+            Element activeSkillList = doc.createElement("active-skill-list");
+            entity.appendChild(activeSkillList);
+            this.activeSkillList.save(doc,activeSkillList);
+        }
+
+        //save passive skills
+        if(this.passiveSkillList != null){
+            Element passiveSkillList = doc.createElement("passive-skill-list");
+            entity.appendChild(passiveSkillList);
+            this.passiveSkillList.save(doc,passiveSkillList);
+        }
+
+        //save mount
+        if(this.mount != null){
+            Element mount = doc.createElement("mount");
+            mount.setAttribute("prev-speed", Integer.toString(this.mount.getEntityPrevspeed()));
+            entity.appendChild(mount);
+            this.mount.save(doc, mount);
+        }
+
+        //save passable terrains
+        if(this.passableTerrains != null){
+            Element passable = doc.createElement("passable-terrains");
+            entity.appendChild(passable);
+            for(Terrain t : passableTerrains){
+                Element terrain = doc.createElement("terrain");
+                terrain.setAttribute("type", t.name());
+                passable.appendChild(terrain);
+            }
+        }
+
+        //save brain
+
+
+        return doc;
     }
 
     @Override

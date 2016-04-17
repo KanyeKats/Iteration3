@@ -41,6 +41,11 @@ public class GameSaver {
             DOMSource source = new DOMSource(doc);
             trans.transform(source, result);
 
+            StringBuffer sb = writer.getBuffer();
+            String finalString = sb.toString();
+
+            writeToFile(finalString, "./res/map/test.xml");
+
         } catch (TransformerException ex) {
             System.out.println("Error outputting document");
         } catch (ParserConfigurationException ex) {
