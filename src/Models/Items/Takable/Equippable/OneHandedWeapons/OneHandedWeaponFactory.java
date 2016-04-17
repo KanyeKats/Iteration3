@@ -32,7 +32,7 @@ public enum OneHandedWeaponFactory {
         public OneHandedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.STRENGTH, 0);
-            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/dragon_dagger.png"), new StatModificationList(buff), "Dragon Dagger Super-Poisened", "A super poisened dragon dagger. This weapons special attack is deadly.", req, 6002);
+            return new OneHandedWeapon(ImageLoader.loadImage("./res/items/dragon_dagger.png"), new StatModificationList(buff), "DDS", "A super poisened dragon dagger. This weapons special attack is deadly.", req, 6002);
         }
     },
     ABBY_WHIP(6003) {
