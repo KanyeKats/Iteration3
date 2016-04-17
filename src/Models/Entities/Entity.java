@@ -56,6 +56,7 @@ public class Entity extends Observable implements Savable {
     private boolean tryingNewDirection;
     private Timer movementTimer;
     private boolean isMounted;
+    private boolean isFlyer;
     private Mount mount;
 
     // TODO: Ask about terrain checking... not sure if this is ok
@@ -64,7 +65,7 @@ public class Entity extends Observable implements Savable {
 
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
-    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map){
+    public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map, Boolean isFlyer){
 
         // TODO: Make sure that instantiating an entity with existing inventorys and equipment, make sure that the Equipemnt has a correct reference to the inventory.
         this.occupation = occupation;
@@ -81,9 +82,10 @@ public class Entity extends Observable implements Savable {
         passiveSkillList = occupation.initPassiveSkills(stats);
         images = occupation.initImages();
         this.isMounted = false;
+        this.isFlyer = isFlyer;
     }
 
-    public Entity(Occupation occupation, Point3D location, Map map, Terrain... passableTerrains){
+    public Entity(Occupation occupation, Point3D location, Map map,Boolean isFlyer, Terrain... passableTerrains ){
         this.occupation = occupation;
         this.location = location;
         this.stats = new Stats();
@@ -113,6 +115,7 @@ public class Entity extends Observable implements Savable {
         Boot moccassins = BootFactory.bootsFromID(1001);
         equip(moccassins);
         this.isMounted = false;
+        this.isFlyer = isFlyer;
 //        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
 //        equip(bluePhat);
 //        Boot moccassins = BootFactory.bootsFromID(1001);
@@ -137,7 +140,6 @@ public class Entity extends Observable implements Savable {
     public final void move(Direction direction) {
         // Move with taking movement speed in to account
         if(isMounted){
-            System.out.println("mount is moving");
             mount.move(direction);
             setLocation(mount.getDirection().getPointAdjacentTo(mount.getLocation()));
         }
@@ -152,10 +154,11 @@ public class Entity extends Observable implements Savable {
                 this.tryingNewDirection = true;
 
             // Move the entity
-            this.direction = direction;
+            if(direction != Direction.UP && direction != Direction.DOWN){
+                this.direction = direction;
+            }
             map.moveEntity(this, direction);
         }
-
     }
     public final void moveComplete() {
         this.justMoved = true;
@@ -383,17 +386,6 @@ public class Entity extends Observable implements Savable {
         this.passableTerrains = passableTerrains;
     }
 
-//    private void initImages(){
-//
-//        images = new HashMap<>();
-//        images.put(Direction.NORTH, Assets.BUG_NORTH);
-//        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST);
-//        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST);
-//        images.put(Direction.SOUTH, Assets.BUG_SOUTH);
-//        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST);
-//        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST);
-//
-//    }
 
 //    public int calculateMovementDelay() {
 //        // Calculate the timer delay based off of the "Movement" stat,
@@ -448,6 +440,8 @@ public class Entity extends Observable implements Savable {
     public void changeBack(HashMap<Direction,BufferedImage> images) {
 
     }
+
+    public boolean isFlyer(){ return this.isFlyer; }
 
     public HashMap<Direction,BufferedImage> getImages(){
         return this.images;

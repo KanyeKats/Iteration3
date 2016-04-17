@@ -3,6 +3,7 @@ package Utilities.MapUtilities;
 import Models.Entities.Entity;
 import Models.Map.Direction;
 import Models.Map.Map;
+import Models.Map.Terrain;
 import Models.Map.Tile;
 import Utilities.Constants;
 import javafx.geometry.Point3D;
@@ -39,6 +40,17 @@ public class MapNavigationUtilities {
             }
         }
         return null;
+    }
+
+    public static boolean isEntityaboveTile(Point3D pointofTile, HashMap<Point3D,Tile> map){
+
+        for(int i = (int)pointofTile.getZ(); i < Constants.COLUMN_HEIGHT - 1; i++){
+            pointofTile = pointofTile.add(0,0,1);
+            if(map.get(pointofTile).containsEntity() && map.get(pointofTile).getTerrain() != Terrain.EARTH){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static ArrayList<ArrayList<Tile>> getRadialTiles(Point3D point, int range, Map map){

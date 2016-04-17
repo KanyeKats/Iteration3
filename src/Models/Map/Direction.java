@@ -42,12 +42,24 @@ public enum Direction {
             Point3D p = new Point3D(point.getX(), point.getY(), point.getZ());
             return p.add(-1, 0, 0);
         }
+    },
+    UP {
+        public Point3D getPointAdjacentTo(Point3D point){
+            Point3D p = new Point3D(point.getX(), point.getY(), point.getZ());
+            return p.add(0, 0, 1);
+        }
+    },
+    DOWN {
+        public Point3D getPointAdjacentTo(Point3D point){
+            Point3D p = new Point3D(point.getX(), point.getY(), point.getZ());
+            return p.add(0, 0, -1);
+        }
     };
 
     public abstract Point3D getPointAdjacentTo(Point3D point);
 
 
-
+    //TODO: these need to be changed because of the added enums
     public Direction next() {
         int length = values().length;
         int current = this.ordinal();
