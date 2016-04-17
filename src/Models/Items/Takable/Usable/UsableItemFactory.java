@@ -9,7 +9,7 @@ public enum UsableItemFactory {
     KAT_KEY(13000) {
         @Override
         public UsableItem createInstance() {
-            return new UsableItem(Assets.PLACEHOLDER, "Kat Key", "Used to open a Chestbox.", 13000);
+            return new UsableItem(Assets.PLACEHOLDER, "Kat Key", "Used to open a Chestbox.", 13000, 20);
         }
     };
 
