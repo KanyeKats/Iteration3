@@ -192,7 +192,7 @@ public class NPC extends Entity implements Savable{
     }
 
     public void processDeath() {
-        this.move(new Point3D(5,5,0));
+        this.move(new Point3D(0,0,0));
         this.getStats().respawn();
     }
 }
