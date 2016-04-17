@@ -288,8 +288,16 @@ public class GameViewController extends ViewController {
                     System.out.println("EXECUTING SKILL YO");
                     skill.activate(avatar);
                 }
+
+                @Override
+                public String toString(){ return skill.toString();}
             });
-            key++;
+            if(key == KeyEvent.VK_9)
+                key = KeyEvent.VK_0;
+            else if(key == KeyEvent.VK_0)
+                key = KeyEvent.VK_J;
+            else
+                key++;
         }
     }
 }

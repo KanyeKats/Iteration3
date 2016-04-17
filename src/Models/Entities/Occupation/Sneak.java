@@ -16,6 +16,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
+import Models.Items.Takable.Equippable.WeaponType;
 import Models.Map.Direction;
 import Views.Graphics.Assets;
 
@@ -41,6 +42,11 @@ public class Sneak extends Occupation {
     }
 
     @Override
+    protected void initCompatibleWeapons() {
+        this.compatibleWeapons.add(WeaponType.RANGED);
+    }
+
+    @Override
     public PassiveSkillList initPassiveSkills(Stats stats){
         passiveSkillList.add(new Bargain(stats));
         passiveSkillList.add(new Observation(stats));
@@ -51,8 +57,6 @@ public class Sneak extends Occupation {
     @Override
     public ActiveSkillList initActiveSkills(Stats stats){
         super.initActiveSkills(stats);
-        activeSkillList.add(new BindWounds());
-        activeSkillList.add(new BasicAttack());
         activeSkillList.add(new Creep());
         activeSkillList.add(new DetectTrap());
         activeSkillList.add(new PickPocket());
