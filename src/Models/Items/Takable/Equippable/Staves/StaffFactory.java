@@ -16,7 +16,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(ImageLoader.loadImage("./res/items/airstaff.png"), new StatModificationList(buff), "Air Staff", "A staff of air. Increases your magic damage", req, 8000);
+            return new Staff(ImageLoader.loadImage("./res/items/airstaff.png"), new StatModificationList(buff), "Air Staff", "A staff of air. Increases your magic damage", req, 8000, 30);
         }
     },
     FIRE_STAFF(8001) {
@@ -24,7 +24,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(ImageLoader.loadImage("./res/items/firestaff.png"), new StatModificationList(buff), "Fire Staff", "A staff of fire. Increases your magic damage", req, 8001);
+            return new Staff(ImageLoader.loadImage("./res/items/firestaff.png"), new StatModificationList(buff), "Fire Staff", "A staff of fire. Increases your magic damage", req, 8001, 45);
         }
     },
     WATER_STAFF(8002) {
@@ -32,7 +32,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(ImageLoader.loadImage("./res/items/waterstaff.png"), new StatModificationList(buff), "Water Staff", "A staff of water. Increases your magic damage", req, 8002);
+            return new Staff(ImageLoader.loadImage("./res/items/waterstaff.png"), new StatModificationList(buff), "Water Staff", "A staff of water. Increases your magic damage", req, 8002, 60);
         }
     },
     LIGHT_STAFF(8003) {
@@ -40,7 +40,7 @@ public enum StaffFactory {
         public Staff createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.INTELLECT, 0);
-            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Staff of Light", "An insanely staff, harnessing the power of light. Beware.", req, 8003);
+            return new Staff(Assets.PLACEHOLDER, new StatModificationList(buff), "Staff of Light", "An insanely staff, harnessing the power of light. Beware.", req, 8003, 75);
         }
     };
 

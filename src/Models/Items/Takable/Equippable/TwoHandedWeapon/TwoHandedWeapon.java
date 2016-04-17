@@ -16,13 +16,14 @@ import java.awt.*;
  */
 public class TwoHandedWeapon extends EquippableItem {
     // We will just be instantiating different "Versions" of this equipment type
-    public TwoHandedWeapon(Image image, StatModificationList mods, String name, String description, StatRequirement requirement, int ID) {
+    public TwoHandedWeapon(Image image, StatModificationList mods, String name, String description, StatRequirement requirement, int ID, int price) {
         this.image = image;
         this.statModificationList = mods;
         this.name = name;
         this.description = description;
         this.requirementToEquip = requirement;
         this.ID = ID;
+        this.price = price;
     }
 
     @Override

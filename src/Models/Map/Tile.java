@@ -33,7 +33,6 @@ public class Tile implements Savable {
     private ArrayList<Item> items;
     private Effect effect;
     private Boolean visited;
-    // TODO: User visitor pattern to construct tile image?
     // pixel point used for moving
     private Point pixelPoint;
 

@@ -9,7 +9,7 @@ import java.awt.*;
 
 /**
  * Created by johnkaufmann on 4/6/16.
- * TODO:
+ *
  */
 public class TeleportAreaEffect extends AreaEffect {
     private Point3D targetLocation;

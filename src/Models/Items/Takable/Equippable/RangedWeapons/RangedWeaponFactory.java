@@ -16,7 +16,7 @@ public enum RangedWeaponFactory {
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(ImageLoader.loadImage("./res/items/throwing_knives.png"), new StatModificationList(buff), "Steel throwing knives", "Some sharp, steel throwing knives", req, 9000);
+            return new RangedWeapon(ImageLoader.loadImage("./res/items/throwing_knives.png"), new StatModificationList(buff), "Steel throwing knives", "Some sharp, steel throwing knives", req, 9000, 35);
         }
     },
     NINJA_STARS(9001) {
@@ -24,7 +24,7 @@ public enum RangedWeaponFactory {
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(ImageLoader.loadImage("./res/items/ninja_stars.png"), new StatModificationList(buff), "Ninja Throwing Stars", "Sharp, quick ninja throwing stars", req, 9001);
+            return new RangedWeapon(ImageLoader.loadImage("./res/items/ninja_stars.png"), new StatModificationList(buff), "Ninja Throwing Stars", "Sharp, quick ninja throwing stars", req, 9001, 45);
         }
     },
     CROSSBOW(9002) {
@@ -32,7 +32,7 @@ public enum RangedWeaponFactory {
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(ImageLoader.loadImage("./res/items/crossbow.png"), new StatModificationList(buff), "Crossbow", "A heavy hitting crossbow", req, 9002);
+            return new RangedWeapon(ImageLoader.loadImage("./res/items/crossbow.png"), new StatModificationList(buff), "Crossbow", "A heavy hitting crossbow", req, 9002, 60);
         }
     },
     DARK_BOW(9003) {
@@ -40,7 +40,7 @@ public enum RangedWeaponFactory {
         public RangedWeapon createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.AGILITY, 0);
-            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Darkbow", "An insanely powerful, dark compound bow.", req, 9003);
+            return new RangedWeapon(Assets.PLACEHOLDER, new StatModificationList(buff), "Darkbow", "An insanely powerful, dark compound bow.", req, 9003, 75);
         }
     };
 

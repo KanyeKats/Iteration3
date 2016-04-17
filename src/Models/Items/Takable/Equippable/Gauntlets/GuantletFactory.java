@@ -16,7 +16,7 @@ public enum GuantletFactory {
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Guantlets(ImageLoader.loadImage("./res/items/wooden_gauntlets.png"), new StatModificationList(buff), "Wooden Guantlets", "A pair of wooden guantlets", req, 4000);
+            return new Guantlets(ImageLoader.loadImage("./res/items/wooden_gauntlets.png"), new StatModificationList(buff), "Wooden Guantlets", "A pair of wooden guantlets", req, 4000, 20);
         }
     },
     BRASS_KNUCKLES(4001) {
@@ -24,7 +24,7 @@ public enum GuantletFactory {
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Guantlets(ImageLoader.loadImage("./res/items/brass_knuckles.png"), new StatModificationList(buff), "Brass Knuckles", "A pair of dangerous brass knuckles", req, 4001);
+            return new Guantlets(ImageLoader.loadImage("./res/items/brass_knuckles.png"), new StatModificationList(buff), "Brass Knuckles", "A pair of dangerous brass knuckles", req, 4001, 30);
         }
     },
     JACKSON_GLOVES(4002) {
@@ -32,7 +32,7 @@ public enum GuantletFactory {
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Guantlets(ImageLoader.loadImage("./res/items/jacksonglove.png"), new StatModificationList(buff), "Jackson Gloves", "A single white glove", req, 4002);
+            return new Guantlets(ImageLoader.loadImage("./res/items/jacksonglove.png"), new StatModificationList(buff), "Jackson Gloves", "A single white glove", req, 4002, 40);
         }
     },
     BLADE_FIST(4003) {
@@ -40,7 +40,7 @@ public enum GuantletFactory {
         public Guantlets createInstance() {
             StatModification buff = new StatModification(Stat.WEAPON_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Blade Fists", "You'll have some sharp fists with these!", req, 4003);
+            return new Guantlets(Assets.PLACEHOLDER, new StatModificationList(buff), "Blade Fists", "You'll have some sharp fists with these!", req, 4003, 50);
         }
     };
 

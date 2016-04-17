@@ -16,7 +16,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 5);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(ImageLoader.loadImage("./res/items/yogaPants.png"), new StatModificationList(buff), "Yoga Pants", "Some comfy, cute yoga pants", req, 5000);
+            return new Legging(ImageLoader.loadImage("./res/items/yogaPants.png"), new StatModificationList(buff), "Yoga Pants", "Some comfy, cute yoga pants", req, 5000, 30);
         }
     },
     BRONZE_PLATE_LEGS(5001) {
@@ -24,7 +24,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 10);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Platelegs", "A pair of bronze platelegs", req, 5001);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Bronze Platelegs", "A pair of bronze platelegs", req, 5001, 45);
         }
     },
     IRON_PLATE_LEGS(5002) {
@@ -32,7 +32,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 15);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Platelegs", "A pair of iron platelegs", req, 5002);
+            return new Legging(Assets.PLACEHOLDER, new StatModificationList(buff), "Iron Platelegs", "A pair of iron platelegs", req, 5002, 75);
         }
     },
     PETER_PAN_LEGGINGS(5003) {
@@ -40,7 +40,7 @@ public enum LeggingFactory {
         public Legging createInstance() {
             StatModification buff = new StatModification(Stat.ARMOR_MODIFIER, 20);
             StatRequirement req = new StatRequirement(Stat.DEFENSIVE_RATING, 0);
-            return new Legging(ImageLoader.loadImage("./res/items/peterpanleggings.png"), new StatModificationList(buff), "Peter Pan Pants", "Cute pants worn by Peter Pan. Will protect you from magic.", req, 5003);
+            return new Legging(ImageLoader.loadImage("./res/items/peterpanleggings.png"), new StatModificationList(buff), "Peter Pan Pants", "Cute pants worn by Peter Pan. Will protect you from magic.", req, 5003, 100);
         }
     };
 

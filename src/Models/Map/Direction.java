@@ -4,7 +4,7 @@ import javafx.geometry.Point3D;
 
 /**
  * Created by johnkaufmann on 3/31/16.
- * TODO:
+ *
  */
 public enum Direction {
     NORTH {

@@ -13,7 +13,7 @@ import java.awt.*;
 
 /**
  * Created by johnkaufmann on 4/7/16.
- * TODO:
+ *
  */
 public class InstantDeathAreaEffect extends AreaEffect {
     public InstantDeathAreaEffect() {
