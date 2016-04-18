@@ -31,6 +31,7 @@ public abstract class ActiveSkill extends Skill implements Savable{
     protected BufferedImage asset = Assets.FIRE;
 
 
+
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {

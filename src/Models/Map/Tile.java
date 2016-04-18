@@ -6,7 +6,6 @@ import Models.Entities.NPC.NPC;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.AreaEffects.AreaEffectFactory;
-import Models.Map.AreaEffects.RiverAreaEffect;
 import Utilities.MapUtilities.TileDrawingVisitor;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
@@ -86,6 +85,7 @@ public class Tile implements Savable {
     }
 
     public boolean activateTileObjectsOnEntity(Entity entity) {
+        boolean rerender = false;
         // Activate items
         for (Iterator<Item> iterator = items.iterator(); iterator.hasNext(); ) {
             Item item = iterator.next();
@@ -95,15 +95,15 @@ public class Tile implements Savable {
             if (removeItem) {
                 iterator.remove();
             }
-            return true;
+            rerender = true;
         }
 
         // Activate AreaEffects
         if(areaEffect!=null) {
             areaEffect.activate(entity);
-            return true;
+            rerender = true;
         }
-        return false;
+        return rerender;
     }
 
     public void removeEntity(){
