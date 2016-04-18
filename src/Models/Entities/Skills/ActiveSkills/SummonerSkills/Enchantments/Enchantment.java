@@ -12,12 +12,18 @@ public abstract class Enchantment extends ActiveSkill{
     protected Effect effect;
     protected final int BASE_RANGE = 4;
 
+
+//    @Override
+//    public void activate(Entity entity){
+//        if(isCooledDown){
+//            if(percentChanceByLevel())
+//                effect.start();
+//        }
+//    }
+
     @Override
-    public void activate(Entity entity){
-        if(isCooledDown){
-            if(percentChanceByLevel())
-                effect.start();
-        }
+    protected void performSkill(Entity entity) {
+        effect.start();
     }
 
     //TODO: Implement this when the activeTime timer stops. Don't think this is done here...pretty sure it's done by the consequence...
