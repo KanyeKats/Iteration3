@@ -5,6 +5,7 @@ import Models.Items.Takable.TakableItem;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
@@ -98,41 +99,28 @@ public class Inventory implements Savable {
         return doc;
     }
 
-    // TODO: 4/14/16 does not work..
     @Override
     public void load(Element data) {
-        try {
-            // Get the tilesNodes from the xml file
-            NodeList itemNodes = data.getElementsByTagName("tile");
+        // Get the item child nodes of the tile
+        NodeList itemNodes = data.getElementsByTagName("item");
 
-            //find out how many tiles there are
-            int numItems = itemNodes.getLength();
+        this.items = new ArrayList<>();
+        if (itemNodes.getLength() != 0) {
+            // Get all item elements
+            for (int i = 0; i < itemNodes.getLength(); i++) {
+                // Get the node/element
+                Node node = itemNodes.item(i);
+                Element itemElement = (Element) node;
 
-            //instantiate every tile to the map
-            for(int i=0; i<numItems; i++) {
+                // Grab the item id
+                String itemID = itemElement.getAttribute("id");
+                int id = Integer.parseInt(itemID);
 
-                Element tileElement = (Element) itemNodes.item(i);
-
-                int x = Integer.parseInt(tileElement.getAttribute("x"));
-                int y = Integer.parseInt(tileElement.getAttribute("y"));
-                int z = Integer.parseInt(tileElement.getAttribute("z"));
-
-                //construct an empty tile and load it into the game
-                TakableItem item = new TakableItem() {
-                    @Override
-                    public void onUse(Entity entity) {
-                        // idk
-                    }
-                };
-                item.load(tileElement);
-
-
-                // Check to see if this column has already been started
+                // Construct an instance and add it to this inventory
+                TakableItem item = (TakableItem)Item.itemFromID(id);
                 this.items.add(item);
             }
-        } catch (Exception e) {
-            System.out.println("Error parsing map again");
-            e.printStackTrace();
         }
+
     }
 }

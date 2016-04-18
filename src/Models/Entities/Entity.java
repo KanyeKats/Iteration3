@@ -3,11 +3,14 @@ package Models.Entities;
 import Models.Entities.NPC.Mount;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
+import Models.Entities.Occupation.Sneak;
+import Models.Entities.Occupation.Summoner;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.Stats;
+import Models.Items.Item;
 import Models.Items.Takable.Equippable.Boots.Boot;
 import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
@@ -22,6 +25,8 @@ import Utilities.Savable.Savable;
 import javafx.geometry.Point3D;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -47,7 +52,7 @@ public class Entity implements Savable {
     private boolean canMove;
     private boolean justMoved;
     private boolean enteredNewTile;
-    private boolean tryingNewDirection;
+    private boolean isAvatar = false;
     private Timer movementTimer;
     private boolean isMounted;
     private boolean isFlyer;
@@ -58,6 +63,9 @@ public class Entity implements Savable {
 
 
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
+
+    // This is used when loading a saved game
+    public Entity(){}
 
     public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map, Boolean isFlyer){
 
@@ -102,7 +110,6 @@ public class Entity implements Savable {
         canMove = true;
         justMoved = false;
         enteredNewTile = false;
-        tryingNewDirection = true;
 
         // TODO: Remove!! Just testing item factory and equipping.
         Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
@@ -129,8 +136,32 @@ public class Entity implements Savable {
         }
     }
 
+    private void equipAllAfterSave(ArrayList<EquippableItem> items){
+        for(EquippableItem item : items){
+            if(item != null) {
+                boolean successfullEquip = item.equip(equipment, passiveSkillList);
+                if (successfullEquip) {
+                    inventory.removeItem(item);
+                }
+            }
+        }
+    }
+
     public void unequip(EquippableItem item){
         item.unequip(equipment);
+    }
+
+    private ArrayList<EquippableItem> unequipAllForSave(){
+        ArrayList<EquippableItem> items = new ArrayList<>();
+        items.add(equipment.unequipBoots());
+        items.add(equipment.unequipBothHands());
+        items.add(equipment.unequipChest());
+        items.add(equipment.unequipHead());
+        items.add(equipment.unequipLeftHand());
+        items.add(equipment.unequipLeggings());
+        items.add(equipment.unequipRightHand());
+
+        return items;
     }
 
     public final void move(Direction direction) {
@@ -142,12 +173,6 @@ public class Entity implements Savable {
         else if (canMove) {
             // Don't allow the entity to move
             canMove = false;
-
-            // Deals with redrawing when the entity can't move
-            if(this.direction == direction)
-                this.tryingNewDirection = false;
-            else
-                this.tryingNewDirection = true;
 
             // Move the entity
             if(direction != Direction.UP && direction != Direction.DOWN){
@@ -358,7 +383,7 @@ public class Entity implements Savable {
     }
 
     public void setDirection(Direction orientation) {
-        this.direction = direction;
+        this.direction = orientation;
     }
 
     public Map getMap(){
@@ -430,6 +455,10 @@ public class Entity implements Savable {
 
     public boolean isFlyer(){ return this.isFlyer; }
 
+    public void setFlyer(boolean fly){
+        isFlyer = fly;
+    }
+
     public HashMap<Direction,BufferedImage> getImages(){
         return this.images;
     }
@@ -438,9 +467,20 @@ public class Entity implements Savable {
         this.images = images;
     }
 
+    public void setMap(Map m){
+        this.map = m;
+    }
+
+    public void setAsAvatar(){
+        isAvatar = true;
+    }
+
+    public boolean isAvatar(){
+        return isAvatar;
+    }
+
     @Override
     public Document save(Document doc, Element parentElement) {
-
         Element entity = doc.createElement("entity");
         String locString = Integer.toString((int)getLocation().getX()) + ",";
         locString += Integer.toString((int)getLocation().getY()) + ",";
@@ -448,6 +488,8 @@ public class Entity implements Savable {
         entity.setAttribute("location", locString);
         entity.setAttribute("direction", String.valueOf(getDirection()));
         entity.setAttribute("is-mounted", String.valueOf(isMounted()));
+        entity.setAttribute("is-avatar", String.valueOf(isAvatar()));
+        entity.setAttribute("is-flyer", String.valueOf(isFlyer()));
         parentElement.appendChild(entity);
 
         //save inventory
@@ -478,7 +520,9 @@ public class Entity implements Savable {
         if(this.stats != null){
             Element stats = doc.createElement("stats");
             entity.appendChild(stats);
+            ArrayList<EquippableItem> equippedItems = unequipAllForSave();
             this.stats.save(doc, stats);
+            equipAllAfterSave(equippedItems);
         }
 
         //save active skills
@@ -495,14 +539,6 @@ public class Entity implements Savable {
             this.passiveSkillList.save(doc,passiveSkillList);
         }
 
-        //save mount
-        if(this.mount != null){
-            Element mount = doc.createElement("mount");
-            mount.setAttribute("prev-speed", Integer.toString(this.mount.getEntityPrevspeed()));
-            entity.appendChild(mount);
-            this.mount.save(doc, mount);
-        }
-
         //save passable terrains
         if(this.passableTerrains != null){
             Element passable = doc.createElement("passable-terrains");
@@ -514,27 +550,165 @@ public class Entity implements Savable {
             }
         }
 
-        //save brain
-
-
         return doc;
     }
 
     @Override
     public void load(Element data) {
-        Occupation occupation = new Smasher();
-        occupation.load(data);
-        Stats stats = new Stats();
-        stats.load(data);
-        Inventory inventory = new Inventory(20);
-        inventory.load(data);
-        Equipment equipment = new Equipment(stats, inventory);
-        equipment.load(data);
-        Point3D location = new Point3D(3,3,3); // TODO: 4/14/16 have to fix this to read in the point from the xml
-        Direction direction = Direction.NORTH; // TODO: 4/14/16 fix this aswell
-        Map map = new Map(new HashMap<>());
-        map.load(data);
-        isVisible = true; // TODO: 4/14/16 read in from the file
+
+        //Load in occupation
+        NodeList occupationNodes = data.getElementsByTagName("occupation");
+        if(occupationNodes.getLength() != 0) {
+            Node node = occupationNodes.item(0);
+            Element inventoryElement = (Element) node;
+            String occupationString = inventoryElement.getAttribute("value");
+            if (occupationString.equals("Smasher"))
+                occupation = new Smasher();
+            else if (occupationString.equals("Summoner"))
+                occupation = new Summoner();
+            else
+                occupation = new Sneak();
+        }
+        else{
+            occupation = new Smasher();
+        }
+
+
+        //Load in stats
+        NodeList statNodes = data.getElementsByTagName("stats");
+        if(statNodes.getLength() != 0) {
+            Node node = statNodes.item(0);
+            Element statElement = (Element) node;
+            stats = new Stats();
+            stats.load(statElement);
+        }
+        else{
+            stats = new Stats();
+            occupation.initStats(stats);
+        }
+
+
+        //Load in inventory
+        NodeList inventoryNodes = data.getElementsByTagName("inventory");
+        if(inventoryNodes.getLength() != 0){
+            Node node = inventoryNodes.item(0);
+            Element inventoryElement = (Element) node;
+            String capacityString = inventoryElement.getAttribute("capacity");
+            int capacity = Integer.parseInt(capacityString);
+            inventory = new Inventory(capacity);
+            inventory.load(inventoryElement);
+        }
+        else {
+            inventory = new Inventory(20);
+        }
+
+
+        //Load in active skills
+        NodeList activeSkillNodes = data.getElementsByTagName("active-skill-list");
+        if(activeSkillNodes.getLength() != 0){
+            Node node = activeSkillNodes.item(0);
+            Element activeSkillsElement = (Element) node;
+            activeSkillList = occupation.initActiveSkills(stats);
+            activeSkillList.load(activeSkillsElement);
+        }
+        else {
+            activeSkillList = occupation.initActiveSkills(stats);
+        }
+
+
+        //Load in passive skills
+        NodeList passiveSkillNodes = data.getElementsByTagName("passive-skill-list");
+        if(passiveSkillNodes.getLength() != 0){
+            Node node = passiveSkillNodes.item(0);
+            Element passiveSkillsElement = (Element) node;
+            passiveSkillList = occupation.initPassiveSkills(stats);
+            passiveSkillList.load(passiveSkillsElement);
+        }
+        else {
+            passiveSkillList = occupation.initPassiveSkills(stats);
+        }
+
+
+        // Load in equipment
+        NodeList equipmentNodes = data.getElementsByTagName("equipment");
+        if(equipmentNodes.getLength() != 0){
+            Node node = equipmentNodes.item(0);
+            Element equipmentElement = (Element) node;
+            equipment = new Equipment(stats, inventory);
+
+            NodeList itemNodes = equipmentElement.getElementsByTagName("item");
+            if (itemNodes.getLength() != 0) {
+                // Get all item elements
+                for (int i = 0; i < itemNodes.getLength(); i++) {
+                    // Get the node/element
+                    Node itemNode = itemNodes.item(i);
+                    Element itemElement = (Element) itemNode;
+
+                    // Grab the item id
+                    String itemID = itemElement.getAttribute("id");
+                    int id = Integer.parseInt(itemID);
+
+                    // Construct an instance and add it to this inventory
+                    EquippableItem item = (EquippableItem) Item.itemFromID(id);
+                    equip(item);
+                }
+            }
+        }
+        else {
+            equipment = new Equipment(stats, inventory);
+        }
+
+
+        //Load in passable terrains
+        NodeList passableTerrainNode = data.getElementsByTagName("passable-terrains");
+        if(passableTerrainNode.getLength() != 0){
+            Node node = passableTerrainNode.item(0);
+
+
+            Element terrainElement = (Element) node;
+            NodeList terrainNodes = terrainElement.getElementsByTagName("terrain");
+            if(terrainNodes.getLength() != 0){
+                this.passableTerrains = new ArrayList<>();
+                for(int i = 0; i < terrainNodes.getLength(); i++) {
+                    Element terrain = (Element) terrainNodes.item(i);
+                    this.passableTerrains.add(Terrain.valueOf(terrain.getAttribute("type")));
+                }
+            }
+        }
+        else {
+            this.passableTerrains = null;
+        }
+
+
+        //Load in location
+        String locationString = data.getAttribute("location");
+        String[] stringArray = locationString.split(",");
+        int x = Integer.parseInt(stringArray[0]);
+        int y = Integer.parseInt(stringArray[1]);
+        int z = Integer.parseInt(stringArray[2]);
+        this.location = new Point3D(x, y, z);
+
+
+        //Load in direction
+        String directionString = data.getAttribute("direction");
+        this.direction = Direction.valueOf(directionString);
+
+
+        //Load in isAvatar
+        String isAvatarString = data.getAttribute("is-avatar");
+        this.isAvatar = Boolean.valueOf(isAvatarString);
+
+
+        //Load in isFlyer
+        String flyerString = data.getAttribute("is-flyer");
+        setFlyer(Boolean.valueOf(flyerString));
+
+        images = occupation.initImages();
+        this.isVisible = true;          //TODO: Save/load this value
+        movementTimer = new Timer();
+        canMove = true;
+        justMoved = false;
+        enteredNewTile = false;
     }
 
     public void update(){

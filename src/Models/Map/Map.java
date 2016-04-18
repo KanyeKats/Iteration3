@@ -30,6 +30,7 @@ public class Map implements Savable {
     private Set<Entity> entitiesOnMap;
     private ArrayList<Entity> storedEntities = new ArrayList();
     private boolean moveInProgress;
+    private Entity avatar;
 
     // Map will be passed the HashMap that is created by the gameloader after parsing the XML file.
     public Map(HashMap<Point3D, Tile> tiles){
@@ -470,6 +471,14 @@ public class Map implements Savable {
         return tiles.get(point);
     }
 
+    public void setAvatar(Entity avatar){
+        this.avatar = avatar;
+    }
+
+    public Entity getAvatar(){
+        return avatar;
+    }
+
     @Override
     public Document save(Document doc, Element parentElement) {
         //determine true 2D dimensions of the map (10 tiles high always!)
@@ -535,7 +544,17 @@ public class Map implements Savable {
 
                 // Check to see if this column has already been started
                 this.tiles.put(new Point3D(x, y, z), tile);
+                if(tile.containsEntity()) {
+                    insertEntity(tile.getEntity(), new Point3D(x, y, z));
+                    tile.getEntity().setMap(this);
+                    System.out.println(tile.getEntity().getOccupation().toString());
+                    System.out.println(tile.getEntity().isAvatar());
+                    if(tile.getEntity().isAvatar())
+                        setAvatar(tile.getEntity());
+                }
             }
+
+
         } catch (Exception e) {
             System.out.println("Error parsing map again");
             e.printStackTrace();

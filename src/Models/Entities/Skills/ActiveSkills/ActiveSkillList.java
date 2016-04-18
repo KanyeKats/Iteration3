@@ -3,6 +3,7 @@ package Models.Entities.Skills.ActiveSkills;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
@@ -60,34 +61,22 @@ public class ActiveSkillList implements Savable {
 
     @Override
     public void load(Element data) {
-        try {
-            // Get the tilesNodes from the xml file
-            NodeList skillNodes = data.getElementsByTagName("ActiveSkill");
+        // Get the item child nodes of the tile
+        NodeList activeSkillNodes = data.getElementsByTagName("active-skill");
 
-            //find out how many tiles there are
-            int skillNodesLength = skillNodes.getLength();
+        if (activeSkillNodes.getLength() != 0) {
+            // Get all item elements
+            for (int i = 0; i < activeSkillNodes.getLength(); i++) {
+                // Get the node/element
+                Node node = activeSkillNodes.item(i);
+                Element skillElement = (Element) node;
 
-            //instantiate every tile to the map
-            for(int i=0; i<skillNodesLength; i++) {
+                String skillName = skillElement.getAttribute("type");
+                String skillLevelString = skillElement.getAttribute("value");
+                int skillLevel = Integer.valueOf(skillLevelString);
 
-                Element skillElement = (Element) skillNodes.item(i);
-
-                int x = Integer.parseInt(skillElement.getAttribute("x"));
-                int y = Integer.parseInt(skillElement.getAttribute("y"));
-                int z = Integer.parseInt(skillElement.getAttribute("z"));
-
-                //construct an empty tile and load it into the game
-                ActiveSkill activeSkill = new ActiveSkill() {
-                };
-                activeSkill.load(skillElement);
-
-
-                // Check to see if this column has already been started
-                this.activeSkillList.add(activeSkill);
+                activeSkillList.get(i).setLevel(skillLevel);
             }
-        } catch (Exception e) {
-            System.out.println("Error parsing map again");
-            e.printStackTrace();
         }
     }
 }
