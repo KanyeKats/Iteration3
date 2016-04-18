@@ -16,22 +16,32 @@ public abstract class Bane extends ActiveSkill {
     protected Effect effect;
     protected final int BASE_DAMAGE_AMOUNT = 5;
     protected final int BASE_RANGE = 4;
+    private final int BASE_MANA_REQUIRED = 5;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
+
 
     public Bane(){
         StatModification damageStatMod = new StatModification(Stat.HEALTH, -BASE_DAMAGE_AMOUNT);
         consequence = new ImmediateStatConsequence(new StatModificationList(damageStatMod));
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
+//    @Override
+//    public void activate(Entity entity){
+//        System.out.println("ACTIVATE BANE");
+//        if(isCooledDown){
+//            if(percentChanceByLevel()) {
+//                effect.start();
+//                isCooledDown = false;
+//                doTheCoolDown();
+//            }
+//        }
+//    }
+
     @Override
-    public void activate(Entity entity){
-        System.out.println("ACTIVATE BANE");
-        if(isCooledDown){
-            if(percentChanceByLevel()) {
-                effect.start();
-                isCooledDown = false;
-                doTheCoolDown();
-            }
-        }
+    protected void performSkill(Entity entity) {
+        effect.start();
     }
 
     //Calculates a random number, checks if it's more than 0.8^level

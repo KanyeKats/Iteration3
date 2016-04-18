@@ -14,26 +14,32 @@ import java.util.ArrayList;
  */
 public class DetectTrap extends ActiveSkill {
 
-    public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
+    public final int BASE_COOLDOWN_TIME = 5000;    //5 seconds
+    private final int BASE_MANA_REQUIRED = 5;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
 
     public DetectTrap(){
         cooldownTime = BASE_COOLDOWN_TIME;
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
-    public void activate(Entity entity){
+    @Override
+    protected boolean percentChanceByLevel(){
+        return true;
+    }
 
-
+    @Override
+    protected void performSkill(Entity entity) {
         ArrayList<ArrayList<Tile>> potentialTrappedTiles = MapNavigationUtilities.getRadialTiles(entity.getLocation(),2,entity.getMap());
 
         for (ArrayList<Tile> al : potentialTrappedTiles) {
             for (Tile tile : al) {
                 //if there is a trap
                 if (!tile.getAreaEffect().getVisibility()) {
-                    if (isCooledDown) {
-                        if (percentChanceByLevel()) {
-                            //Implement making a trap visible
-                            tile.getAreaEffect().setVisibility(true);
-                        }
+                    if (percentChanceByLevel()) {
+                        //Implement making a trap visible
+                        tile.getAreaEffect().setVisibility(true);
                     }
                 }
             }

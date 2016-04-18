@@ -12,24 +12,50 @@ public abstract class Boon extends ActiveSkill{
     protected int activeTime;
     protected Entity entity;
 
-    @Override
+
+//    @Override
+//    public void activate(Entity e){
+//        if(isCooledDown){
+//            if(percentChanceByLevel()) {
+//                this.entity = e;
+//                consequence.execute(e);
+//                isCooledDown = false;
+//
+//
+//                effectTimer.schedule(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        consequence.remove(entity);
+//                        doTheCoolDown();
+//                    }
+//                }, activeTime);
+//
+//            }
+//        }
+//    }
     public void activate(Entity e){
         if(isCooledDown){
             if(percentChanceByLevel()) {
-                this.entity = e;
-                consequence.execute(e);
-                isCooledDown = false;
+                if (hasEnoughMana(e)) {
+                    System.out.println("executing skill");
+                    useMana(e);
+
+                    this.entity = e;
+                    consequence.execute(e);
+                    isCooledDown = false;
 
 
-                effectTimer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        consequence.remove(entity);
-                        doTheCoolDown();
-                    }
-                }, activeTime);
-
+                    effectTimer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            consequence.remove(entity);
+                            doTheCoolDown();
+                        }
+                    }, activeTime);
+                }
             }
         }
+        else
+            System.out.println("Not cooled down!");
     }
 }
