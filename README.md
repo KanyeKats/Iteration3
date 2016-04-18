@@ -29,11 +29,11 @@ git clone https://github.com/KanyeKats/Iteration3.git
 ```
 - Run the following command at the root directory to compile and run the game:   
 ```bash
-find $PWD -name "*.java" > sources.txt && mkdir bin &&  javac -d bin @sources.txt && cp -R src bin/ && cd bin && java RunGame && cd .. && rm -rf bin
+find $PWD -name "*.java" > sources.txt && mkdir bin && javac -d bin @sources.txt && cp -R src bin/ && cp -R res bin/ && cp -R aiden_res bin/ && cd bin && java RunGame && cd .. && rm -rf bin
 ```
 - To just compile the game run:
 ```bash
-find $PWD -name "*.java" > sources.txt && mkdir bin &&  javac -d bin @sources.txt && cp -R src bin/
+find $PWD -name "*.java" > sources.txt && mkdir bin && javac -d bin @sources.txt && cp -R src bin/ && cp -R res bin/ && cp -R aiden_res bin/
 ```
 - Then, to run the game, run:
 ```bash
