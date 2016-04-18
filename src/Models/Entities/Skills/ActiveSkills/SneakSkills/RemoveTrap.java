@@ -21,21 +21,6 @@ public class RemoveTrap extends ActiveSkill {
         manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
-//    public void activate(Entity entity){
-//
-//        Tile potentialTrapTile = entity.getTileInFront();
-//        AreaEffect potentialTrap = potentialTrapTile.getAreaEffect();
-//
-//        //if there is a trap
-//        if(potentialTrap != null && potentialTrap.isRemovable()){
-//            if(isCooledDown) {
-//                if (percentChanceByLevel()) {
-//                    //Implement removing a trap
-//                    potentialTrapTile.removeAreaEffect();
-//                }
-//            }
-//        }
-//    }
 
     @Override
     protected void performSkill(Entity entity) {
