@@ -149,7 +149,8 @@ public class Tile implements Savable {
         return entity!=null ? entity.getImage() : null;
     }
 
-    public AreaEffect getAreaEffect() { return this.areaEffect; }
+    public AreaEffect getAreaEffect() {
+        return this.areaEffect; }
 
     public ArrayList<Item> getItems() { return this.items; }
 

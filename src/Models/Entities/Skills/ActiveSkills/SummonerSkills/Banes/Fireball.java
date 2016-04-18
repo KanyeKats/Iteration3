@@ -1,14 +1,12 @@
 package Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes;
 
-import Models.Entities.Entity;
 import Models.Consequences.ImmediateStatConsequence;
+import Models.Entities.Entity;
 import Models.Entities.Skills.InfluenceEffect.LinearEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Views.Graphics.Assets;
-
-import java.awt.image.BufferedImage;
 
 /**
  * Created by josh on 4/6/16.
@@ -16,32 +14,17 @@ import java.awt.image.BufferedImage;
 public class Fireball extends Bane {
 
     private final int BASE_COOLDOWN_TIME = 1000;       //20 seconds
-    private final BufferedImage decal = Assets.FIRE; // TODO: Dont use the bug anymore lol
 
 
     public Fireball(){
         super();
+        setAsset(Assets.FIRE);
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
-//    @Override
-//    public void activate(Entity entity){
-//        System.out.println("ACTIVATE FIREBALL");
-//        if(isCooledDown){
-//            System.out.println("isCooledDown");
-//            if(percentChanceByLevel()) {
-//                System.out.println("All systems go");
-//                effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), decal);
-//                effect.start();
-//                isCooledDown = false;
-//                doTheCoolDown();
-//            }
-//        }
-//    }
-
     @Override
     protected void performSkill(Entity entity) {
-        effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), decal);
+        effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), asset);
         effect.start();
     }
 

@@ -1,14 +1,12 @@
 package Models.Entities.Skills.ActiveSkills.CommonSkills;
 
+import Models.Consequences.ImmediateStatConsequence;
 import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
-import Models.Consequences.ImmediateStatConsequence;
 import Models.Entities.Skills.InfluenceEffect.LinearEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
-import Models.Map.Decal;
-import Views.Graphics.Assets;
 
 /**
  * Created by josh on 4/6/16.
@@ -41,9 +39,10 @@ public class BasicAttack extends ActiveSkill {
             return false;
         }
     }
+
     @Override
     protected void performSkill(Entity entity) {
-        LinearEffect effect = new LinearEffect(1, entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), Assets.FIRE);
+        LinearEffect effect = new LinearEffect(entity.getStats().getStat(Stat.BASIC_ATTACK_RANGE), entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), asset);
         effect.start();
     }
 

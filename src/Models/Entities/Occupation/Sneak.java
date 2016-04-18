@@ -1,13 +1,10 @@
 package Models.Entities.Occupation;
 
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
-import Models.Entities.Skills.ActiveSkills.CommonSkills.BasicAttack;
-import Models.Entities.Skills.ActiveSkills.CommonSkills.BindWounds;
 import Models.Entities.Skills.ActiveSkills.SneakSkills.Creep;
 import Models.Entities.Skills.ActiveSkills.SneakSkills.DetectTrap;
 import Models.Entities.Skills.ActiveSkills.SneakSkills.PickPocket;
 import Models.Entities.Skills.ActiveSkills.SneakSkills.RemoveTrap;
-import Models.Entities.Skills.InfluenceEffect.RadialEffect;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Bargain;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Observation;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
@@ -57,6 +54,7 @@ public class Sneak extends Occupation {
     @Override
     public ActiveSkillList initActiveSkills(Stats stats){
         super.initActiveSkills(stats);
+        activeSkillList.get(0).setAsset(Assets.THROWINGSTAR);
         activeSkillList.add(new Creep());
         activeSkillList.add(new DetectTrap());
         activeSkillList.add(new PickPocket());

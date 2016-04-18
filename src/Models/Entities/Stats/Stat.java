@@ -32,7 +32,8 @@ public enum Stat {
     SKILL_POINTS("Skill Points", 100),
     TOTAL_WEIGHT("Weight", 100),
     BARGAIN("Bargain", 100),
-    OBSERVATION("Observation", 100);
+    OBSERVATION("Observation", 100),
+    BASIC_ATTACK_RANGE("Basic Attack Range", 10);
 
 
     // Properties and methods (constructor)

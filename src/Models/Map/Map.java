@@ -66,8 +66,12 @@ public class Map implements Savable {
 
         final Tile updatedDestinationTile = tiles.get(destination);
 
+
+        // Get the entites movement speed.
+        int movementSpeed = entity.getStats().getStat(Stat.MOVEMENT);
+
         // Check if the tiles are in bounds of the map.
-        if(sourceTile==null || updatedDestinationTile==null || destination==source){
+        if(sourceTile==null || updatedDestinationTile==null || destination==source || movementSpeed == 0){
             entity.failedMovement();
             return;
         }
@@ -81,8 +85,6 @@ public class Map implements Savable {
             return;
         }
 
-        // Get the entites movement speed.
-        int movementSpeed = entity.getStats().getStat(Stat.MOVEMENT);
 
         // Move him at that rate, upon completion of translation, we will apply items/AoEs/etc on the tile.
         translateEntity(entity, destination, movementSpeed);
@@ -228,16 +230,17 @@ public class Map implements Savable {
         Tile destination = tiles.get(point);
         Tile current = tiles.get(entity.getLocation());
 
-        current.removeEntity();
+        if(destination!=null){
+            current.removeEntity();
 
-        // insert
-        destination.insertEntity(entity);
+            // insert
+            destination.insertEntity(entity);
 
-        entity.setLocation(point);
-        entity.setPixelLocation(destination.getPixelPoint());
-        entity.moveComplete();
-        destination.activateTileObjectsOnEntity(entity);
-
+            entity.setLocation(point);
+            entity.setPixelLocation(destination.getPixelPoint());
+            entity.moveComplete();
+            destination.activateTileObjectsOnEntity(entity);
+        }
     }
 
     // This should only be used when an Entity is dead.

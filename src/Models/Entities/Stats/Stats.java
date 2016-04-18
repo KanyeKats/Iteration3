@@ -68,7 +68,7 @@ public class Stats implements Savable {
             else if(currentValue <= 0)
                 currentValue = 0;
         }
-        else if (currentValue < 1 && stat != Stat.SKILL_POINTS)
+        else if (currentValue < 1 && stat != Stat.SKILL_POINTS && stat != Stat.MOVEMENT)
             currentValue = 1;
         else if (stat == Stat.EXPERIENCE) {
             if (delta + stats.get(Stat.EXPERIENCE) > getExpRequiredToLevelUp()) {
