@@ -206,24 +206,24 @@ public class Menu{
                         System.out.println("Summoner");
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
-                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER,Terrain.SKY};
-                        Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map,true, passableTerrains); // TOD0: Improve avatar initial placement.
+                        Terrain []passableTerrainsAvatar =  {Terrain.EARTH, Terrain.WATER,Terrain.SKY};
+                        Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map,true, passableTerrainsAvatar); // TOD0: Improve avatar initial placement.
                         avatar.setAsAvatar();
                         map.setAvatar(avatar);
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
-
+                        Terrain []passableTerrainsNPC =  {Terrain.EARTH, Terrain.WATER};
                         // TODO: Remove after testing.
                         //why does the entity need a point for its constructor and the insert entity map takes in the point anyway?
-                        NPC pet = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET, false);
+                        NPC pet = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrainsNPC, Personality.PET, false);
                         map.insertEntity(pet, new Point3D(2, -1, 0));
 
-                        NPC shopKeeper = new NPC(new Smasher(), new Point3D(-7, -2, 0), map, passableTerrains, Personality.SHOP_KEEPER, false);
+                        NPC shopKeeper = new NPC(new Smasher(), new Point3D(-7, -2, 0), map, passableTerrainsNPC, Personality.SHOP_KEEPER, false);
                         map.insertEntity(shopKeeper, new Point3D(-7, -2, 0));
 
-                        NPC enemy = new NPC(new Sneak(), new Point3D(0, -4, 0), map, passableTerrains, Personality.HOSTILE, false);
+                        NPC enemy = new NPC(new Sneak(), new Point3D(0, -4, 0), map, passableTerrainsNPC, Personality.HOSTILE, false);
                         map.insertEntity(enemy, new Point3D(0, -4, 0));
 
-                        Mount hand = new Mount(new Point3D(-1, 1, 0),map,passableTerrains, false);
+                        Mount hand = new Mount(new Point3D(-1, 1, 0),map,passableTerrainsNPC, false);
                         map.insertEntity(hand,new Point3D(-1,1,0));
 
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
