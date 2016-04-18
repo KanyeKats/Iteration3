@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class DetectTrap extends ActiveSkill {
 
-    public final int BASE_COOLDOWN_TIME = 5000;    //5 seconds
+    public final int BASE_COOLDOWN_TIME = 500;    //5 seconds
     private final int BASE_MANA_REQUIRED = 5;
     private final int MANA_LEVEL_MULTIPLIER = 1;
 
@@ -37,12 +37,9 @@ public class DetectTrap extends ActiveSkill {
             for (Tile tile : al) {
                 //if there is a trap
                 if (tile.getAreaEffect() != null && !tile.getAreaEffect().getVisibility()) {
-                    if (isCooledDown) {
-                        if (percentChanceByLevel()) {
-                            //Implement making a trap visible
-                            tile.getAreaEffect().setVisibility(true);
-                        }
-                    }
+                    System.out.println(tile.getAreaEffect().toString());
+                    //Implement making a trap visible
+                    tile.getAreaEffect().setVisibility(true);
                 }
             }
         }

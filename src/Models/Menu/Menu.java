@@ -260,18 +260,18 @@ public class Menu{
                         avatar.setAsAvatar();
                         map.setAvatar(avatar);
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
-                        //why does the entity need a point for its constructor and the insert entity map takes in the point anyway?
-//                        NPC pet = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET, false);
-//                        map.insertEntity(pet, new Point3D(2, -1, 0));
-//
-//                        NPC shopKeeper = new NPC(new Smasher(), new Point3D(-7, -2, 0), map, passableTerrains, Personality.SHOP_KEEPER, false);
-//                        map.insertEntity(shopKeeper, new Point3D(-7, -2, 0));
+                        // why does the entity need a point for its constructor and the insert entity map takes in the point anyway?
+                        NPC pet = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET, false);
+                        map.insertEntity(pet, new Point3D(2, -1, 0));
+
+                        NPC shopKeeper = new NPC(new Smasher(), new Point3D(-7, -2, 0), map, passableTerrains, Personality.SHOP_KEEPER, false);
+                        map.insertEntity(shopKeeper, new Point3D(-7, -2, 0));
 
                         NPC enemy = new NPC(new Sneak(), new Point3D(0, -4, 0), map, passableTerrains, Personality.HOSTILE, false);
                         map.insertEntity(enemy, new Point3D(0, -4, 0));
 //
-//                        Mount hand = new Mount(new Point3D(-1, 1, 0),map,passableTerrains, false);
-//                        map.insertEntity(hand,new Point3D(-1,1,0));
+                        Mount hand = new Mount(new Point3D(-1, 1, 0),map,passableTerrains, false);
+                        map.insertEntity(hand,new Point3D(-1,1,0));
 
 
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);

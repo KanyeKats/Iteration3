@@ -230,16 +230,17 @@ public class Map implements Savable {
         Tile destination = tiles.get(point);
         Tile current = tiles.get(entity.getLocation());
 
-        current.removeEntity();
+        if(destination!=null){
+            current.removeEntity();
 
-        // insert
-        destination.insertEntity(entity);
+            // insert
+            destination.insertEntity(entity);
 
-        entity.setLocation(point);
-        entity.setPixelLocation(destination.getPixelPoint());
-        entity.moveComplete();
-        destination.activateTileObjectsOnEntity(entity);
-
+            entity.setLocation(point);
+            entity.setPixelLocation(destination.getPixelPoint());
+            entity.moveComplete();
+            destination.activateTileObjectsOnEntity(entity);
+        }
     }
 
     // This should only be used when an Entity is dead.

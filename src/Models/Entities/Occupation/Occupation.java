@@ -3,17 +3,13 @@ package Models.Entities.Occupation;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.ActiveSkills.CommonSkills.BasicAttack;
 import Models.Entities.Skills.ActiveSkills.CommonSkills.BindWounds;
-import Models.Entities.Skills.PassiveSkills.CommonSkills.Bargain;
-import Models.Entities.Skills.PassiveSkills.CommonSkills.Observation;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
 import Models.Entities.Stats.Stat;
-import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
 import Models.Items.Takable.Equippable.WeaponType;
 import Models.Map.Direction;
 import Utilities.Savable.Savable;
-import Views.Graphics.Assets;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -44,7 +40,7 @@ public abstract class Occupation implements Savable {
         statModificationList.applyModifications(stats);
         stats.setStat(Stat.HEALTH, stats.getMaxHealth());
         stats.setStat(Stat.MANA,stats.getMaxMana());
-
+        stats.setStat(Stat.BASIC_ATTACK_RANGE, 1);
     }
 
     protected void initCompatibleWeapons() {

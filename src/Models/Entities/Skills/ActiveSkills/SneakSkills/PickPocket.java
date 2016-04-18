@@ -3,6 +3,8 @@ package Models.Entities.Skills.ActiveSkills.SneakSkills;
 import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
 
+import Models.Items.Item;
+import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Tile;
 import javafx.geometry.Point3D;
@@ -24,12 +26,6 @@ public class PickPocket extends ActiveSkill {
         manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
-//    public void activate(Entity entity){
-//
-//        if(isCooledDown && tileHasNPC(entity)){
-//            stealItem(entity);
-//        }
-//    }
 
     @Override
     protected void performSkill(Entity entity) {
@@ -48,7 +44,13 @@ public class PickPocket extends ActiveSkill {
 
     private void stealItem(Entity entity){
         Entity npc = entity.getTileInFront().getEntity();
-        entity.addItemToInventory(npc.getInventory().removeRandomItem());
+        TakableItem item = npc.getInventory().removeRandomItem();
+        if(item != null) {
+            entity.addItemToInventory(item);
+        }
+        else{
+            System.out.println("empty inventory!");
+        }
     }
 
     @Override

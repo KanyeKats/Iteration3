@@ -14,7 +14,6 @@ public class Polymorph extends Enchantment {
 
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
     public final int BASE_ACTIVE_TIME = 10000;    //10 seconds
-    private final BufferedImage decal = Assets.POLYMORPH; // TODO: Dont use the bug anymore lol
     private final int BASE_MANA_REQUIRED = 5;
     private final int MANA_LEVEL_MULTIPLIER = 1;
 
@@ -26,6 +25,7 @@ public class Polymorph extends Enchantment {
         cooldownTime = 2000;
         manaRequired = BASE_MANA_REQUIRED;
         manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
+        setAsset(Assets.POLYMORPH);
     }
 
 //    @Override
@@ -41,7 +41,7 @@ public class Polymorph extends Enchantment {
 //    }
     @Override
     protected void performSkill(Entity entity) {
-        effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap(), decal);
+        effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap(), asset);
         effect.start();
     }
 

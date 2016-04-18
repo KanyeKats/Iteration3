@@ -7,9 +7,11 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Utilities.Savable.Savable;
+import Views.Graphics.Assets;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.awt.image.BufferedImage;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,12 +27,14 @@ public abstract class ActiveSkill extends Skill implements Savable{
     //by default, requires no mana
     protected int manaRequired = 0;
     protected int manaLevelMultiplier = 0;
+    // Default asset
+    protected BufferedImage asset = Assets.FIRE;
+
 
     public void activate(Entity entity){
         if(isCooledDown){
             if(percentChanceByLevel()) {
                 if (hasEnoughMana(entity)) {
-                    System.out.println("executing skill");
                     isCooledDown = false;
                     useMana(entity);
                     performSkill(entity);
@@ -55,11 +59,10 @@ public abstract class ActiveSkill extends Skill implements Savable{
     //Calculates a random number, checks if it's more than 0.9^level
     //This value doesn't go below 0.5 until level=7
     protected boolean percentChanceByLevel(){
-//        if(Math.random() > Math.pow(0.9, level))
-//            return true;
-//        else
-//            return false;
-        return true;
+        if(Math.random() > Math.pow(0.4, level))
+            return true;
+        else
+            return false;
     }
 
     //makes sure an entity has enough mana to perform the skill
@@ -87,5 +90,9 @@ public abstract class ActiveSkill extends Skill implements Savable{
     @Override
     public void load(Element data) {
         this.consequence.load((Element) data.getElementsByTagName("consequence"));
+    }
+
+    public void setAsset(BufferedImage asset){
+        this.asset = asset;
     }
 }
