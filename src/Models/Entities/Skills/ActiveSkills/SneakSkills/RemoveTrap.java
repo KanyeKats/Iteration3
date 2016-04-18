@@ -12,24 +12,40 @@ import Models.Map.Tile;
 public class RemoveTrap extends ActiveSkill {
 
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
+    private final int BASE_MANA_REQUIRED = 5;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
 
     public RemoveTrap(){
         cooldownTime = BASE_COOLDOWN_TIME;
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
-    public void activate(Entity entity){
+//    public void activate(Entity entity){
+//
+//        Tile potentialTrapTile = entity.getTileInFront();
+//        AreaEffect potentialTrap = potentialTrapTile.getAreaEffect();
+//
+//        //if there is a trap
+//        if(potentialTrap != null && potentialTrap.isRemovable()){
+//            if(isCooledDown) {
+//                if (percentChanceByLevel()) {
+//                    //Implement removing a trap
+//                    potentialTrapTile.removeAreaEffect();
+//                }
+//            }
+//        }
+//    }
 
+    @Override
+    protected void performSkill(Entity entity) {
         Tile potentialTrapTile = entity.getTileInFront();
         AreaEffect potentialTrap = potentialTrapTile.getAreaEffect();
 
         //if there is a trap
         if(potentialTrap != null && potentialTrap.isRemovable()){
-            if(isCooledDown) {
-                if (percentChanceByLevel()) {
-                    //Implement removing a trap
-                    potentialTrapTile.removeAreaEffect();
-                }
-            }
+            //Implement removing a trap
+            potentialTrapTile.removeAreaEffect();
         }
     }
 

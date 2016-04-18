@@ -31,29 +31,20 @@ public class BasicAttack extends ActiveSkill {
         consequence = new ImmediateStatConsequence(new StatModificationList(damageStatMod));
     }
 
-    @Override
-    public void activate(Entity entity) {
-//        System.out.println("ACTIVATE BASIC ATTACK");
-        if(isCooledDown){
-//            System.out.println("isCooledDown");
-            if(percentChanceByLevel()) {
-//                System.out.println("All systems go");
-                LinearEffect effect = new LinearEffect(1, entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), Assets.FIRE);
-                effect.start();
-                isCooledDown = false;
-                doTheCoolDown();
-            }
-        }
-    }
-
     //Overriding this method because it needs a higher chance of success, I think
     //Calculates a random number, checks if it's more than 0.8^level
     @Override
     protected boolean percentChanceByLevel(){
         if(Math.random() > Math.pow(0.8, level))
             return true;
-        else
+        else {
             return false;
+        }
+    }
+    @Override
+    protected void performSkill(Entity entity) {
+        LinearEffect effect = new LinearEffect(1, entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), Assets.FIRE);
+        effect.start();
     }
 
     @Override
