@@ -223,8 +223,8 @@ public class Menu{
                         NPC enemy = new NPC(new Sneak(), new Point3D(0, -4, 0), map, passableTerrainsNPC, Personality.HOSTILE, false);
                         map.insertEntity(enemy, new Point3D(0, -4, 0));
 
-                        Mount hand = new Mount(new Point3D(-1, 1, 0),map,passableTerrainsNPC, false);
-                        map.insertEntity(hand,new Point3D(-1,1,0));
+                        Mount hand = new Mount(new Point3D( 12,-1 , 0),map,passableTerrainsNPC, false);
+                        map.insertEntity(hand,new Point3D(12,-1,0));
 
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
