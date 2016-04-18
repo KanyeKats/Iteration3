@@ -1,6 +1,7 @@
 package Models.Entities.NPC.AI;
 
 import Models.Entities.Entity;
+import Models.Entities.NPC.NPC;
 import javafx.geometry.Point3D;
 
 import java.awt.*;

@@ -23,7 +23,7 @@ public class RunAwayDecision implements Decision{
     }
 
     @Override
-    public boolean continuePursuing(VisualInfo visualInfo) {
+    public boolean continuePursuing(VisualInfo visualInfo, NPC npc) {
         return visualInfo.getStillFeared();
     }
 

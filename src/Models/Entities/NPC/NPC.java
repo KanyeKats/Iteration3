@@ -355,4 +355,8 @@ public class NPC extends Entity implements Savable{
         this.move(new Point3D(0,0,0));
         this.getStats().respawn();
     }
+
+    public Brain getBrain(){
+        return this.brain;
+    }
 }

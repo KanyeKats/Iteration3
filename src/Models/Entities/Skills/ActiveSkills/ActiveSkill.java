@@ -38,8 +38,9 @@ public abstract class ActiveSkill extends Skill implements Savable{
                 }
             }
         }
-        else
-            System.out.println("Not cooled down!");
+        else{
+
+        }
     }
 
     final protected void doTheCoolDown(){

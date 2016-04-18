@@ -54,4 +54,5 @@ public class Brain {
     public void setDead(boolean dead) {
         isDead = dead;
     }
+    public boolean isFrog(){ return frontalLobe.isFrog(); }
 }

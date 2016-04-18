@@ -25,7 +25,7 @@ public class GoToAreaEffectDecision implements Decision {
     }
 
     @Override
-    public boolean continuePursuing(VisualInfo visualInfo) {
+    public boolean continuePursuing(VisualInfo visualInfo, NPC npc) {
 
         ArrayList<Point3D> areaEffectLocations = visualInfo.getAreaEffectLocations();
         if(areaEffectLocations.contains(areaEffectLocation)){

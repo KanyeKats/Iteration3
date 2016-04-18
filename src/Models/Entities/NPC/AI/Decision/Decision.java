@@ -9,5 +9,5 @@ import Models.Entities.NPC.NPC;
 public interface Decision {
 
     void executeDecision(NPC npc);
-    boolean continuePursuing(VisualInfo visualInfo);
+    boolean continuePursuing(VisualInfo visualInfo, NPC npc);
 }
