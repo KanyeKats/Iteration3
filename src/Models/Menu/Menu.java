@@ -226,6 +226,7 @@ public class Menu{
                         Mount hand = new Mount(new Point3D( 12,-1 , 0),map,passableTerrainsNPC, false);
                         map.insertEntity(hand,new Point3D(12,-1,0));
 
+
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
                         stateManager.setActiveState(new State(gameViewController, gameView));
