@@ -51,6 +51,9 @@ public class Assets {
     public static BufferedImage BEE_SOUTH_WEST;
     public static BufferedImage BEE_NORTH_WEST;
 
+    public static BufferedImage BUTTERFLY;
+    public static BufferedImage CATERPILLAR;
+
     //polymorphFrog
     public static BufferedImage FROG_NORTH;
     public static BufferedImage FROG_SOUTH;
@@ -243,6 +246,12 @@ public class Assets {
 
         SpriteSheet mountNW = new SpriteSheet(ImageLoader.loadImage("./res/etc/handnorthwest.png"));
         MOUNT_NORTH_WEST = mountNW.scale(0, 0, SPRITE_SIZE, (int)(SPRITE_SIZE));
+
+        SpriteSheet butterfly = new SpriteSheet(ImageLoader.loadImage("res/bugs/Butterfly.png"));
+        BUTTERFLY = butterfly.scale(0, 0, SPRITE_SIZE, (int)(SPRITE_SIZE));
+
+        SpriteSheet caterpillar = new SpriteSheet(ImageLoader.loadImage("res/bugs/caterpillar.png"));
+        CATERPILLAR = caterpillar.scale(0, 0, SPRITE_SIZE, (int)(SPRITE_SIZE));
 
         // Init all the areaEffect assets.
         SpriteSheet star = new SpriteSheet(ImageLoader.loadImage("./res/decals/gold-star.png"));
