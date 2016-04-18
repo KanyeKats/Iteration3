@@ -57,7 +57,7 @@ public class FrontalLobe {
                 System.out.println("FOLLOW!");
                 currentDecision = new FollowDecision(entitiesFound.get(0));
                 currentDecision.executeDecision(npc);
-            }else if(personality.willAttack() && !isFrog){
+            }else if(personality.willAttack()){
                // System.out.println("ATTACK!");
                 currentDecision = new AttackDecision(entitiesFound.get(0));
                 currentDecision.executeDecision(npc);

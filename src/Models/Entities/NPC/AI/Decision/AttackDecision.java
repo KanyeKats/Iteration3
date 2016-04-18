@@ -19,7 +19,7 @@ public class AttackDecision implements Decision {
 
     @Override
     public void executeDecision(NPC npc) {
-        if(MapUtilities.distanceBetweenPoints(npc.getLocation(), enemy.getLocation()) <2 ){
+        if(MapUtilities.distanceBetweenPoints(npc.getLocation(), enemy.getLocation()) <2 && !npc.getBrain().isFrog()){
             // If you are right next to the enemy, attack them.
             npc.getActiveSkillList().get(0).activate(npc);
             //System.out.println("ATTACKING NOW");
@@ -32,10 +32,7 @@ public class AttackDecision implements Decision {
 
     @Override
     public boolean continuePursuing(VisualInfo visualInfo, NPC npc) {
-        if(npc.getBrain().isFrog()){
-            System.out.println("getting in here");
-            return false;
-        }
+
         return enemy.isVisible();
     }
 }
