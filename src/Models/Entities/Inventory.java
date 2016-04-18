@@ -85,8 +85,11 @@ public class Inventory implements Savable {
 
     public TakableItem removeRandomItem(){
         Random rand = new Random();
-        int randomItem = rand.nextInt(items.size());
-        return items.remove(randomItem);
+        if(items.size() != 0) {
+            int randomItem = rand.nextInt(items.size());
+            return items.remove(randomItem);
+        }
+        return null;
     }
 
     @Override
