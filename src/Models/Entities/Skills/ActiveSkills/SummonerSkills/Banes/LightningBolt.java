@@ -14,12 +14,16 @@ import Views.Graphics.Assets;
 public class LightningBolt extends Bane {
 
     private final int BASE_COOLDOWN_TIME = 1000;       //20 seconds
+    private final int BASE_MANA_REQUIRED = 10;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
 
 
     public LightningBolt(){
         super();
         cooldownTime = BASE_COOLDOWN_TIME;
         setAsset(Assets.BEE_SOUTH);
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
 //    @Override

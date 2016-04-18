@@ -14,11 +14,16 @@ public class FireWave extends Bane {
 
     private final int BASE_COOLDOWN_TIME = 1000;       //20 seconds
 
+    private final int BASE_MANA_REQUIRED = 7;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
+
 
 
     public FireWave(){
         super();
         cooldownTime = BASE_COOLDOWN_TIME;
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
 //    @Override

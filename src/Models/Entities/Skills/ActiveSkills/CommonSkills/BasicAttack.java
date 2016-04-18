@@ -39,6 +39,7 @@ public class BasicAttack extends ActiveSkill {
             return false;
         }
     }
+
     @Override
     protected void performSkill(Entity entity) {
         LinearEffect effect = new LinearEffect(entity.getStats().getStat(Stat.BASIC_ATTACK_RANGE), entity.getLocation(), consequence, entity.getDirection(), entity.getMap(), asset);
