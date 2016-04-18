@@ -17,14 +17,12 @@ public class Creep extends ActiveSkill {
 
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
     public final int BASE_EFFECT_TIME = 10000;      //10 seconds
+    private final int BASE_MOVEMENT_DECREMENT = -2;
+    private final int BASE_OFFENSIVE_INCREMENT = 3;
     private Entity entity;
 
     public Creep(){
         cooldownTime = BASE_COOLDOWN_TIME;
-        StatModificationList statModificationList = new StatModificationList(
-                new StatModification(Stat.MOVEMENT,-5),
-                new StatModification(Stat.OFFSENSIVE_RATING,10));
-        this.consequence = new TimedConsequence(statModificationList, BASE_EFFECT_TIME);
     }
 
     public void activate(Entity e){
@@ -45,6 +43,15 @@ public class Creep extends ActiveSkill {
 
             }
         }
+    }
+
+    @Override
+    public void incrementLevel() {
+        ++level;
+        StatModificationList statModificationList = new StatModificationList(
+                new StatModification(Stat.MOVEMENT,BASE_MOVEMENT_DECREMENT*level),
+                new StatModification(Stat.OFFSENSIVE_RATING,BASE_OFFENSIVE_INCREMENT*level));
+        this.consequence = new TimedConsequence(statModificationList, BASE_EFFECT_TIME);
     }
 
     @Override
