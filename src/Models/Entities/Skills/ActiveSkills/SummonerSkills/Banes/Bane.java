@@ -27,18 +27,6 @@ public abstract class Bane extends ActiveSkill {
         manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
-//    @Override
-//    public void activate(Entity entity){
-//        System.out.println("ACTIVATE BANE");
-//        if(isCooledDown){
-//            if(percentChanceByLevel()) {
-//                effect.start();
-//                isCooledDown = false;
-//                doTheCoolDown();
-//            }
-//        }
-//    }
-
     @Override
     protected void performSkill(Entity entity) {
         effect.start();
