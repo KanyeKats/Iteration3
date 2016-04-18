@@ -2,7 +2,6 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
 import Models.Entities.Entity;
-import Models.Entities.Stats.Stat;
 import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
@@ -64,15 +63,17 @@ public abstract class Effect implements Runnable, Savable {
             }
 
             // check to see if an entity is there and then hit them with the attack!
-            traverseThroughTiles(affectedTiles.get(i));
+            if(affectedTiles.get(i) != null){
+                traverseThroughTiles(affectedTiles.get(i));
 
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                removeDecals(affectedTiles.get(i));
             }
-
-            removeDecals(affectedTiles.get(i));
         }
     }
 

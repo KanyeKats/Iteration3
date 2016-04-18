@@ -14,7 +14,8 @@ import java.util.TimerTask;
  */
 public class Creep extends ActiveSkill {
 
-    public final int BASE_COOLDOWN_TIME = 30000;    //30 seconds
+
+    public final int BASE_COOLDOWN_TIME = 2000;    //20 seconds
     public final int BASE_EFFECT_TIME = 10000;      //10 seconds
     private final int BASE_MOVEMENT_DECREMENT = -6;
     private final int BASE_OFFENSIVE_INCREMENT = 3;
