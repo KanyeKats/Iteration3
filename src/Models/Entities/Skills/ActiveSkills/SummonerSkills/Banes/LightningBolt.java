@@ -3,6 +3,7 @@ package Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes;
 import Models.Entities.Entity;
 import Models.Consequences.ImmediateStatConsequence;
 import Models.Entities.Skills.InfluenceEffect.PrismEffect;
+import Models.Entities.Skills.InfluenceEffect.SphericalEffect;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
@@ -38,7 +39,7 @@ public class LightningBolt extends Bane {
 
     @Override
     protected void performSkill(Entity entity) {
-        effect = new PrismEffect(BASE_RANGE, BASE_RANGE, entity.getLocation(), consequence, entity.getMap(), decal);
+        effect = new SphericalEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getMap(), decal);
         effect.start();
     }
 
