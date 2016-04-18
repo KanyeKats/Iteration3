@@ -214,8 +214,12 @@ public class Menu{
 
                         // TODO: Remove after testing.
                         //why does the entity need a point for its constructor and the insert entity map takes in the point anyway?
-                        NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET, false);
-                        map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
+                        NPC pet = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET, false);
+                        map.insertEntity(pet, new Point3D(2, -1, 0));
+
+                        NPC shopKeeper = new NPC(new Smasher(), new Point3D(-7, -2, 0), map, passableTerrains, Personality.SHOP_KEEPER, false);
+                        map.insertEntity(shopKeeper, new Point3D(-7, -2, 0));
+
                         Mount hand = new Mount(new Point3D(-1, 1, 0),map,passableTerrains, false);
                         map.insertEntity(hand,new Point3D(-1,1,0));
 
