@@ -99,6 +99,8 @@ public class Assets {
     public static BufferedImage SLEEP;
     public static BufferedImage POLYMORPH;
 
+    public static BufferedImage THROWINGSTAR;
+
     private static final int SPRITE_SIZE = 70;
     private static final int DECAL_SIZE = 30;
 
@@ -326,6 +328,9 @@ public class Assets {
 
         SpriteSheet fullFogSheet = new SpriteSheet(ImageLoader.loadImage("./res/map/terrain/fullFog.png"));
         FULLFOG = fullFogSheet.scale(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
+
+        SpriteSheet throwingStarSheet = new SpriteSheet((ImageLoader.loadImage("./res/items/ninjaprojectile.png")));
+        THROWINGSTAR = throwingStarSheet.scale(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
 
     }
 }
