@@ -115,9 +115,9 @@ public class Menu{
 
 
                         Map map = GameLoader.loadMap("./res/map/saved.xml");
-                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER,Terrain.SKY};
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, map.getAvatar(), map);
                         GameViewController gameViewController = new GameViewController(stateManager, map.getAvatar(), map, gameView.getAreaViewPort());
+                        gameViewController.loadKeys("./res/map/saved.xml");
                         stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
@@ -412,11 +412,11 @@ public class Menu{
                         if(avatar.isMounted()) {
                             Mount mount = avatar.getMount();
                             avatar.unMountVehicle();
-                            GameSaver.saveMap(avatar.getMap());
+                            GameSaver.saveMap(avatar.getMap(), gameViewController);
                             mount.mount(avatar);
                         }
                         else
-                            GameSaver.saveMap(avatar.getMap());
+                            GameSaver.saveMap(avatar.getMap(), gameViewController);
 
                         // TODO: Implement this.
                     }

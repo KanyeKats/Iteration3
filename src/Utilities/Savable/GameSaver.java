@@ -1,5 +1,7 @@
 package Utilities.Savable;
 
+import Controllers.GameViewController;
+import Controllers.ViewController;
 import Models.Map.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -21,7 +23,7 @@ import org.w3c.dom.Element;
  * Created by johnkaufmann on 3/31/16.
  */
 public class GameSaver {
-    public static void saveMap(Map map) {
+    public static void saveMap(Map map, GameViewController gameViewController) {
         try {
             DocumentBuilderFactory dFact = DocumentBuilderFactory.newInstance();
             DocumentBuilder build = dFact.newDocumentBuilder();
@@ -31,6 +33,9 @@ public class GameSaver {
             doc.appendChild(root);
 
             map.save(doc, root);
+
+            gameViewController.save(doc, root);
+
 
             TransformerFactory tFact = TransformerFactory.newInstance();
             Transformer trans = tFact.newTransformer();
