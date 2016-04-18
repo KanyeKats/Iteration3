@@ -330,7 +330,7 @@ public class Assets {
         FULLFOG = fullFogSheet.scale(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
 
         SpriteSheet throwingStarSheet = new SpriteSheet((ImageLoader.loadImage("./res/items/ninjaprojectile.png")));
-        THROWINGSTAR = throwingStarSheet.scale(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
+        THROWINGSTAR = throwingStarSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
 
     }
 }

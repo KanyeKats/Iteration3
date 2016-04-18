@@ -26,12 +26,6 @@ public class PickPocket extends ActiveSkill {
         manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
-//    public void activate(Entity entity){
-//
-//        if(isCooledDown && tileHasNPC(entity)){
-//            stealItem(entity);
-//        }
-//    }
 
     @Override
     protected void performSkill(Entity entity) {
