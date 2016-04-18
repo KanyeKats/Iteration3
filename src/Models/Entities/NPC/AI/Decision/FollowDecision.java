@@ -23,7 +23,7 @@ public class FollowDecision implements Decision {
     }
 
     @Override
-    public boolean continuePursuing(VisualInfo visualInfo) {
+    public boolean continuePursuing(VisualInfo visualInfo, NPC npc) {
 
         return followee.isVisible();
     }

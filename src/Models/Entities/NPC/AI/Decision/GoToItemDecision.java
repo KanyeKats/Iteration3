@@ -26,7 +26,7 @@ public class GoToItemDecision implements Decision {
     }
 
     @Override
-    public boolean continuePursuing(VisualInfo visualInfo) {
+    public boolean continuePursuing(VisualInfo visualInfo, NPC npc) {
 
         ArrayList<Point3D> itemLocations = visualInfo.getItemLocations();
         if(itemLocations.contains(itemLocations)){

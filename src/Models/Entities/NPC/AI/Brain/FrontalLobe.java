@@ -29,7 +29,7 @@ public class FrontalLobe {
     public void process(VisualInfo visualInfo, NPC npc){
 
         // If there is a current decision and we can continue pursing it, do it!
-        if(currentDecision!=null && currentDecision.continuePursuing(visualInfo)){
+        if(currentDecision!=null && currentDecision.continuePursuing(visualInfo,npc)){
             currentDecision.executeDecision(npc);
             return;
         }
@@ -58,7 +58,7 @@ public class FrontalLobe {
                 currentDecision = new FollowDecision(entitiesFound.get(0));
                 currentDecision.executeDecision(npc);
             }else if(personality.willAttack() && !isFrog){
-                System.out.println("ATTACK!");
+               // System.out.println("ATTACK!");
                 currentDecision = new AttackDecision(entitiesFound.get(0));
                 currentDecision.executeDecision(npc);
             }
@@ -81,5 +81,7 @@ public class FrontalLobe {
     public void actLikeFrog(boolean isFrog){
         this.isFrog = isFrog;
     }
+
+    public boolean isFrog(){ return this.isFrog; }
 
 }
