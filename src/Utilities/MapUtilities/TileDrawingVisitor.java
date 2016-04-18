@@ -30,7 +30,7 @@ public class TileDrawingVisitor {
 
         // Draw the areaEffect
         AreaEffect areaEffect = tile.getAreaEffect();
-        if(areaEffect!=null && areaEffect.getImage()!=null && isInSight){
+        if(areaEffect!=null && areaEffect.getImage()!=null && isInSight && areaEffect.getVisibility()){
             drawComponent(areaEffect.getImage(), g);
         }
 

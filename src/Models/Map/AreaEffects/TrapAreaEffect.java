@@ -1,8 +1,12 @@
 package Models.Map.AreaEffects;
 
+import Models.Consequences.TimedConsequence;
 import Models.Consequences.TrappedConsequence;
 import Models.Entities.Entity;
 import Models.Consequences.BehaviorConsequence;
+import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.StatModification;
+import Models.Entities.Stats.StatModificationList;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
 import org.w3c.dom.Document;
@@ -33,25 +37,11 @@ public class TrapAreaEffect extends AreaEffect {
 
     @Override
     public void activate(Entity entity) {
-        // TODO: we need to create a behavior consequence that stops movement for trap!
-        BehaviorConsequence consequence = new TrappedConsequence(trappedTime);
+        StatModificationList statModificationList = new StatModificationList(new StatModification(Stat.MOVEMENT,-entity.getStats().getStat(Stat.MOVEMENT)));
+        TimedConsequence consequence = new TimedConsequence(statModificationList, trappedTime);
 
         // Execute the consequence
         consequence.execute(entity);
-    }
-
-    // TODO: Not sure if this should be here? maybe in detect trap skill?
-
-    //TODO: I agree this sould not be here, it should be in the trap skill
-    //TODO: because it is the skill that is making the trap visiible.  ... - Aidan
-
-    public void attemptToDetectTrap(int chanceToDetect) {
-        Random rand = new Random();
-
-        int  n = rand.nextInt(100);
-
-        if (chanceToDetect < n) return;
-        else this.isVisible = true;
     }
 
     @Override
