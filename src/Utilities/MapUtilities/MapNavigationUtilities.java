@@ -8,6 +8,7 @@ import Models.Map.Tile;
 import Utilities.Constants;
 import javafx.geometry.Point3D;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,8 +34,9 @@ public class MapNavigationUtilities {
     public static Point3D findOpenTile(Entity entity, Map map){
         Point3D entityPoint = entity.getLocation();
         for(Direction direction: Direction.values()){
-            Tile tile = map.getTile(direction.getPointAdjacentTo(entityPoint));
-            if(tile !=null && !tile.preventsMovement(entity)){
+            Point3D checkPoint = direction.getPointAdjacentTo(entityPoint);
+            Tile tile = map.getTile(checkPoint);
+            if(tile !=null && !tile.preventsMovement(entity) && map.getTile(checkPoint.add(0,0,1)).getTerrain() != Terrain.EARTH){
                 return direction.getPointAdjacentTo(entityPoint);
             }
         }

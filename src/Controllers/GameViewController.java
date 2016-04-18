@@ -10,13 +10,11 @@ import Models.Map.Direction;
 import Models.Map.Map;
 import Utilities.Action;
 import Utilities.Constants;
-import Views.PauseMenuView;
-import Views.SkillViewPort;
-
 import Views.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.Set;
 
 /**
@@ -248,7 +246,8 @@ public class GameViewController extends ViewController {
                 if(avatar.getTileInFront().containsEntity()) {
                     Models.Menu.Menu npcMenu = Models.Menu.Menu.createNPCMenu(stateManager, avatar, avatar.getTileInFront().getEntity());
                     MenuViewController npcMenuController = new MenuViewController(stateManager, npcMenu);
-                    NPCMenuView npcMenuView = new NPCMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcMenu);
+                    BufferedImage oldViewContent = stateManager.getCurrentViewContent();
+                    NPCMenuView npcMenuView = new NPCMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcMenu, oldViewContent);
                     stateManager.setActiveState(new State(npcMenuController, npcMenuView));
                 }
             }
@@ -263,7 +262,8 @@ public class GameViewController extends ViewController {
             public void execute() {
                 Models.Menu.Menu pauseMenu = Models.Menu.Menu.createPauseMenu(stateManager, controller, avatar);
                 MenuViewController skillViewPortMenuController = new MenuViewController(stateManager, pauseMenu);
-                PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, pauseMenu);
+                BufferedImage oldViewContent = stateManager.getCurrentViewContent();
+                PauseMenuView pauseView = new PauseMenuView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, pauseMenu, oldViewContent);
                 stateManager.setActiveState(new State(skillViewPortMenuController, pauseView));
             }
 
@@ -296,8 +296,7 @@ public class GameViewController extends ViewController {
                 entity.update();
             }
             refreshCounter = 0;
-            System.out.println("NO: " + entitiesOnMap.size());
-            System.out.println(avatar.getLocation().toString());
+
         }
         refreshCounter++;
     }
@@ -311,7 +310,6 @@ public class GameViewController extends ViewController {
             keyBindings.addBinding(key, new Action() {
                 @Override
                 public void execute() {
-                    System.out.println("EXECUTING SKILL YO");
                     skill.activate(avatar);
                 }
 
