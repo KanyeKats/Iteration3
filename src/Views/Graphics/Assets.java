@@ -100,9 +100,10 @@ public class Assets {
     public static BufferedImage POLYMORPH;
 
     public static BufferedImage THROWINGSTAR;
+    public static BufferedImage FIST;
 
     private static final int SPRITE_SIZE = 70;
-    private static final int DECAL_SIZE = 30;
+    private static final int DECAL_SIZE = 40;
 
 
     public static void init(){
@@ -330,7 +331,10 @@ public class Assets {
         FULLFOG = fullFogSheet.scale(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
 
         SpriteSheet throwingStarSheet = new SpriteSheet((ImageLoader.loadImage("./res/items/ninjaprojectile.png")));
-        THROWINGSTAR = throwingStarSheet.scale(0,0,Constants.TILE_WIDTH, (int)(Constants.TILE_HEIGHT *1.25));
+        THROWINGSTAR = throwingStarSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
+
+        SpriteSheet fist = new SpriteSheet((ImageLoader.loadImage("./res/etc/fist.png")));
+        FIST = fist.scale(0,0,DECAL_SIZE, DECAL_SIZE);
 
     }
 }

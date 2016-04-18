@@ -46,4 +46,8 @@ public class KeyBindings {
             keys.add(key);
         return keys;
     }
+
+    public void clear(){
+        bindings.clear();
+    }
 }

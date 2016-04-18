@@ -7,6 +7,8 @@ import Models.Map.AreaEffect;
 import Models.Map.Decal;
 import Models.Map.Direction;
 import Views.Graphics.Assets;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -70,6 +72,16 @@ public class RiverAreaEffect extends AreaEffect {
         // Once he's done moving, remove the movement speed buff and set back his original movement speed
         // Set the entity's sped back
         stats.setStat(Stat.MOVEMENT, entitysOriginalSpeed);
+    }
+
+    @Override
+    public Document save(Document doc, Element parentElement) {
+        Element areaEffect = doc.createElement("area-effect");
+        areaEffect.setAttribute("type", "RIVER");
+        areaEffect.setAttribute("value", Integer.toString(flowSpeed));
+        parentElement.appendChild(areaEffect);
+
+        return null;
     }
 
 }

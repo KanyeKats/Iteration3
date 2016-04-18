@@ -82,11 +82,13 @@ public abstract class Effect implements Runnable, Savable {
     //increase range by one
     protected void traverseThroughTiles(ArrayList<Tile> tiles) {
         for (Tile tile : tiles) {
-            Entity entity = getEntity(tile);
-            if (hasEntity(entity)) {
-                dealConsequence(entity);
+            if(tile!=null){
+                Entity entity = getEntity(tile);
+                if (hasEntity(entity)) {
+                    dealConsequence(entity);
+                }
+                tile.insertEffect(this); // Insert the effect so it can be drawn.
             }
-            tile.insertEffect(this); // Insert the effect so it can be drawn.
         }
     }
 

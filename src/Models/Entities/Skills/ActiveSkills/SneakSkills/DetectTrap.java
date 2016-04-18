@@ -38,12 +38,8 @@ public class DetectTrap extends ActiveSkill {
                 //if there is a trap
                 if (tile.getAreaEffect() != null && !tile.getAreaEffect().getVisibility()) {
                     System.out.println(tile.getAreaEffect().toString());
-                    if (isCooledDown) {
-                        if (percentChanceByLevel()) {
-                            //Implement making a trap visible
-                            tile.getAreaEffect().setVisibility(true);
-                        }
-                    }
+                    //Implement making a trap visible
+                    tile.getAreaEffect().setVisibility(true);
                 }
             }
         }

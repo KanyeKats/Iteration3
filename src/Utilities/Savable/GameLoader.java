@@ -1,5 +1,6 @@
 package Utilities.Savable;
 
+import Controllers.GameViewController;
 import Models.Map.*;
 import Models.Map.AreaEffects.RiverAreaEffect;
 import Utilities.Constants;

@@ -1,8 +1,6 @@
 package Models.Entities.Occupation;
 
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
-import Models.Entities.Skills.ActiveSkills.CommonSkills.BasicAttack;
-import Models.Entities.Skills.ActiveSkills.CommonSkills.BindWounds;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes.FireBlast;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes.FireWave;
 import Models.Entities.Skills.ActiveSkills.SummonerSkills.Banes.Fireball;
@@ -60,6 +58,7 @@ public class Summoner extends Occupation {
     @Override
     public ActiveSkillList initActiveSkills(Stats stats){
         super.initActiveSkills(stats);
+        activeSkillList.get(0).setAsset(Assets.SPARKS);
         activeSkillList.add(new FireBlast());
         activeSkillList.add(new Fireball());
         activeSkillList.add(new FireWave());

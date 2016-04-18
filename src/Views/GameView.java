@@ -12,6 +12,7 @@ public class GameView extends View {
 
     private AreaViewport areaViewport;
     private StatusViewPort statusViewport;
+    private DamageToasts damageToasts;
 //    private SkillsViewport skillsViewport;
 
     public GameView(int width, int height, Entity entity, Map map) {
@@ -19,6 +20,7 @@ public class GameView extends View {
 
         this.areaViewport = new AreaViewport(width, height, map, entity);
         this.statusViewport = new StatusViewPort(width, height, entity);
+        this.damageToasts = new DamageToasts(width, height, entity);
 //        this.skillsViewport = new SkillsViewport(entity.getSkillList());
 
         repaint();
@@ -33,6 +35,7 @@ public class GameView extends View {
         // Render the viewports onto this view.
         areaViewport.render(g);
         statusViewport.render(g);
+        damageToasts.render(g);
 
 //        skillsViewport.render(g);
 
