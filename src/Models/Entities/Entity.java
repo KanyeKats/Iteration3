@@ -1,6 +1,7 @@
 package Models.Entities;
 
 import Models.Entities.NPC.Mount;
+import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
 import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
@@ -52,6 +53,7 @@ public class Entity implements Savable {
     private boolean isMounted;
     private boolean isFlyer;
     private Mount mount;
+    private Direction pendingMovement;
 
     // TODO: Ask about terrain checking... not sure if this is ok
     private ArrayList<Terrain> passableTerrains;
@@ -78,6 +80,7 @@ public class Entity implements Savable {
         images = occupation.initImages();
         this.isMounted = false;
         this.isFlyer = isFlyer;
+        this.pendingMovement = null;
     }
 
     public Entity(Occupation occupation, Point3D location, Map map,Boolean isFlyer, Terrain... passableTerrains ){
@@ -95,6 +98,8 @@ public class Entity implements Savable {
         activeSkillList = occupation.initActiveSkills(stats);
         passiveSkillList = occupation.initPassiveSkills(stats);
         images = occupation.initImages();
+        this.pendingMovement = null;
+
         //initImages();
 
         // Set movment variables
@@ -104,17 +109,8 @@ public class Entity implements Savable {
         enteredNewTile = false;
         tryingNewDirection = true;
 
-        // TODO: Remove!! Just testing item factory and equipping.
-        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
-        equip(bluePhat);
-        Boot moccassins = BootFactory.bootsFromID(1001);
-        equip(moccassins);
         this.isMounted = false;
         this.isFlyer = isFlyer;
-//        Helmet bluePhat = HelmetFactory.BLUE_PHAT.createInstance();
-//        equip(bluePhat);
-//        Boot moccassins = BootFactory.bootsFromID(1001);
-//        equip(moccassins);
 
 
     }
@@ -136,12 +132,14 @@ public class Entity implements Savable {
     public final void move(Direction direction) {
         // Move with taking movement speed in to account
         if(isMounted){
+            pendingMovement = null;
             mount.move(direction);
             setLocation(mount.getDirection().getPointAdjacentTo(mount.getLocation()));
         }
         else if (canMove) {
             // Don't allow the entity to move
             canMove = false;
+            pendingMovement = null;
 
             // Deals with redrawing when the entity can't move
             if(this.direction == direction)
@@ -154,6 +152,9 @@ public class Entity implements Savable {
                 this.direction = direction;
             }
             map.moveEntity(this, direction);
+
+        }else{
+            pendingMovement = direction;
         }
     }
     public final void moveComplete() {
@@ -161,7 +162,16 @@ public class Entity implements Savable {
         this.enteredNewTile = false;
 
         // Allow movement again
-        this.canMove = true;
+        movementTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Entity.this.canMove = true;
+                if(pendingMovement!=null){
+                    move(pendingMovement);
+                }
+
+            }
+        }, 300);
     }
 
     public final boolean enteredNewTile() {
@@ -392,8 +402,7 @@ public class Entity implements Savable {
 //    }
 
     public Image getImage(){
-
-        return isVisible ? images.get(direction) : null;
+        return images.get(direction);
     }
 
     //TODO: Will need to cover a +/- 1 in height eventually

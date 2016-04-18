@@ -2,15 +2,12 @@ package Models.Map.AreaEffects;
 
 import Models.Entities.Entity;
 import Models.Entities.Stats.Stat;
-import Models.Entities.Stats.StatModification;
-import Models.Entities.Stats.StatModificationList;
 import Models.Entities.Stats.Stats;
 import Models.Map.AreaEffect;
 import Models.Map.Decal;
 import Models.Map.Direction;
 import Views.Graphics.Assets;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 

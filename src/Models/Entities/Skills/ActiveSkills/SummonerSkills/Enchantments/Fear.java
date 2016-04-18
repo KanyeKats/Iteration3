@@ -15,14 +15,14 @@ public class Fear extends Enchantment {
 
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
     public final int BASE_ACTIVE_TIME = 10000;    //10 seconds
-    private final BufferedImage decal = Assets.BUG_NORTH; // TODO: Dont use the bug anymore lol
+    private final BufferedImage decal = Assets.FEAR; // TODO: Dont use the bug anymore lol
 
 
     //TODO: create the right type of BehaviorConsequence
     public Fear(){
         activeTime = BASE_ACTIVE_TIME;
         consequence = new FearConsequence(activeTime);
-        cooldownTime = BASE_COOLDOWN_TIME;
+        cooldownTime = 2000;
     }
 
     @Override
@@ -32,7 +32,6 @@ public class Fear extends Enchantment {
                 consequence = new FearConsequence(activeTime,entity.getDirection());
                 effect = new LinearEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
                 effect.start();
-
                 isCooledDown = false;
                 doTheCoolDown();
             }

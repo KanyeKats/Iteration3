@@ -51,6 +51,9 @@ public class Assets {
     public static BufferedImage BEE_SOUTH_WEST;
     public static BufferedImage BEE_NORTH_WEST;
 
+    public static BufferedImage BUTTERFLY;
+    public static BufferedImage CATERPILLAR;
+
     //polymorphFrog
     public static BufferedImage FROG_NORTH;
     public static BufferedImage FROG_SOUTH;
@@ -92,6 +95,9 @@ public class Assets {
     public static BufferedImage FIRE;
     public static BufferedImage LIGHTNING;
     public static BufferedImage SPARKS;
+    public static BufferedImage FEAR;
+    public static BufferedImage SLEEP;
+    public static BufferedImage POLYMORPH;
 
     private static final int SPRITE_SIZE = 70;
     private static final int DECAL_SIZE = 30;
@@ -241,6 +247,12 @@ public class Assets {
         SpriteSheet mountNW = new SpriteSheet(ImageLoader.loadImage("./res/etc/handnorthwest.png"));
         MOUNT_NORTH_WEST = mountNW.scale(0, 0, SPRITE_SIZE, (int)(SPRITE_SIZE));
 
+        SpriteSheet butterfly = new SpriteSheet(ImageLoader.loadImage("res/bugs/Butterfly.png"));
+        BUTTERFLY = butterfly.scale(0, 0, SPRITE_SIZE, (int)(SPRITE_SIZE));
+
+        SpriteSheet caterpillar = new SpriteSheet(ImageLoader.loadImage("res/bugs/caterpillar.png"));
+        CATERPILLAR = caterpillar.scale(0, 0, SPRITE_SIZE, (int)(SPRITE_SIZE));
+
         // Init all the areaEffect assets.
         SpriteSheet star = new SpriteSheet(ImageLoader.loadImage("./res/decals/gold-star.png"));
         LEVEL = star.scale(0, 0, DECAL_SIZE, DECAL_SIZE);
@@ -292,6 +304,15 @@ public class Assets {
 
         SpriteSheet sparksSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/sparks.png"));
         SPARKS = sparksSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
+
+        SpriteSheet fearSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/fear.png"));
+        FEAR = fearSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
+
+        SpriteSheet sleepSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/sleep.png"));
+        SLEEP = sleepSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
+
+        SpriteSheet polymorphSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/polymorph.png"));
+        POLYMORPH = polymorphSheet.scale(0,0,DECAL_SIZE, DECAL_SIZE);
 
         SpriteSheet placeholderSheet = new SpriteSheet(ImageLoader.loadImage("./res/etc/placeholder-blk.png"));
         PLACEHOLDER = placeholderSheet.scale(0, 0, DECAL_SIZE, (int)(DECAL_SIZE));

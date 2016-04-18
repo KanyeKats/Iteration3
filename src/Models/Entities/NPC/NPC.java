@@ -61,7 +61,7 @@ public class NPC extends Entity implements Savable{
 
     @Override
     public void fear(Direction direction){
-        brain.getFrontalLobe().setisFeared(true,this.getDirection(),this);
+        brain.getFrontalLobe().setisFeared(true,direction,this);
         brain.getVisualInfo().setStillFeared(true);
     }
 
@@ -76,6 +76,7 @@ public class NPC extends Entity implements Savable{
         //need to save the previous images
         //i let the consequence hold the images and give them back
         //to the entity when the polymorph is over
+        System.out.println("starting polymorph");
         HashMap<Direction,BufferedImage> tempImages = new HashMap<>();
         HashMap<Direction,BufferedImage> images = this.getImages();
         for(Direction direction : images.keySet()){
@@ -84,12 +85,12 @@ public class NPC extends Entity implements Savable{
         }
         brain.getFrontalLobe().actLikeFrog(true);
         //TODO: Make frog images not bug
-        images.put(Direction.NORTH, Assets.BUG_NORTH);
-        images.put(Direction.NORTH_EAST, Assets.BUG_NORTH_EAST);
-        images.put(Direction.SOUTH_EAST, Assets.BUG_SOUTH_EAST);
-        images.put(Direction.SOUTH, Assets.BUG_SOUTH);
-        images.put(Direction.SOUTH_WEST, Assets.BUG_SOUTH_WEST);
-        images.put(Direction.NORTH_WEST, Assets.BUG_NORTH_WEST);
+        images.put(Direction.NORTH, Assets.FROG_NORTH);
+        images.put(Direction.NORTH_EAST, Assets.FROG_NORTH_EAST);
+        images.put(Direction.SOUTH_EAST, Assets.FROG_SOUTH_EAST);
+        images.put(Direction.SOUTH, Assets.FROG_SOUTH);
+        images.put(Direction.SOUTH_WEST, Assets.FROG_SOUTH_WEST);
+        images.put(Direction.NORTH_WEST, Assets.FROG_NORTH_WEST);
         return tempImages;
     }
 

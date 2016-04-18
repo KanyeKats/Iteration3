@@ -47,7 +47,6 @@ public class TileDrawingVisitor {
         // Draw the effects
         Effect effect = tile.getEffect();
         if(effect!=null && effect.getImage()!=null && isInSight){
-            System.out.println("Drawing Effect");
             drawComponent(effect.getImage(), g);
         }
 
