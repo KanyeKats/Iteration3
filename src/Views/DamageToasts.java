@@ -73,7 +73,7 @@ public class DamageToasts extends View {
             g.setColor(Color.white);
 
             Point pixelPoint = message.entity.getPixelLocation();
-            int x = (int)pixelPoint.getX();
+            int x = (int)pixelPoint.getX() + message.entity.getImage().getWidth(null);
             int y = (int)pixelPoint.getY();
             y += Constants.TILE_HEIGHT/2;
 
