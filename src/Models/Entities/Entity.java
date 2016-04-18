@@ -1,7 +1,6 @@
 package Models.Entities;
 
 import Models.Entities.NPC.Mount;
-import Models.Entities.NPC.NPC;
 import Models.Entities.Occupation.Occupation;
 import Models.Entities.Occupation.Smasher;
 import Models.Entities.Occupation.Sneak;
@@ -12,11 +11,7 @@ import Models.Entities.Skills.Skill;
 import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
-import Models.Items.Takable.Equippable.Boots.Boot;
-import Models.Items.Takable.Equippable.Boots.BootFactory;
 import Models.Items.Takable.Equippable.EquippableItem;
-import Models.Items.Takable.Equippable.Helmets.Helmet;
-import Models.Items.Takable.Equippable.Helmets.HelmetFactory;
 import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
@@ -67,7 +62,13 @@ public class Entity implements Savable {
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
     // This is used when loading a saved game
-    public Entity(){}
+    public Entity(){
+        this.isVisible = true;          //TODO: Save/load this value
+        movementTimer = new Timer();
+        canMove = true;
+        justMoved = false;
+        enteredNewTile = false;
+    }
 
     public Entity(Occupation occupation, Stats stats, Inventory inventory, Equipment equipment, BufferedImage sprite, Point3D location, Direction orientation, Map map, Boolean isFlyer){
 
@@ -713,11 +714,7 @@ public class Entity implements Savable {
         setFlyer(Boolean.valueOf(flyerString));
 
         images = occupation.initImages();
-        this.isVisible = true;          //TODO: Save/load this value
-        movementTimer = new Timer();
-        canMove = true;
-        justMoved = false;
-        enteredNewTile = false;
+
     }
 
     public void update(){

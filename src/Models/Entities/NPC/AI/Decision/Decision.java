@@ -8,31 +8,6 @@ import Models.Entities.NPC.NPC;
  */
 public interface Decision {
 
-//    ATTACK(){
-//        @Override
-//        public void executeDecision(NPC npc){
-//
-//        }
-//    },
-//    FOLLOW(){
-//        @Override
-//        public void executeDecision(NPC npc){
-//
-//        }
-//    },
-//    GO_TO_ITEM(){
-//        @Override
-//        public void executeDecision(NPC npc){
-//
-//        }
-//    },
-//    GO_TO_AREA_EFFECT(){
-//        @Override
-//        public void executeDecision(NPC npc){
-//
-//        }
-//    };
-
     void executeDecision(NPC npc);
     boolean continuePursuing(VisualInfo visualInfo);
 }

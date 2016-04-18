@@ -37,7 +37,9 @@ public class NPC extends Entity implements Savable{
     private boolean isDead;
 
     //For saving/loading purposes
-    public NPC(){}
+    public NPC(){
+        super();
+    }
 
     public NPC(Occupation occupation, Point3D location, Map map, Terrain[]passableTerrain, Personality personality, Boolean isFlyer) {
         super(occupation, location, map, isFlyer, passableTerrain);

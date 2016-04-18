@@ -34,6 +34,8 @@ public class FrontalLobe {
             return;
         }
 
+        currentDecision = null; // Reset the current Decision since it is not being executed.
+
         // Unpack the visual info.
         ArrayList<Point3D> itemLocations = visualInfo.getItemLocations();
         ArrayList<Entity> entitiesFound = visualInfo.getEntities();

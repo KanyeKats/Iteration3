@@ -3,10 +3,11 @@ package Models.Entities.NPC;
 import Models.Entities.Entity;
 import Models.Entities.Equipment;
 import Models.Entities.Inventory;
-import Models.Entities.NPC.AI.Brain.Brain;
 import Models.Entities.NPC.AI.Personality;
-import Models.Entities.Occupation.*;
-import Models.Entities.Stats.Stat;
+import Models.Entities.Occupation.Smasher;
+import Models.Entities.Occupation.Sneak;
+import Models.Entities.Occupation.Summoner;
+import Models.Entities.Occupation.Vehicle;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
 import Models.Items.Takable.Equippable.EquippableItem;
@@ -34,7 +35,9 @@ public class Mount extends NPC implements Savable{
     private int entityPrevspeed;
 
     //For saving/loading purposed
-    public Mount(){}
+    public Mount(){
+        super();
+    }
 
     public Mount(Point3D location, Map map, Terrain[] passableTerrain, Boolean isFlyer) {
         super(new Vehicle(), location, map, passableTerrain, Personality.MOUNT, isFlyer);
