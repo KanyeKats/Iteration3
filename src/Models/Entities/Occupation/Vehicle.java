@@ -54,4 +54,9 @@ public class Vehicle extends Occupation {
 
         return images;
     }
+
+    @Override
+    public String toString() {
+        return "Vehicle";
+    }
 }

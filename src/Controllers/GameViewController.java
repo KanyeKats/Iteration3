@@ -296,7 +296,6 @@ public class GameViewController extends ViewController {
                 entity.update();
             }
             refreshCounter = 0;
-
         }
         refreshCounter++;
     }

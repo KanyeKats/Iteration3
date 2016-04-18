@@ -16,6 +16,8 @@ import Utilities.Action;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.util.HashMap;
 
@@ -99,6 +101,7 @@ public class Equipment implements Savable {
             removeStatModsOfEquipment(old);
             inventory.addItem(old);
             this.head = null;
+            return old;
         }
         return this.head;
     }
@@ -108,6 +111,7 @@ public class Equipment implements Savable {
             removeStatModsOfEquipment(old);
             inventory.addItem(old);
             this.chest = null;
+            return old;
         }
         return this.chest;
     }
@@ -117,6 +121,7 @@ public class Equipment implements Savable {
             removeStatModsOfEquipment(old);
             inventory.addItem(old);
             this.legs = null;
+            return old;
         }
         return this.legs;
     }
@@ -126,6 +131,7 @@ public class Equipment implements Savable {
             removeStatModsOfEquipment(old);
             inventory.addItem(old);
             this.boots = null;
+            return old;
         }
         return this.boots;
     }
@@ -135,6 +141,7 @@ public class Equipment implements Savable {
             removeStatModsOfEquipment(old);
             inventory.addItem(old);
             this.lefthand = null;
+            return old;
         }
         return lefthand;
     }
@@ -145,18 +152,21 @@ public class Equipment implements Savable {
             removeStatModsOfEquipment(old);
             inventory.addItem(old);
             this.bothhands = null;
+            return old;
         }
         return bothhands;
     }
 
     // Might not be using a "righthand" slot
-    public void unequipRightHand() {
+    public EquippableItem unequipRightHand() {
         if (this.righthand != null) {
             EquippableItem old = this.righthand;
             removeStatModsOfEquipment(old);
             inventory.addItem(old);
             this.righthand = null;
+            return old;
         }
+        return righthand;
     }
 
     // GETTERS
@@ -263,13 +273,7 @@ public class Equipment implements Savable {
 
     @Override
     public void load(Element data) {
-        this.head.load((Element) data.getElementsByTagName("head"));
-        this.chest.load((Element) data.getElementsByTagName("chest"));
-        this.legs.load((Element) data.getElementsByTagName("legs"));
-        this.boots.load((Element) data.getElementsByTagName("boots"));
-        this.lefthand.load((Element) data.getElementsByTagName("lefthand"));
-        this.righthand.load((Element) data.getElementsByTagName("righthand"));
-        this.bothhands.load((Element) data.getElementsByTagName("bothhands"));
+
     }
 
     private interface EquipmentGetter {

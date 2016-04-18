@@ -113,7 +113,12 @@ public class Menu{
                     public void execute() {
                         System.out.println("LOAD GAME");
 
-                        // TODO: Implement this.
+
+                        Map map = GameLoader.loadMap("./res/map/saved.xml");
+                        Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER,Terrain.SKY};
+                        GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, map.getAvatar(), map);
+                        GameViewController gameViewController = new GameViewController(stateManager, map.getAvatar(), map, gameView.getAreaViewPort());
+                        stateManager.setActiveState(new State(gameViewController, gameView));
                     }
                 });
                 return actions;
@@ -170,6 +175,8 @@ public class Menu{
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
                         Entity avatar = new Entity(new Smasher(), GameLoader.DEFAULT_STARTING_POINT, map, false, passableTerrains); // TOD0: Improve avatar initial placement.
+                        avatar.setAsAvatar();
+                        map.setAvatar(avatar);
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
@@ -201,6 +208,8 @@ public class Menu{
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER,Terrain.SKY};
                         Entity avatar = new Entity(new Summoner(), GameLoader.DEFAULT_STARTING_POINT, map,true, passableTerrains); // TOD0: Improve avatar initial placement.
+                        avatar.setAsAvatar();
+                        map.setAvatar(avatar);
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
 
                         // TODO: Remove after testing.
@@ -239,7 +248,9 @@ public class Menu{
 
                         Map map = GameLoader.loadMap("./res/map/default_map.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER};
-                        Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map,false, passableTerrains); // TOD0: Improve avatar initial placement.
+                        Entity avatar = new Entity(new Sneak(), GameLoader.DEFAULT_STARTING_POINT, map,true, passableTerrains); // TOD0: Improve avatar initial placement.
+                        avatar.setAsAvatar();
+                        map.setAvatar(avatar);
                         map.insertEntity(avatar, GameLoader.DEFAULT_STARTING_POINT);
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
@@ -376,7 +387,14 @@ public class Menu{
                     @Override
                     public void execute() {
                         System.out.println("Save Game");
-                        GameSaver.saveMap(avatar.getMap());
+                        if(avatar.isMounted()) {
+                            Mount mount = avatar.getMount();
+                            avatar.unMountVehicle();
+                            GameSaver.saveMap(avatar.getMap());
+                            mount.mount(avatar);
+                        }
+                        else
+                            GameSaver.saveMap(avatar.getMap());
 
                         // TODO: Implement this.
                     }
@@ -535,7 +553,7 @@ public class Menu{
                                             ReconfigureKeysView reconfigureKeysView = new ReconfigureKeysView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, reconfigureKeysMenu);
                                             stateManager.setActiveState(new State(reconfigureKeysMenuController, reconfigureKeysView));
                                         }
-                                    }, 1000 / Constants.FRAME_RATE);
+                                    }, 2000 / Constants.FRAME_RATE);
                                 }
                             };
                             jf.addKeyListener(listen);
