@@ -12,6 +12,7 @@ import Models.Entities.Occupation.Summoner;
 import Models.Entities.Stats.Stats;
 import Models.Items.Item;
 import Models.Items.Takable.Equippable.EquippableItem;
+import Models.Items.Takable.TakableItem;
 import Models.Map.Direction;
 import Models.Map.Map;
 import Models.Map.Terrain;
@@ -347,12 +348,13 @@ public class NPC extends Entity implements Savable{
         }
     }
 
-    public boolean isDead() {
-        return this.getStats().isDead();
-    }
-
     public void processDeath() {
+        // Drop all items
+        dropAllItems();
+
         this.move(new Point3D(0,0,0));
+
         this.getStats().respawn();
+
     }
 }
