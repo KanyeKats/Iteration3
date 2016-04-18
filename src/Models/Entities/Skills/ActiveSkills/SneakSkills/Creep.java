@@ -1,7 +1,12 @@
 package Models.Entities.Skills.ActiveSkills.SneakSkills;
 
+import Models.Consequences.ImmediateStatConsequence;
+import Models.Consequences.TimedConsequence;
 import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
+import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.StatModification;
+import Models.Entities.Stats.StatModificationList;
 
 import java.util.TimerTask;
 
@@ -16,6 +21,10 @@ public class Creep extends ActiveSkill {
 
     public Creep(){
         cooldownTime = BASE_COOLDOWN_TIME;
+        StatModificationList statModificationList = new StatModificationList(
+                new StatModification(Stat.MOVEMENT,-5),
+                new StatModification(Stat.OFFSENSIVE_RATING,10));
+        this.consequence = new TimedConsequence(statModificationList, BASE_EFFECT_TIME);
     }
 
     public void activate(Entity e){
@@ -24,6 +33,7 @@ public class Creep extends ActiveSkill {
                 e.setVisible(false);
                 isCooledDown = false;
                 this.entity = e;
+                this.consequence.execute(e);
 
                 effectTimer.schedule(new TimerTask() {
                     @Override
