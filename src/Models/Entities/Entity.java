@@ -62,7 +62,7 @@ public class Entity implements Savable {
     // TODO: Whenever something changes in the entity that would change its apperance, make sure to call setChanged() notifyObservers();
 
     // This is used when loading a saved game
-    public Entity(){
+    public Entity() {
         this.isVisible = true;          //TODO: Save/load this value
         movementTimer = new Timer();
         canMove = true;
@@ -228,12 +228,30 @@ public class Entity implements Savable {
     public void dropItem(int positionInInventory) {
         // Remove the item from the inventory
         TakableItem item = this.inventory.removeItemAtIndex(positionInInventory);
+        dropItem(item);
+    }
 
+    public void dropItem(TakableItem item) {
         // Drop it like its hot
         if (item != null) {
             map.insertItem(item, location);
         }
     }
+
+
+    public void dropAllItems() {
+        // Get inventory
+        Inventory inventory = this.getInventory();
+
+        // Get and remove all items
+        ArrayList<TakableItem> items = inventory.getAndRemoveAllItems();
+
+        // Drop em all like its hot
+        for (TakableItem item : items) {
+            dropItem(item);
+        }
+    }
+
 
     public void useSkill(Skill skill){
 
@@ -376,6 +394,10 @@ public class Entity implements Savable {
         return new Point(pixelX, pixelY);
     }
 
+    public boolean isDead() {
+        return this.getStats().isDead();
+    }
+
     public void setPixelLocation(Point pixelLocation) {
         this.pixelLocation = pixelLocation;
     }
@@ -409,23 +431,6 @@ public class Entity implements Savable {
         this.passableTerrains = passableTerrains;
     }
 
-
-//    public int calculateMovementDelay() {
-//        // Calculate the timer delay based off of the "Movement" stat,
-//        // Using some funky math Sergio did to gauge how much your stat
-//        // modifies the visual "speediness" of movement.
-//        int movementTimerDelay =  Constants.MAX_MOVEMENT_DELAY_MS - (stats.getStat(Stat.MOVEMENT) * 17);
-//
-//        // Guard to make sure the movement delay is not less than 5ms.
-//        if (movementTimerDelay < Constants.MIN_MOVEMENT_DELAY_MS) {
-//            movementTimerDelay = Constants.MIN_MOVEMENT_DELAY_MS;
-//        }
-//
-//        // Return it to the timer
-//        System.out.println("MOVEMENT DELAY IS: ");
-//        System.out.println(movementTimerDelay + "ms");
-//        return movementTimerDelay;
-//    }
 
     public Image getImage(){
         return images.get(direction);

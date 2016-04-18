@@ -69,6 +69,13 @@ public class Inventory implements Savable {
         return items.size();
     }
 
+    public ArrayList<TakableItem> getAndRemoveAllItems() {
+        ArrayList <TakableItem> items = new ArrayList<>(this.items);
+        this.items.clear();
+
+        return items;
+    }
+
     //The contains(ID) class Rokas wanted
     public boolean containsItemByID(int ID){
         for(Item item: items){
