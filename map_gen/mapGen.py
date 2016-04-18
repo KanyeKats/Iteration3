@@ -75,7 +75,7 @@ def generate(mapSizeX, mapSizeY, terrainArray, outputFileName, available_aoes):
                     print 'Generated an item at pt ' + str(x) + ", " + str(y) + ", " + str(z)
                     generateRandomItem(element)
 
-                if (y_point == 2 or y_point == 1) and z_point == 0 and x_point != -1:
+                if (y_point == 2 or y_point == 1) and z_point == 1 and x_point != -1:
                     addRiver(element)
 
                 # Add item to this tile!!!
