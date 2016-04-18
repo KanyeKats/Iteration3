@@ -2,6 +2,7 @@ package Models.Entities.Skills.InfluenceEffect;
 
 import Models.Consequences.Consequence;
 import Models.Entities.Entity;
+import Models.Entities.Stats.Stat;
 import Models.Map.Map;
 import Models.Map.Tile;
 import Utilities.Savable.Savable;
@@ -34,6 +35,7 @@ public abstract class Effect implements Runnable, Savable {
     public void start() {
         //starts a thread that moves this effect throughout the map
         new Thread(this).start();
+
     }
 
     @Override
@@ -46,7 +48,7 @@ public abstract class Effect implements Runnable, Savable {
         ArrayList <ArrayList<Tile>> affectedTiles = getAffectedTiles();
 
         //traverse through map at a certain speed for a certain range
-        for (int i = 0; i < range-1; i++) {
+        for (int i = 0; i < affectedTiles.size(); i++) {
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
@@ -57,7 +59,6 @@ public abstract class Effect implements Runnable, Savable {
 
             if (lastFpsTime >= 1000000000)
             {
-                System.out.println("(FPS: "+fps+")");
                 lastFpsTime = 0;
                 fps = 0;
             }

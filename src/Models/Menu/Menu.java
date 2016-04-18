@@ -30,6 +30,7 @@ import javafx.geometry.Point3D;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 /**
@@ -113,7 +114,7 @@ public class Menu{
                         System.out.println("LOAD GAME");
 
 
-                        Map map = GameLoader.loadMap("./res/map/test.xml");
+                        Map map = GameLoader.loadMap("./res/map/saved.xml");
                         Terrain []passableTerrains =  {Terrain.EARTH, Terrain.WATER,Terrain.SKY};
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, map.getAvatar(), map);
                         GameViewController gameViewController = new GameViewController(stateManager, map.getAvatar(), map, gameView.getAreaViewPort());
@@ -215,8 +216,8 @@ public class Menu{
                         //why does the entity need a point for its constructor and the insert entity map takes in the point anyway?
                         NPC shopkeeper = new NPC(new Smasher(), new Point3D(2, -1, 0), map, passableTerrains, Personality.PET, false);
                         map.insertEntity(shopkeeper, new Point3D(2, -1, 0));
-                        Mount hand = new Mount(new Point3D(2, 0, 0),map,passableTerrains, false);
-                        map.insertEntity(hand,new Point3D(2,0,0));
+                        Mount hand = new Mount(new Point3D(-2, 3, 0),map,passableTerrains, false);
+                        map.insertEntity(hand,new Point3D(-2,3,0));
 
                         GameView gameView = new GameView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, avatar, map);
                         GameViewController gameViewController = new GameViewController(stateManager, avatar, map, gameView.getAreaViewPort());
@@ -592,7 +593,8 @@ public class Menu{
 
                         Models.Menu.Menu npcTalkMenu = Models.Menu.Menu.createNPCTalkMenu(stateManager);
                         MenuViewController npcTalkViewController = new MenuViewController(stateManager, npcTalkMenu);
-                        NPCTalkView npcTalkView = new NPCTalkView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcTalkMenu, dialog);
+                        BufferedImage lastViewContent = stateManager.getCurrentViewContent();
+                        NPCTalkView npcTalkView = new NPCTalkView(Constants.SCREEN_WIDTH, Constants.SCREEN_HEIGHT, npcTalkMenu, dialog, lastViewContent);
                         stateManager.setActiveState(new State(npcTalkViewController, npcTalkView));
                     }
                 });

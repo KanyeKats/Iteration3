@@ -4,6 +4,7 @@ import Models.Entities.Stats.Stat;
 import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 import Views.Graphics.Assets;
+import Views.Graphics.ImageLoader;
 
 /**
  * Created by rokas on 4/9/16.
@@ -13,14 +14,14 @@ public enum OneShotItemFactory {
         @Override
         public OneShotItem createInstance() {
             StatModification buff = new StatModification(Stat.HEALTH, -1000000);
-            return new OneShotItem(Assets.PLACEHOLDER, new StatModificationList(buff), "Bug Zapper", "Extremely poisonous to bugs.", 14000);
+            return new OneShotItem(ImageLoader.loadImage("./res/items/bugzapper.png"), new StatModificationList(buff), "Bug Zapper", "Extremely poisonous to bugs.", 14000);
         }
     },
     CACOON(14001) {
         @Override
         public OneShotItem createInstance() {
             StatModification buff = new StatModification(Stat.DEFENSIVE_RATING, 20);
-            return new OneShotItem(Assets.PLACEHOLDER, new StatModificationList(buff), "Cacoon", "Increases the resilience of the bug.", 14001);
+            return new OneShotItem(ImageLoader.loadImage("./res/items/cacoon.png"), new StatModificationList(buff), "Cacoon", "Increases the resilience of the bug.", 14001);
         }
     };
 

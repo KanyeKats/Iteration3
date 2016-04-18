@@ -46,7 +46,7 @@ public class MapDrawingVisitor  {
                               int rangeofVisibility,
                               boolean cameraMoving,
                               boolean isDebug,
-                              boolean moveInProgress) {
+                              boolean canRecenter) {
 
         boolean justRecentered = false;
 
@@ -65,7 +65,7 @@ public class MapDrawingVisitor  {
         int distance = MapUtilities.distanceBetweenPoints(MapUtilities.to2DPoint(center), MapUtilities.to2DPoint(drawingCenter));
 
         // Re-center on avatar if necessary.
-        if (distance > 3 && !moveInProgress) {
+        if (distance > 3 && canRecenter) {
             setCenter(drawingCenter);
             justRecentered = true;
             tilesOnScreen = MapNavigationUtilities.getTilesOnScreen(drawingCenter, tile);
@@ -137,7 +137,14 @@ public class MapDrawingVisitor  {
             // Set the tiles pixel point (where it is being drawn on the screen)
             currentTile.setPixelPoint(pixelPoint);
 
-            g.drawImage(tileImage, pixelX, pixelY, null);
+            if (currentTile.getTerrain() == Terrain.WATER) {
+                Graphics2D g2 = (Graphics2D)g;
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
+                g2.drawImage(tileImage, pixelX, pixelY, null);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
+            }
+            else
+                g.drawImage(tileImage, pixelX, pixelY, null);
 
             // If any entity is on the tile, init its pixel location and draw him!
             if (currentTile.containsEntity()) {

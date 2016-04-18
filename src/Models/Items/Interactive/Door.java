@@ -2,6 +2,7 @@ package Models.Items.Interactive;
 
 import Models.Entities.Entity;
 import Models.Entities.Requirements.RequirementList;
+import Views.Graphics.ImageLoader;
 
 import java.awt.*;
 
@@ -22,11 +23,9 @@ public class Door extends InteractiveItem {
     //this method could change the picture of the door when entity is allowed to pass
     @Override
     public boolean onTouch(Entity entity) {
-        //TODO: maybe switch the image to an opened door if all reqs fullfilled? (rip mvc)
+        // switch to open door
         if (reqs.allAreFullfilled(entity)) {
-            //change to opened door
-        } else {
-            //change to closed door
+            this.image = ImageLoader.loadImage("./res/items/open_door.png");
         }
         return false;
     }

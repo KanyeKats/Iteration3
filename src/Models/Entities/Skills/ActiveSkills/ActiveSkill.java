@@ -41,10 +41,11 @@ public abstract class ActiveSkill extends Skill implements Savable{
     //Calculates a random number, checks if it's more than 0.9^level
     //This value doesn't go below 0.5 until level=7
     protected boolean percentChanceByLevel(){
-        if(Math.random() > Math.pow(0.9, level))
-            return true;
-        else
-            return false;
+//        if(Math.random() > Math.pow(0.9, level))
+//            return true;
+//        else
+//            return false;
+        return true;
     }
 
     @Override
