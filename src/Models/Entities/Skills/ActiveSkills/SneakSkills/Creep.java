@@ -1,6 +1,5 @@
 package Models.Entities.Skills.ActiveSkills.SneakSkills;
 
-import Models.Consequences.ImmediateStatConsequence;
 import Models.Consequences.TimedConsequence;
 import Models.Entities.Entity;
 import Models.Entities.Skills.ActiveSkills.ActiveSkill;
