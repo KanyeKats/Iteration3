@@ -126,6 +126,8 @@ public class Tile implements Savable {
         this.areaEffect = null;
     }
 
+    public boolean containsAreaEffect() {return this.areaEffect != null;}
+
     public void insertEffect(Effect effect){
         this.effect = effect;
     }

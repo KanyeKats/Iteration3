@@ -19,9 +19,9 @@ public class AttackDecision implements Decision {
 
     @Override
     public void executeDecision(NPC npc) {
-        if(MapUtilities.distanceBetweenPoints(npc.getLocation(), enemy.getLocation()) == 1){
+        if(MapUtilities.distanceBetweenPoints(npc.getLocation(), enemy.getLocation()) <2 ){
             // If you are right next to the enemy, attack them.
-            npc.getActiveSkillList().get(0).activate(enemy);
+            npc.getActiveSkillList().get(0).activate(npc);
             System.out.println("ATTACKING NOW");
         }else{
             // Otherwise walk towards them.
@@ -32,6 +32,6 @@ public class AttackDecision implements Decision {
 
     @Override
     public boolean continuePursuing(VisualInfo visualInfo) {
-        return true;
+        return enemy.isVisible();
     }
 }

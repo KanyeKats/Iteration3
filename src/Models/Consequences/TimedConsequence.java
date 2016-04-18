@@ -1,7 +1,6 @@
 package Models.Consequences;
 
 import Models.Entities.Entity;
-import Models.Entities.Stats.StatModification;
 import Models.Entities.Stats.StatModificationList;
 
 import java.util.Timer;
@@ -37,7 +36,7 @@ public class TimedConsequence extends Consequence {
     @Override
     public void remove(Entity entity) {
         statModificationList.removeModifications(entity.getStats());
-        timer.cancel();
-        timer.purge();
+//        timer.cancel();
+//        timer.purge();
     }
 }

@@ -15,17 +15,26 @@ import java.util.Random;
 public class PickPocket extends ActiveSkill {
 
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
+    private final int BASE_MANA_REQUIRED = 5;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
 
     public PickPocket(){
         cooldownTime = BASE_COOLDOWN_TIME;
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
-    public void activate(Entity entity){
+//    public void activate(Entity entity){
+//
+//        if(isCooledDown && tileHasNPC(entity)){
+//            stealItem(entity);
+//        }
+//    }
 
-        if(isCooledDown && tileHasNPC(entity)){
-            if(percentChanceByLevel()){
-                stealItem(entity);
-            }
+    @Override
+    protected void performSkill(Entity entity) {
+        if(tileHasNPC(entity)){
+            stealItem(entity);
         }
     }
 

@@ -15,6 +15,8 @@ public class Polymorph extends Enchantment {
     public final int BASE_COOLDOWN_TIME = 20000;    //20 seconds
     public final int BASE_ACTIVE_TIME = 10000;    //10 seconds
     private final BufferedImage decal = Assets.POLYMORPH; // TODO: Dont use the bug anymore lol
+    private final int BASE_MANA_REQUIRED = 5;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
 
 
     //TODO: create the right type of BehaviorConsequence
@@ -22,18 +24,25 @@ public class Polymorph extends Enchantment {
         activeTime = BASE_ACTIVE_TIME;
         consequence = new PolymorphConsequence(activeTime);
         cooldownTime = 2000;
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
+//    @Override
+//    public void activate(Entity entity){
+//        if(isCooledDown){
+//            if(percentChanceByLevel()) {
+//                effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap(), decal);
+//                effect.start();
+//                isCooledDown = false;
+//                doTheCoolDown();
+//            }
+//        }
+//    }
     @Override
-    public void activate(Entity entity){
-        if(isCooledDown){
-            if(percentChanceByLevel()) {
-                effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap(), decal);
-                effect.start();
-                isCooledDown = false;
-                doTheCoolDown();
-            }
-        }
+    protected void performSkill(Entity entity) {
+        effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence, entity.getDirection(),entity.getMap(), decal);
+        effect.start();
     }
 
     @Override
