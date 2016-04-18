@@ -14,12 +14,16 @@ public class LifeBloom extends Boon {
     private final int BASE_HEAL_AMOUNT = 2;
     private final int BASE_ACTIVE_TIME = 5000;          //5 seconds
     private final int PERIOD = 500;                     //0.5 seconds
+    private final int BASE_MANA_REQUIRED = 5;
+    private final int MANA_LEVEL_MULTIPLIER = 1;
 
     public LifeBloom(){
         StatModification healthStatMod = new StatModification(Stat.HEALTH, BASE_HEAL_AMOUNT);
         activeTime = BASE_ACTIVE_TIME;
         consequence = new PeriodicStatConsequence(new StatModificationList(healthStatMod), PERIOD, activeTime/PERIOD);
         cooldownTime = BASE_COOLDOWN_TIME;
+        manaRequired = BASE_MANA_REQUIRED;
+        manaLevelMultiplier = MANA_LEVEL_MULTIPLIER;
     }
 
     @Override

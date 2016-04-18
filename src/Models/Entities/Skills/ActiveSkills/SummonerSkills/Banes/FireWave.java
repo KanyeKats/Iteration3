@@ -25,17 +25,23 @@ public class FireWave extends Bane {
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
+//    @Override
+//    public void activate(Entity entity){
+//        if(isCooledDown){
+//            if(percentChanceByLevel()) {
+//                effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
+//                System.out.println("FireWave");
+//                effect.start();
+//                isCooledDown = false;
+//                doTheCoolDown();
+//            }
+//        }
+//    }
+
     @Override
-    public void activate(Entity entity){
-        if(isCooledDown){
-            if(percentChanceByLevel()) {
-                effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
-                System.out.println("FireWave");
-                effect.start();
-                isCooledDown = false;
-                doTheCoolDown();
-            }
-        }
+    protected void performSkill(Entity entity) {
+        effect = new ConicalEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
+        effect.start();
     }
 
     @Override
