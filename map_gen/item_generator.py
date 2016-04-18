@@ -115,7 +115,7 @@ def add_item(parentElement, x, y, z):
         add_boulder(parentElement)
     if (x == -8 and y == -11 and z == 6):
         add_kat_key(parentElement)
-    if (x == -1 and y == 2 and z == 0):
+    if (x == -1 and y == 2 and z == 1):
         add_door(parentElement)
     if (x == -12 and y == -4 and z == 0):
             add_cacoon(parentElement)
