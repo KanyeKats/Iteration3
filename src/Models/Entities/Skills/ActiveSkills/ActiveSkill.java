@@ -64,11 +64,6 @@ public abstract class ActiveSkill extends Skill implements Savable{
 
     //makes sure an entity has enough mana to perform the skill
     protected boolean hasEnoughMana(Entity entity) {
-        System.out.println(manaRequired);
-        System.out.println(level);
-        System.out.println(manaLevelMultiplier);
-        System.out.println(entity.getStats().getStat(Stat.MANA));
-        System.out.println("Required mana: " + (manaRequired + level * manaLevelMultiplier) + "\nMANA: " + entity.getStats().getStat(Stat.MANA));
         if (entity.getStats().getStat(Stat.MANA) > manaRequired + level * manaLevelMultiplier) return true;
         else return false;
     }

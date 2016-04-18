@@ -44,7 +44,7 @@ public class GameSaver {
             StringBuffer sb = writer.getBuffer();
             String finalString = sb.toString();
 
-            writeToFile(finalString, "./res/map/test.xml");
+            writeToFile(finalString, "./res/map/saved.xml");
 
         } catch (TransformerException ex) {
             System.out.println("Error outputting document");

@@ -3,6 +3,8 @@ package Models.Entities.Stats;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.util.Arrays;
 import java.util.EnumMap;
@@ -259,6 +261,22 @@ public class Stats implements Savable {
 
     @Override
     public void load(Element data) {
+        // Get the item child nodes of the tile
+        NodeList statNodes = data.getElementsByTagName("stat");
 
+        if (statNodes.getLength() != 0) {
+            // Get all item elements
+            for (int i = 0; i < statNodes.getLength(); i++) {
+                // Get the node/element
+                Node node = statNodes.item(i);
+                Element statElement = (Element) node;
+
+                String statString = statElement.getAttribute("stat");
+                String statLevelString = statElement.getAttribute("value");
+                int statLevel = Integer.valueOf(statLevelString);
+
+                stats.put(Stat.valueOf(statString), statLevel);
+            }
+        }
     }
 }
