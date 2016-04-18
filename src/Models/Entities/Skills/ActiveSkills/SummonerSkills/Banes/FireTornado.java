@@ -24,16 +24,22 @@ public class FireTornado extends Bane {
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
+//    @Override
+//    public void activate(Entity entity){
+//        if(isCooledDown){
+//            if(percentChanceByLevel()) {
+//                effect = new PrismEffect(BASE_RANGE,BASE_RANGE, entity.getLocation(), consequence, entity.getMap(), decal);
+//                effect.start();
+//                isCooledDown = false;
+//                doTheCoolDown();
+//            }
+//        }
+//    }
+
     @Override
-    public void activate(Entity entity){
-        if(isCooledDown){
-            if(percentChanceByLevel()) {
-                effect = new PrismEffect(BASE_RANGE,BASE_RANGE, entity.getLocation(), consequence, entity.getMap(), decal);
-                effect.start();
-                isCooledDown = false;
-                doTheCoolDown();
-            }
-        }
+    protected void performSkill(Entity entity) {
+        effect = new PrismEffect(BASE_RANGE,BASE_RANGE, entity.getLocation(), consequence, entity.getMap(), decal);
+        effect.start();
     }
 
     @Override

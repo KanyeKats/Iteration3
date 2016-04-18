@@ -25,18 +25,24 @@ public class FireBlast extends Bane {
         cooldownTime = BASE_COOLDOWN_TIME;
     }
 
+//    @Override
+//    public void activate(Entity entity){
+//        if(isCooledDown){
+//            if(percentChanceByLevel()) {
+//                //effect = new AngularEffect();
+//                effect = new AngularEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
+//                System.out.println("FireBlast");
+//                effect.start();
+//                isCooledDown = false;
+//                doTheCoolDown();
+//            }
+//        }
+//    }
+
     @Override
-    public void activate(Entity entity){
-        if(isCooledDown){
-            if(percentChanceByLevel()) {
-                //effect = new AngularEffect();
-                effect = new AngularEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
-                System.out.println("FireBlast");
-                effect.start();
-                isCooledDown = false;
-                doTheCoolDown();
-            }
-        }
+    protected void performSkill(Entity entity) {
+        effect = new AngularEffect(BASE_RANGE, entity.getLocation(), consequence,entity.getDirection(), entity.getMap(), decal);
+        effect.start();
     }
 
     @Override

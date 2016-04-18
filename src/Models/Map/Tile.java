@@ -1,6 +1,8 @@
 package Models.Map;
 
 import Models.Entities.Entity;
+import Models.Entities.NPC.Mount;
+import Models.Entities.NPC.NPC;
 import Models.Entities.Skills.InfluenceEffect.Effect;
 import Models.Items.Item;
 import Models.Map.AreaEffects.AreaEffectFactory;
@@ -178,7 +180,7 @@ public class Tile implements Savable {
 
         //save Items
         for (Item item : items) {
-            item.save(doc, parentElement);
+            item.save(doc, parentElement, "tile-item");
         }
 
         //save Entity
@@ -224,8 +226,10 @@ public class Tile implements Savable {
         }
 
 
+
+        //Load items
         // Get the item child nodes of the tile
-        NodeList itemNodes = tileElement.getElementsByTagName("item");
+        NodeList itemNodes = tileElement.getElementsByTagName("tile-item");
 
         this.items = new ArrayList<>();
         // Check if this tile has an Area Effect by checking if the NodeList is not empty
@@ -246,13 +250,37 @@ public class Tile implements Savable {
             }
         }
 
-
-        // TODO: Implement these functions
-        this.entity = null;
-//        // Add rivers whereever water is.
-//        if (terrain == terrain.WATER) {
-//            this.areaEffect = new RiverAreaEffect(Direction.SOUTH_EAST, 35);
-//        }
+        //Load entity
+        NodeList entityNodes = tileElement.getElementsByTagName("entity");
+        NodeList mountNodes = tileElement.getElementsByTagName("mount");
+        NodeList npcNodes = tileElement.getElementsByTagName("npc");
+        if(entityNodes.getLength() != 0){
+            for(int i = 0; i < entityNodes.getLength(); i++){
+                Node node = entityNodes.item(i);
+                Element entityElement = (Element) node;
+                entity = new Entity();
+                entity.load(entityElement);
+            }
+        }
+        else if(mountNodes.getLength() != 0){
+            for(int i = 0; i < mountNodes.getLength(); i++){
+                Node node = mountNodes.item(i);
+                Element mountElement = (Element) node;
+                entity = new Mount();
+                entity.load(mountElement);
+            }
+        }
+        else if(npcNodes.getLength() != 0){
+            for(int i = 0; i < npcNodes.getLength(); i++){
+                Node node = npcNodes.item(i);
+                Element npcElement = (Element) node;
+                entity = new NPC();
+                entity.load(npcElement);
+            }
+        }
+        else{
+            this.entity = null;
+        }
 
     }
 }

@@ -3,6 +3,8 @@ package Models.Entities.Skills.PassiveSkills;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import java.util.ArrayList;
 
@@ -60,6 +62,22 @@ public class PassiveSkillList implements Savable {
 
     @Override
     public void load(Element data) {
+        // Get the item child nodes of the tile
+        NodeList passiveSkillNodes = data.getElementsByTagName("passive-skill");
 
+        if (passiveSkillNodes.getLength() != 0) {
+            // Get all item elements
+            for (int i = 0; i < passiveSkillNodes.getLength(); i++) {
+                // Get the node/element
+                Node node = passiveSkillNodes.item(i);
+                Element skillElement = (Element) node;
+
+                String skillName = skillElement.getAttribute("type");
+                String skillLevelString = skillElement.getAttribute("value");
+                int skillLevel = Integer.valueOf(skillLevelString);
+
+                passiveSkillList.get(i).setLevel(skillLevel);
+            }
+        }
     }
 }

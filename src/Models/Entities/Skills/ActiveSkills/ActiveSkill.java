@@ -3,6 +3,9 @@ package Models.Entities.Skills.ActiveSkills;
 import Models.Entities.Entity;
 import Models.Consequences.Consequence;
 import Models.Entities.Skills.Skill;
+import Models.Entities.Stats.Stat;
+import Models.Entities.Stats.StatModification;
+import Models.Entities.Stats.StatModificationList;
 import Utilities.Savable.Savable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,15 +18,26 @@ import java.util.TimerTask;
  */
 public abstract class ActiveSkill extends Skill implements Savable{
     protected Consequence consequence;
-    protected int cooldownTime;
+    protected int cooldownTime = 0;
     protected boolean isCooledDown = true;
     protected Timer cooldownTimer = new Timer();
     protected Timer effectTimer =  new Timer();
+    //by default, requires no mana
+    protected int manaRequired = 0;
+    protected int manaLevelMultiplier = 0;
 
     public void activate(Entity entity){
         if(isCooledDown){
-//            if(percentChanceByLevel())
-                consequence.execute(entity);
+            if(percentChanceByLevel()) {
+                if (hasEnoughMana(entity)) {
+                    System.out.println("executing skill");
+                    isCooledDown = false;
+                    useMana(entity);
+                    performSkill(entity);
+                    doTheCoolDown();
+
+                }
+            }
         }
         else
             System.out.println("Not cooled down!");
@@ -46,6 +60,23 @@ public abstract class ActiveSkill extends Skill implements Savable{
 //        else
 //            return false;
         return true;
+    }
+
+    //makes sure an entity has enough mana to perform the skill
+    protected boolean hasEnoughMana(Entity entity) {
+        if (entity.getStats().getStat(Stat.MANA) > manaRequired + level * manaLevelMultiplier) return true;
+        else return false;
+    }
+
+    //use the mana for the skill
+    protected void useMana(Entity entity) {
+        StatModificationList statMod = new StatModificationList(new StatModification(Stat.MANA,-(manaRequired + level * manaLevelMultiplier)));
+        statMod.applyModifications(entity.getStats());
+    }
+
+    //Skill mechanic should be defined here
+    protected void performSkill(Entity entity) {
+        consequence.execute(entity);
     }
 
     @Override
