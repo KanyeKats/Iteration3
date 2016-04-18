@@ -37,10 +37,11 @@ public class VisualCortex {
             Tile tile = map.getTile(point);
             if(tile!=null){
                 Entity entity = tile.getEntity();
+                boolean entityIsVisible = tile.containsVisibleEntity();
                 ArrayList<Item> item = tile.getItems();
                 AreaEffect effect = tile.getAreaEffect();
 
-                if(entity!=null){
+                if(entity!=null && entityIsVisible){
                     visualInfo.addEntity(entity);
                 }
                 if(!item.isEmpty()){
