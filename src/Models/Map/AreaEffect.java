@@ -17,7 +17,9 @@ public abstract class AreaEffect implements Savable {
     protected boolean isRemovable;
 
     public abstract void activate(Entity entity);
-    public void setVisibility(boolean visibility){ isVisible = visibility; }
+    public void setVisibility(boolean visibility){
+        isVisible = visibility;
+    }
     public boolean getVisibility(){ return this.isVisible; }
 
     @Override

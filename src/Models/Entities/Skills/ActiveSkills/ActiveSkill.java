@@ -30,7 +30,6 @@ public abstract class ActiveSkill extends Skill implements Savable{
         if(isCooledDown){
             if(percentChanceByLevel()) {
                 if (hasEnoughMana(entity)) {
-                    System.out.println("executing skill");
                     isCooledDown = false;
                     useMana(entity);
                     performSkill(entity);
