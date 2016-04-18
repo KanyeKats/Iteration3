@@ -1,5 +1,6 @@
 package Models.Entities.Occupation;
 
+import Models.Entities.Skills.ActiveSkills.ActiveSkillList;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Bargain;
 import Models.Entities.Skills.PassiveSkills.CommonSkills.Observation;
 import Models.Entities.Skills.PassiveSkills.PassiveSkillList;
@@ -41,6 +42,13 @@ public class Smasher extends Occupation {
         this.compatibleWeapons.add(WeaponType.BRAWLING);
         this.compatibleWeapons.add(WeaponType.ONEHANDED);
         this.compatibleWeapons.add(WeaponType.TWOHANDED);
+    }
+
+    @Override
+    public ActiveSkillList initActiveSkills(Stats stats){
+        super.initActiveSkills(stats);
+        activeSkillList.get(0).setAsset(Assets.FIST);
+        return activeSkillList;
     }
 
     @Override
